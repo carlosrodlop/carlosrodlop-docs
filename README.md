@@ -6,12 +6,8 @@ as code, creating reusable assets:
 * `.docker` Docker containers definition
 * `.github/workflow` Actions for
   * [![Push Devops Image](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/docker-buildAndPush-devops.yml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/docker-buildAndPush-devops.yml)
-  * [![Book to PDF](https://github.com/carlosrodlop/carlosrodlop-doc/actions/workflows/book-to-pdf.yml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/book-to-pdf.yml)
-  * [![Update Index](https://github.com/carlosrodlop/carlosrodlop-doc/actions/workflows/book-update-index.yaml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/book-update-index.yaml)
-  * [![CV to HTML](https://github.com/carlosrodlop/carlosrodlop-doc/actions/workflows/cv-to-html.yaml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/cv-to-html.yaml)
-* `docs/book` Personal Notes on Tech (& Certifications)
-* `docs/cv` [CV as JSON](https://jsonresume.org/)
-  * Linkedin CV exported via [LinkedIn to JSON Resume Browser Tool](https://github.com/joshuatz/linkedin-to-jsonresume)
+  * [![Book to PDF](https://github.com/carlosrodlop/carlosrodlop-docs/actions/workflows/book-to-pdf.yml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/book-to-pdf.yml)
+  * [![Update Index](https://github.com/carlosrodlop/carlosrodlop-docs/actions/workflows/book-update-index.yaml/badge.svg)](https://github.com/carlosrodlop/carlosrodlop/actions/workflows/book-update-index.yaml)
 * `src/gist`  Bucket for snippets of code
 * `src/config` (🔒) Configuration of my workstation
   * Containing secrets encrypted via [SOPS](https://github.com/mozilla/sops)
