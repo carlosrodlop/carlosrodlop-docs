@@ -413,7 +413,7 @@ INFO: prpc-platform-squid-pr #39 completed: FAILURE
 
 3.- Debug > Edit configuration > + > Remote
 
-![coreDebug.png](../../img/docs/jenkinsDebugCore.png)
+![coreDebug.png](img/jenkinsDebugCore.png)
 
 Note: Copy for JDK 1.4.x inline to use if in (4)
 
@@ -434,7 +434,7 @@ By default, use this method unless you find a problem.
 * Name: Maven-Run
 * Command line: `mvn hpi:run`
 
-![pluginDebug.png](../../img/docs/jenkinsDebugPlugin.png)
+![pluginDebug.png](img/jenkinsDebugPlugin.png)
 
 3.- Hit Debug mode
 

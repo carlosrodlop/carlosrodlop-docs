@@ -28,7 +28,7 @@
 
 Allocating multiple shards and replicas is the essence of the design for distributed search capability, providing for high availability and quick access in searches against the documents within an index. The main difference between a primary and a replica shard is that only the primary shard can accept indexing requests. Both replicas and primary shards can serve querying requests.
 
-![](../../img/docs/esCluster.png)
+![](img/docs/esCluster.png)
 
 In the diagram above, we have an Elasticsearch cluster consisting of two nodes in a default shard configuration. Elasticsearch automatically arranges the five primary shards split across the two nodes. There is one replica shard that corresponds to each primary shard, but the arrangement of these replica shards is altogether different from that of the primary shards. Again, think distribution.
 
