@@ -1,0 +1,64 @@
+name: Update Book Index README
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - docs/book/**
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  check_run:
+    runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+      - run: echo "${{ github.event.head_commit.message }}"
+  checkout:
+    runs-on: ubuntu-latest
+    needs: check_run
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Book README.md
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          rm docs/book/README.md
+          pages=( $( ls docs/book/ | grep .md) )
+          diagrams=( $( ls docs/book/diagrams | grep .png) )
+          printPages () {
+            for page in "${pages[@]}"
+            do
+              echo "* [$page]($page)"
+            done
+          }
+          printDiagrams () {
+            for diagram in "${diagrams[@]}"
+            do
+              echo "* [$diagram](https://github.com/carlosrodlop/carlosrodlop/blob/main/docs/book/diagrams/${diagram})"
+            done
+          }
+          cat <<EOT >> docs/book/README.md
+          # Index
+
+          ## Pages
+          $(printPages)
+
+          ## Diagrams
+          $(printDiagrams)
+
+          EOT
+          if [ -n "$(git status --porcelain docs/book/README.md)" ]; then
+            git add docs/book/README.md
+            git commit -m "[ci skip] chore(docs/book/README.md): update book README page"
+            echo ::set-output name=exit_code::0
+          else
+            echo ::set-output name=exit_code::1
+          fi
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: steps.commit.outputs.exit_code == 0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

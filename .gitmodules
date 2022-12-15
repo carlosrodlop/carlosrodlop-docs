@@ -1,0 +1,6 @@
+[submodule "forks/docsite-ps"]
+	path = forks/docsite-ps
+	url = git@github.com:cloudbees/docsite-ps.git
+[submodule "forks/ps-docs"]
+	path = forks/ps-docs
+	url = git@github.com:cloudbees/ps-docs
