@@ -24,9 +24,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          rm docs/book/README.md
-          pages=( $( ls docs/book/ | grep .md) )
-          diagrams=( $( ls docs/book/diagrams | grep .png) )
+          rm book/README.md
+          pages=( $( ls book/ | grep .md) )
+          diagrams=( $( ls book/diagrams | grep .png) )
           printPages () {
             for page in "${pages[@]}"
             do
@@ -36,10 +36,10 @@ jobs:
           printDiagrams () {
             for diagram in "${diagrams[@]}"
             do
-              echo "* [$diagram](https://github.com/carlosrodlop/carlosrodlop/blob/main/docs/book/diagrams/${diagram})"
+              echo "* [$diagram](https://github.com/carlosrodlop/carlosrodlop/blob/main/book/diagrams/${diagram})"
             done
           }
-          cat <<EOT >> docs/book/README.md
+          cat <<EOT >> book/README.md
           # Index
 
           ## Pages
@@ -49,9 +49,9 @@ jobs:
           $(printDiagrams)
 
           EOT
-          if [ -n "$(git status --porcelain docs/book/README.md)" ]; then
-            git add docs/book/README.md
-            git commit -m "[ci skip] chore(docs/book/README.md): update book README page"
+          if [ -n "$(git status --porcelain book/README.md)" ]; then
+            git add book/README.md
+            git commit -m "[ci skip] chore(book/README.md): update book README page"
             echo ::set-output name=exit_code::0
           else
             echo ::set-output name=exit_code::1
