@@ -1,1 +1,4 @@
 
+[submodule "forks/doc-site-ps"]
+	path = forks/doc-site-ps
+	url = git@github.com:carlosrodlop/docsite-ps.git
