@@ -968,21 +968,30 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
 ###  Instance Store
 
-* Instance Store is temporary block-based storage physically attached to an EC2 instance
+* Instance Store is an **Ephemeral/temporal** block-based storage physically attached to an EC2 instance
+  * Data persists on instance reboot, data doesn’t persist on stop or termination
 * It can be attached to an EC2 instance only when the instance is launched and cannot be dynamically resized
-* Also known to as Ephemeral Storage
 * Deliver very low-latency and high random I/O performance
-* Data persists on instance reboot, data doesn’t persist on stop or termination
 
 ### EBS (Elastic Block Store)
 
-* EBS is persistent storage volumes for EC2
-* It is Block-based storage: It needs to be **mounted to an EC2 instance within the same Availability Zone** (EBS Volume think like a "USB stick")
+* EBS is Persistent and High Available storage volumes for EC2
+  * Data persists on EC2 stop or termination
+    * When we terminate EC2 instance, it removes EBS volumes automatically.
+  * Each Amazon EBS volume is automatically replicated within it's Availability Zone to protect you from component failure.
+* EBS volumen can be edited after instance is launched, including changing the size and storage type.
+* It is Block-based storage: It needs to be **mounted to an EC2 instance within the same Availability Zone (Region)** (EBS Volume think like a "USB stick")
   * 1 EBS - 1 EC2. It can be attached to only one EC2 instance at a time. Can be detached & attached to another EC2 instance in that same AZ only.
   * 1 EC2 - 1..N EBS. Can attach multiple EBS volumes to single EC2 instance. Data persist after detaching from EC2
 * EBS Snapshots
-  * It is a backup of EBS Volume at a point in time.
-  * You can not copy EBS volume across AZ but you can **create EBS Volume from Snapshot across AZ**, including different AWS Regions.
+  * It is an **incremental** backup of EBS Volume at a point in time saved into Amazon S3
+    * Incremental => only blocks that have changed since your last snapshot (first snapshots takes longer)
+  * Snapshots can be taken while the instance is running but ...
+    * To create a snapshot for Amazon EBS volumes that serve as a root devices — best practice to terminate it first. 
+  * Mechanism to move Volumen data to a different AZ location
+    * To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
+    * To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then **copy the AMI from one region to other**. Then use the copied AMI to launch the new EC2 instance in the new region.
+  * EBS volume cannot be mount to an EC2 into a different AZ directly, but you can **restore a Snapshot to a EBS volumen from different AZ** (into the same or different Region).
 * EBS supports dynamic changes in live production volume e.g. volume type, volume size, and IOPS capacity without service interruption
 * EBS Volume encryption:
   * All data at rest inside the volume is encrypted
@@ -991,18 +1000,27 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
   * All volumes created from encrypted snapshots are automatically encrypted
   * Volumes created from unencrypted snapshots can be encrypted at the time of creation
 * Types of EBS volumes:
-  * SSD for small/random IO operations, High IOPS means number of read and write operations per second, Only SSD EBS Volumes can be used as boot volumes for EC2
-  * HDD for large/sequential IO operations, High Throughput means number of bytes read and write per second
+  * **SSD** for small/random IO operations, High IOPS means number of read and write operations per second, Only SSD EBS Volumes can be used as boot volumes for EC2
+
+SSD VolumeTypes | Description | Usage |
+|---|---|---|
+General Purpose _SSD_ (gp2/gp3) | Max 16000 IOPS | Balances price and performance and can be used for most workloads (boot volumes, dev environment, virtual desktop) |
+Provisioned IOPS _SSD_ (io1/io2)| 16000 - 64000 IOPS, EBS Multi-Attach | Mission critical business application, Databases (large SQL and NoSQL database workloads) |
+
+  * **HDD** (Hard Disk Drive) or Magnectic for large/sequential IO operations, High Throughput means number of bytes read and write per second
+
+HDD VolumeTypes | Description | Usage |
+|---|---|---|
+Throughput Optimized _HDD_ (st1) | Low cost, frequently accessed, throughput intensive. Max 500 IOPS per volume | Big Data, Data warehouses, log processing |
+Cold _HDD_ (sc1) | Lowest cost, infrequently accessed. Max 250 IOPS per volume | Used for less frequently accessed workloads and when lowest storage cost is important. Common use could be for file servers|
+Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard disk drive typically used for infrequently accessed workloads. |
+
 * EBS Volumes with two types of RAID configuration:-
   * RAID 0 (increase performance) two 500GB EBS Volumes with 4000 IOPS - creates 1000GB RAID0 Array with 8000 IOPS and 1000Mbps throughput
   * RAID 1 (increase fault tolerance) two 500GB EBS Volumes with 4000 IOPS - creates 500GB RAID1 Array with 4000 IOPS and 500Mbps throughput
 
-EBS VolumeTypes | Description | Usage |
-|---|---|---|
-General Purpose SSD (gp2/gp3) | Max 16000 IOPS | boot volumes, dev environment, virtual desktop|
-Provisioned IOPS SSD (io1/io2)| 16000 - 64000 IOPS, EBS Multi-Attach | critical business application, large SQL and NoSQL database workloads |
-Throughput Optimized HDD (st1) | Low-cost, frequently accessed, throughput intensive | Big Data, Data warehouses, log processing |
-Cold HDD (sc1) | Lowest-cost, infrequently accessed | Large data with lowest cost|
+* An AMI's can be created from both Volumes and Snapshots.
+* 
 
 ### EFS (Elastic File System)
 
