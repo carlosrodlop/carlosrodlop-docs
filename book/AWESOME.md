@@ -46,6 +46,7 @@
 ## On-line tools
 
 - [Online IP Subnet Calculator](https://www.subnet-calculator.com/)
+- [Shields.io: Quality metadata badges for open source projects](https://shields.io/)
 
 ## YouTube
 
