@@ -1,4 +1,9 @@
 
-[submodule "forks/doc-site-ps"]
-	path = forks/doc-site-ps
-	url = git@github.com:carlosrodlop/docsite-ps.git
+[submodule "book/gis/portfolio"]
+	path = book/gis/portfolio
+	url = git@github.com:carlosrodlop/my-gis-portfolio.git
+	branch = master
+[submodule "book/gis/usle"]
+	path = book/gis/usle
+	url = git@github.com:carlosrodlop/my-GIS4USLE-GuadalfeoBasin.git
+	branch = master
