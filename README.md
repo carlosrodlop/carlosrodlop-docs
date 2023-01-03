@@ -1,6 +1,6 @@
 # Carlosrodlop
 
-<img alt="gitleaks badge" src="https://img.shields.io/badge/protected%20by-gitleaks-blue">
+[![gitleaks badge](https://img.shields.io/badge/protected%20by-gitleaks-blue)](https://github.com/zricethezav/gitleaks#pre-commit) 
 
 ## CI Actions
 
