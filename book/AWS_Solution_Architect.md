@@ -7,7 +7,8 @@
 3. [Compute](#compute)
 4. [Application Integration](#application_integration)
 5. [Storage](#storage)
-6. [References](#references)
+6. [Database](#database)
+7. [References](#references)
 
 ## Global
 
@@ -979,24 +980,24 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
   * Data persists on EC2 stop or termination
     * When we terminate EC2 instance, it removes EBS volumes automatically.
   * Each Amazon EBS volume is automatically replicated within it's Availability Zone to protect you from component failure.
-* EBS volumen can be edited after instance is launched, including changing the size and storage type.
 * It is Block-based storage: It needs to be **mounted to an EC2 instance within the same Availability Zone (Region)** (EBS Volume think like a "USB stick")
-  * 1 EBS - 1 EC2. It can be attached to only one EC2 instance at a time. Can be detached & attached to another EC2 instance in that same AZ only.
+  * 1 EBS - 1 EC2. It can be attached to only one EC2 instance at a time in the same AZ (different from EFS ==> 1 EFS - 1..N EC2).
   * 1 EC2 - 1..N EBS. Can attach multiple EBS volumes to single EC2 instance. Data persist after detaching from EC2
 * EBS Snapshots
   * It is an **incremental** backup of EBS Volume at a point in time saved into Amazon S3
     * Incremental => only blocks that have changed since your last snapshot (first snapshots takes longer)
   * Snapshots can be taken while the instance is running but ...
     * To create a snapshot for Amazon EBS volumes that serve as a root devices — best practice to terminate it first. 
-  * Mechanism to move Volumen data to a different AZ location
+  * Snapshots can be shared with other AWS accounts or made public.
+    * You can share snapshots, but only if they are unencrypted. 
+  * Mechanism to move Volumen data (EBS) to a different AZ location (EBS volume cannot be mount to an EC2 into a different AZ directly)
     * To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
     * To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then **copy the AMI from one region to other**. Then use the copied AMI to launch the new EC2 instance in the new region.
-  * EBS volume cannot be mount to an EC2 into a different AZ directly, but you can **restore a Snapshot to a EBS volumen from different AZ** (into the same or different Region).
-* EBS supports dynamic changes in live production volume e.g. volume type, volume size, and IOPS capacity without service interruption
+* EBS volumen can be edited after instance is launched, it supports dynamic changes in live production volume e.g. volume type, volume size, and IOPS capacity without service interruption
 * EBS Volume encryption:
   * All data at rest inside the volume is encrypted
   * All data in flight between the volume and EC2 instance is encrypted
-  * All snapshots of encrypted volumes are automatically encrypted
+  * All snapshots of encrypted volumes are automatically encrypted. 
   * All volumes created from encrypted snapshots are automatically encrypted
   * Volumes created from unencrypted snapshots can be encrypted at the time of creation
 * Types of EBS volumes:
@@ -1020,36 +1021,139 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
   * RAID 1 (increase fault tolerance) two 500GB EBS Volumes with 4000 IOPS - creates 500GB RAID1 Array with 4000 IOPS and 500Mbps throughput
 
 * An AMI's can be created from both Volumes and Snapshots.
-* 
+
+![EBS AWS diagram](https://d1.awsstatic.com/product-marketing/Storage/EBS/Product-Page-Diagram_Amazon-Elastic-Block-Store.5821c6ee4297f3c01cba37e304922451c828fb04.png)
 
 ### EFS (Elastic File System)
 
-* EFS is a POSIX-compliant file-based storage
-* EFS supports file systems semantics - strong read after write consistency and file locking
-* highly scalable - can automatically scale from gigabytes to petabytes of data without needing to provision storage. With burst mode, the throughput increase, as file system grows in size.
-* Highly Available - stores data redundantly across multiple Availability Zones
-* Network File System (NFS) that can be mounted on and accessed concurrently by thousands of EC2 in multiple AZs without sacrificing performance.
-* EFS file systems can be accessed by Amazon EC2 Linux instances, Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda functions via a file system interface such as NFS protocol.
+* Fully managed, high scalable (elastic) and distributed (available) file storage that supports Network File Storage version 4 (NFSv4) and can be mounted to your EC2 instance.
+  * Highly Scalable - can automatically scale from gigabytes to petabytes of data without needing to provision storage, growing and shrinking as you add/remove files. (you don't need to pre-provision storage like you do with EBS)
+    * With burst mode, the throughput increase, as file system grows in size.
+  * Highly Available - stores data redundantly across multiple Availability Zones.
+  * Network File System (NFS) that can be mounted on and accessed concurrently in multiple AZs without sacrificing performance.
+  * EFS file systems can be accessed by Amazon EC2 **Linux** instances, Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda functions via a file system interface such as NFS protocol. (EBS only for EC2 instances)
+* EFS is a POSIX-compliant file-based storage.
+* EFS supports file systems semantics - strong read after write consistency and file locking.
+* Native to Unix & Linux, but not supported on Windows instances.
+* Only pay for what you use
 * Performance Mode:
   * General Purpose for most file system for low-latency file operations, good for content-management, web-serving etc.
   * Max I/O is optimized to use with 10s, 100s, 1000s of EC2 instances with high aggregated throughput and IOPS, slightly higher latency for file operations, good for big data analytics, media processing workflow
-* Use case: Share files, images, software updates, or computing across all EC2 instances in ECS, EKS cluster
+* Use case: When you need scalable and resilient storage for linux instances
+  * Share files, images, software updates, or computing across all EC2 instances in ECS, EKS cluster
+
+![EFS AWS diagram](https://d1.awsstatic.com/legal/AmazonEFS/product-page-diagram_Amazon-EFS-Replication_HIW%402x.ccbabcc8777609fc0d23d7ff5ee1d52d5000dbf5.png)
 
 ### FSx for Windows
 
-* Windows-based file system supports SMB protocol & Windows NTFS
-* Supports Microsoft Active Directory (AD) integration, ACLs, user quotas
+* Fully managed, highly performant, native Microsoft Windows file system that supports SMB protocol & Windows NTFS. It also supports Microsoft Active Directory (AD) integration, ACLs, user quotas. 
+* Use case: When you need centralised storage for Windows-based applications such as Sharepoint, Microsoft SQL Server, Workspaces, IIS Web Server or any other native Microsoft Application.
+
+![FSx for Windows AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/Product-Page-Diagram_Managed-File-System-How-it-Works_Updated@2x.c0c4e846c0fca27e8f43bd1651883b21b4cc1eec.png)
 
 ### FSx for Lustre
 
+* Fully managed and High performance file system for **fast processing of workload** with consistent **sub-millisecond latencies**, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS.
 * Lustre = Linux + Cluster is a **POSIX-compliant parallel linux file system**, which stores data across multiple network file servers
-* High performance file system for **fast processing of workload** with consistent **sub-millisecond latencies**, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS.
-* Use it for Machine learning, High performance computing (HPC), video processing, financial modeling, genome sequencing, and electronic design automation (EDA).
+* **Seamless integration with Amazon S3** (optional) - connect your S3 data sets to your FSx for Lustre file system, run your analyses, write results back to S3, and delete your file system
 * You can use **FSx for Lustre as hot storage** for your highly accessed files, and **Amazon S3 as cold storage** for rarely accessed files.
-* **Seamless integration with Amazon S3** - connect your S3 data sets to your FSx for Lustre file system, run your analyses, write results back to S3, and delete your file system
 * FSx for Lustre provide two deployment options:
   * **Scratch file systems** - for temporary storage and short term processing
   * **Persistent file systems** - for high available & persist storage and long term processing
+* Use case: When you need high speed or high capacity distributed storage for compute-intensive workloads, such as for Machine learning (ML), High performance computing (HPC), video processing, financial modeling, genome sequencing, and electronic design automation (EDA).
+
+![FSx for Lustre AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_Amazon-FSx-for-Lustre.097ed5e5175fa96e8ac77a2470151965774eec32.png)
+
+## Database
+
+### RDS (Relational Database Service)
+
+* AWS Managed Service to create PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora in the cloud
+* Scalability: Upto 5 Read replicas, replication is asynchronous so reads are eventually consistent.
+* Availability use Multi-AZ Deployment, synchronous replication
+* You can create a read replica in a different region of your running RDS instance. You pay for replication cross Region, but not for cross AZ.
+* Automatic failover by switching the CNAME from primary to standby database
+* Enable Password and IAM Database Authentication to authenticate using database password and user credentials through IAM users and roles, works with MySQL and PostgreSQL
+* Enable Enhanced Monitoring to see percentage of CPU bandwidth and total memory consumed by each database process (OS process thread) in DB instance
+* Enable Automated Backup for daily storage volume snapshot of your DB instance with retention-period from 1 day (default from CLI, SDK) to 7 days (default from console) to 35 days (max). Use AWS Backup service for retention-period of 90 days.
+* To encrypt an unencrypted RDS DB instance, take a snapshot, copy snapshot and encrypt new snapshot with AWS KMS. Restore the DB instance with the new encrypted snapshot.
+
+### Amazon Aurora
+
+* Amazon fully managed relational database compatible with MySQL and PostgreSQL
+* Provide 5x throughput of MySQL and 3x throughput of PostgreSQL
+* Aurora Global Database is single database span across multiple AWS regions, enable low-latency global reads and disaster recovery from region-wide outage. Use global database for disaster recovery having RPO of 1 second and RTO of 1 minute.
+* Aurora Serverless capacity type is used for on-demand auto scaling for intermittent, unpredictable, and sporadic workloads.
+* Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
+  * Primary DB instance - Only one primary instance, supports both read and write operation
+  * Aurora Replica - Upto 15 replicas spread across different AZ, supports only read operation, automatic failover if primary DB instance fails, high availability
+* Connections Endpoints
+  * Cluster endpoint - only one cluster endpoint, connects to primary DB instance, only this endpoint can perform write (DDL, DML) operations
+  * Reader endpoint - one reader endpoint, provide load-balancing for all read-only connections to read from Aurora replicas
+  * Custom endpoint - Upto 5 custom endpoint, read or write from specified group of DB instance from Cluster, used for specialized workloads to route traffic to high-capacity or low-capacity instances
+  * Instance endpoint - connects to specified DB instance directly, generally used to improve connection speed after failover
+
+### DynamoDB
+
+* AWS proprietary, Serverless, managed NoSQL database
+* Use to store JSON documents, or session data
+* Use as distributed serverless cache with single-digit millisecond performance
+* Planned Capacity provision WCU & RCU, can enable auto-scaling, good for predictable workloads
+* On-demand Capacity unlimited WCU & RCU, more expensive, good for unpredictable workloads where read & write are less (low throughput)
+* Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to cache frequently read values and offload the heavy read on hot keys of DynamoDB, prevent ProvisionedThroughputExceededException
+* Enable DynamoDB Streams to trigger events on database and integrate with lambda function for e.g. send welcome email to user added into the table.
+* Use DynamoDB Global Table to serve the data globally. You must enable DynamoDB Streams first to create global table.
+* You can use Amazon DMS (Data Migration Service) to migrate from Mongo, Oracle, MySQL, S3, etc. to DynamoDB
+
+### ElastiCache
+
+* AWS Managed Service for Redis or Memcached
+* Use as distributed cache with sub millisecond performance
+* Elasticache for Redis
+  * Offers Multi-AZ with Auto-failover, Cluster mode
+  * Use password/token to access data using Redis Auth
+  * HIPAA Compliant
+* Elasticache for Memcached
+  * Intended for use in speeding up dynamic web applications
+  * Not HIPAA Compliant
+
+### Redshift
+
+  * Columnar Database, OLAP (online analytical processing)
+  * supports Massive Parallel Query Execution (MPP)
+  * Use for Data Analytics and Data warehousing
+  * Integrate with Business Intelligence (BI) tools like AWS Quicksight or Tableau for analytics
+  * Use Redshift Spectrum to query S3 bucket directly without loading data in Redshift
+
+### Amazon Kinesis
+
+* Amazon Kinesis is fully managed service for collecting, processing, and analyzing streaming real-time data in the cloud. Real-time data generally comes from IoT devices, gaming applications, vehicle tracking, click stream, etc.
+* Kinesis Data Streams capture, process and store data streams.
+  * Producer can be Amazon Kinesis Agent, SDK, or Kinesis Producer Library (KPL)
+  * Consumer can be Kinesis Data Analytics, Kinesis Data Firehose, or Kinesis Consumer Library (KCL)
+  * Data Retention period from 24 hours (default) to 365 days (max).
+  * Order is maintained at Shard (partition) level.
+* Kinesis Data Firehose load data streams into AWS data stores such as S3, Amazon Redshift and ElastiSearch. Transform data using lambda functions and store failed data to another S3 bucket.
+* Kinesis Data Analytics analyze data streams with SQL or Apache Flink
+* Kinesis Video Streams capture, process and store video streams
+
+### Amazon EMR
+
+* EMR = Elastic MapReduce
+* Big data cloud platform for processing vast data using open source tools such as Hadoop, Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi, and Presto.
+* EMR can be used to perform data transformation workloads - Extract, transform, load (ETL)
+* Use case: Analyze Clickstream data from S3 using Apache Spark and Hive to deliver more effective ads
+
+### Neptune
+
+* Graph Database
+* Use case: high relationship data, social networking data, knowledge graphs (Wikipedia)
+
+### ElasticSearch
+
+* Amazon managed Elastic Search service
+* Integration with Kinesis Data Firehose, AWS IoT, and CloudWatch logs
+* Use case: Search, indexing, partial or fuzzy search
 
 ## References
 
