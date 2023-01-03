@@ -26,6 +26,7 @@
 - [vmware-tanzu/k-bench: Workload Benchmark for Kubernetes](https://github.com/vmware-tanzu/k-bench)
 - [AWS - EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/)
 - [Best practices  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/best-practices)
+- [Argo Awesome list](https://github.com/terrytangyuan/awesome-argo)
 
 ## Terraform
 
