@@ -976,6 +976,8 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
 ### EBS (Elastic Block Store)
 
+![EBS AWS diagram](https://d1.awsstatic.com/product-marketing/Storage/EBS/Product-Page-Diagram_Amazon-Elastic-Block-Store.5821c6ee4297f3c01cba37e304922451c828fb04.png)
+
 * EBS is Persistent and High Available storage volumes for EC2
   * Data persists on EC2 stop or termination
     * When we terminate EC2 instance, it removes EBS volumes automatically.
@@ -1022,9 +1024,9 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 
 * An AMI's can be created from both Volumes and Snapshots.
 
-![EBS AWS diagram](https://d1.awsstatic.com/product-marketing/Storage/EBS/Product-Page-Diagram_Amazon-Elastic-Block-Store.5821c6ee4297f3c01cba37e304922451c828fb04.png)
-
 ### EFS (Elastic File System)
+
+![EFS AWS diagram](https://d1.awsstatic.com/legal/AmazonEFS/product-page-diagram_Amazon-EFS-Replication_HIW%402x.ccbabcc8777609fc0d23d7ff5ee1d52d5000dbf5.png)
 
 * Fully managed, high scalable (elastic) and distributed (available) file storage that supports Network File Storage version 4 (NFSv4) and can be mounted to your EC2 instance.
   * Highly Scalable - can automatically scale from gigabytes to petabytes of data without needing to provision storage, growing and shrinking as you add/remove files. (you don't need to pre-provision storage like you do with EBS)
@@ -1042,16 +1044,16 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 * Use case: When you need scalable and resilient storage for linux instances
   * Share files, images, software updates, or computing across all EC2 instances in ECS, EKS cluster
 
-![EFS AWS diagram](https://d1.awsstatic.com/legal/AmazonEFS/product-page-diagram_Amazon-EFS-Replication_HIW%402x.ccbabcc8777609fc0d23d7ff5ee1d52d5000dbf5.png)
-
 ### FSx for Windows
+
+![FSx for Windows AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/Product-Page-Diagram_Managed-File-System-How-it-Works_Updated@2x.c0c4e846c0fca27e8f43bd1651883b21b4cc1eec.png)
 
 * Fully managed, highly performant, native Microsoft Windows file system that supports SMB protocol & Windows NTFS. It also supports Microsoft Active Directory (AD) integration, ACLs, user quotas. 
 * Use case: When you need centralised storage for Windows-based applications such as Sharepoint, Microsoft SQL Server, Workspaces, IIS Web Server or any other native Microsoft Application.
 
-![FSx for Windows AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/Product-Page-Diagram_Managed-File-System-How-it-Works_Updated@2x.c0c4e846c0fca27e8f43bd1651883b21b4cc1eec.png)
-
 ### FSx for Lustre
+
+![FSx for Lustre AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_Amazon-FSx-for-Lustre.097ed5e5175fa96e8ac77a2470151965774eec32.png)
 
 * Fully managed and High performance file system for **fast processing of workload** with consistent **sub-millisecond latencies**, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS.
 * Lustre = Linux + Cluster is a **POSIX-compliant parallel linux file system**, which stores data across multiple network file servers
@@ -1062,36 +1064,68 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
   * **Persistent file systems** - for high available & persist storage and long term processing
 * Use case: When you need high speed or high capacity distributed storage for compute-intensive workloads, such as for Machine learning (ML), High performance computing (HPC), video processing, financial modeling, genome sequencing, and electronic design automation (EDA).
 
-![FSx for Lustre AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_Amazon-FSx-for-Lustre.097ed5e5175fa96e8ac77a2470151965774eec32.png)
-
 ## Database
 
 ### RDS (Relational Database Service)
 
-* AWS Managed Service to create PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora in the cloud
-* Scalability: Upto 5 Read replicas, replication is asynchronous so reads are eventually consistent.
-* Availability use Multi-AZ Deployment, synchronous replication
-* You can create a read replica in a different region of your running RDS instance. You pay for replication cross Region, but not for cross AZ.
-* Automatic failover by switching the CNAME from primary to standby database
-* Enable Password and IAM Database Authentication to authenticate using database password and user credentials through IAM users and roles, works with MySQL and PostgreSQL
-* Enable Enhanced Monitoring to see percentage of CPU bandwidth and total memory consumed by each database process (OS process thread) in DB instance
-* Enable Automated Backup for daily storage volume snapshot of your DB instance with retention-period from 1 day (default from CLI, SDK) to 7 days (default from console) to 35 days (max). Use AWS Backup service for retention-period of 90 days.
-* To encrypt an unencrypted RDS DB instance, take a snapshot, copy snapshot and encrypt new snapshot with AWS KMS. Restore the DB instance with the new encrypted snapshot.
+![AWS RDS](https://d1.awsstatic.com/video-thumbs/RDS/product-page-diagram_Amazon-RDS-Regular-Deployment_HIW-V2.96bc5b3027474538840af756a5f2c636093f311f.png)
+
+* AWS Managed Service to create High Available and Scalable **Relational** databases in the Cloud
+  * It supports: PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora
+  * RDS runs on Virtual Machines (can’t log in to the OS or SSH in)
+  * AWS handles admin tasks for you like hardware provisioning, patching & backups.
+  * RDS is not serverless — (one exception Aurora Serverless)
+* RDS Main Features
+  * **High Available > Multi AZ Recovery** > User For Disaster Recovery Scenarios
+    * Have a primary and secondary database, if you lose the primary database, AWS would detect and automatically update the DNS to point at the secondary database.
+    * You can force a fail-over from AZ to another by rebooting the RDS instance.
+  * **Scalable > Read Replicas** > Improves Performance
+    * A Read Replica allows you to have read-only copies (Upto 5 Read replicas) of your production database. This is achieved by using Asynchronous replication so reads are eventually consistent. Every time you write to the main database, it is replicated in the secondary databases.
+    * Read replicas can be distributed across multiple AZ, even in a different Region of your running RDS instance. You pay for replication cross Region, but not for cross AZ.
+    * It must have automatic backups turned on in order to deploy a read replica.
+    * You can have read replicas of read replicas (but watch out for latency)
+    * Each read replica will have its own DNS end point.
+    * Read replicas can be promoted to be their own databases. This breaks the replication.
+* RDS Backups
+  * Automated Backups
+    * Enabled by default
+    * Allows you to recover your database to any point in time within the specified retention period (Max 35 days)
+    * Takes daily snapshots and stores transition logs
+    * When recovering AWS will choose the most recent backup
+    * Backup data is stored in S3
+    * May experience latency when backup is being taken
+    * Backups are deleted once you remove the original RDS instances
+  * Database Snapshot
+    * User-initiated, must be manually done by yourself
+    * Stored until you explicitly delete them, even after you delete the original RDS instance they are still persisted (This is not the case with automated backups).
+* Offers **encryption at rest** — done with KMS - Once your RDS instance is encrypted, as are its automated backups, read replicas, and snapshots.
 
 ### Amazon Aurora
 
-* Amazon fully managed relational database compatible with MySQL and PostgreSQL
-* Provide 5x throughput of MySQL and 3x throughput of PostgreSQL
-* Aurora Global Database is single database span across multiple AWS regions, enable low-latency global reads and disaster recovery from region-wide outage. Use global database for disaster recovery having RPO of 1 second and RTO of 1 minute.
-* Aurora Serverless capacity type is used for on-demand auto scaling for intermittent, unpredictable, and sporadic workloads.
-* Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
-  * Primary DB instance - Only one primary instance, supports both read and write operation
-  * Aurora Replica - Upto 15 replicas spread across different AZ, supports only read operation, automatic failover if primary DB instance fails, high availability
-* Connections Endpoints
-  * Cluster endpoint - only one cluster endpoint, connects to primary DB instance, only this endpoint can perform write (DDL, DML) operations
-  * Reader endpoint - one reader endpoint, provide load-balancing for all read-only connections to read from Aurora replicas
-  * Custom endpoint - Upto 5 custom endpoint, read or write from specified group of DB instance from Cluster, used for specialized workloads to route traffic to high-capacity or low-capacity instances
-  * Instance endpoint - connects to specified DB instance directly, generally used to improve connection speed after failover
+![AWS Aurora](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-Aurora_How-it-Works.b1c2b37e7548757780b195c6dcceb58511de5b1d.png)
+
+* AWS fully managed relational database (Aurora Global Database) compatible with MySQL and PostgreSQL
+  * Provides 5x better performance than MySQL
+  * Provides 3x better performance than Postgres SQL
+* Distributed: 2 copies of your data is contained in each Availability Zone (AZ) — minimum of 3 AZ’s and 6 copies.
+  * Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
+    * Primary DB instance - Only one primary instance, supports both read and write operation
+    * Replicas - Each Aurora DB cluster has built-in replication between multiple DB instances, you can choose between built-in features such as Aurora global databases or the traditional replication mechanisms for the MySQL or PostgreSQL DB engines
+* Fault tolerant: It can handle the loss of up to 2 copies without affecting write ability and the lose of up to 3 copies of data without affecting read ability.
+* Self-healing storage system (Data blocks and disks are continuously scanned for errors and repaired automatically.)
+* Autoscaling for storage and computer capacity
+  * Start with 10Gb, Scales in 10 GB increments to 64 TB (Storage Autoscaling)
+  * Compute resources can scale up tp 32vCPUS and 244GB of Memory
+* Backups with Aurora
+  * Automated backups are always enabled on Amazon Aurora DB Instances. Backups do not impact performance.
+  * You can also take snapshots with Aurora. This also does not impact on performance. Snapshots can be shared with other AWS accounts
+
+#### Aurora Serverless (POR AQUI)
+
+* On demand autoscaling configuration of Aurora
+* Automatically starts up, shuts down, and scales based on app needs
+* Used for simple, cost effective infrequently used, intermittent or unpredictable workloads
+* Only pay for invocation.
 
 ### DynamoDB
 
@@ -1160,8 +1194,8 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 After doing the course from [Digital Training](https://digitalcloud.training/aws-cheat-sheets/), I reviwed the following resources to make this summary:
 
 * [Amazon Docs](https://aws.amazon.com/)
-* [AWS Certified Solutions Architect Associate (SAA-C02) Exam Notes - Coding N Concepts](https://codingnconcepts.com/aws/aws-certified-solutions-architect-associate/#aws-infrastructure)
+* [AWS Certified Solutions Architect Associate (SAA-C02) Exam Notes - Coding N Concepts](https://codingnconcepts.com/aws/aws-certified-solutions-architect-associate)
 * [AWS\_CCP\_Notes/AWS\_Solution\_Architecture\_Associate.txt at main · kasukur/AWS\_CCP\_Notes](https://github.com/kasukur/AWS_CCP_Notes/blob/main/AWS_Solution_Architecture_Associate.txt)
 * [AWS Solution Architect Associate Exam Study Notes | by Chloe McAteer | Medium](https://chloemcateer.medium.com/aws-solution-architect-associate-exam-study-notes-b6c5884ee500)
 
-Finally, I practiced the following Exam Tests
+Finally, I practiced the following Exam Tests `AWS Certified Solutions Architect Associate Practice` from Udemy.
