@@ -1066,6 +1066,18 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 
 ## Database
 
+### Database migration service (DMS)
+
+* Transfer a database to another type (relational databases, data warehouses, NoSQL databases and other types of data stores.). It is valid for on-premise, in cloud (AWS o different vendro, Azure) or combination of both for Sources and Targets.
+* It is a server in the AWS cloud that runs **Replication** software.
+  * Create a source and a target endpoints
+  * Schedule/Run a Replication Task (Replication Instance - VM) to move the data
+  * Source stays functioning the whole time during the migration
+* Types of migrations
+  * Supports Homogenous Migrations — Identical e.g. oracle to oracle
+  * Supports Hetrogenous Migrations — Different e.g. SQLServer to Aurora.
+    * If you do this you will need to use a Schema Conversion Tool (SCT)
+
 ### RDS (Relational Database Service)
 
 ![AWS RDS](https://d1.awsstatic.com/video-thumbs/RDS/product-page-diagram_Amazon-RDS-Regular-Deployment_HIW-V2.96bc5b3027474538840af756a5f2c636093f311f.png)
@@ -1120,7 +1132,7 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
   * Automated backups are always enabled on Amazon Aurora DB Instances. Backups do not impact performance.
   * You can also take snapshots with Aurora. This also does not impact on performance. Snapshots can be shared with other AWS accounts
 
-#### Aurora Serverless (POR AQUI)
+#### Aurora Serverless
 
 * On demand autoscaling configuration of Aurora
 * Automatically starts up, shuts down, and scales based on app needs
@@ -1129,38 +1141,99 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 
 ### DynamoDB
 
-* AWS proprietary, Serverless, managed NoSQL database
-* Use to store JSON documents, or session data
-* Use as distributed serverless cache with single-digit millisecond performance
-* Planned Capacity provision WCU & RCU, can enable auto-scaling, good for predictable workloads
-* On-demand Capacity unlimited WCU & RCU, more expensive, good for unpredictable workloads where read & write are less (low throughput)
-* Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to cache frequently read values and offload the heavy read on hot keys of DynamoDB, prevent ProvisionedThroughputExceededException
-* Enable DynamoDB Streams to trigger events on database and integrate with lambda function for e.g. send welcome email to user added into the table.
-* Use DynamoDB Global Table to serve the data globally. You must enable DynamoDB Streams first to create global table.
-* You can use Amazon DMS (Data Migration Service) to migrate from Mongo, Oracle, MySQL, S3, etc. to DynamoDB
+![AWS Dynamo DB](https://d1.awsstatic.com/product-page-diagram_Amazon-DynamoDBa.1f8742c44147f1aed11719df4a14ccdb0b13d9a3.png)
+
+* AWS proprietary, a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
+* It is fully Managed and Serverless (no servers to provision, patch, or manage) database
+* It supports both document (limit of 400KB item size. E.g. JSON documents, or session data.) and key-value data models. Its flexible data model and reliable performance make it a great fit for mobile, web, gaming, ad-tech, IoT, and many other applications.
+* Stored on SSD Storage.
+* Spread across 3 geographically distinct data centers.
+* DynamoDB supports eventually consistent and strongly consistent reads. (eventual consistency is default)
+  * Eventual Consistent Read (Default): Consistency across data within a second, meaning the response might not reflect the results of a just completed write operation, but if you repeat the read request again it should return the updated data. (Best Read Performance)
+  * Strongly Consistent Reads: Returns the latest data. Results should reflect all writes that received a successful response prior to that read!
+
+#### Streams
+
+* Time ordered sequence of item level modifications in a table (stored up to 24 hours)
+* Enable DynamoDB Streams to trigger events on database 
+* It can be integrated with lambda function for e.g. send welcome email to user added into the table.
+
+#### Global Tables
+
+* Fully managed, multi-active & multi-region database, that replicate your DynamoDB tables across selected regions
+* Use DynamoDB Global Table to serve the data globally for distributed apps
+* It is based on DynamoDB streams, thus DynamoDB Streams must enable first to create global table.
+* Can be used for Disaster Recovery or high availability
+
+#### Security in DynamoDB
+
+* Encryption at rest using KMS
+* Can use site to site VPN, direct connect (Dx) and IAM policies and roles
+* Can implement fine grain access
+* Can monitor on Cloud Watch and Cloud trail
+
+####  DynamoDB Accelerator (DAX)
+
+* Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to cache frequently read values and offload the heavy read on hot keys of DynamoDB, prevent `ProvisionedThroughputExceededException`
+* Managed, highly available in memory cache for DynamoDB
+* Has up to 10 times performance improvement
+* Request time reduced to microseconds
+* DAX manages all in-memory acceleration, so you don’t need to mange things like cache invalidations
+* Compatible with Dynamo API calls
 
 ### ElastiCache
 
-* AWS Managed Service for Redis or Memcached
-* Use as distributed cache with sub millisecond performance
-* Elasticache for Redis
-  * Offers Multi-AZ with Auto-failover, Cluster mode
-  * Use password/token to access data using Redis Auth
-  * HIPAA Compliant
-* Elasticache for Memcached
-  * Intended for use in speeding up dynamic web applications
-  * Not HIPAA Compliant
+![AWS ElasticCache](https://d1.awsstatic.com/elasticache/EC_Use_Cases/product-page-diagram_ElastiCache_how-it-works.ec509f8b878f549b7fb8a49669bf2547878303f6.png)
+
+* Amazon ElastiCache is a fully managed, in-memory caching service supporting flexible, real-time use cases.
+* It allows you to deploy, operate & scale in-memory data stores(caching) in the cloud ==> Uses Cases:
+  * Improves the performance of web applications, as it allows you to retrieve data fast from memory with high throughput and low latency. Use as distributed cache with sub millisecond performance
+  * primary data store for use cases that don't require durability like session stores, gaming leaderboards, streaming, and analytics
+* There are two types of in-memory caching engines:
+  * Memcached — designed for simplicity, so used with you need the simplest model possible.
+  * Redis — works for a wide range of use cases and have multi AZ. You can also complete backups/restores of redis.
+    * Use password/token to access data using Redis Auth
+    * HIPAA Compliant
+* Services capable of caching
+  * CloudFront
+  * API Gateway
+  * ElasticCache
+  * Dynamo DB Accelerator
+* Caching is a balancing act between up-to-date accurate information and latency.
+* The further up you cache in your architecture the better e.g. at CloudFront level instead of waiting to DB level.
 
 ### Redshift
 
-  * Columnar Database, OLAP (online analytical processing)
-  * supports Massive Parallel Query Execution (MPP)
-  * Use for Data Analytics and Data warehousing
-  * Integrate with Business Intelligence (BI) tools like AWS Quicksight or Tableau for analytics
-  * Use Redshift Spectrum to query S3 bucket directly without loading data in Redshift
+![AWS Redshift](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-Redshift%402x.6c8ada98ebf822d3ddc113e6b802abe08fd4a4d2.png)
 
-### Amazon Kinesis
+* Amazon Redshift uses SQL to analyze structured and semi-structured data across data warehouses, operational databases, and data lakes, using AWS-designed hardware and machine learning to deliver the best price performance at any scale.
+* It can be used for **Business Intelligence (BI)**, allowing integrations with tools like AWS Quicksight or Tableau for analytics
+* Redshift uses Advanced compression: Has column compression — compress columns instead of rows because of similar data  because similar data is stored sequentially on disk.
+* Backups:
+  * Enabled by default with a 1 day retention period (Maximum is 35 days)
+  * Redshift always attempts to maintain at least three copies of your data (the original and replica on the compute nodes and a backup in Amazon S3).
+  * Redshift can also asynchronously replicate your snapshots to S3 in another region for DR.
+  * Only Redshift can delete these automated snapshots, you can’t delete them manually.
+* Security Considerations
+  * Encrypted in transit using SSL
+  * Encrypted at rest using AES-256 encryption
+  * By default Redshift takes care of key management
+* Pricing — compute node hours, backups and data transfer
+* It can be configured as follows:
+  * Single Node (160Gb)
+  * Multi-Node
+    1. Leader Node (manages client connections and receives queries)
+    2. Compute Node (store data and perform queries and computations). Up to 128 Compute Nodes.
+* Availability
+  * Currently only in 1 AZ (check AWS to confirm for the latest)
+  * Can restore snapshots to new AZs in the event of an outage
+* It supports Massive Parallel Processing (MPP): Amazon Redshift automatically distributes data and query load across all nodes. Amazon Redshift makes it easy to add nodes to your data warehouse and enables you to maintain fast query performance as your data warehouse grows.
 
+### Amazon Kinesis (por AQUI)
+
+![Amazon Kinesis](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/kinesis/Product-Page-Diagram_Amazon-Kinesis-Data-Streams.e04132af59c6aa1e9372cabf44a17749f4a81b16.png)
+
+* Amazon Kinesis Data Streams is a serverless streaming data service that makes it easy to capture, process, and store data streams at any scale.
 * Amazon Kinesis is fully managed service for collecting, processing, and analyzing streaming real-time data in the cloud. Real-time data generally comes from IoT devices, gaming applications, vehicle tracking, click stream, etc.
 * Kinesis Data Streams capture, process and store data streams.
   * Producer can be Amazon Kinesis Agent, SDK, or Kinesis Producer Library (KPL)
@@ -1173,18 +1246,26 @@ Magnetic (Standard) | Max 40–200 IOPS per volume. | Previous generation hard d
 
 ### Amazon EMR
 
-* EMR = Elastic MapReduce
+![Amazon EMR](https://d1.awsstatic.com/products/EMR/Product-Page-Diagram_Amazon-EMR.803d6adad956ba21ceb96311d15e5022c2b6722b.png)
+
+* Amazon EMR (EMR = Elastic MapReduce) is the industry-leading cloud big data solution for petabyte-scale data processing, interactive analytics, and machine learning using open-source frameworks such as Apache Spark, Apache Hive, and Presto.
 * Big data cloud platform for processing vast data using open source tools such as Hadoop, Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi, and Presto.
 * EMR can be used to perform data transformation workloads - Extract, transform, load (ETL)
 * Use case: Analyze Clickstream data from S3 using Apache Spark and Hive to deliver more effective ads
 
 ### Neptune
 
+![AWS Neptune](https://d1.awsstatic.com/products/Neptune/product-page-diagram_Amazon-Neptune%402x.8af655592b659339933079725a914c14cbc0d831.png)
+
+* Amazon Neptune is a fully managed database service built for the cloud that makes it easier to build and run graph applications. Neptune provides built-in security, continuous backups, serverless compute, and integrations with other AWS services.
 * Graph Database
 * Use case: high relationship data, social networking data, knowledge graphs (Wikipedia)
 
-### ElasticSearch
+### OpenSearch (old ElasticSearch)
 
+![OpenSearch](https://d1.awsstatic.com/product-marketing/Elasticsearch/product-page-diagram_Amazon-OpenSearch-Service_HIW%402x.f20d73b8aa110b5fb6ca1d9ebb439066a5e31ef5.png)
+
+* Amazon OpenSearch Service makes it easy for you to perform interactive log analytics, real-time application monitoring, website search, and more. OpenSearch is an open source, distributed search and analytics suite derived from Elasticsearch. Amazon OpenSearch Service offers the latest versions of OpenSearch, support for 19 versions of Elasticsearch (1.5 to 7.10 versions), as well as visualization capabilities powered by OpenSearch Dashboards and Kibana (1.5 to 7.10 versions). Amazon OpenSearch Service currently has tens of thousands of active customers with hundreds of thousands of clusters under management processing hundreds of trillions of requests per month.
 * Amazon managed Elastic Search service
 * Integration with Kinesis Data Firehose, AWS IoT, and CloudWatch logs
 * Use case: Search, indexing, partial or fuzzy search
