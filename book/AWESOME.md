@@ -26,13 +26,14 @@
 - [vmware-tanzu/k-bench: Workload Benchmark for Kubernetes](https://github.com/vmware-tanzu/k-bench)
 - [AWS - EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/)
 - [Best practices  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/best-practices)
+- [awesome-helm](https://github.com/cdwv/awesome-helm)
 - [Argo Awesome list](https://github.com/terrytangyuan/awesome-argo)
+- [ahmetb/kubernetes-network-policy-recipes: Example recipes for Kubernetes Network Policies that you can just copy paste](https://github.com/ahmetb/kubernetes-network-policy-recipes)
 
 ## Terraform
 
 - [shuaibiyy/awesome-terraform: Curated list of resources on HashiCorp's Terraform](https://github.com/shuaibiyy/awesome-terraform)
 - [aws-ia/terraform-aws-eks-blueprints: Configure and deploy complete EKS clusters.](https://github.com/aws-ia/terraform-aws-eks-blueprints)
-- [awesome-helm](https://github.com/cdwv/awesome-helm)
 
 ## AWS
 
