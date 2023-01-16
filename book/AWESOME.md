@@ -1,6 +1,4 @@
-##  Awesome
-
-[![Awesome](https://raw.githubusercontent.com/sindresorhus/awesome/main/media/logo.svg)](https://github.com/sindresorhus/awesome)
+##  My Awesome list [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ## General & DevOps
 
