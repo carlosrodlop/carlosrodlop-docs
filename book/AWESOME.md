@@ -10,6 +10,7 @@
 - [DZone: RefCards](https://dzone.com/refcardz)
 - [GitHub - bregman-arie/devops-exercises: Linux, Jenkins, AWS, SRE, Prometheus, Docker, Python, Ansible, Git, Kubernetes, Terraform, OpenStack, SQL, NoSQL, Azure, GCP, DNS, Elastic, Network, Virtualization. DevOps Interview Questions](https://github.com/bregman-arie/devops-exercises)
 - [Continuous Delivery Landscape](https://landscape.cd.foundation/)
+- [AdminTurnedDevOps/100DaysOfContainersAndOrchestration: Your go-to open source repo to learn containers (Docker, Podman, etc.) and Orchestration (Kubernetes, ECS, etc.) from start to finish.](https://github.com/AdminTurnedDevOps/100DaysOfContainersAndOrchestration)
 
 ## SRE
 
@@ -31,7 +32,8 @@
 ## Terraform
 
 - [shuaibiyy/awesome-terraform: Curated list of resources on HashiCorp's Terraform](https://github.com/shuaibiyy/awesome-terraform)
-- [aws-ia/terraform-aws-eks-blueprints: Configure and deploy complete EKS clusters.](https://github.com/aws-ia/terraform-aws-eks-blueprints)
+- [Terraform blueprints for EKS clusters.](https://github.com/aws-ia/terraform-aws-eks-blueprints)
+- [Terraform blueprints and modules for Google Cloud](https://cloud.google.com/docs/terraform/blueprints/terraform-blueprints)
 
 ## AWS
 
