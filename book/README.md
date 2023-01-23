@@ -2,6 +2,7 @@
 
 ## Pages
 * [AWESOME.md](AWESOME.md)
+* [AWS_Notes.md](AWS_Notes.md)
 * [AWS_Solution_Architect.md](AWS_Solution_Architect.md)
 * [CloudBees_CI.md](CloudBees_CI.md)
 * [ElasticSearch.md](ElasticSearch.md)
