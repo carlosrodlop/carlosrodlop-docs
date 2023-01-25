@@ -9,7 +9,8 @@
 5. [Storage](#storage)
 6. [Database](#database)
 7. [Migration](#migration)
-8. [References](#references)
+8. [Networking](#networking)
+9. [References](#references)
 
 ## Global
 
@@ -1084,6 +1085,8 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
 ## Database
 
+Go to [Index](#index)
+
 ### Database migration service (DMS)
 
 - Transfer a database to another type (relational databases, data warehouses, NoSQL databases and other types of data stores.). It is valid for on-premise, in cloud (AWS o different vendro, Azure) or combination of both for Sources and Targets.
@@ -1321,17 +1324,99 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
 ## Migration
 
+Go to [Index](#index)
+
 ### AWS Snow Family
+
+- AWS snow family are **Physical device** used for on-premises large scale data migration to S3 buckets and processing data **at low network locations**.
+- Use case: Addresses a lot of the common challenges that typically comes with with large-scale data transfers, including high network costs, long transfer times, and security concerns.
+
+| Family Member | Storage | RAM | Migration Type   | DataSync | Migration Size |
+| ------------- | ------- | --- | ---------------- | -------- | -------------- |
+| Snowcone      | 8TB     | 4GB | online & offline | yes      | GBs and TBs    |
+
+![snowcone](https://d1.awsstatic.com/SnowconHIW122722.406d05c2ce372214190996db3bd52e17e15e4007.png)
+
+| Family Member                   | Storage | RAM   | Migration Type | DataSync | Migration Size |
+| ------------------------------- | ------- | ----- | -------------- | -------- | -------------- |
+| Snowball Edge Storage Optimized | 80TB    | 80GB  | offline        | no       | Petabyte-scale |
+| Snowball Edge Compute Optimized | 42TB    | 208GB | offline        | no       | Petabyte-scale |
+
+![snowball](<https://d1.awsstatic.com/hiw_snowball%402x%20(3).afde317ee4d3d8abe9a7ecc4fe52fefb9f454683.png>)
+
+- AWS Snowball Edge comes with on-board storage and compute power for select AWS capabilities. Snowball Edge can do local processing and edge-computing workloads in addition to transferring data between your local environment and the AWS Cloud.
+
+| Family Member | Storage | RAM | Migration Type | DataSync | Migration Size |
+| ------------- | ------- | --- | -------------- | -------- | -------------- |
+| Snowmobile    | 100PB   | N/A | offline        | no       | Exabyte scale  |
+
+![snowmobile](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Snowmobile%402x.4f7215d254697f7cb01d2e7189b81cb660165260.png)
 
 ### AWS Storage Gateway
 
+![storagegateway](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_AWS-Storage-Gateway_HIW@2x.6df96d96cdbaa61ed3ce935262431aabcfb9e52d.png)
+
+- Store gateway is a **hybrid cloud service** to connect on-premises applications (data) with cloud storage.
+- Types:
+
+| Storage Gateway  | Protocol   | Backed by                               | Use Case                                                                                                                             |
+| ---------------- | ---------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| File Gateway     | NFS & SMB  | S3 -> S3-IA, S3 One Zone-IA             | Store files as object in S3, with a local cache for low-latency access, with user auth using Active Directory                        |
+| FSx File Gateway | SMB & NTFS | FSx -> S3                               | Windows or Lustre File Server, integration with Microsoft AD                                                                         |
+| Volume Gateway   | iSCSI      | S3 -> EBS                               | Block storage in S3 with backups as EBS snapshots. Use **Cached Volume** for low-latency and **Stored Volume** for scheduled backups |
+| Tape Gateway     | iSCSI VTL  | S3 -> S3 Glacier & Glacier Deep Archive | Backup data in S3 and archive in Glacier using tape-based process                                                                    |
+
 ### AWS DataSync
+
+- Data transfer service for moving large amounts of data into AWS. Has built in security capabilities (e.g. encryption in transit)
+- Use cases
+
+**A/** FROM an on-premise data center (using NFS and SMB storage protocol) TO AWS Storage: S3 (any storage type) , EFS, or FSx for Windows, AWS Snowcone. => Installing AWS Data Sync Agent on a VM, Amazon s3 Outspots or Snowcone
+
+![on premise](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync_On-Premises-to-AWS%402x.8769b9dea1615c18ee0597b236946cbe0103b2da.png)
+
+**B/** BETWEEN AWS storage services (e.g. to replicate EFS to EFS)
+
+![between aws](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync-to-AWS-Storage-Services%402x.c9ae72a5d796feed1fd562b968fc133f9e66eec2.png)
+
+**C/** FROM other Public Clouds to AWS Storage Services => Installing AWS Data Sync Agent on a VM
+
+![different cloud](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/AWS-DataSync-CrossCloud-to-AWS-Storage-Services_1%402x.bf8d56bb81dce99407eed06593b961bcb893dc0f.png)
 
 ### AWS Backup
 
+![backup](https://d1.awsstatic.com/products/backup/Product-Page-Diagram_AWS-Backup%402x.9a3f6d1b456ddadac992018c5b308bb1d9e8c055.png)
+
+- AWS Backup to centrally manage and automate backup process for EC2 instances, EBS Volumes, EFS, RDS databases, DynamoDB tables, FSx for Lustre, FSx for Window server, and Storage Gateway volumes
+- Use case: Automate backup of RDS with 90 days retention policy. (Automate backup using RDS directly has max 35 days retention period)
+
 ### Database Migration Service (DMS)
 
+- It helps to migrate database (data storage) to AWS with source remain fully operational during migration, minimize the downtime
+- It supports multiple combinations: Out of AWS => AWS, AWS => AWS, AWS => Out of AWS
+  - Out of AWS can be On premises or a Different Cloud Provider
+- How it works? You need to select EC2 instance to run DMS in order to migrate (and replicate) database from source => target
+- Types:
+
+**A/** Homogenous migrations (origin and target same technology) e.g. On-premise PostgreSQL => AWS RDS PostgreSQL
+
+![dms_homogeneous](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Database-Migration-Service_Homogenous-Database-Migrations_Reduced%402x.053ebcf3f38feed093d6180bb7a351c5551a30a1.png)
+
+**B/** Heterogenous migrations (origin and target different technology) such as MS SQL to Amazon Aurora. It requires to run AWS SCT (Schema Conversion Tool) at source
+
+![dms_heterogeneous](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
+
 ### AWS Application Migration Service (MGN)
+
+![mgn](https://d1.awsstatic.com/pdp-headers/2022/application-migration/MGN-How-It-Works-Diagram_biggerfonts1.1cb6cd71af1796ed95842d71c7b7a588a81c442d.jpg)
+
+- It helps on automating the conversion of your **Source servers (VM)** (VMware vSphere, Microsoft Hyper-V or Microsoft Azure) **to run natively on AWS**. It also simplifies application modernization with built-in and custom optimization options.
+- AWS Application Migration Service (new) utilizes continuous, block-level replication and enables cutover windows measured in minutes
+- AWS Server Migration Service (legacy) utilizes incremental, snapshot-based replication and enables cutover windows measured in hours.
+
+## Networking
+
+Go to [Index](#index)
 
 ## References
 
