@@ -575,7 +575,7 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
     - Use Cases:
       - With No Cross Zone Load Balancing, we got a user and we are using Route 53 for our DNS, which is splitting of our traffic 50/50 and sending the requests to EC2's in two diff AZ's.
         Each AC has a Load Balancer, The first AZ has 4 EC2 instances and the second has only one EC2 instance.
-        _ Because we don't have Cross Zone Load Balancing enabled - First AZ will split 50% to 4 instances and the second AZ receives 50% on 1 instance.
+        _Because we don't have Cross Zone Load Balancing enabled - First AZ will split 50% to 4 instances and the second AZ receives 50% on 1 instance.
         _ When we enable Cross Zone Load Balancing: The Load balancer will distribute the load evenly among instances on both AZ's.
       - We got a user and we are using Route 53 for our DNS, which is sending all the requests (100%) to a Load Balancer in AZ1, The first AZ1 has 4 EC2 instances and the second has only one EC2 instance.
         - Route 53's 100% traffic is sent to the only load balancer in US-EAST-1A and no traffic is being sent to US-EAST-1B.
@@ -1417,6 +1417,72 @@ Go to [Index](#index)
 ## Networking
 
 Go to [Index](#index)
+
+### CIDR block (Classless Inter-Domain Routing)
+
+- It is an internet protocol address allocation and route aggregation methodology. CIDR block has two components - Base IP (WW.XX.YY.ZZ) and Subnet Mask (/0 to /32)
+- Examples
+  - 192.168.0.0/32 means 2 raised to (32-**32**) = **1 single IP**
+  - 192.168.0.0/24 means 2 raised to (32-**24**) = 256 IPs ranging from 192.168.0.0 to 192.168.0.255 (last number can change)
+  - 192.168.0.0/16 means 2 raised to (32-**16**) = 65,536 IPs ranging from 192.168.0.0 to 192.168.255.255 (last 2 numbers can change)
+  - 192.168.0.0/8 means 2 raised to (32-8)= 16,777,216 IPs ranging from 192.0.0.0 to 192.255.255.255 (last 3 numbers can change)
+  - 0.0 0.0.0.0/0 means 232-0= All IPs ranging from 0.0.0.0 to 255.255.255.255 (all 4 numbers can change)
+
+### Amazon VPC (Virtual Private Cloud)
+
+- A VPC is a logical separated section of AWS Cloud (your own datacenter in AWS) for an account to enable:
+  - Launch instances
+  - Assign custom IP address ranges
+  - Configure route tables between subnets
+  - Create internet gateway and attach it to our VPC
+  - Much better security control over your AWS resources
+  - Instance security groups
+  - Subnet network access control lists (ACL's)
+- VPCs are region specific they do not span across regions
+  - Every region comes with default VPC.
+  - You can create upto 5 VPC per Region by default (soflimit, it can be extended)
+- Default VPC vs Custom VPC
+  - Default VPC is user friendly, allowing you to immediately deploy instances.
+  - All subnets in a default VPC have a route out to the internet.
+  - Each EC2 instance has both a public and private IP address.
+  - If you delete a default VPC, you can recover it now. Try not to delete it.
+- VPC’s consist of an Internet gateway or virtual private gateway, subnets, route tables, network access control lists and security groups.
+  - A subnet is a range of IP addresses within your VPC.
+    - A subnet can not span multiple availability zones. However an AZ can have multiple subnets.
+    - VPC IP Ranges
+      - Amazon don’t allow /8 prefix as it is too large — the largest they allow is /16
+      - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use.
+  - You can only have one internet gateway in your VPC
+  - When we create a VPC
+    - Created by default: a Route Table, Network Access Control List and Security Group.
+    - No created by default: Subnets and Internet gateway
+- Auto assigning a public IP Address is turned off by default, this will need to be updated if you want a public subnet.
+- You are not charged for using a VPC, however you are charged for the components used within it e.g. gateway, traffic monitoring etc.
+- One way to save costs when it comes to networking is to use private IP addresses instead of public IP addresses as they utilise the AWS Backbone network.
+- If you want to cut all network costs, group all EC2 instances in same AZ and use private IP addresses.
+- Types of tenancy: On set up of your VPC you will be asked to choose either:
+  - Dedicated → Everything on dedicated hardware (Very expensive)
+  - Default → multi-tenant share underlying hardware with other AWS customers
+
+#### VPC Peering
+
+- VPC peering connect two VPC over a direct network route using private IP addresses
+- Instances on peered VPCs behave just like they are on the same network
+- Must have no overlapping CIDR Blocks
+- VPC peering connection are 1 to 1 (not transitive) i.e. VPC-A peering VPC-B and VPC-B peering to VPC-C doesn’t mean VPC-A peering VPC-C
+- Route tables must be updated in both VPC that are peered so that instances can communicate
+- Can connect one VPC to another in same or different region. VPC peering in different region called as VPC inter-region peering
+- Can connect one VPC to another in same or different AWS account
+
+#### Subnet
+
+
+#### Route Table
+
+#### Internet Gateway
+
+#### NAT Gateway
+
 
 ## References
 
