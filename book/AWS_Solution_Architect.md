@@ -1418,17 +1418,9 @@ Go to [Index](#index)
 
 Go to [Index](#index)
 
-### CIDR block (Classless Inter-Domain Routing)
-
-- It is an internet protocol address allocation and route aggregation methodology. CIDR block has two components - Base IP (WW.XX.YY.ZZ) and Subnet Mask (/0 to /32)
-- Examples
-  - 192.168.0.0/32 means 2 raised to (32-**32**) = **1 single IP**
-  - 192.168.0.0/24 means 2 raised to (32-**24**) = 256 IPs ranging from 192.168.0.0 to 192.168.0.255 (last number can change)
-  - 192.168.0.0/16 means 2 raised to (32-**16**) = 65,536 IPs ranging from 192.168.0.0 to 192.168.255.255 (last 2 numbers can change)
-  - 192.168.0.0/8 means 2 raised to (32-8)= 16,777,216 IPs ranging from 192.0.0.0 to 192.255.255.255 (last 3 numbers can change)
-  - 0.0 0.0.0.0/0 means 232-0= All IPs ranging from 0.0.0.0 to 255.255.255.255 (all 4 numbers can change)
-
 ### Amazon VPC (Virtual Private Cloud)
+
+![vpc](https://d1.awsstatic.com/Digital%20Marketing/House/Hero/products/ec2/VPC/Product-Page-Diagram_Amazon-VPC_HIW.9c472d7f2eb39ab8bdd22aa3ab80be00cdd00d8f.png)
 
 - A VPC is a logical separated section of AWS Cloud (your own datacenter in AWS) for an account to enable:
   - Launch instances
@@ -1446,16 +1438,6 @@ Go to [Index](#index)
   - All subnets in a default VPC have a route out to the internet.
   - Each EC2 instance has both a public and private IP address.
   - If you delete a default VPC, you can recover it now. Try not to delete it.
-- VPC’s consist of an Internet gateway or virtual private gateway, subnets, route tables, network access control lists and security groups.
-  - A subnet is a range of IP addresses within your VPC.
-    - A subnet can not span multiple availability zones. However an AZ can have multiple subnets.
-    - VPC IP Ranges
-      - Amazon don’t allow /8 prefix as it is too large — the largest they allow is /16
-      - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use.
-  - You can only have one internet gateway in your VPC
-  - When we create a VPC
-    - Created by default: a Route Table, Network Access Control List and Security Group.
-    - No created by default: Subnets and Internet gateway
 - Auto assigning a public IP Address is turned off by default, this will need to be updated if you want a public subnet.
 - You are not charged for using a VPC, however you are charged for the components used within it e.g. gateway, traffic monitoring etc.
 - One way to save costs when it comes to networking is to use private IP addresses instead of public IP addresses as they utilise the AWS Backbone network.
@@ -1464,7 +1446,95 @@ Go to [Index](#index)
   - Dedicated → Everything on dedicated hardware (Very expensive)
   - Default → multi-tenant share underlying hardware with other AWS customers
 
-#### VPC Peering
+#### Required Components
+
+- VPC’s consist of an Internet gateway, Subnets, Route tables, Network Access Control Lists and Security Groups.
+- When we create a VPC
+  - Created by default: a Route Table, Network Access Control List and Security Group.
+  - No created by default: Subnets and Internet gateway
+
+##### A/ Subnet (No created by default)
+
+- A range of IP addresses within a VPC.
+  - You assign one CIDR block per Subnet within CIDR range of your VPC. Should not overlap with other Subnet’s CIDR in your VPC.
+  - Amazon don’t allow /8 prefix as it is too large — the largest they allow is /16
+  - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use. For e.g. If you need 29 IP addresses to use, your should choose CIDR /26 = 64 IP and not /27 = 32 IP, since 5 IPs are reserved and can not use.
+  - Enable Auto assign public IPv4 address in public subnets, EC2 instances created in public subnets will be assigned a public IPv4 address
+  - If you have 3 AZ in a region then you create total 6 subnets - 3 private subnets (1 in each AZ) and 3 public subnets (1 in each AZ) for multi-tier and highly-available architecture. API gateway and ALB reside in public subnet, EC2 instances, Lambda, Database reside in private subnet.
+- Each subnet is tied to one Availability Zone, one Route Table, and one Network ACL
+  - A subnet can not span multiple availability zones. However an AZ can have multiple subnets.
+
+###### CIDR block (Classless Inter-Domain Routing)
+
+- It is an internet protocol address allocation and route aggregation methodology. CIDR block has two components - Base IP (WW.XX.YY.ZZ) and Subnet Mask (From /0 to /32)
+- Examples - Base IP 192.168.0.0
+  - 192.168.0.0/32 means 2 raised to (32-**32**) = **1 single IP**
+  - 192.168.0.0/24 means 2 raised to (32-**24**) = 256 IPs ranging from 192.168.0.0 to 192.168.0.255 (last number can change)
+  - 192.168.0.0/16 means 2 raised to (32-**16**) = 65,536 IPs ranging from 192.168.0.0 to 192.168.255.255 (last 2 numbers can change)
+  - 192.168.0.0/8 means 2 raised to (32-8)= 16,777,216 IPs ranging from 192.0.0.0 to 192.255.255.255 (last 3 numbers can change)
+  - 0.0 0.0.0.0/0 means 232-0= All IPs ranging from 0.0.0.0 to 255.255.255.255 (all 4 numbers can change)
+
+##### B/ Internet Gateway (No created by default)
+
+![Internet Gateway](https://docs.aws.amazon.com/images/vpc/latest/userguide/images/internet-gateway-basics.png)
+
+- It is known as Internet gateway or Virtual Private Gateway
+- 1 VPC <-> 1 Internet Gateway. Each Internet Gateway is associated with one VPC only, and each VPC has one Internet Gateway only (one-to-one mapping)
+- Allows your VPC to communicate with the Internet. Internet Gateway allows public subnet access to the internet and accessible from internet
+- For internet communication, you must set up a route in your route table that directs traffic to the Internet Gateway
+- Performs network address translation for instances
+
+##### C/ Route Table (Created by default)
+
+- A set of rules (called routes) that are used to determine where network traffic is directed.
+  - Each Route table route has Destination like IPs and Target like local, IG, NAT, VPC endpoint etc.
+  - Allows subnets to talk to each other
+- Each subnet in your VPC must be associated with a route table.
+- Cardinality
+  - 1 Subnet -> 1 Route Table. A subnet can only be associated with one route table at a time
+  - N Subnet -> Same Roue Table. Multiple subnets can be associated with the same route table For e.g. you create 4 subnets in your VPC where 2 subnets associated with one route table with no internet access rules know as private subnets and another 2 subnets are associated with another route table with internet access rules known as public subnets
+- By default subnets are associated with the Main route table, but this can be a security risk e.g. if you were to put a route out to the public internet in the route table all subnets would automatically be made public.
+  - To resolve this — keep main route table as private and then have separate route tables that use the main one, but have additional routes.
+- Public vs Private Subnet
+  - Public subnet ==> It is a subnet that’s associated with a route table having **rules to connect to internet using Internet Gateway**.
+  - Private subnet ==> It is a subnet that’s associated with a route table having **no rules to connect to internet using Internet Gateway**. When our Subnets connected to the Private Route Table need access to the internet, we set up a NAT Gateway in the public Subnet. We then add a rule to our Private Route Table saying that all traffic looking to go to the internet should point to the NAT Gateway.
+
+##### D/ Network Access Control List (Created by default)
+
+- Extra layer of security for your VPC (acts as a Firewall) as it can be used to control the traffic in and out of subnets.
+- Similar to security groups, as they contain rules, but you can you can **block IP addresses** with a NACL (unlike Security Groups).
+- A NACL can be associated with many Subnets, but a subnet can only have one NACL
+- NACL are stateless, meaning they can have separate inbound and outbound rules (unlike Security Groups).
+- PCs comes with a modifiable default NACL. By default, it allows all inbound and outbound traffic.
+- You can create custom NACL. By default, each custom network ACL denies all inbound and outbound traffic until you add rules.
+- Each subnet within a VPC must be associated with only 1 NACL
+  - If you don’t specify, auto associate with default NACL.
+  - If you associate with new NACL, auto remove previous association
+- Apply to all instances in associated subnet
+- Rules
+  - Support both Allow and Deny rules
+  - Evaluate rules in number order, starting with lowest numbered rule. NACL rules have number(1 to 32766) and higher precedence to lowest number for e.g. #100 ALLOW <IP> and #200 DENY <IP> means IP is allowed
+  - Each network ACL also includes a rule with rule number as asterisk *. If any of the numbered rule doesn’t match, it’s denies the traffic. You can’t modify or remove this rule.
+  - Recommended to create numbered rules in increments (for example, increments of 10 or 100) so that you can insert new rules where you need to later on.
+
+##### E/ Security Groups (Created by default)
+
+#### Optional Components
+
+##### NAT Gateway
+
+NAT Gateway allows AWS instances in private subnet access to the internet but not accessible from internet
+NAT Gateway (latest) is a managed service which launches redundant instances within the selected AZ (can survive failure of EC2 instance)
+NAT Instances (legacy) are individual EC2 instances. Community AMIs exist to launch NAT Instances. Works same as NAT Gateway.
+You can only have 1 NAT Gateway inside 1 AZ (cannot span AZ).
+You should create a NAT Gateway in each AZ for high availability so that if a NAT Gateway goes down in one AZ, instances in other AZs are still able to access the internet.
+NAT Gateway reside in public subnet. You must allocate Elastic IP to NAT Gateway. You must add NAT Gateway in private subnet route table with Destination 0.0.0.0/0 and Target nat-gateway-id
+NAT Gateways are automatically assigned a public IP address
+NAT Gateway/Instances works with IPv4
+NAT Gateway cannot be shared across VPC
+NAT Instance cannot be used as Bastions
+
+##### VPC Peering
 
 - VPC peering connect two VPC over a direct network route using private IP addresses
 - Instances on peered VPCs behave just like they are on the same network
@@ -1474,14 +1544,7 @@ Go to [Index](#index)
 - Can connect one VPC to another in same or different region. VPC peering in different region called as VPC inter-region peering
 - Can connect one VPC to another in same or different AWS account
 
-#### Subnet
 
-
-#### Route Table
-
-#### Internet Gateway
-
-#### NAT Gateway
 
 
 ## References
