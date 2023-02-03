@@ -1445,6 +1445,8 @@ Go to [Index](#index)
 - Types of tenancy: On set up of your VPC you will be asked to choose either:
   - Dedicated → Everything on dedicated hardware (Very expensive)
   - Default → multi-tenant share underlying hardware with other AWS customers
+- Cost nothing: VPCs, Route Tables, NACLs, Internet Gateway, Security Groups, Subnets, VPC Peering
+- Cost money: NAT Gateway, VPC Endpoints, VPN Gateway, Customer Gateway
 
 #### Required Components
 
@@ -1501,10 +1503,10 @@ Go to [Index](#index)
 
 ##### D/ Network Access Control List (Created by default)
 
-- Extra layer of security for your VPC (acts as a Firewall) as it can be used to control the traffic in and out of subnets.
+- Extra layer of security **for your VPC** (acts as a Firewall) as it can be used to control the traffic in and out of subnets.
 - Similar to security groups, as they contain rules, but you can you can **block IP addresses** with a NACL (unlike Security Groups).
+- NACL are **stateless**, when you create an inbound rule and an outbound rule is not automatically created. It means they can have separate inbound and outbound rules (unlike Security Groups).
 - A NACL can be associated with many Subnets, but a subnet can only have one NACL
-- NACL are stateless, meaning they can have separate inbound and outbound rules (unlike Security Groups).
 - PCs comes with a modifiable default NACL. By default, it allows all inbound and outbound traffic.
 - You can create custom NACL. By default, each custom network ACL denies all inbound and outbound traffic until you add rules.
 - Each subnet within a VPC must be associated with only 1 NACL
@@ -1519,20 +1521,46 @@ Go to [Index](#index)
 
 ##### E/ Security Groups (Created by default)
 
+- Control inbound and outbound traffic **at EC2 instance level**
+- You can specify allows rule, but not deny rules. You can specify a source in security group rule to be an IP range, A specific IP (/32), or another security group.
+- When you first create a security group, bu default
+  - All outbound traffic is allowed.
+  - All inbound traffic is blocked.
+- **Stateful** when you create an inbound rule and an outbound rule is automatically created.
+- Cardinality: N Security Group <--> N EC2 instance.
+  - You can have any number of EC2 instances within a security group.
+  - You can have multiple Security Groups attached/assigned to EC2 instances. Evaluate all rules before deciding whether to allow traffic. Meaning if you have one security group which has no Allow and you add an allow in another than it will Allow
+
 #### Optional Components
 
-##### NAT Gateway
+##### NAT Gateway/Instances
 
-NAT Gateway allows AWS instances in private subnet access to the internet but not accessible from internet
-NAT Gateway (latest) is a managed service which launches redundant instances within the selected AZ (can survive failure of EC2 instance)
-NAT Instances (legacy) are individual EC2 instances. Community AMIs exist to launch NAT Instances. Works same as NAT Gateway.
-You can only have 1 NAT Gateway inside 1 AZ (cannot span AZ).
-You should create a NAT Gateway in each AZ for high availability so that if a NAT Gateway goes down in one AZ, instances in other AZs are still able to access the internet.
-NAT Gateway reside in public subnet. You must allocate Elastic IP to NAT Gateway. You must add NAT Gateway in private subnet route table with Destination 0.0.0.0/0 and Target nat-gateway-id
-NAT Gateways are automatically assigned a public IP address
-NAT Gateway/Instances works with IPv4
-NAT Gateway cannot be shared across VPC
-NAT Instance cannot be used as Bastions
+![NAT vs IG](https://miro.medium.com/max/1400/1*gftv4LSqU_12kRqNwYISJw.webp)
+
+- NAT gateways/instances provides **private subnets access to internet traffic**, but ensures internet traffic does not initiate a connection with the instances.
+- The NAT gateway/instance must live in a public subnet and then for a private subnet to connect to it, the private subnet must have a route in its route table that directs traffic to it.
+- Use Case: For example this can enable our EC2 Instances in a private subnet to go out and download software by communicating with our Internet Gateway.
+- NAT Gateway/Instances works with IPv4
+
+###### NAT Instances (legacy)
+
+- NAT Instances are individual EC2 instances. Community AMIs exist to launch NAT Instances. Works same as NAT Gateway.
+- NAT instances are managed by you.
+- It can be associated with security groups to control inbound and outbound traffic.
+- Since NAT Instances send and receive traffic from different sources/destinations, it can cause some issues as EC2 does source/destination checks automatically — so when using a NAT Instance you need to **disable source/destination checks** on the EC2 instance when creating it.
+
+###### NAT Gateway (latest, best practice)
+
+- NAT Gateways are preferred by enterprise as they are **highly available**, can **scale** and are **managed by AWS**.  It is a managed service which launches redundant instances within the selected AZ (can survive failure of EC2 instance)
+- You can create an AZ independent architecture with Network Gateways to reduce the risks of failures. This can be done by creating a NAT Gateway in each AZ and then configuring the routing to ensure resources in the same NAT Gateway are in the same AZ.
+- Can not be associated with security groups, but you can associate the resources behind the NAT Gateway with security groups.
+- Automatically assigned public IP Address
+- You don’t need to worry about disabling source & destination checks on the instance.
+
+###### Bastion Host
+
+- A Bastion host is used to **securely administer EC2 instances** in private subnet (using SSH or RDP). Bastions are called Jump Boxes in Australia.
+- A NAT Gateway or a NAT instance is used to provide **internet traffic** to EC2 instances in a private subnets. **They cannnot be used as Bastion Host**.
 
 ##### VPC Peering
 
@@ -1544,7 +1572,95 @@ NAT Instance cannot be used as Bastions
 - Can connect one VPC to another in same or different region. VPC peering in different region called as VPC inter-region peering
 - Can connect one VPC to another in same or different AWS account
 
+##### VPC Flow Logs
 
+- Capture information about **IP traffic information** (not hostnames) entering and leaving interfaces in your VPC.
+  - They allow you to monitor the traffic reaching your instances and can help you see if your security groups are restrictive enough.
+- They can be created at 3 levels: VPC, Subnet, Network Interface level.
+- You can publish these flow logs with CloudWatch or S3. Query VPC flow logs using Athena on S3 or CloudWatch logs insight.
+- Flow logs do not impact latency or network throughput as they are collected outside the path of your network traffic.
+- You can have flow logs for peered VPCs, but only if they are in same account.
+
+##### Transit Gateway
+
+- Allows transitive peering between VPCs and on-premises data centres through a central hub.
+- Works on regional bases but can span multiple regions.
+- Supports IP Multicast, so can distribute the same content to multiple specific destinations (NOT supported by any other service).
+- Overall used to simplify network typology.
+
+##### VPC endpoints
+
+- Allows you to **privately connect a VPC to other AWS resources** and it is powered by Private Link.
+- Instances in your VPC do not require public IP addresses to communicate with resources in the service. So traffic between your VPC and other services does not leave the Amazon network.
+- Eliminates the need of an Internet Gateway and NAT Gateway for instances in public and private subnets to access the other AWS services through public internet
+- Eliminates the need of an Internet Gateway and NAT Gateway for instances in public and private subnets to access the other AWS services through public internet.
+- 2 types:
+  - Interface endpoint → Attach an Elastic Network Interface (ENI) with a private IP address onto your EC2 instance for it to communicate to services using AWS network. It serves as an entry point for traffic destined to a supported service.
+  - Gateway endpoints → Create it as a route table target for traffic to services, like NAT gateways — its supported for only S3 & Dynamo.
+
+###### VPC Private Link
+
+- Provides private connections between VPC’s, AWS services and on-premise networks.
+- Best way to expose your VPC to hundreds or thousands of other VPC’s.
+- Can secure your traffic and simplify network management.
+- Doesn’t require VPC peering, route tables or NAT gateways
+- Requires Network Load Balancer on the service VPC and an elastic network interface on the customer VPC.
+
+### VPN CloudHub
+
+- If you have multiple sites, each with its own VPN connection, you can use AWS VPN CloudHub to connect those sites together.
+- Low cost easy to manage.
+- Operates over public internet, but all traffic is encrypted.
+- Hub and Spoke model
+
+### AWS Direct Connect
+
+- **Directly connects** your on-premise datacenter to an AWS VPC using a dedicated network connection over a standard ethernet **fiber-optic cable**.
+- Provide 1GB to 100GB/s network bandwidth for fast transfer of data from on-premises to Cloud
+- Benefits of using Direct Connect includes: reduced network costs and increase in bandwidth throughput.
+
+| AWS VPN | AWS Direct Connect |
+| ------------- | ------- |
+| Over the internet connection    | Over the dedicated private connection   |
+| Configured in minutes    | Configured in days |
+| low to modest bandwidth   | high bandwidth 1 to 100 GB/s |
+
+- Exam question: A VPN connection keeps dropping out because the amount of throughput, and what kinds of things could you do to solve that? Answer: Direct Connect
+
+### AWS VPN
+
+- AWS Site-to-Site VPN connection is created to communicate between your remote network and Amazon VPC over the internet
+- **VPN connection**: A secure connection between your on-premises equipment and your Amazon VPCs.
+- **VPN tunnel**: An encrypted link where data can pass from the customer network to or from AWS. Each VPN connection includes two VPN tunnels which you can simultaneously use for high availability.
+- Customer gateway: An AWS resource which provides information to AWS about your customer gateway device.
+- Customer gateway device: A physical device or software application on customer side of the Site-to-Site VPN connection.
+- Virtual private gateway: The VPN concentrator on the Amazon side of the Site-to-Site VPN connection. You use a virtual private gateway or a transit gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
+- Transit gateway: A transit hub that can be used to interconnect your VPCs and on-premises networks. You use a transit gateway or virtual private gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
+
+### Amazon API Gateway
+
+- It is at a fully managed service to Create and Manage APIs that acts as a front door for back-end systems running on EC2, AWS Lambda, etc. It makes easy for developers to publish, maintain, monitor and secure APIs at any scale.
+- API Gateway Types - HTTP, WebSocket, and REST
+- API Gateway has caching capabilities to increase performance
+- API Gateway is low cost and scales automatically
+- Allows you to track and control usage of API. Set throttle limit (default 10,000 req/s) to prevent from being overwhelmed by too many requests and returns `429 Too Many Request` error response.
+- You can log results to CloudWatch
+- If you are using Javascript/AJAX that uses multiple domains with API Gateway, ensure that you have enable CORS on API Gateway.
+- CORS is enforced by the client (Browser)
+
+### AWS Global Accelerator
+
+- It is a service which you create accelerators to improve availability and performance of your applications for **global users**.
+  - How? It directs traffic to optimal endpoints over the AWS Global network to avoid congestion.
+  - First you create global accelerator, which provisions two anycast static IP addresses.
+  - Then you register one or more endpoints with Global Accelerator. Each endpoint can have one or more AWS resources such as NLB, ALB, EC2, S3 Bucket or Elastic IP.
+- You can control traffic using traffic dials. This is done within the endpoint group.
+- You can control weighting to individual endpoints using weights (how much traffic is routed to each endpoint)
+- Within endpoint, global accelerator monitor health checks of all AWS resources to send traffic to healthy resources only
+
+### Amazon CloudFront
+
+### Amazon Route 53
 
 
 ## References
