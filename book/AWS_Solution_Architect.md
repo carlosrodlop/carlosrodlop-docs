@@ -1660,6 +1660,44 @@ Go to [Index](#index)
 
 ### Amazon CloudFront
 
+![cloudfront](https://docs.aws.amazon.com/images/AmazonCloudFront/latest/DeveloperGuide/images/how-you-configure-cf.png)
+
+- It is a global service.
+- It is a Content Delivery Network (CDN) uses AWS edge locations to cache and securely deliver cached content (such as images and videos) based on the geographic locations of the user, the origin of the webpage and a content delivery server (Requests to content are automatically routed to nearest geographical edge location). Advantages ==> Low latency and high transfer speeds.
+  - Edge Location → Location where content will be cached (different to an AWS Region). They are not just read, you can also write to them.
+  - Origin → Location where all the files THAT the CDN will distribute are stored — can be an S3 Bucket, EC2, ELB etc (Any type of AWS resource)
+  - Distribution → Name of the CDN, which consists of a collection of edge locations. There are two types:
+    - Web Distributions which are used for websites (Download Data)
+    - RTMP Distributions which are used for streaming media (Stremming Access)
+  - Invalidations → these can be files or subfolders that you can select to not be on the edge locations. Useful when you need to remove a file from an edge cache before it expires
+  - Versioning → can be used to serve a different version of a file under a different name.
+- Objects are cached for the Time To Live (TTL) - default 24 hours.
+  - If requested resources does not exist on CloudFront — it will query the original server and then cache it on the edge location. Next requests get a cached copy from the Edge Location instead of downloading it again from the server until TTL expires.
+  - It is possible to clear cached objects, however you will incur a charge.
+- Can integrate with AWS Shied, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
+- It supports Geo restriction (Geo-Blocking) to whitelist or blacklist countries that can access the content.
+
+#### Restricting Access to CloudFront: Signed URL ir Signed Cookies
+
+- It used to restrict access to the resource to certain people so that it is only accessible through CloudFront and not directly through the AWS resource.
+  - Example: Netflix - Option in AWS CloudFront is "Restrict Viewer access (Use Signed URL's or Signed cookies)")
+  - If your origin is EC2, then use CloudFront Signed URL.
+  - If your origin is S3, then use S3 signed URL instead of CloudFront Signed URL. (REVIEW THIS)
+- You can restrict access using signed URLs or Signed Cookies.
+  - A signed URL is for individual files, 1 files = 1 URL.
+  - A signed cookie is for multiple file, 1 cookie = multiple files.
+- When we create a signed URL or signed cookie, we attach a policy. The policy can include:
+  a. URL expiration.
+  b. IP ranges
+  c. Trusted Signers (which AWS accounts can create signed URL's)
+
+##### Features of a signed url
+
+- The signed url (key pair) is account wide & managed by the root user.
+- Has an associated policy statement (JSON) specifying restrictions on the URL.
+- Contains additional information e.g. expiration date/time.
+- Can have different origins and can utilise caching features.
+
 ### Amazon Route 53
 
 
