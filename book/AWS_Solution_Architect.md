@@ -1700,7 +1700,6 @@ Go to [Index](#index)
 
 ### Amazon Route 53
 
-
 ## References
 
 After doing the course from [Digital Training](https://digitalcloud.training/aws-cheat-sheets/), I reviwed the following resources to make this summary:
