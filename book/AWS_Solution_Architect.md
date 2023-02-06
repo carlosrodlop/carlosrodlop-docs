@@ -10,7 +10,8 @@
 6. [Database](#database)
 7. [Migration](#migration)
 8. [Networking](#networking)
-9. [References](#references)
+9. [Management and Governance](#management_and_governance)
+10. [References](#references)
 
 ## Global
 
@@ -1650,6 +1651,8 @@ Go to [Index](#index)
 
 ### AWS Global Accelerator
 
+![global_accelerator](https://d1.awsstatic.com/product-page-diagram_AWS-Global-Accelerator%402x.dd86ff5885ab5035037ad065d54120f8c44183fa.png)
+
 - It is a service which you create accelerators to improve availability and performance of your applications for **global users**.
   - How? It directs traffic to optimal endpoints over the AWS Global network to avoid congestion.
   - First you create global accelerator, which provisions two anycast static IP addresses.
@@ -1699,6 +1702,95 @@ Go to [Index](#index)
 - Can have different origins and can utilise caching features.
 
 ### Amazon Route 53
+
+![route53](https://d1.awsstatic.com/Route53/product-page-diagram_Amazon-Route-53_HIW%402x.4c2af00405a0825f83fca113352b480b19d9210e.png)
+
+- Route 53 is AWS’s highly available, universal (not region specific) and scalable DNS service.
+- Route 53 allows you to perform Domain Registration, DNS routing and also Health Checking.
+  - If you want to use Route 53 for domain purchased from 3rd party websites (example GoDaddy).
+    - AWS - You need to create a Hosted Zone in Route 53
+    - 3 party DNS provider - update the 3rd party registrar NS (name server) records to use Route 53.
+- It also works well with other AWS services — it allows you to connect requests to your infrastructure such as to EC2 instances, ELBs or S3 buckets.
+- Private Hosted Zone is used to create an internal (intranet) domain name to be used within Amazon VPC. You can then add some DNS record and routing policy for that internal domain. That internal domain is accessible from EC2 instances or any other resource within VPC.
+- There is a default limit of 50 domain names. However, this limit can be increased by contacting AWS support.
+
+#### Terminology
+
+- Internet Protocol (IP) → is a numerical label assigned to devices and used by computers to identify each other on a network.
+- Domain Name System (DNS) → used to convert human friendly domain names into IP addresses.
+- Domain Registrars → authority that can assign domain names
+- Start of Authority Record (SOA) → type of resource record that every DNS must begin with, it contains the following information:
+  - Stores the name of the server supplying the data
+  - Stores the admin zone
+  - Currently version of data file
+  - Time to live
+- Name Server (NS) records→ used by top level domain servers to direct traffic to the content DNS server. It specifies which DNS server is authoritative for a domain.
+- A Records (Address Record) → type of DNS record, used by computer to translate a logical domain name to an IP address.
+- Time To Live (TTL) → length of time the DNS record is cached on the server for in seconds. Default is 48 hours.
+- Canonical Name (CName)→ It is used to resolve one domain name (hostname) to another (Map to a reference). Only works with subdomains e.g. something.mydomain.com
+- Alias Record (A or AAAA) → Similar to CName but can be used:
+  - At the top node of a DNS namespace, also known as the zone apex (a naked domain name) e.g. example.com
+  - Points hostname to an AWS Resource like ALB, API Gateway, CloudFront, S3 Bucket, Global Accelerator, Elastic Beanstalk, VPC interface endpoint etc.
+  - Works with both root-domain and subdomains
+
+#### DNS Record: Routing Policy
+
+In order for Route 53 to respond to queries, you need to define one of the following routing policies:
+
+- **Simple** You can only have one record with multiple IP addresses. If you specify multiple values in a record, Route 53 returns all values to the user in a random order — so you never know which EC2 you are hitting and it can be shuffled on refreshed!
+  - You can't have any health checks.
+- **Weighted** Split traffic based on different custom proportions you assign.
+  - You can set health checks on individual record sets. If a recordset fails a health check it will be removed from Route53 until it passes the health check.
+  - Example: you can set 10% of your traffic to go to US-EAST-1 and 90% to EU-WEST-1.
+- **Latency** Allows you to route your traffic based on the lowest network latency for your end user (ie which region will give them the fastest response time).
+  - Example: create 3 DNS records with region us-east-1, eu-west-2, and ap-east-1.
+- **Failover** to route traffic from Primary to Secondary (DR scenario) in case of failover (active/passive set-up)
+  - It is mandatory to create health check for both IP and associate to record. The traffic goes to main site when its healthy and then can route traffic to the secondary site when the main one becomes unhealthy.
+  - Example create 2 DNS records for primary site in EU-WEST-2 and secondary (DR) IP in AP-SOUTHEAST-2.
+- **Geolocation** to route traffic to specific IP based on user geolocation (select Continent or Country).
+  - For this you need to create separate record sets for each required location. It also requires a default (select Default location) policy in case there’s no match on location.
+  - For Example: You might want all queries from Europe to be routed to a fleet of EC2 instances that are specifically configured for European customers. These servers may have the local language of European customers and all prices are displayed in Euros.
+- **Geoproximity** to route traffic to specific IP based on user geolocation AND location of your resources.
+  - You can also optionally choose to route more traffic or less to a given resource by specifying a value, known as a bias A bias expands or shrinks the size of the geographic region from which traffic is routed to a resource.
+  - To use Geoproximity Routing, you must use Route 53 traffic flow.
+- **Multivalue Answer** configure Amazon Route 53 to return multiple values, such as IP addresses for your web servers, in response to DNS queries.
+  - You can specify multiple value for almost any record, but multivalue answer routing also lets you check the health of each resource, so Route 53 returns only values from healthy resources.
+  - Similar to Simple Routing only you can put health checks on each record set so that only healthy resources are returned.
+  - Use case: Your company hosts 10 web servers all serving the same web content in AWS. They want Route 53 to serve traffic to random web servers.
+  - Example: create 3 DNS records with associated health check. Acts as client side Load Balancer, expect a downtime of TTL, if an EC2 becomes unhealthy.
+
+#### DNS Failover
+
+- Active-Active failover when you want all resources to be available the majority of time. All records have same name, same type, and same routing policy such as weighted or latency
+- Active-Passive failover when you have active primary resources and standby secondary resources. You create two records - primary & secondary with failover routing policy
+
+## Management and Governance
+
+Go to [Index](#index)
+
+### Amazon CloudWatch
+
+### AWS CloudTrail
+
+### AWS CloudFormation
+
+### AWS Elastic Beanstalk
+
+### AWS ParallelCluster
+
+### AWS Step Functions (SF)
+
+### AWS Simple Workflow Service (SWF)
+
+### AWS Organization
+
+### AWS OpsWorks
+
+### AWS Glue
+
+## Containers
+
+Go to [Index](#index)
 
 ## References
 
