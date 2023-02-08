@@ -1,5 +1,6 @@
 # AWS Solution Architect
 
+![badge](https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png)
 ## Index
 
 1. [Global](#global)
@@ -589,7 +590,7 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 | Type                        | Protocol                                                   | OSI Layer                   |
 | --------------------------- | ---------------------------------------------------------- | --------------------------- |
-| Application Load Balancer   |  HTTP, HTTPS, WebSocket                                    | Layer 7 (Application layer) |
+| Application Load Balancer   | HTTP, HTTPS, WebSocket                                     | Layer 7 (Application layer) |
 | Network Load Balancer       | TCP, UDP, TLS                                              | Layer 4 (Transport layer)   |
 | Gateway Load Balancer       | Thirdparty appliances, virtual applications e.g. firewalls | Layer 3                     |
 | Classic Load Balancer (old) | HTTP, HTTPS, TCP                                           | Both Layer 7 and Layer 4    |
@@ -1770,11 +1771,91 @@ Go to [Index](#index)
 
 ### Amazon CloudWatch
 
+![cloudwatch](https://d1.awsstatic.com/reInvent/reinvent-2022/cloudwatch/Product-Page-Diagram_Amazon-CloudWatch.095eb618193be7422d2d34e3abd5fdf178b6c0e2.png)
+
+- CloudWatch is a monitoring & observability service for AWS resources (EC2, ALB, S3, Lambda, DynamoDB, RDS etc.) and applications to watch **performance**.
+  - It can collect these Inputs: Metrics and Log files
+  - It allows you to create these Outputs:
+    - Dashboards: Creates dashboards to see what is happening with your AWS environment
+    - Alarms: Allows you to set Alarms that notify you when particular metric thresholds are hit
+    - Events: CloudWatch Events helps you to respond to state changes in your AWS resources.
+    - Logs: CloudWatch Logs helps you to aggregate, monitor and store logs.
+
+#### CloudWatch with EC2
+
+- It can monitor EC2 at host level: CPU, Network, Disk, Status Check
+- It Monitors every 5 mins by default (Can switch to every 1min by enabling detailed logs)
+- You can terminate or recover EC2 instance based on CloudWatch Alarm
+
 ### AWS CloudTrail
+
+![CloudTrail](https://d1.awsstatic.com/product-marketing/CloudTrail/product-page-diagram_AWS-CloudTrail_HIW.feb63815c1869399371b4b9cc1ae00e78ed9e67f.png)
+
+- CloudTrail is used for governance, compliance & operational **auditing**, security analysis
+  - It collect as Inputs: of all the actions taken on any user on Management Console, AWS service, CLI, or SDK across AWS infrastructure.
+  - Can detect user behaviour patterns and also unusual activity. Use case: check in the CloudTrail if any resource is deleted from AWS without anyone’s knowledge.
+- CloudTrail works per AWS account and is enabled per region.
+  - It is enabled by default for all regions
+  - It can consolidate logs using S3 bucket:
+    - Turn on CloudTrail in paying account.
+    - Create a bucket policy that allows cross-account access.
+    - Turn on CloudTrail in the other accounts and use the bucket in the paying account.
 
 ### AWS CloudFormation
 
+![CloudFormation](https://d1.awsstatic.com/Products/product-name/diagrams/product-page-diagram_CloudFormation.ad3a4c93b4fdd3366da3da0de4fb084d89a5d761.png)
+
+- Allows you to provision AWS resources as code. Infrastructure as Code (IaC).
+  - Create, update, or delete your stack of resources using CloudFormation Template (blue prints) as a JSON or YAML file.
+- It simplifies infrastructure management and also makes it very easy to replicate infrastructure across different regions.
+  - Use case: Use to setup the same infrastructure in different environment for e.g. SIT, UAT and PROD. Use to create DEV resources everyday in working hours and delete later to lower the cost
+- Using CloudFormation itself is free, underlying AWS resources are charged
+
+#### Template Sections
+
+- There are ten valid sections a CloudFormation template can contain, however they are not all required:
+  - Resources — specify the actual resources you want to create (REQUIRED)
+  - Parameters — Any values that you want to pass into your template at run time. (Optional)
+  - Rules — used to validate parameters passed into the stack (Optional)
+  - Mappings — mapping of key value pairs that can be used to specify conditions (Optional)
+  - Outputs — values that are displayed when you check the stacks properties (Optional)
+  - Conditions — can control whether a resource is created or whether certain properties are assigned depending on a particular criteria. (Optional)
+  - Format Version — Version that the template conforms to (Optional)
+  - Description — Describes what the template is used for. This is optional, but if you use it, it needs to follow the Format Version.
+  - MetaData — any additional info about the template. (Optional)
+  - Transform — used for serverless applications, allows you to specify the SAM version to use (Optional)
+- Allows DependsOn attribute to specify that the creation of a specific resource follows another
+- Allows DeletionPolicy attribute to be defined for resources in the template
+  - retain to preserve resources like S3 even after stack deletion
+  - snapshot to backup resources like RDS after stack deletion
+- Supports Bootstrap scripts to install packages, files and services on the EC2 instances by simple describing them in the template
+- automatic rollback on error feature is enabled, by default, which will cause all the AWS resources that CF created successfully for a stack up to the point where an error occurred to be deleted.
+
+#### Serverless Application Model (SAM)
+
+- Is an open-source framework that extends CloudFormation so that it is optimised for serverless applications (e.g. Lambdas, API’s, databases etc.)
+- It supports anything CloudFormation supports.
+- Also uses templates to define resources and these templates are in a YAML format.
+- Can run serverless applications locally using docker.
+
 ### AWS Elastic Beanstalk
+
+![ElasticBeanstalk](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Elastic-Beanstalk%402x.6027573605a77c0e53606d5264ec7d3053bf26af.png)
+
+- Platform as a Service (PaaS)
+  - It Makes it easier for developers to quickly deploy and manage applications without thinking about underlying resources
+  - It Automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling and application health monitoring
+- You can launch an application with following pre-configured platforms:
+  - Apache Tomcat for Java applications,
+  - Apache HTTP Server for PHP and Python applications
+  - Nginx or Apache HTTP Server for Node.js applications
+  - Passenger or Puma for Ruby applications
+  - Microsoft IIS 7.5 for .NET applications
+  - Single and Multi Container Docker
+- You can also launch an environment with following environment tier:-
+  - An application that serves HTTP requests runs in a web server environment tier.
+  - A backend environment that pulls tasks from an Amazon Simple Queue Service (Amazon SQS) queue runs in a worker environment tier.
+- It costs nothing to use Elastic Beanstalk, only the resources it provisions e.g. EC2, ASG, ELB, and RDS etc.
 
 ### AWS ParallelCluster
 
