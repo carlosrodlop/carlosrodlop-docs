@@ -28,6 +28,7 @@
 - [awesome-helm](https://github.com/cdwv/awesome-helm)
 - [Argo Awesome list](https://github.com/terrytangyuan/awesome-argo)
 - [ahmetb/kubernetes-network-policy-recipes: Example recipes for Kubernetes Network Policies that you can just copy paste](https://github.com/ahmetb/kubernetes-network-policy-recipes)
+- [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
 
 ## Terraform
 
@@ -50,6 +51,7 @@
 
 - [Online IP Subnet Calculator](https://www.subnet-calculator.com/)
 - [Shields.io: Quality metadata badges for open source projects](https://shields.io/)
+- [Network Policy Editor for Kubernetes](https://editor.cilium.io/?id=Duo0R0Wc7egzNHrM)
 
 ## YouTube
 
