@@ -54,8 +54,8 @@ Go to [Index](#index)
 ### Amazon Resource Name (ARN)
 
 - Identifier (ID) for any AWS resource. They are globally unique
-- begin with `arn:<partition>:<service>:<region>:<account_id>` and end with: resource
-  resource_type/resource, resource_type/resource/qualifier, resource_type/resource:qualifier, resource_type:resource and resource_type:resource:qualifier
+- begin with `arn:<partition>:<service>:<region>:<account_id>` and end with: `resource`
+  `resource_type/resource`, `resource_type/resource/qualifier`, `resource_type/resource:qualifier`, `resource_type:resource` and `resource_type:resource:qualifier`
 - Examples:
   - `arn:aws:iam::123456789012:user/sri` <-- :: region is omitted because IAM is global
   - `arn:aws:s3:::my_awesome_bucket/image.png` <-- ::: - no region, no account id needed to identify an object in S3. all objects in S3 are globally unique
