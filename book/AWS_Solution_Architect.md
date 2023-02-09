@@ -1,6 +1,7 @@
 # AWS Solution Architect
 
 ![badge](https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png)
+
 ## Index
 
 1. [Global](#global)
@@ -11,8 +12,9 @@
 6. [Database](#database)
 7. [Migration](#migration)
 8. [Networking](#networking)
-9. [Management and Governance](#management_and_governance)
-10. [References](#references)
+9. [Management_and_Governance](#management_and_governance)
+10. [Containers](#containers)
+11. [References](#references)
 
 ## Global
 
@@ -1765,7 +1767,7 @@ In order for Route 53 to respond to queries, you need to define one of the follo
 - Active-Active failover when you want all resources to be available the majority of time. All records have same name, same type, and same routing policy such as weighted or latency
 - Active-Passive failover when you have active primary resources and standby secondary resources. You create two records - primary & secondary with failover routing policy
 
-## Management and Governance
+## Management_and_Governance
 
 Go to [Index](#index)
 
@@ -1859,19 +1861,67 @@ Go to [Index](#index)
 
 ### AWS ParallelCluster
 
+![ParallelCluster](https://d1.awsstatic.com/HPC2019/Product-Page-Diagram_Paralell-Cluster_How-It-Works.50eb43991f5baa11d4d7687ac8155ed7943341ef.png)
+
+- Open-source cluster management tools **deploy and manage High Performance Computing (HPC) clusters** resources on AWS (VPC, subnet, cluster type and instance types.) using a simple text file for modeling.
+- You have full control on the underlying resources.
+- AWS ParallelCluster is free, and you pay only for the AWS resources needed to run your applications.
+
 ### AWS Step Functions (SF)
+
+![AWSStepFunctions](https://d1.awsstatic.com/video-thumbs/Step-Functions/AWS_Step_Functions_HIW.bc3d2930f00dd0401269367b8e8617a7dba5915c.png)
+
+- Build serverless visual workflow to orchestrate your Lambda functions
+- You write state machine in declarative JSON, you write a decider program to separate activity steps from decision steps.
 
 ### AWS Simple Workflow Service (SWF)
 
+- Amazon Workflow Service (Amazon SWF) is a web service that makes it easy to coordinate work across distributed application components. SWF enables applications for a range of use cases, including media processing, web application back-ends, business process workflows and analytics pipelines, to be designed as a coordination of tasks.
+- Tasks represent invocations of various processing steps in an application which can be performed by executable code, web service calls, human actions and scripts.
+- Exam Scenario: Any human interaction required in the service, think of SWF
+
 ### AWS Organization
+
+![Organization](https://d1.awsstatic.com/diagrams/organizations-HIW.1870c83be9fdfc55680172a1861080a91b700fff.png)
+
+- Global Services that lets you create new AWS accounts at no additional charge.
+  - With accounts in an organization, you can easily allocate resources, group accounts, and apply governance policies to accounts or groups, consolidate billing across all accounts (single payment method)
+  - It has a master account and multiple member accounts
+  - Member Acccounts or Organization Units (OUs) are based on department, cost center or environment, OU can have other OUs (hierarchy)
+  - You can apply Service Control Policies (SCPs) at OU or account level, SCP is applied to all user and roles in that account. SPC Deny take precedence over Allow in the full OU tree of an account for e.g. allowed at account level but deny at OU level is = deny
+- Best practices with AWS Organizations.
+  - Always enable multi-factor authentication on root or master account.
+  - Always use strong and complex passwords on root account.
+  - Paying account should be used for billing purposes only. Do not deploy resources into the paying account, into the root account or the master account,
+  - Enable and disable AWS services using service control policies (SCPs) either on organisational units or on individual accounts.
 
 ### AWS OpsWorks
 
+- It is a Managed **Configuration as Code** Service that lets you use Chef and Puppet to automate how server are configured, deployed, managed across EC2 instances using Code.
+- OpsWork Stack let you model you application as a stack containing different layers, such as load balancing, database, and application server.
+
 ### AWS Glue
+
+- Serverless, fully managed **ETL (extract, transform, and load)** service.
+- AWS Glue Crawler scan data from data source such as S3 or DynamoDB table, determine the schema for data, and then creates metadata tables in the AWS Glue Data Catalog.
+- AWS Glue provide classifiers for CSV, JSON, AVRO, XML or database to determine the schema for data
 
 ## Containers
 
 Go to [Index](#index)
+
+- ECR (Elastic Container Registry) is Docker Registry to pull and push Docker images, managed by Amazon.
+- ECS (Elastic Container Service) is container management service to run, stop, and manage Docker containers on a cluster
+- ECS Task Definition where you configure task and container definition
+  - Specify ECS Task IAM Role for ECS task (Docker container instance) to access AWS services like S3 bucket or DynamoDB
+  - Specify Task Execution IAM Role i.e. ecsTaskExecutionRole for EC2 (ECS Agent) to pull docker images from ECR, make API calls to ECS service and publish container logs to Amazon CloudWatch on your behalf
+  - Add container by specifying docker image, memory, port mappings, healthcheck, etc.
+- You can create multiple ECS Task Definitions - e.g. one task definition to run web application on Nginx server and another task definition to run microservice on Tomcat.
+- ECS Service Definition where you configure cluster, ELB, ASG, task definition, number of tasks to run multiple similar ECS Task, which deploy a docker container on EC2 instance. One EC2 instance can run multiple ECS tasks.
+- Amazon EC2 Launch Type: You manage EC2 instances of ECS Cluster. You must install ECS Agent on each EC2 instances. Cheaper. Good for predictable, long running tasks.
+- ECS Agent The agent sends information about the EC2 instance’s current running tasks and resource utilization to Amazon ECS. It starts and stops tasks whenever it receives a request from Amazon ECS
+- Fargate Launch Type: Serverless, EC2 instances are managed by Fargate. You only manage and pay for container resources. Costlier. Good for variable, short running tasks
+- EKS (Elastic Kubernetes Service) is managed Kubernetes clusters on AWS
 
 ## References
 
