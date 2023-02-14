@@ -284,11 +284,10 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS Key Management Service (KMS)
 
-- AWS managed centralized key management service to create, manage and rotate customer master keys (CMKs) for encryption at REST. Provides you with a central place to manage all keys.
-- Can integrate with most other AWS services to increase security and make it easier to encrypt your data.
-
 ![AWS Key Management Service (KMS)](https://d1.awsstatic.com/Security/aws-kms/Group%2017aws-kms.6dc3dbbbe5b75b46c4f62218d0531e5bed7276ce.png)
 
+- AWS managed centralized key management service to create, manage and rotate customer master keys (CMKs) for encryption at REST. Provides you with a central place to manage all keys.
+- Can integrate with most other AWS services to increase security and make it easier to encrypt your data.
 - You can enable automatic master key rotation once per year. Service keeps the older version of master key to decrypt old encrypted data.
 - Allows you to control access to the keys using things like IAM policies or key policies.
 - Encrypt/decrypt up to 4KB.
@@ -312,6 +311,8 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS CloudHSM
 
+![AWS CloudHSM](https://d1.awsstatic.com/whiteboard-graphics/products/CloudHSM/product-page-diagram_AWS-CloudHSM_HIW.76ce14889e22d8861a6a9fff0b5664516ed1bddd.png)
+
 - Dedicated cloud-based Hardware Security Module (HSM) for creating, using and managing your own encryption keys (cryptographic keys) in AWS.
 - Conforms to FIPS 140–2 (**Level 3**) security standard
 - No access to the AWS managed component and AWS does not have visibility or access to your keys.
@@ -320,9 +321,6 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
   - CloudHSM will operate inside its own VPC dedicated to CloudHSM
   - CloudHSM will project to ENI of customer VPC
 - Keys are irretrievable if lost and can not be recovered.
-
-![AWS CloudHSM](https://d1.awsstatic.com/whiteboard-graphics/products/CloudHSM/product-page-diagram_AWS-CloudHSM_HIW.76ce14889e22d8861a6a9fff0b5664516ed1bddd.png)
-
 - Use case: Use KMS to create a CMKs in a custom key store and store non-extractable key material in AWS CloudHSM to get a full control on encryption keys
 - Difference between KMS and CloudHSM
   - FIPS 140–2 Level 2 vs Level 3
@@ -353,6 +351,8 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS WAF
 
+![AWS WAF](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Web-Application-Firewall%402x.5f24d1b519ed1a88b7278c5d4cf7e4eeaf9b75cf.png)
+
 - **Web Application Firewall** add an extra layer of protection to your web applications or APIs against web attacks from common exploits, such as SQL injection or Cross-site scripting (XSS).
 - You can deploy WAF on CloudFront, Application Load Balancer, API Gateway and AWS AppSync
 - Protect against **Layer 7** (HTTP & HTTPS) attacks and block common attack patterns by setting up rules to control the traffic. How?
@@ -368,32 +368,32 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
     - Presence of a script
 - Pay for what you use, based on the number of rules you have and requests your applications receive.
 
-![AWS WAF](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Web-Application-Firewall%402x.5f24d1b519ed1a88b7278c5d4cf7e4eeaf9b75cf.png)
-
 ### AWS Firewall Manager
+
+![AWS Firewall Manager](https://d1.awsstatic.com/products/firewall-manager/product-page-diagram_AWS-Firewall-Manager%402x%20(1)1.ad6bf5281dc2c33c0493e9988e3504dd1590eaa2.png)
 
 - Use AWS Firewall Manager to centrally configure and manage Firewall Rules across an Organization: AWS WAF rules, AWS Shield Advanced, Network Firewall rules, and Route 53 DNS Firewall Rules
 - Use case: Meet Gov regulations to deploy AWS WAF rule to block traffic from embargoed countries across accounts and resources
 
-![](<https://d1.awsstatic.com/products/firewall-manager/product-page-diagram_AWS-Firewall-Manager%402x%20(1)1.ad6bf5281dc2c33c0493e9988e3504dd1590eaa2.png>)
-
 ### AWS GuardDuty
+
+![AWS GuardDuty](https://d1.awsstatic.com/Security/Amazon-GuardDuty/Amazon-GuardDuty_HIW.057a144483974cb73ab5f3f87a50c7c79f6521fb.png)
 
 - Read VPC Flow Logs, DNS Logs, and CloudTrail events. Apply machine learning algorithms and anomaly detections to discover threats
 - Can protect against CryptoCurrency attacks
 
-![AWS GuardDuty](https://d1.awsstatic.com/Security/Amazon-GuardDuty/Amazon-GuardDuty_HIW.057a144483974cb73ab5f3f87a50c7c79f6521fb.png)
-
 ### Amazon Inspector
+
+![Amazon Inspector](https://d1.awsstatic.com/reInvent/re21-pdp-tier1/amazon-inspector/Amazon-Inspector_HIW%402x.c26d455cb7e4e947c5cb2f9a5e0ab0238a445227.png)
 
 - Automated Security Assessment service for **EC2 instances** by installing an agent in the OS of EC2 instance.
 - Inspector comes with pre-defined rules packages:
   - `Network Reachability` rules package checks for unintended network accessibility of EC2 instances
   - `Host Assessment rules` package checks for vulnerabilities and insecure configurations on EC2 instance. Includes Common Vulnerabilities and Exposures (CVE), Center for Internet Security (CIS) Operating System configuration benchmarks, and security best practices.
 
-![](https://d1.awsstatic.com/reInvent/re21-pdp-tier1/amazon-inspector/Amazon-Inspector_HIW%402x.c26d455cb7e4e947c5cb2f9a5e0ab0238a445227.png)
-
 ### Amazon Macie
+
+![Amazon Macie](https://d1.awsstatic.com/reInvent/reinvent-2022/macie/Product-Page-Diagram_Amazon-Macie.a51550cca0a731ba2e4a26e8463ed5f5a81202e3.png)
 
 - Managed service to discover and protect your **sensitive data** in AWS
 - Can automatically discover **Personally Identifiable Information (PII)** in your data and can alert you once identified (e.g. selected S3 buckets)
@@ -405,16 +405,14 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
   - Can help you meet regulatory compliance
   - Great for PCI-DSS(credit card payments) and preventing theft
 
-![Amazon Macie](https://d1.awsstatic.com/reInvent/reinvent-2022/macie/Product-Page-Diagram_Amazon-Macie.a51550cca0a731ba2e4a26e8463ed5f5a81202e3.png)
-
 ### AWS Config
+
+![AWS Config](https://d1.awsstatic.com/config-diagram-092122.974fe2a4cb6aae1fe564fdbbe30ab55841a9858e.png)
 
 - Managed service that provides you with an AWS resource inventory, configuration history, and configuration change notifications to enable security and governance. Assess, audit, and evaluate configurations of your AWS resources in multi-region, multi-account
 - You are notified via SNS for any configuration change
 - Integrated with CloudTrail, provide resource configuration history
 - Use case: Customers need to comply with standards like PCI-DSS (Payment Card Industry Data Security Standard) or HIPAA (U.S. Health Insurance Portability and Accountability Act) can use this service to assess compliance of AWS infra configurations
-
-![AWS Config](https://d1.awsstatic.com/config-diagram-092122.974fe2a4cb6aae1fe564fdbbe30ab55841a9858e.png)
 
 ## Compute
 
@@ -513,14 +511,13 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 - A security group acts as a virtual firewall for your EC2 instances to control incoming and outgoing traffic.
 - If you don't sepcify a Securtiy Group, the EC2 instance is linked to the default Security Group
-- Changes to Security Groups take effect immediately.
+- Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
 - When you create a New Security Group
   - All inbound traffic is blocked by default - so we enable some IP and ports using Security Groups.
     - To let All IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
-    - Common Ports: Linux (port 22)
+    - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
   - All outbound traffic is allowed.
-    - Common Ports: Microsoft - RDP (port 3389), HTTP (80) and HTTPS (443)
-- Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
+    - Common Ports: HTTP (80) and HTTPS (443)
 - Cardinality Security Group _-_ EC2 Instance
   - You can have any number of EC2 instances within a security group.
   - You can have multiple Security Groups attached/assigned to EC2 instances.
@@ -567,7 +564,6 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
   - Health Checks check the instance health by talking to it.
   - `504 Error` means that the gateway has timed out. This means that the application not responding within the idle timeout period.
 - Advanced Load Balancers Theory
-
   - `Stickiness` (a.k.a. Session Affinity):
     - Allows you to bind a users session to a specific instance, ensuring all requests in that specific session are sent to the same instance.
     - Use Cases:
@@ -578,9 +574,9 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
     - It enables EC2 instances to get equal share of traffic/load across multiple AZs
     - Use Cases:
       - With No Cross Zone Load Balancing, we got a user and we are using Route 53 for our DNS, which is splitting of our traffic 50/50 and sending the requests to EC2's in two diff AZ's.
-        Each AC has a Load Balancer, The first AZ has 4 EC2 instances and the second has only one EC2 instance.
-        _Because we don't have Cross Zone Load Balancing enabled - First AZ will split 50% to 4 instances and the second AZ receives 50% on 1 instance.
-        _ When we enable Cross Zone Load Balancing: The Load balancer will distribute the load evenly among instances on both AZ's.
+        Each AC has a Load Balancer, The first AZ has 4 EC2 instances and the second has only one EC2 instance. 
+        - Because we don't have Cross Zone Load Balancing enabled - First AZ will split 50% to 4 instances and the second AZ receives 50% on 1 instance.
+        - When we enable Cross Zone Load Balancing: The Load balancer will distribute the load evenly among instances on both AZ's.
       - We got a user and we are using Route 53 for our DNS, which is sending all the requests (100%) to a Load Balancer in AZ1, The first AZ1 has 4 EC2 instances and the second has only one EC2 instance.
         - Route 53's 100% traffic is sent to the only load balancer in US-EAST-1A and no traffic is being sent to US-EAST-1B.
         - In this scenario, we enable Cross Zone Load Balancing to distribute the traffic evenly between US-EAST-1A and US-EAST-1B
@@ -599,25 +595,25 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 #### Application Load Balancer (ALB)
 
+![Application Load Balancer](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_ALB_HIW%402x.cb3ce6cfd5dd549c99645ed51eef9e8be8a27aa3.png)
+
 - Best suitable for protocol HTTP, HTTPS, WebSocket | Layer 7 (Application layer)
 - Routes traffic based on request content (hostname, request path, params, headers, source IP etc.).
 - Use Case: It is **Intelligent** and can send specific requests to specific servers.
 
-![Application Load Balancer](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_ALB_HIW%402x.cb3ce6cfd5dd549c99645ed51eef9e8be8a27aa3.png)
-
 #### Network Load Balancer (NLB)
+
+![Network Load Balancer](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_NLB_HIW%402x.2f8ded8b565042980c4ad5f8ec57d6b2fafe54ba.png)
 
 - Best suitable for protocol TCP, UDP, TLS | Layer 4 (Transport layer)
 - Use case: when extreme performance is required: Handle **volatile workloads** and **extreme low-latency**. Static IP Address.
 
-![Network Load Balancer](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_NLB_HIW%402x.2f8ded8b565042980c4ad5f8ec57d6b2fafe54ba.png)
-
 #### Gateway Load Balancer (GLB)
+
+![Gateway](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_GWLB_HIW%402x.58547db68b537b4aa4b0cdf7e593a6415d588a09.png)
 
 - Thirdparty appliances, virtual applications e.g. firewalls | Layer 3
 - Automatically scales virtual appliances based on demand.
-
-![Gateway](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/elb/Product-Page-Diagram_Elastic-Load-Balancing_GWLB_HIW%402x.58547db68b537b4aa4b0cdf7e593a6415d588a09.png)
 
 #### Classic Load Balancers (Previos Generation)
 
