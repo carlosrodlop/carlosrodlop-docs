@@ -11,6 +11,7 @@
 - [GitHub - bregman-arie/devops-exercises: Linux, Jenkins, AWS, SRE, Prometheus, Docker, Python, Ansible, Git, Kubernetes, Terraform, OpenStack, SQL, NoSQL, Azure, GCP, DNS, Elastic, Network, Virtualization. DevOps Interview Questions](https://github.com/bregman-arie/devops-exercises)
 - [Continuous Delivery Landscape](https://landscape.cd.foundation/)
 - [AdminTurnedDevOps/100DaysOfContainersAndOrchestration: Your go-to open source repo to learn containers (Docker, Podman, etc.) and Orchestration (Kubernetes, ECS, etc.) from start to finish.](https://github.com/AdminTurnedDevOps/100DaysOfContainersAndOrchestration)
+- [GitHub emoji cheat sheet](https://github.com/ikatyang/emoji-cheat-sheet)
 
 ## SRE
 
@@ -29,6 +30,7 @@
 - [Argo Awesome list](https://github.com/terrytangyuan/awesome-argo)
 - [ahmetb/kubernetes-network-policy-recipes: Example recipes for Kubernetes Network Policies that you can just copy paste](https://github.com/ahmetb/kubernetes-network-policy-recipes)
 - [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
+- [Learn Cloud Native – Sysdig](https://sysdig.com/learn-cloud-native/)
 
 ## Terraform
 

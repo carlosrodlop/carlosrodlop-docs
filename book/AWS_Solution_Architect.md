@@ -129,7 +129,6 @@ Go to [Index](#index)
 - Allows configuration of temporary access for users, devices and services
 - It supports PCI DSS compliance. PCI DSS compliance just is basically a compliant framework that if you're taking credit card details, you need to be compliant with the framework. So IAM supports PCI DSS.
 - Access entities:
-
   - `Users` End users such as people, employees of an organisation ... etc
     - IAM users are individuals who have been granted access to an AWS account.
     - New Users
@@ -137,16 +136,15 @@ Go to [Index](#index)
       - They are assigned Access Key ID & Secret Access Keys when first created => You can get to view these once. If you lose them, you have to regenerate them.
       - In order for a new IAM user to be able to log into the console, the user must have a password set
   - `Groups` are a collection of users, and can not have other groups. Groups allow you to define permissions for all the users within it.
-  - `Roles` Assigned to AWS resources, specifying what the resource (such as EC2) is allowed to access on another resource (S3)
+  - `Roles`
+    - Types of Roles
+      - Service Roles (To assign permission to AWS Resources), specifying what the resource (such as EC2) is allowed to access on another resource (S3)
+      - Cross account access roles: Used when you have multiple AWS accounts and another AWS account must interact with the current AWS account
+      - Identity provider access roles : Identity Federation (including AD, Facebook etc) can be configured to allow secure access to resources in an AWS account without creating an IAM user account.
     - Adventanges
       - Roles are more secure than storing your access key and secret access key on individual EC2 instances.
       - Roles are easier to manage.
       - Roles can be assigned to an EC2 instance after it is created using both the console & command line.
-    - Types of Roles
-      - Service Roles (To assign permission to AWS Resources)
-      - Cross account access roles: Used when you have multiple AWS accounts and another AWS account must interact with the current AWS account
-      - Identity provider access roles : Identity Federation (including AD, Facebook etc) can be configured to allow secure access to resources in an AWS account without creating an IAM user account.
-
 - `Policies` JSON Document that defines permissions (`Allow` or `Deny` access to an action that can be performed on AWS resources) for Access Entities (user, group or role)
   - Each statement matches an AWS API request
   - Anything that is not explicitly allowed is implicitly denied
@@ -201,6 +199,12 @@ Go to [Index](#index)
 
 ### Access AWS
 
+- Temporary security credentials/access consist of the AWS access key ID, secret access key, and `security token` (temporal/expire).
+  - AWS Security Token Service (AWS STS) as a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users you authenticate (federated users)
+- Types of Access
+  - IAM Users
+  - None IAM Users
+
 #### IAM Users
 
 - Options:
@@ -209,13 +213,11 @@ Go to [Index](#index)
   - AWS CLI or SDK - Use Access Key ID (~username) and Secret Access Key (~password)
   - AWS CloudShell - CLI tool from AWS browser console - Require login to AWS
 
-- Temporary security credentials consist of the AWS access key ID, secret access key, and security token.
-
-  - IAM can assign temporary security credentials to provide users with temporary access to services/resources.
-
 - When creating a user's credentials, you can only see/download the credentials at the time of creation not after.
 - Access Keys can be retired, and new ones can be created in the event that secret access keys are lost
-- To create a user password, once the users have been created, choose the user you want to set the password for and from the User Actions drop list, click manage password. Here you can opt to create a generated or custom password. If generated, there is an option to force the user to set a custom password on next login. Once a generated password has been issued, you can see the password which is the same as the access keys. Its shown once only
+- To create an user password (loging in AWS console), once the users have been created,  you can opt to create a generated or custom password.
+  - If generated, there is an option to force the user to set a custom password on next login.
+  - Once a generated password has been issued, you can see the password which is the same as the access keys. Its shown once only.
 
 #### None IAM Users
 
@@ -231,7 +233,7 @@ Go to [Index](#index)
 
 ##### AWS Directory Service
 
-- Directories store information about users, groups, and devices, and administrators use them to manage access to information and resources. Hierarchical database of users, groups, computers - trees and forests.
+- Directories store information about users, groups, and devices, and administrators use them to manage access to information and resources. **Hierarchical database of users, groups, computers - trees and forests**.
 
 ###### Compatible with Microsft Active Directory
 
@@ -245,7 +247,7 @@ Go to [Index](#index)
 
 - `Simple AD`
 
-  - Use Simple AD is standalone AWS managed compatible AD powered by Samba 4 with basic directory features (Enables a subset of the features Managed Mircosoft AD)
+  - Use Simple AD is standalone AWS managed compatible AD powered by Samba 4 with basic directory features (Enables a subset of the features Managed Microsoft AD)
   - You cannot connect it to on-premise AD.
   - Best choice for basic directory features.
   - Can be used for Linux workloads that need LDAP
@@ -253,15 +255,15 @@ Go to [Index](#index)
 - `AD Connector`
   - It is proxy service to redirect requests to on-premise Microsoft AD, without caching information in the cloud.
   - Best choice to use existing on-premise AD with compatible AWS services.
-  - Can use multiple AD Connectors to spread the load to match performance needs
-  - Cannot be used across different AWS accounts
+  - Can use multiple AD Connectors to spread the load to match performance needs.
+  - Cannot be used across different AWS accounts.
 
 ###### No Compatible with Microsft Active Directory
 
 - `Cloud Directory`
 
   - Cloud-native directories for organizing Hierarchies of data along **multiple dimensions** fully managed by AWS
-  - Can have multiple hierarchies with hundreds/millions of objects
+  - Can have multiple hierarchies with hundreds/millions of objects.
   - Some common use cases include: directories for organisational charts, course catalogs, and device registries.
 
 - `Amazon Cognito`
@@ -269,18 +271,17 @@ Go to [Index](#index)
   - The two main components of Amazon Cognito are:
 
 a. `User pools`: User directories in Amazon Cognito. Options for authetication
-_Directly through Amazon Cognito.
-_ Through social identity providers like Google, Facebook, Amazon, or Apple, and through SAML identity providers.
 
-In any case, menber of the user pool have a directory profile that you can access through a Software Development Kit (SDK)
+- _Directly through Amazon Cognito_
+- Through social identity providers like Google, Facebook, Amazon, or Apple, and through SAML identity providers.
+
+In any case, members of the user pool have a directory profile that you can access through a Software Development Kit (SDK)
 
 ![Amazon Cognito, User pools](https://docs.aws.amazon.com/images/cognito/latest/developerguide/images/scenario-authentication-cup.png)
 
 b. `Identity pools`: Cognito elements grant users temporary credentials to other AWS services (e.g., Amazon S3 and DynamoDB).
 
 Steps: You first authenticate user using `Cognito User Pools` and then exchange token with `Cognito Identity Pools` which further use `AWS STS` to generate temporary AWS credentials to access AWS Resources.
-
-- AWS Security Token Service (AWS STS) as a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users you authenticate (federated users)
 
 ### AWS Key Management Service (KMS)
 
@@ -329,6 +330,8 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS Systems Manager
 
+![AWS Systems Manager](https://d1.awsstatic.com/AWS%20Systems%20Manager/Product-Page-Diagram_AWS-Systems-Manager.9184df66edfbc48285d16c810c3f2d670e210479.png)
+
 - `Parameter Store` is Secure and centralized serverless storage of configuration and secrets: passwords, database details, and license code, API Keys
   - `Parameter` value can be type String (plain text), StringList (comma separated) or SecureString (KMS encrypted data)
   - `Use case`: Centralized configuration for dev/uat/prod environment to be used by CLI, SDK, and Lambda function
@@ -337,6 +340,8 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS Secrets Manager
 
+![AWS Secrets Manager](https://d1.awsstatic.com/diagrams/Secrets-HIW.e84b6533ffb6bd688dad66cfca36622c2fa7c984.png)
+
 - Secret Manager is mainly used to store, manage, and rotate secrets (passwords) such as database credentials, API keys, and OAuth tokens.
 - Apply the new key/passwords in RDS for you. Generate random secrets.
 - Secret Manager has **native support to rotate database credentials of RDS databases** - MySQL, PostgreSQL and Amazon Aurora. Automatically rotate secrets.
@@ -344,16 +349,21 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 ### AWS Shield
 
-- AWS managed **Distributed Denial of Service (DDoS) protection service**.
-- Protect against **Layer 3 and 4** (Network and Transport) attacks.
-- `AWS Shield Standard` is automatic and free DDoS protection service for all AWS customers for CloudFront and Route 53 resources.
-- `AWS Shield Advanced` is paid service (Advanced costs $3K per month per org) for enhanced DDoS protection for EC2, ELB, CloudFront, and Route 53 resources.
+![AWS Shield](https://d1.awsstatic.com/AWS%20Shield%402x.1d111b296bfd0dd864664b682217bc7610453808.png)
+
+- AWS Shield provide protections against **Distributed Denial of Service (DDoS) attacks** for AWS resources at the network and transport layers (layer 3 and 4) and the application layer (layer 7)
+  - Denial-of-service attack (DoS attack) is a cyber-attack in which the perpetrator seeks to make a machine or network resource unavailable to its intended users by temporarily or indefinitely disrupting services of a host connected to a network. Denial of service is typically accomplished by flooding the targeted machine or resource with superfluous requests in an attempt to overload systems and prevent some or all legitimate requests from being fulfilled
+- Types
+  - `AWS Shield Standard` is automatic and free DDoS protection service for all AWS customers for CloudFront and Route 53 resources.
+  - `AWS Shield Advanced` is paid service (Advanced costs $3K per month per org) for enhanced DDoS protection for EC2, ELB, CloudFront, and Route 53 resources.
 
 ### AWS WAF
 
 ![AWS WAF](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Web-Application-Firewall%402x.5f24d1b519ed1a88b7278c5d4cf7e4eeaf9b75cf.png)
 
 - **Web Application Firewall** add an extra layer of protection to your web applications or APIs against web attacks from common exploits, such as SQL injection or Cross-site scripting (XSS).
+  - SQL injection is a code injection technique used to attack data-driven applications, in which malicious SQL statements are inserted into an entry field for execution (e.g. to dump the database contents to the attacker).
+  - Cross-site scripting (XSS) attacks enable attackers to inject client-side scripts into web pages viewed by other users. A cross-site scripting vulnerability may be used by attackers to bypass access controls such as the same-origin policy.
 - You can deploy WAF on CloudFront, Application Load Balancer, API Gateway and AWS AppSync
 - Protect against **Layer 7** (HTTP & HTTPS) attacks and block common attack patterns by setting up rules to control the traffic. How?
   - Setting up your own rules to control the traffic by either only allowing what you specify or only blocking what you specify. Alternatively, you can count the requests that match a certain pattern.
@@ -424,37 +434,37 @@ Go to [Index](#index)
   - Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requirements change.
   - Gives you complete control of your computing resources including choice of storage, processor, networking and operating system.
 - When you restart an EC2 instance, its public IP can change. Use `Elastic IP` to assign a fixed public IPv4 to your EC2 instance. By default, all AWS accounts are limited to five (5) Elastic IP addresses per Region.
-- You need to create a key pair — public & private for asymmetric encryption.
 - The EC2 Root volume is a virtual disk where the OS is installed, it can only be launched on SSD or Magnetic.
 - Bootstrap scripts are code that gets ran as soon as your EC2 instance first boots up.
 - EC2 Information Endpoints (can be obteined via `curl`):
   - `http://169.254.169.254/latest/meta-data` ==> Metadata Private & public IP
   - `http://169.254.169.254/latest/user-data` ==> user-defined data
 - Use VM Import/Export to import virtual machine image and convert to Amazon EC2 AMI to launch EC2 instances
-- Exams tips:
-  - Termination protection is turned off by default, you must turn it on.
-  - On an EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated. Any additional EBS volumes by default won't be deleted.
+- Termination protection is turned off by default.
+- On an EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated. Any additional EBS volumes by default won't be deleted.
+- Encryption
+  - You need to create a key pair — public & private for asymmetric encryption.
   - Root device volumes can be encrypted now (a popular exam topic)
-  - EBS Root volumes of your DEFAULT AMI's CAN be encrypted. You can also use a third party tool (such as bit locker etc) to encrypt the root volume, or this can be done when creating AMI's (lab to follow) in the AWS console or using the API.
+  - EBS Root volumes of your DEFAULT AMI's CAN be encrypted. You can also use a third party tool (such as bit locker etc) to encrypt the root volume, or this can be done when creating AMI's in the AWS console or using the API.
   - Additional volumes can be encrypted as well.
-  - You must provision nitro-based EC2 instance to achieve 64000 EBS IOPS. Max 32000 EBS IOPS with Non-Nitro EC2.
-  - EC2 Design
-    - Place all the EC2 instances in same AZ to reduce the data transfer cost.
-    - Design for failure. Have one EC2 instance in each availability zone.
+- You must provision nitro-based EC2 instance to achieve 64000 EBS IOPS. Max 32000 EBS IOPS with Non-Nitro EC2.
+- EC2 Design
+  - Place all the EC2 instances in same AZ to reduce the data transfer cost.
+  - Design for failure. Have one EC2 instance in each availability zone.
 
 #### EC2 Hibernate
 
 - Allows you to hibernate your EC2 instances, so that you can stop them and pick back up where you left off again.
 - It does this by saving the content from the in-memory state of the instance (RAM) to your EBS root volume.
-- You can hibernate an instance only if it’s enabled for hibernation and it meets the hibernation prerequisites
+- You can hibernate an instance only if it’s enabled for hibernation and it meets the hibernation prerequisites.
 - Useful for long running services and services that take long to boot.
-- Can’t hibernate for more than 60 days
-- Once in hibernation mode there is no hourly charge — you only pay for the elastic IP Address & other attached volumes
+- Can’t hibernate for more than 60 days.
+- Once in hibernation mode there is no hourly charge — you only pay for the elastic IP Address & other attached volumes.
 - Boots up a lot faster after hibernation as it does not need to reload the operating system.
 
 #### EC2 Instance Types
 
-You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Linux OS, 8 vCPU, 32GB RAM, EBS-Only Storage, Up to 10 Gbps Network bandwidth, Up to 4,750 Mbps IO Operations.
+You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has Linux OS, 8 vCPU, 32GB RAM, EBS-Only Storage, Up to 10 Gbps Network bandwidth, Up to 4,750 Mbps IO Operations.
 
 | Instance Class | Usage Type            | Usage Example                                                                                                            |
 | -------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -466,28 +476,27 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 #### EC2 Pricing Types
 
-- **On-Demand** - Pay a fixed rate by the hour (or by the second) with no commitment. Pay as you use, costly
+- **On-Demand** - Pay a fixed rate by the hour (or by the second) with no commitment. Pay as you use, costly.
   - Use Cases:
-    1. Users that want the low cost and flexibility of Amazon EC2 without any up-front payment for long-term commitment.
-    2. Applications with short term, spiky or unpredictable workloads that cannot be interrupted
-    3. Applications being developed or tested on Amazon EC2 for the first time.
-- **Reserved** - Provides you with a capacity reservation, and offer significant discount on the hourly charge for an instance, but it requires to have a Contracts for 1 - 3 year terms. Higher discount with upfront payments and longer contracts. However, you cant move between regions.
+    - Users that want the low cost and flexibility of Amazon EC2 without any up-front payment for long-term commitment.
+    - Applications with short term, spiky or unpredictable workloads that cannot be interrupted.
+    - Applications being developed or tested on Amazon EC2 for the first time.
+- **Reserved** - Provides you with a capacity reservation, and offer significant discount on the hourly charge for an instance, but it requires to have a Contracts for 1 - 3 year terms. Higher discount with upfront payments and longer contracts. However, you can't move between regions.
   - Uses Cases:
-    1. Applications with steady or predictable usage.
-    2. Applications that require reserved capacity.
-    3. Users able to make upfront payments to reduce their total computing costs even further.
+    - Applications with steady or predictable usage.
+    - Applications that require reserved capacity.
+    - Users able to make upfront payments to reduce their total computing costs even further.
   - Types:
     - **Standard Reserved Instances** Provides the most discount (up to 75% off). Unused instanced can be sold in AWS reserved instance marketplace
     - **Convertible Reserved Instances** up to 54% off. It can be exchanged for another Convertible Reserved Instance with different instance attributes e.g. you to change between instance types e.g. t1-t4 as long as its of greater or equal value
     - **Scheduled Reserved Instances** - reserve capacity that is scheduled to recur daily, weekly, or monthly, with a specified start time and duration, for a one-year term.
 - **Spot Instances** - Enables you to bid whatever price you want for instance capacity. when AWS has excess capacity it drops the price so people can use that capacity —but they can take it back at any time. You can set the price you are willing to pay and it will run when its below or at that price — if it goes above that price you lose it.
-
   - It provides up to 90% discount and typically used for apps with flexible start/end times, But don’t use for anything critical that needs to be online all the time. It can handle interruptions and recover gracefully.
   - Imp Note: If the spot instance is terminated by Amazon EC2, you will not be charged for a partial hour of usage. However, if you terminate the instance yourself, you will be charged for any hour in which the instance ran.
   - Uses Cases
-    1. Applications that have flexible start and end times.
-    2. Applications that are only feasible at very low compute prices.
-    3. Users with urgent computing needs for large amounts of additional capacity.
+    - Applications that have flexible start and end times.
+    - Applications that are only feasible at very low compute prices.
+    - Users with urgent computing needs for large amounts of additional capacity.
   - Types
     - **Spot Blocks** can also be launched with a required duration, which are not interrupted due to changes in the Spot price.
     - **Spot Fleet**
@@ -501,16 +510,16 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 - **Dedicated Instance** - Your instance runs on a dedicated hardware provide physical isolation, single-tenant
 - **Dedicated Hosts** - Your instances run on a dedicated physical server. More visibility how instances are placed on server. Dedicated Hosts can help reduce costs by letting you use existing server-bound software licenses and address corporate compliance and regulatory requirements.
+  - Can be purchased On-Demand (hourly)
+  - Can be purchased as a Reservation for up to 70% off the On-Demand price.
   - Uses Cases
-    1. Useful for regulatory requirements that may not support multi-tenant virtualisation.
-  1. Great for licensing which doesn't support multi-tenancy or cloud.
-  2. Can be purchased On-Demand (hourly)
-  3. Can be purchased as a Reservation for up to 70% off the On-Demand price.
+    - Useful for regulatory requirements that may not support multi-tenant virtualisation.
+    - Great for licensing which doesn't support multi-tenancy or cloud.
 
 #### Security Groups
 
 - A security group acts as a virtual firewall for your EC2 instances to control incoming and outgoing traffic.
-- If you don't sepcify a Securtiy Group, the EC2 instance is linked to the default Security Group
+- If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
 - Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
 - When you create a New Security Group
   - All inbound traffic is blocked by default - so we enable some IP and ports using Security Groups.
@@ -518,7 +527,7 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
     - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
   - All outbound traffic is allowed.
     - Common Ports: HTTP (80) and HTTPS (443)
-- Cardinality Security Group _-_ EC2 Instance
+- Cardinality: N Security Group <-> N EC2 Instance
   - You can have any number of EC2 instances within a security group.
   - You can have multiple Security Groups attached/assigned to EC2 instances.
 - Security Groups vs ACL
@@ -527,23 +536,26 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 
 #### EC2 Enhanced Networking
 
-- Elastic Network Interface (ENI) is a virtual network card, which you attach to EC2 instance in same AZ. ENI has one primary private IPv4, one or more secondary private IPv4, one Elastic IP per private IPv4, one public IPv4, one or more IPv6, one or more security groups, a MAC address and a source/destination check flag
-  - While primary ENI cannot be detached from an EC2 instance, A secondary ENI with private IPv4 can be detached and attached to standby EC2 instance if primary EC2 becomes unreachable (failover)
-- Elastic Network Adapter (ENA) for C4, D2, and M4 EC2 instances, Upto 100 Gbps network speed.
-- Elastic Fabric Adapter (EFA) is ENA with additional OS-bypass functionality, which enables HPC and Machine Learning applications to bypass the operating system kernel and communicate directly with EFA device resulting in very high performance and low latency. for M5, C5, R5, I3, G4, metal EC2 instances.
-- Intel 82599 Virtual Function (VF) Interface for C3, C4, D2, I2, M4, and R3 EC2 instances, Upto 10 Gbps network speed.
+- Elastic Network Interface (ENI) is a virtual network card, which you attach to EC2 instance in same AZ which is used to ensure a good network performance.
+  - Enhanced Networking provides higher bandwidth, higher packets per second performance consistently lower it into instance latencies, and there's no additional charge for using
+- Types:
+  - Elastic Network Adapter (ENA) for C4, D2, and M4 EC2 instances, Upto 100 Gbps network speed.
+  - Intel 82599 Virtual Function (VF) Interface for C3, C4, D2, I2, M4, and R3 EC2 instances, Upto 10 Gbps network speed. Old instance types.
+  - Elastic Fabric Adapter (EFA) is ENA with additional OS-bypass functionality, which enables HPC and Machine Learning applications to bypass the operating system kernel and communicate directly with EFA device resulting in very high performance and low latency. for M5, C5, R5, I3, G4, metal EC2 instances.
 
 #### EC2 Placement Groups Strategy
 
 - A way of placing EC2 Instances so that instances are spread across the underlying hardware to minimise failures.
+- AWS recommend homogeneous instances within clustered placement groups.
 - Placement group names need to be unique within your account
-- Only certain instances can be launched in placement groups e.g compute optimised, CPU, memory optimised & storage optimised.
-- You can’t merge placement groups, but you can move an existing instance into a placement group.
+- Only certain types of instances can be launched in a placement group (Compute Optimised, GPU, Memory Optimised, Storage Optimised)
+- You can’t merge placement groups, but you can move an existing instance into a placement group (the instance must be in the stopped state befpre moving it)
+  - Move or remove can only be done via AWS Console (an instance using the AWS CLI or AWS SDK).
 - There is no charge associated with creating placement groups
-
-- **Cluster** - Grouping instances close together within a single Availability Zone, Same Rack. It is used to achieve low Network latency & high throughput, High Performance Computing (HPC). Recommended you have the same type on instances in the cluster.
-- **Spread** - Opposite to clustered placement group. Instance are placed o Different AZ, Distinct Rack. It used for Critical Applications that requires to be seperated on each other to ensure High Availability in case of failure. Spread placement groups can span multiple Availability Zones.
-- **Partition** - EC2 creates partitions by dividing each group into logical segments. Each partition has its own set of racks, network and power source to help isolate the impact of a hardware failure. Same or Different AZ, Different Rack (or Partition), Distributed Applications like Hadoop, Cassandra, Kafka etc
+- Types (A Clustered placement group can't span multiple AZ's, others can)
+  - **Cluster** - Grouping instances close together within a **single Availability Zone**, Same Rack. It is used to achieve low Network latency & high throughput, High Performance Computing (HPC). Recommended you have the same type on instances in the cluster.
+  - **Spread** - Opposite to clustered placement group. Instance are placed o Different AZ, Distinct Rack. It used for Critical Applications that requires to be seperated on each other to ensure High Availability in case of failure. Spread placement groups can span multiple Availability Zones.
+  - **Partition** - EC2 creates partitions by dividing each group into logical segments. Each partition has its own set of racks, network and power source to help isolate the impact of a hardware failure. Same or Different AZ, Different Rack (or Partition), Distributed Applications like Hadoop, Cassandra, Kafka etc
 
 #### AMI (Amazon Machine Image)
 
@@ -551,7 +563,7 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 - You can create an AMI from EC2 instance and launch a new EC2 instance from AMI.
 - AMI are built for a specific region and can be copied across regions
 
-## Elastic Load Balancing (ELB)
+### Elastic Load Balancing (ELB)
 
 - Designed to help balance the load of incoming traffic by distributing it across multiple targets/destinations.
   - Target group (ALB o CLB) can have one or more EC2 instances, IP Addresses, lambda functions.
@@ -630,7 +642,7 @@ You can choose EC2 instance type based on requirement for e.g. m5.2xlarge has Li
 - Instances are created in ASG using Launch Configuration (Legacy) or Launch Template (Recommended option)
   - You can create ASG that launches both Spot and On-Demand Instances or multiple instance types using launch template, not possible with launch configuration.
   - You cannot change the launch configuration for an ASG, you must create a new launch configuration and update your ASG with it.
-- You can add Lifecycle Hooks to ASG to perform custom action during:-
+- You can add Lifecycle Hooks to ASG to perform custom action during:
   1. scale-out to run script, install softwares and send complete-lifecycle-action command to continue
   2. scale-in e.g. download logs, take snapshot before termination
 
@@ -641,39 +653,39 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
 #### Dynamic Scaling
 
 - Dynamic scaling scales the capacity of your Auto Scaling group as traffic changes occur.
-- Types Dynamic Scaling Policies => Increase and decrease the current capacity of the group based on ...
-  - Target tracking scaling: A `Amazon CloudWatch metric` and a `target value` (it can combine more than one target). Health checks are performed to ensure resource level is maintained.
+- Types Dynamic Scaling Policies => Increase and decrease the current capacity of the group based on:
+  - `Target tracking scaling`: A Amazon CloudWatch metric and a target value (it can combine more than one target). Health checks are performed to ensure resource level is maintained.
     - Use Case: Keep the average aggregate CPU utilization of your Auto Scaling group at 40% (and request count per target of your ALB target group at 1000)
-  - Step scaling: A set of scaling adjustments, known as `step adjustments`, that vary based on the size of the alarm breach.
+  - `Step scaling`: A set of scaling adjustments, known as _step adjustments_, that vary based on the size of the alarm breach.
     - CloudWatch alarm CPUUtilization (60%-80%)- add 1, (>80%) - add 3 more, (30%-40%) - remove 1, (<30%) - remove 2 more
-  - Simple scaling: A `single scaling adjustment`, with a `cooldown period` between each scaling activity.
+  - `Simple scaling`: A `single scaling adjustment`, with a `cooldown period` between each scaling activity.
     - CloudWatch alarm CPUUtilization (>80%) - add 2 instances
 
 #### Predictive scaling
 
 Predictive is only available for EC2 auto scaling groups and the scaling can work in a number of ways:
 
-- Set **Maximum Capacity**: You specify minimum and maximum instances or desired capacity required and EC2 autoscaling manages the progress of creating/terminating based on what you have specified. min <= desired <= max
+- Set `Maximum Capacity`: You specify minimum and maximum instances or desired capacity required and EC2 autoscaling manages the progress of creating/terminating based on what you have specified. min <= desired <= max
 
-- Scale Based on a **Schedule**: Scaling performed as a function of time to reflect forecasted load.
-  For example, if you know there will be increased load on the application at 9am every morning you can choose to scale at this time
+- Scale Based on a `Schedule`: Scaling performed as a function of time to reflect forecasted load. For example, if you know there will be increased load on the application at 9am every morning you can choose to scale at this time.
 
-- Scale based on **Load forecasting**: Auto Scaling analyses the history of your applications load for up to 14 days and then uses this predict to the load for the next 2 days.
+- Scale based on `Load forecasting`: Auto Scaling analyses the history of your applications load for up to 14 days and then uses this predict to the load for the next 2 days.
 
 ### Lambda
 
-- FaaS (Function as a Service), Serverless. You don’t have to worry about OS or scaling (scale on demand)
+- FaaS (**Function as a Service**), Serverless. You don’t have to worry about OS or scaling (scale on demand)
 - Lambda function supports many languages such as Node.js, Python, Java, C#, Golang, Ruby, etc.
 - It is cheaper than EC2. There is no charge when your code is not running. What determines price for Lambda?
   - Request Pricing (Free Tier: 1 million requests per month)
   - Duration Pricing and resource (memory) usage
   - Additional Charges: if your lambda uses other AWS services or transfers data. For example, If your lambda function reads and writes data to or from Amazon S3, you will be billed for the read/write requests and the data stored in Amazon S3
 - You are charged based on number of requests (first million free), execution time usage. Cheaper than EC2.
-- AWS Lambda integrates with other AWS services to invoke functions or take other actions ==> Method of Invocation:
+- AWS Lambda integrates with other AWS services to invoke functions or take other actions (Check examples [here](https://aws.amazon.com/lambda/))
+- ==> Method of Invocation:
 
-  - Lambda polling: For services that generate a queue or data stream, you set up an event source mapping in Lambda to have Lambda poll the queue or a data stream.
+  - `Lambda polling`: For services that generate a queue or data stream, you set up an event source mapping in Lambda to have Lambda poll the queue or a data stream.
     - Services: Amazon Managed Streaming for Apache Kafka, Self-managed Apache Kafka, Amazon DynamoDB, Amazon Kinesis, Amazon MQ, Amazon Simple Queue Service
-  - Event-driven: Some services generate events (JSON documents) that can invoke your Lambda function.
+  - `Event-driven`: Some services generate events (JSON documents) that can invoke your Lambda function.
     - Synchronous
       - Services: Elastic Load Balancing (Application Load Balancer), Amazon Cognito, Amazon Lex, Amazon Alexa, Amazon API Gateway, Amazon CloudFront (Lambda@Edge), Amazon Kinesis Data Firehose, AWS Step Functions
       - Common Use Case: Respond to incoming HTTP requests using API Gateway.
@@ -783,7 +795,7 @@ Go to [Index](#index)
 - S3 is a UNIVERSAL NAMESPACE, so bucket names need to be globally unique. The reason why is because it creates a web address (DNS name) with the buckets name in it
   - When you view Buckets you view them globally but you can have buckets in individual regions
 
-```
+```sh
 https://<bucket-name>.s3.<aws-region>.amazonaws.com
 or
 https://s3.<aws-region>.amazonaws.com/<bucket-name>
