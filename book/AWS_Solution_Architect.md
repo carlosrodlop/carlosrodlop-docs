@@ -560,7 +560,8 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 #### AMI (Amazon Machine Image)
 
 - Customized image of an EC2 instance, having built-in OS, softwares, configurations, etc.
-- You can create an AMI from EC2 instance and launch a new EC2 instance from AMI.
+- AMI's can be created from both Volumes and Snapshots.
+  - You can create an AMI from EC2 instance and launch a new EC2 instance from AMI.
 - AMI are built for a specific region and can be copied across regions
 
 ### Elastic Load Balancing (ELB)
@@ -722,9 +723,10 @@ Go to [Index](#index)
   - Can have out of order messages (best effort ordering)
 - Consumer (can be EC2 instance or lambda function) **poll** the messages in batches (upto 10 messages) and delete them from queue after processing. If don’t delete, they stay in Queue and may process multiple times.
   - Polling types:
-    - Short Polling (`ReceiveMessageWaitTimeSeconds` = 0) — Keeps polling queue looking for work, even if it’s empty.
+    - Short Polling (`ReceiveMessageWaitTimeSeconds` = 0) - Keeps polling queue looking for work, even if it’s empty.
     - Long Polling (`ReceiveMessageWaitTimeSeconds` > 0) - Reduces the number of empty responses by allowing Amazon SQS to wait until a message is available before sending a response to a ReceiveMessage request, helps to reduce the cost.
-  - Visibility Timeout — the amount of time the message is invisible in the queue after reader picks it up. It prevents other consumers from receiving and processing the same message. The message is then deleted. If the job hasn’t completed it becomes visible in the queue again (can be max 12 hours).
+  - Visibility Timeout — Immediately after a message is received, it remains in the queue. Amazon SQS doesn't automatically delete the message because it is a distributed system
+    - To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds.
     - Use Case: If you are getting messages delivered twice, the cause could be your visibility timeout is too low.
 
 There are two types of queues: Standard & FIFO
@@ -732,26 +734,28 @@ There are two types of queues: Standard & FIFO
 #### Standard Queues
 
 - Default queue type.
-- Nearly unlimited number of API calls per second
-- Guarantees message delivered at least once
-- Occasionally more than one copy of a message might be delivered out of order. However, standard queues provide **best-effort ordering** which ensures that messages are generally delivered in the same order as they are sent
+- Nearly unlimited number of API calls per second.
+- Guarantees message delivered at least once.
+- Occasionally more than one copy of a message might be delivered out of order. However, standard queues provide **best-effort ordering** which ensures that messages are generally delivered in the same order as they are sent.
 
 #### FIFO Queues
 
-- First in First Out => The order in which the messages are sent is preserved.
+- First in First Out => The **order in which the messages are sent is preserved**.
 - Has high throughput
 - Limits: support up to 3,000 transactions per API batch call.
 - Processed exactly once and duplicates are not introduced to the queue.
 
 ### SNS (Amazon Simple Notification Service)
 
-- Fully managed Messaging Service that allows yo **push** (Instantaneous) messages on SNS topic and all topic subscribers receive those messages.
+- Managed Messaging Service that allows you **push** (Instantaneous) messages on SNS topic and all topic subscribers receive those messages.
 - Can group multiple recipients through topics.
-- Highly available as all messages stored across multiple regions
-- One topic can support deliveries to multiple endpoint types - for example, you can group together iOS, Android and SMS recipients, When you publish once to a topic, SNS delivers appropriately formatted copies of your message to each subscriber.
+- Highly available as all messages stored across multiple regions.
+- One topic can support deliveries to multiple endpoint types - for example, you can group together iOS, Android and SMS recipients. When you publish once to a topic, SNS delivers appropriately formatted copies of your message to each subscriber.
 - Inexpensive, pay-as-you-go model with no up-front costs.
 
 #### A2A (PubSub model)
+
+![A2A](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS_Event-Driven-SNS-Compute%402x.03cb54865e1c586c26ee73f9dff0dc079125e9dc.png)
 
 - Allows for many-to-many messaging between distributed systems, microservices and other AWS Services
 - Event driven.
@@ -759,15 +763,13 @@ There are two types of queues: Standard & FIFO
 - You can setup a Subscription Filter Policy which is JSON policy to send the filtered messages to specific subscribers.
 - Subscribers can be Kinesis Data Firehose, SQS, HTTP, HTTPS, Lambda, Email, Email-JSON, SMS Messages, Mobile Notifications.
 
-![A2A](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS_Event-Driven-SNS-Compute%402x.03cb54865e1c586c26ee73f9dff0dc079125e9dc.png)
-
 #### A2P
-
-- Lets you send messages to your **customers** with SMS texts, push notifications, and email.
 
 ![A2P_1](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS-SMS%402x.f499caaae8a9877fbefb4d9cf4768d030dc282da.png)
 
 ![A2P_2](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS-Mobile-Push%402x.08ac920f6c0bcf10c713be9e423b13e6fd9bd50c.png)
+
+- Lets you send messages to your **customers** with SMS texts, push notifications, and email.
 
 ### Amazon MQ
 
@@ -786,14 +788,16 @@ Go to [Index](#index)
 - It is OBJECT BASED storage (suitable for files). It does not allow to install Operation System (different with EBS for example)
 - S3 Object is made up of
   - Key → Name of the object, full path of the object in bucket e.g. /movies/comedy/abc.avi
+    - S3 console show virtual folders based on key.
   - Value → data bytes of object (photos, videos, documents, etc.)
   - Version ID - version object (if versioning is enabled)
   - Metadata
   - Sub-resources (Access Control Lists & Torrent)
-- S3 Bucket holds objects. S3 console show virtual folders based on key.
-- There is unlimited storage, but individual files uploaded can be from **0 bytes to 5TB**. You should use multi-part upload for Object size > 100MB
-- S3 is a UNIVERSAL NAMESPACE, so bucket names need to be globally unique. The reason why is because it creates a web address (DNS name) with the buckets name in it
-  - When you view Buckets you view them globally but you can have buckets in individual regions
+- There is unlimited storage, but individual files uploaded can be from **0 bytes to 5TB**.
+  - Best practice:  use multi-part upload for Object size > 100MB
+  - When you upload a file to S3, you receive a HTTP `200` code if the file upload is successful.
+- S3 is a UNIVERSAL NAMESPACE, so bucket names need to be globally unique. The reason why is because it creates a web address (DNS name) with the buckets name in it.
+  - When you view Buckets you view them globally but you have buckets in individual regions.
 
 ```sh
 https://<bucket-name>.s3.<aws-region>.amazonaws.com
@@ -801,7 +805,6 @@ or
 https://s3.<aws-region>.amazonaws.com/<bucket-name>
 ```
 
-- When you upload a file to S3, you receive a HTTP `200` code if the file upload is successful.
 - **S3 Consistency**
   - Delivers **strong read-after-write consistency for PUTS and DELETES** of objects, for both new objects and for updates to existing objects. This means once there is a successful write, overwrite or delete — the next read request automatically receives the latest version of the object.
   - Updates to a single key are atomic. For example, if you PUT to an existing key from one thread and perform a GET on the same key from a second thread concurrently, you will get either the old data or the new data, but never partial or corrupt data.
@@ -817,10 +820,19 @@ https://s3.<aws-region>.amazonaws.com/<bucket-name>
 #### Optional features
 
 - Enable `S3 Versioning` and `MFA` delete features to protect against accidental delete of S3 Object.
-- Use `Object Lock` to store object using write-once-read-many (WORM) model to prevent objects from being deleted or overwritten for a fixed amount of time (`Retention period`) or indefinitely (`Legal hold`). Each version of object can have different retention-period.
-- You can host static websites on S3 bucket consists of HTML, CSS, client-side JavaScript, and images. You need to enable Static website hosting and Public access for S3 to avoid 403 forbidden error. Also you need to add CORS Policy to allow cross origin request.
+- Enable `S3 Object Lock` to store object using write-once-read-many (WORM) model to prevent objects from being deleted or overwritten for a fixed amount of time (`Retention period`) or indefinitely (`Legal hold`).
+  - Amazon S3 currently does not support enabling object lock after a bucket has been created.
+  - Retention:
+    - Each version of object can have different retention-period.
+    - S3 has two types of retention mode:
+      - Governance Mode → Users can’t overwrite , delete or alter the object version locked unless they have special permissions (permissions requires to be granted).
+      - Compliance Mode → A protected object version can’t be overwritten or deleted by ANY user including the root user during its retention period.
+- `Glacier Vault Lock` → enforce compliance controls on individual S3 Glacier vaults using a Vault Lock policy.
+- You can host **Static websites on S3 bucket** consists of HTML, CSS, client-side JavaScript, and images. Requirements:
+  - Enable Static website hosting and Public access for S3 to avoid 403 forbidden error.
+  - Add CORS Policy to allow cross origin request.
 
-```
+```sh
 https://<bucket-name>.s3-website[.-]<aws-region>.amazonaws.com
 ```
 
@@ -828,42 +840,30 @@ https://<bucket-name>.s3-website[.-]<aws-region>.amazonaws.com
 
 - `S3 Select` or `Glacier Select` can be used to retrieve subset of data from S3 Objects using SQL query. S3 Objects can be CSV, JSON, or Apache Parquet. GZIP & BZIP2 compression is supported with CSV or JSON format with server-side encryption.
   - Allows you to save money on data transfer and increase speed.
-- Using `Range` HTTP Header in a GET Request to download the specific range of bytes of S3 object, known as Byte Range Fetch
+- Using `Range` HTTP Header in a GET Request to download the specific range of bytes of S3 object, known as Byte Range Fetch.
 - You can create `S3 event notification` to push events e.g. s3:ObjectCreated:\* to SNS topic, SQS queue or execute a Lambda function. It is possible that you receive single notification for two writes to non-versioned object at the same time. Enable versioning to ensure you get all notifications.
 - Enable `S3 Cross-Region Replication` for asynchronous replication of object across buckets in another region.
   - Cross Region Replication REQUIRES versioning to be ENABLED on both SOURCE & DESTINATION bucket.
-  - Files in an existing bucket are not replicated automatically once this is enabled — only subsequent updated files. A new objects
-  - You can have this enabled for the entire bucket or just for specific prefixes
-  - Delete markers ARE NOT replicated
+  - If enabled, existing objects are not replicated automatically, only subsequent updated files (new objects).
+  - You can have this enabled for the entire bucket or just for specific prefixes.
+  - Delete markers ARE NOT replicated.
 - Enable `Server access logging` for logging object-level fields object-size, total time, turn around time, and Http referrer. Not available with CloudTrail.
 - Use `VPC S3 gateway endpoint` to access S3 bucket within AWS VPC to reduce the overall data transfer cost.
-- Enable `S3 Transfer Acceleration` for faster transfer and high throughput to S3 bucket (mainly uploads)
+- Enable `S3 Transfer Acceleration` for faster transfer (high throughput) to S3 bucket (mainly uploads).
   - Create CloudFront distribution with Origin Access Identity (OAI) pointing to S3 for faster cached content delivery (mainly reads) over long distances between your client and S3.
   - Restrict the access of S3 bucket through CloudFront only using Origin Access Identity (OAI). Make sure user can’t use a direct URL to the S3 bucket to access the file.
 - Use AWS Athena (Serverless Query Engine) to perform analytics directly against S3 objects using SQL query and save the analysis report in another S3 bucket.
   - Use Case: one time SQL query on S3 objects, S3 access log analysis, serverless queries on S3, IoT data analytics in S3, etc.
-- Locks
-  - Use `Object Lock` to store object using Write-Once-Read-Many (WORM) model to prevent objects from being deleted or overwritten for a custom-defined retention period or indefinitely. It can be one bucket or individual elements.
-    - You can use S3 Object lock to meet regulatory requirements that require WORM storage, or add an extra layer of protection against object changes and deletion.
-    - Amazon S3 currently does not support enabling object lock after a bucket has been created.
-    - S3 has two types of retention mode:
-      - Governance Mode → Users can’t overwrite , delete or alter the object version locked unless they have special permissions (permissions requires to be granted).
-      - Compliance Mode → A protected object version can’t be overwritten or deleted by ANY user including the root user during its retention period
-    - `Retention Period` → period that protects an object version for a fixed amount of time. Once it expires the object can be overwritten. Unless there is a LEGAL HOLD placed on its version.
-    - `Legal Hold` → Prevents object version from being overwritten or deleted. It doesn’t have a retention period, it remains in effect until it is removed.
-  - `Glacier Vault Lock` → enforce compliance controls on individual S3 Glacier vaults using a Vault Lock policy.
 
 #### S3 Tiered Storage (Storage Classes)
 
 - You can upload files in the same bucket with different Storage Classes like S3 standard, Standard-IA, One Zone-IA, Glacier etc.
-- You can setup `S3 Lifecycle Rules` to transition current (or previous version) objects to cheaper storage classes or delete (expire if versioned) objects after certain days for e.g.
-  - Use Case:
-    - Transition from S3 Standard to S3 Standard-IA or One Zone-IA can only be done after 30 days.
+- You can setup `S3 Lifecycle Rules` to transition current (or previous version) objects to cheaper storage classes or delete (expire if versioned) objects after certain period of time.
+  - Use Case: Transition from S3 Standard to S3 Standard-IA or One Zone-IA can only be done after 30 days.
   - You can also setup lifecycle rule to abort multipart upload, if it doesn’t complete within certain days, which auto delete the parts from S3 buckets associated with multipart upload.
-  - It can be u
-- Princing per Storage type
-  - S3 Glacier Deep Archive is the cheapest.
-  - S3 Standard is the most expensive, if you are going to use it — why not use S3 Intelligent tiering (same price), unless you have thousands or millions of objects.
+- Princing per Storage type:
+  - `S3 Glacier Deep Archive` is the cheapest.
+  - `S3 Standard` is the most expensive, if you are going to use it — why not use `S3 Intelligent tiering` (same price), unless you have thousands or millions of objects.
     - Benefit of using S3 Intelligent tiering: it does give you access to the infrequently access — so you could save money!
     - Warning: If you have a lot of objects you are going to incur monitoring and automation charges.
 
@@ -876,14 +876,14 @@ https://<bucket-name>.s3-website[.-]<aws-region>.amazonaws.com
 | S3 Glacier                         | 11 9’s     | 99.99%       | ≥3  | 90 days      | Expedite (1-5 mins), Standard (3-5 hrs), Bulk (5-12 hrs) | per GB        |
 | S3 Glacier Deep Archive            |  11 9’s    |  99.99%      |  ≥3 |  180 days    | Standard (12 hrs), Bulk (48 hrs) per GB                  |
 
-- `Standard`: General purpose storage for any type of frequently used data very high availability, and fast retrieval
+- `Standard`: General purpose storage for any type of frequently used data very high availability, and fast retrieval.
   - HA: Stored redundantly across multiple devices in multiple facilities and is designed to sustain the loss of 2 facilities concurrently.
-- `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective storage class automatically, without performance impact or operational overhead.
-  - Use case: automatic cost savings for data with unknown or changing access patterns
-- `Standard-IA` (Infrequently Accessed) : Cost effective for infrequent access files which cannot be recreated
+- `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective storage class automatically, without performance impact.
+  - Use case: automatic cost savings for data with unknown/changing access patterns.
+- `Standard-IA` (Infrequently Accessed): Cost effective for infrequent access files which cannot be recreated.
   - For data that is not accessed very frequently — but once it is accessed it needs to be retrieved rapidly.
-  - Is cheaper than standard S3, but you do get charged a retrieval fee
-- `One-Zone IA`(also called S3 RRS) : Cost effective for infrequent access files which can be recreated
+  - It is cheaper than standard S3, but you do get charged a retrieval fee.
+- `One-Zone IA`(also called S3 RRS): Cost effective for infrequent access files which can be recreated.
   - Low cost option for data that is not accessed frequently and does not require the redundancy, if the zone fails, we loose the data.
   - Use case: re-creatable infrequently accessed data that needs milliseconds access.
 - `Glacier`: Cheaper choice to Archive Data. Retrival time configurable from minutes to hours
@@ -891,11 +891,11 @@ https://<bucket-name>.s3-website[.-]<aws-region>.amazonaws.com
 
 #### Sharing S3 buckets Across Accounts
 
-If you have two accounts within the same organisation you can use any of these to share the an S3 bucket with both accounts:
+For multiple accounts within the same organisation, to share S3 buckets among account:
 
-- Bucket policy & IAM — applies to entire bucket, but programmatic access only
-- Using bucket ALCs & IAM — can apply to individual objects — programatic access only
-- Cross Account IAM roles — programatic and console access
+- Bucket policy & IAM — applies to entire bucket, but programmatic access only.
+- Using bucket ALCs & IAM — can apply to individual objects — programatic access only.
+- Cross Account IAM roles — programatic and console access.
 
 #### S3 Security
 
@@ -911,38 +911,38 @@ If you have two accounts within the same organisation you can use any of these t
 ###### Bucket policy (recommended)
 
 - S3 Bucket Policies are JSON based policy for complex access rules at user, account, folder, and object level
-- Bucket policies are **bucket wide**. This works at budget levels not individual file level. Applies to whole bucket!
+- Bucket policies are **bucket wide**. This works at budget levels not individual file level.
 
 ###### S3 Signed URLS
 
-- Used to secure content so that only people you authorise are able to access (upload or download object data) temporarly it.
-- It can be generated from CLI or SDK (can’t from web) and has an LIMITED LIFETIME (e.g. 5 min)
+- Used to secure content so only authorised people are able to access (upload or download object data) temporarly it.
+- It can be generated from CLI or SDK (can’t from web) and has an LIMITED LIFETIME (e.g. 5 min).
 
-```
+```sh
 aws s3 presign s3://mybucket/myobject --expires-in 300
 ```
 
-- Use Case: when not using CloudFront (Different from CloudFront signed urls) and user have direct access to S3
-- Issues a request as the IAM user who creates the pre-signed URL (Same permissions)
+- Use Case: when not using CloudFront (Different from CloudFront signed urls) and user have direct access to S3.
+- Issues a request as the IAM user who creates the pre-signed URL (Same permissions).
 
 ##### Encryption
 
-- `Encryption in Transit` — encrypting network traffic (between client and S3) using SSL/TLS
-- `Encryption at Rest (Server Side)` — happens server side, encrypting the data which is stored. Can be achieved by:
-  - `SSE-S3`: S3 Managed Keys (SSE-S3), AWS Managed Keys
-  - `SSE-KMS`: AWS Key Management Service(SSE-KMS) AWS & you manage keys together
+- `Encryption at Rest (Client Side)` — client encrypt and decrypt the data before sending and after receiving data from S3.
+- `Encryption in Transit` — encrypting network traffic (between client and S3) using SSL/TLS.
+- `Encryption at Rest (Server Side)` — Encrypting the data which is stored. Can be achieved by:
+  - `SSE-S3`: S3 Managed Keys (SSE-S3), AWS Managed Keys.
+  - `SSE-KMS`: AWS Key Management Service(SSE-KMS) AWS & you manage keys together.
   - `SSE-C`: Customer provided keys — give AWS you own keys that you manage.
-- `Encryption at Rest (Client Side)` — client encrypt and decrypt the data before sending and after receiving data from S3
-- To meet PCI-DSS or HIPAA compliance, encrypt S3 using SSE-C and Client Side Encryption
+- To meet PCI-DSS or HIPAA compliance, encrypt S3 using SSE-C and Client Side Encryption.
 
 #### S3 Versioning
 
-- It acts like a backup tool that stores all versions of an object (even writes & deletes)
+- It acts **like a backup tool** that stores all versions of an object (even writes & deletes).
   - If you delete a file it will still show up in versioning with the delete marker on it.
-- When enabled on your bucket it cannot be disabled — only suspended
-- It is possible to integrate it with life cycle rules
-- If you mark a single file as public and then upload a new version of it — the new version is private
-- The size of your S3 bucket is the sum of all files and all versions of those files
+- When enabled on your bucket it cannot be disabled — only suspended.
+- It is possible to integrate it with lifecycle rules.
+- If you mark a single file as public and then upload a new version of it — the new version is private.
+- The size of your S3 bucket is the sum of all files and all versions of those files.
 - Versioning's MFA Delete capability, which uses multi-factor authentication, can be used to provide an additional layer of security.
 
 #### S3 Performance
@@ -952,8 +952,8 @@ S3 Has extremely low latency
 ##### Performance limitations
 
 - If you are using KMS (SSE-KMS) to encrypt your objects in S3, you must keep in mind the KMS limits.
-  - When you upload a file, you will call GenerateDataKey in the KMS API.
-  - When you download a file, you will call Decrypt in the KMS API.
+  - When you upload a file, you will call `GenerateDataKey` in the KMS API.
+  - When you download a file, you will call `Decrypt` in the KMS API.
 - Uploading/Downloading will count towards the KMS per second quota, which could affect performance
   - Region-specific, however, it's either 5,500, 10,000 or 30,000 requests our second.
   - accessed through a Network File System (NFS) mount point
@@ -962,13 +962,13 @@ S3 Has extremely low latency
 
 - `S3 Prefix` is the part between the bucket name and the filename. You can get better performance by spreading your reads across different prefixes.
 
-```
+  - Use Case: By default, you can get the first byte out of S3 within 100-200 milliseconds. You can also achieve a high number of requests: 3,500 PUT/COPY/POST/DELETE and 5,500 GET/HEAD requests per second per prefix. Spreading your reads across different prefixes. For Example, If you are using two prefixes, you can achieve 11,000 requests per second.
+
+```sh
 mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 ```
 
-Use Case: By default, you can get the first byte out of S3 within 100-200 milliseconds. You can also achieve a high number of requests: 3,500 PUT/COPY/POST/DELETE and 5,500 GET/HEAD requests per second per prefix. Spreading your reads across different prefixes. For Example, If you are using two prefixes, you can achieve 11,000 requests per second.
-
-- `Multipart Uploads` -> it splits your file into parts and uploads them in Parallel
+- `Multipart Uploads` -> It splits your file into parts and uploads them in Parallel
 
   - Recommended for files over 100MB
   - Required for files over 5GB
@@ -977,30 +977,29 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
 #### S3 Storage Gateway
 
-- Is a hybrid cloud storage service for connecting on-premises software applications with cloud based storage.
-- Allows your on-premise to access virtually unlimited cloud storage.
+- Is a hybrid cloud storage service for **connecting on-premises software applications with cloud based storage**.
 - Can be downloaded as a Virtual Machine Image and installed in your datacenter.
 - Has low latency as it caches data in the local VM or gateway hardware appliance.
 - Storage Gateways Type
-  - **1.** File Gateway (protocol NFS & SMB)
-    - Stores objects directly in s3
-    - Utilises standard storage protocols with NFS & SMB
-    - Common use case is for on-premise backup to the cloud
+  - **1.** File Gateway (protocol NFS & SMB).
+    - Stores objects directly in s3.
+    - Utilises standard storage protocols with NFS & SMB.
+    - Use case: on-premise backup to the cloud
   - **2.** Volume Gateway (ISCSI block protocol)
-    - Presents your applications with disk volumes using ISCSI block protocol
-    - Stores/manages on-premise data in S3
-    - It allows you to take point-in-time snapshots using AWS Backup and stores them in EBS (Only captures changed blocks)
+    - Presents your applications with disk volumes using ISCSI block protocol.
+    - Stores/manages on-premise data in S3.
+    - It allows you to take point-in-time snapshots using AWS Backup and stores them in EBS (Only captures changed blocks).
     - Types of Volume Gateways:
       - Stored Volumes — Entire Dataset is stored on site and is asynchronously backed up to S3. Store you primary data locally so there is low latency to the entire dataset and then asynchronously backs up that data to S3.
-      - Cached Volumes — Entire Dataset is stored on S3 and the most frequently accessed data is cached on site. Uses s3 as your primary storage while retaining frequently accessed data locally. Minimise need to scale your on-premise infrastructure
+      - Cached Volumes — Entire Dataset is stored on S3 and the most frequently accessed data is cached on site. Uses s3 as your primary storage while retaining frequently accessed data locally. Minimise need to scale your on-premise infrastructure.
   - **3.** Tape Gateway (VTL)
-    - Durable, cost effective archiving
-    - Is a way of replacing physical tapes with a virtual tape interface in AWS without changes existing backup workflows
+    - Durable, cost effective archiving.
+    - Is a way of replacing physical tapes with a virtual tape interface in AWS without changes existing backup workflows.
 
 ###  Instance Store
 
 - Instance Store is an **Ephemeral/temporal** block-based storage physically attached to an EC2 instance
-  - Data persists on instance reboot, data doesn’t persist on stop or termination
+  - **Data persists on instance reboot, data doesn’t persist on stop or termination**
 - It can be attached to an EC2 instance only when the instance is launched and cannot be dynamically resized
 - Deliver very low-latency and high random I/O performance
 
@@ -1023,8 +1022,8 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
   - Snapshots can be shared with other AWS accounts or made public.
     - You can share snapshots, but only if they are unencrypted.
   - Mechanism to move Volumen data (EBS) to a different AZ location (EBS volume cannot be mount to an EC2 into a different AZ directly)
-    - To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
     - To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then **copy the AMI from one region to other**. Then use the copied AMI to launch the new EC2 instance in the new region.
+    - An AMI's can be created from both Volumes and Snapshots.
 - EBS volumen can be edited after instance is launched, it supports dynamic changes in live production volume e.g. volume type, volume size, and IOPS capacity without service interruption
 - EBS Volume encryption:
   - All data at rest inside the volume is encrypted
@@ -1033,14 +1032,15 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
   - All volumes created from encrypted snapshots are automatically encrypted
   - Volumes created from unencrypted snapshots can be encrypted at the time of creation
 - Types of EBS volumes:
-  - **SSD** for small/random IO operations, High IOPS means number of read and write operations per second, Only SSD EBS Volumes can be used as boot volumes for EC2
+
+**A/ SSD** for small/random IO operations, High IOPS means number of read and write operations per second, Only SSD EBS Volumes can be used as boot volumes for EC2
 
 | SSD VolumeTypes                  |  Description                         |  Usage                                                                                                             |
 | -------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | General Purpose _SSD_ (gp2/gp3)  | Max 16000 IOPS                       | Balances price and performance and can be used for most workloads (boot volumes, dev environment, virtual desktop) |
 | Provisioned IOPS _SSD_ (io1/io2) | 16000 - 64000 IOPS, EBS Multi-Attach | Mission critical business application, Databases (large SQL and NoSQL database workloads)                          |
 
-- **HDD** (Hard Disk Drive) or Magnectic for large/sequential IO operations, High Throughput means number of bytes read and write per second
+**B/ HDD** (Hard Disk Drive) or Magnectic for large/sequential IO operations, High Throughput means number of bytes read and write per second
 
 | HDD VolumeTypes                  |  Description                                                                 |  Usage                                                                                                                      |
 | -------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -1052,8 +1052,6 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 
   - RAID 0 (increase performance) two 500GB EBS Volumes with 4000 IOPS - creates 1000GB RAID0 Array with 8000 IOPS and 1000Mbps throughput
   - RAID 1 (increase fault tolerance) two 500GB EBS Volumes with 4000 IOPS - creates 500GB RAID1 Array with 4000 IOPS and 500Mbps throughput
-
-- An AMI's can be created from both Volumes and Snapshots.
 
 ### EFS (Elastic File System)
 
@@ -1087,8 +1085,8 @@ Use Case: By default, you can get the first byte out of S3 within 100-200 millis
 ![FSx for Lustre AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_Amazon-FSx-for-Lustre.097ed5e5175fa96e8ac77a2470151965774eec32.png)
 
 - Fully managed and High performance file system for **fast processing of workload** with consistent **sub-millisecond latencies**, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS.
-- Lustre = Linux + Cluster is a **POSIX-compliant parallel linux file system**, which stores data across multiple network file servers
-- **Seamless integration with Amazon S3** (optional) - connect your S3 data sets to your FSx for Lustre file system, run your analyses, write results back to S3, and delete your file system
+- Lustre = Linux + Cluster is a **POSIX-compliant parallel linux file system**, which stores data across multiple network file servers.
+- **Seamless integration with Amazon S3** (optional) - connect your S3 data sets to your FSx for Lustre file system, run your analyses, write results back to S3, and delete your file system.
 - You can use **FSx for Lustre as hot storage** for your highly accessed files, and **Amazon S3 as cold storage** for rarely accessed files.
 - FSx for Lustre provide two deployment options:
   - **Scratch file systems** - for temporary storage and short term processing
