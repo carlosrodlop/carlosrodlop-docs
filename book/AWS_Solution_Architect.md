@@ -111,6 +111,41 @@ Go to [Index](#index)
 
 - Your AWS account has default quotas, formerly referred to as limits, for each AWS service. Unless otherwise noted, each quota is Region-specific. You can request increases for some quotas, and other quotas cannot be increased.
 
+### Types of Cloud Computing
+
+#### Services Models
+
+- Infrastructure as a Service - **IaaS** (Examples: EC2, ELB, VPC)
+  
+  - Basic building blocks for cloud IT and typically provide access to networking features, computers (virtual or on dedicated hardware), and data storage space.
+  - Highest level of flexibility and management control over your IT resources
+
+- Platform as a Service - **PaaS** (Examples: Elastic Beanstalk, Fargate)
+
+  - Platforms as a service remove the need for organizations to manage the underlying infrastructure (usually hardware and operating systems)
+  - This helps you be more efficient as you don’t need to worry about resource procurement, capacity planning, software maintenance, patching, or any of the other undifferentiated heavy lifting involved in running your application.
+
+- Software as a Service - **SaaS** (Examples: ECS, Aurora, ECR)
+
+  - It is completed product that is run and managed by the service provider ("end-user applications").
+  - You do not not only need to think about how the underlying infrastructure is managed (PaaS) but also how the service is maintained; you only need to think about how you will use that particular piece of software
+
+#### Deployment Models
+
+- Cloud
+
+  - A cloud-based application is fully deployed in the cloud and all parts of the application run in the cloud.
+
+- [Hybrid](https://aws.amazon.com/hybrid/)
+
+  - A hybrid deployment is a way to connect infrastructure and applications between cloud-based resources and existing resources that are not located in the cloud.
+  - Use: Between cloud and existing on-premises infrastructure to extend, and grow, an organization's infrastructure into the cloud while connecting cloud resources to internal system.
+
+- On-Premises (Private)
+
+  - Deploying resources on-premises, using virtualization and resource management tools, is sometimes called “private cloud”.
+  - It does not provide many of the benefits of cloud computing.
+
 ## Security
 
 Go to [Index](#index)
@@ -428,7 +463,7 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
 
 Go to [Index](#index)
 
-### EC2
+### EC2 (IaaS)
 
 - Infrastructure as a Service (IaaS) - Re-sizable (elastic) and secure virtual machine on the cloud.
   - Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requirements change.
@@ -1103,11 +1138,16 @@ Go to [Index](#index)
 - It is a server in the AWS cloud that runs **Replication** software.
   - Create a source and a target endpoints
   - Schedule/Run a Replication Task (Replication Instance - VM) to move the data
-  - Source stays functioning the whole time during the migration
+  - No downtime (Source stays functioning the whole time during the migration)
 - Types of migrations
   - Supports Homogenous Migrations — Identical e.g. oracle to oracle
+
+![Homogeneos](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Database-Migration-Service_Homogenous-Database-Migrations_Reduced%402x.053ebcf3f38feed093d6180bb7a351c5551a30a1.png)
+
   - Supports Hetrogenous Migrations — Different e.g. SQLServer to Aurora.
     - If you do this you will need to use a Schema Conversion Tool (SCT)
+
+![Heterogeneos](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
 
 ### RDS (Relational Database Service)
 
@@ -1116,7 +1156,6 @@ Go to [Index](#index)
 - AWS Managed Service to create High Available and Scalable **Relational** databases in the Cloud
   - It supports: PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora
   - RDS runs on Virtual Machines (can’t log in to the OS or SSH in)
-  - AWS handles admin tasks for you like hardware provisioning, patching & backups.
   - RDS is not serverless — (one exception Aurora Serverless)
 - RDS Main Features
   - **High Available > Multi AZ Recovery** > User For Disaster Recovery Scenarios
@@ -1846,7 +1885,7 @@ Go to [Index](#index)
 - Also uses templates to define resources and these templates are in a YAML format.
 - Can run serverless applications locally using docker.
 
-### AWS Elastic Beanstalk
+### AWS Elastic Beanstalk (PaaS)
 
 ![ElasticBeanstalk](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Elastic-Beanstalk%402x.6027573605a77c0e53606d5264ec7d3053bf26af.png)
 
