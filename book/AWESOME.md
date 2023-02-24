@@ -4,38 +4,28 @@
 
 - [Curated list of awesome lists | Project-Awesome.org](https://project-awesome.org/)
 - [GitHub - EbookFoundation/free-programming-books: Freely available programming books](https://github.sre.pub/EbookFoundation/free-programming-books)
-- [awesome-soft/awesome-devops: A curated list of awesome softwares for Devops.](https://github.com/awesome-soft/awesome-devops)
 - [kamranahmedse/developer-roadmap: Roadmap to becoming a developer in 2022](https://github.com/kamranahmedse/developer-roadmap)
 - [70+ Free Awesome Certificates to Earn in 2021 - DEV Community](https://dev.to/panx/50-free-awesome-certificates-to-earn-in-2021-2l7g)
 - [DZone: RefCards](https://dzone.com/refcardz)
-- [GitHub - bregman-arie/devops-exercises: Linux, Jenkins, AWS, SRE, Prometheus, Docker, Python, Ansible, Git, Kubernetes, Terraform, OpenStack, SQL, NoSQL, Azure, GCP, DNS, Elastic, Network, Virtualization. DevOps Interview Questions](https://github.com/bregman-arie/devops-exercises)
 - [Continuous Delivery Landscape](https://landscape.cd.foundation/)
-- [AdminTurnedDevOps/100DaysOfContainersAndOrchestration: Your go-to open source repo to learn containers (Docker, Podman, etc.) and Orchestration (Kubernetes, ECS, etc.) from start to finish.](https://github.com/AdminTurnedDevOps/100DaysOfContainersAndOrchestration)
 - [GitHub emoji cheat sheet](https://github.com/ikatyang/emoji-cheat-sheet)
+- [A guide to Kubernetes Monitoring: In this 5 part series from Grafana Labs you'll learn about key metrics and best practices for getting the most from your K8s monitoring. : kubernetes](https://www.reddit.com/r/kubernetes/comments/10q9dn1/a_guide_to_kubernetes_monitoring_in_this_5_part/)
 
 ## SRE
 
 - [Google - Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)
 - [Linkedin - School Of SRE](https://linkedin.github.io/school-of-sre/)
+- [GitLab.com / runbooks · GitLab](https://gitlab.com/gitlab-com/runbooks/)
 
 ## Kubernetes
 
 - [Cloud Native Landscape](https://landscape.cncf.io/)
-- [K2-KK/certified-kubernetes-administrator-course: Certified Kubernetes Administrator - CKA Course](https://github.com/K2-KK/certified-kubernetes-administrator-course)
-- [tomhuang12/awesome-k8s-resources: A curated list of awesome Kubernetes tools and resources.](https://github.com/tomhuang12/awesome-k8s-resources)
-- [vmware-tanzu/k-bench: Workload Benchmark for Kubernetes](https://github.com/vmware-tanzu/k-bench)
-- [AWS - EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/)
 - [Best practices  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/best-practices)
-- [awesome-helm](https://github.com/cdwv/awesome-helm)
-- [Argo Awesome list](https://github.com/terrytangyuan/awesome-argo)
-- [ahmetb/kubernetes-network-policy-recipes: Example recipes for Kubernetes Network Policies that you can just copy paste](https://github.com/ahmetb/kubernetes-network-policy-recipes)
 - [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
 - [Learn Cloud Native – Sysdig](https://sysdig.com/learn-cloud-native/)
 
 ## Terraform
 
-- [shuaibiyy/awesome-terraform: Curated list of resources on HashiCorp's Terraform](https://github.com/shuaibiyy/awesome-terraform)
-- [Terraform blueprints for EKS clusters.](https://github.com/aws-ia/terraform-aws-eks-blueprints)
 - [Terraform blueprints and modules for Google Cloud](https://cloud.google.com/docs/terraform/blueprints/terraform-blueprints)
 
 ## AWS
