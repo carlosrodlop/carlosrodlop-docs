@@ -1134,27 +1134,29 @@ Go to [Index](#index)
 
 ### Database migration service (DMS)
 
-- Transfer a database to another type (relational databases, data warehouses, NoSQL databases and other types of data stores.). It is valid for on-premise, in cloud (AWS o different vendro, Azure) or combination of both for Sources and Targets.
-- It is a server in the AWS cloud that runs **Replication** software.
+- KeyWords: Database Migration, Replication
+- It Saas that to transfer (Replicate) a database to another type (relational databases, data warehouses, NoSQL databases and other types of data stores.). It is valid for on-premise, in cloud (AWS o different vendro, Azure) or combination of both for Sources and Targets.
+- Steps:
   - Create a source and a target endpoints
   - Schedule/Run a Replication Task (Replication Instance - VM) to move the data
   - No downtime (Source stays functioning the whole time during the migration)
-- Types of migrations
-  - Supports Homogenous Migrations — Identical e.g. oracle to oracle
+- Types of migrations:
+  - Homogenous Migrations — Identical e.g. oracle to oracle
 
 ![Homogeneos](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Database-Migration-Service_Homogenous-Database-Migrations_Reduced%402x.053ebcf3f38feed093d6180bb7a351c5551a30a1.png)
 
-  - Supports Hetrogenous Migrations — Different e.g. SQLServer to Aurora.
-    - If you do this you will need to use a Schema Conversion Tool (SCT)
+  - Hetrogenous Migrations — Different (e.g. SQLServer to Aurora). It requires a Schema Conversion Tool (SCT)
 
 ![Heterogeneos](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
 
 ### RDS (Relational Database Service)
 
+- KeyWords: Relation Database
+
 ![AWS RDS](https://d1.awsstatic.com/video-thumbs/RDS/product-page-diagram_Amazon-RDS-Regular-Deployment_HIW-V2.96bc5b3027474538840af756a5f2c636093f311f.png)
 
-- AWS Managed Service to create High Available and Scalable **Relational** databases in the Cloud
-  - It supports: PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora
+- Saas to manage High Available and Scalable Relational databases in the Cloud
+  - It supports multiple Engines: PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server, and Amazon Aurora
   - RDS runs on Virtual Machines (can’t log in to the OS or SSH in)
   - RDS is not serverless — (one exception Aurora Serverless)
 - RDS Main Features
@@ -1164,7 +1166,7 @@ Go to [Index](#index)
   - **Scalable > Read Replicas** > Improves Performance
     - A Read Replica allows you to have read-only copies (Upto 5 Read replicas) of your production database. This is achieved by using Asynchronous replication so reads are eventually consistent. Every time you write to the main database, it is replicated in the secondary databases.
     - Read replicas can be distributed across multiple AZ, even in a different Region of your running RDS instance. You pay for replication cross Region, but not for cross AZ.
-    - It must have automatic backups turned on in order to deploy a read replica.
+    - **It must have automatic backups turned on in order to deploy a read replica**.
     - You can have read replicas of read replicas (but watch out for latency)
     - Each read replica will have its own DNS end point.
     - Read replicas can be promoted to be their own databases. This breaks the replication.
@@ -1177,93 +1179,97 @@ Go to [Index](#index)
     - Backup data is stored in S3
     - May experience latency when backup is being taken
     - Backups are deleted once you remove the original RDS instances
-  - Database Snapshot
+  - Manual Database Snapshot
     - User-initiated, must be manually done by yourself
     - Stored until you explicitly delete them, even after you delete the original RDS instance they are still persisted (This is not the case with automated backups).
 - Offers **encryption at rest** — done with KMS - Once your RDS instance is encrypted, as are its automated backups, read replicas, and snapshots.
 
 ### Amazon Aurora
 
+- KeyWords: Relation Database, Aurora Global Database (AWS proprietary), Serveless (optional)
+
 ![AWS Aurora](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-Aurora_How-it-Works.b1c2b37e7548757780b195c6dcceb58511de5b1d.png)
 
-- AWS fully managed relational database (Aurora Global Database) compatible with MySQL and PostgreSQL
+- It is Saas which manages own AWS engine for relational database (Aurora Global Database) **compatible with MySQL and PostgreSQL**
   - Provides 5x better performance than MySQL
   - Provides 3x better performance than Postgres SQL
-- Distributed: 2 copies of your data is contained in each Availability Zone (AZ) — minimum of 3 AZ’s and 6 copies.
+- **Distributed**: 2 copies of your data is contained in each Availability Zone (AZ) — minimum of 3 AZ’s and 6 copies.
   - Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
     - Primary DB instance - Only one primary instance, supports both read and write operation
     - Replicas - Each Aurora DB cluster has built-in replication between multiple DB instances, you can choose between built-in features such as Aurora global databases or the traditional replication mechanisms for the MySQL or PostgreSQL DB engines
-- Fault tolerant: It can handle the loss of up to 2 copies without affecting write ability and the lose of up to 3 copies of data without affecting read ability.
-- Self-healing storage system (Data blocks and disks are continuously scanned for errors and repaired automatically.)
-- Autoscaling for storage and computer capacity
+- **Fault tolerant**: It can handle the loss of up to 2 copies without affecting write ability and the lose of up to 3 copies of data without affecting read ability.
+- **Self-healing storage system** (Data blocks and disks are continuously scanned for errors and repaired automatically.)
+- **Autoscaling for storage and computer capacity**
   - Start with 10Gb, Scales in 10 GB increments to 64 TB (Storage Autoscaling)
   - Compute resources can scale up tp 32vCPUS and 244GB of Memory
-- Backups with Aurora
-  - Automated backups are always enabled on Amazon Aurora DB Instances. Backups do not impact performance.
-  - You can also take snapshots with Aurora. This also does not impact on performance. Snapshots can be shared with other AWS accounts
+- Backups (Mix)
+  - Backups do not impact performance.
+  - Automated Backups are Enabled by default.
+  - You can also take manual snapshots with Aurora. Snapshots can be shared with other AWS accounts.
 
 #### Aurora Serverless
 
-- On demand autoscaling configuration of Aurora
-- Automatically starts up, shuts down, and scales based on app needs
-- Used for simple, cost effective infrequently used, intermittent or unpredictable workloads
+- **On demand autoscaling configuration of Aurora**
+- Automatically starts up, shuts down, and scales based on app needs.
+- Used for simple, cost effective infrequently used, intermittent or unpredictable workloads.
 - Only pay for invocation.
 
 ### DynamoDB
 
+- KeyWords: NoSQL, AWS proprietary, Eventual Consistent Read, Strongly Consistent Reads
+
 ![AWS Dynamo DB](https://d1.awsstatic.com/product-page-diagram_Amazon-DynamoDBa.1f8742c44147f1aed11719df4a14ccdb0b13d9a3.png)
 
-- AWS proprietary, a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
-- It is fully Managed and Serverless (no servers to provision, patch, or manage) database
-- It supports both document (limit of 400KB item size. E.g. JSON documents, or session data.) and key-value data models. Its flexible data model and reliable performance make it a great fit for mobile, web, gaming, ad-tech, IoT, and many other applications.
+- AWS proprietary, a fast and flexible **NoSQL** database service for all applications that need consistent, single-digit millisecond latency at any scale.
+- It is fully Managed and Serverless (no servers to provision, patch, or manage) database.
+- Its **flexible data model** and reliable performance make it a great fit for mobile, web, gaming, ad-tech, IoT, and many other applications. It supports both:
+  - Document (limit of 400KB item size. E.g. JSON documents, or session data.)
+  - Key-value data models.
 - Stored on SSD Storage.
 - Spread across 3 geographically distinct data centers.
-- DynamoDB supports eventually consistent and strongly consistent reads. (eventual consistency is default)
-  - Eventual Consistent Read (Default): Consistency across data within a second, meaning the response might not reflect the results of a just completed write operation, but if you repeat the read request again it should return the updated data. (Best Read Performance)
+- It supports eventually consistent and strongly consistent reads (eventual consistency is default).
+  - Eventual Consistent Read (Default): Consistency across data within a second, meaning the response might not reflect the results of a just completed write operation, but if you repeat the read request again it should return the updated data (Best Read Performance).
   - Strongly Consistent Reads: Returns the latest data. Results should reflect all writes that received a successful response prior to that read!
 
 #### Streams
 
-- Time ordered sequence of item level modifications in a table (stored up to 24 hours)
-- Enable DynamoDB Streams to trigger events on database
+- This feature is enabled to trigger events on database.
+- It is a time ordered sequence of item level modifications in a table (stored up to 24 hours)
 - It can be integrated with lambda function for e.g. send welcome email to user added into the table.
 
 #### Global Tables
 
-- Fully managed, multi-active & multi-region database, that replicate your DynamoDB tables across selected regions
-- Use DynamoDB Global Table to serve the data globally for distributed apps
-- It is based on DynamoDB streams, thus DynamoDB Streams must enable first to create global table.
-- Can be used for Disaster Recovery or high availability
+- This feature is enabled to serve the data globally for distributed apps or for Disaster Recovery/High Availability scenarios: multi-active & multi-region database, that replicate your DynamoDB tables across selected regions
+- It is based on DynamoDB streams, thus it must enabled first to create global table.
 
 #### Security in DynamoDB
 
 - Encryption at rest using KMS
 - Can use site to site VPN, direct connect (Dx) and IAM policies and roles
 - Can implement fine grain access
-- Can monitor on Cloud Watch and Cloud trail
+- Can be monitored on Cloud Watch and Cloud trail
 
 ####  DynamoDB Accelerator (DAX)
 
-- Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to cache frequently read values and offload the heavy read on hot keys of DynamoDB, prevent `ProvisionedThroughputExceededException`
-- Managed, highly available in memory cache for DynamoDB
-- Has up to 10 times performance improvement
-- Request time reduced to microseconds
-- DAX manages all in-memory acceleration, so you don’t need to mange things like cache invalidations
-- Compatible with Dynamo API calls
+- Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to **cache** (in memory) frequently read values and offload the heavy read on hot keys of DynamoDB, prevent`ProvisionedThroughputExceededException`
+- It improves the performance (up to x10) of DynamoDB. Request time reduced to microseconds.
+- Compatible with Dynamo API calls.
 
 ### ElastiCache
 
+- KeyWords: In-memory Cache
+
 ![AWS ElasticCache](https://d1.awsstatic.com/elasticache/EC_Use_Cases/product-page-diagram_ElastiCache_how-it-works.ec509f8b878f549b7fb8a49669bf2547878303f6.png)
 
-- Amazon ElastiCache is a fully managed, in-memory caching service supporting flexible, real-time use cases.
-- It allows you to deploy, operate & scale in-memory data stores(caching) in the cloud ==> Uses Cases:
-  - Improves the performance of web applications, as it allows you to retrieve data fast from memory with high throughput and low latency. Use as distributed cache with sub millisecond performance
+- It is SaaS for **in-memory caching** supporting flexible, real-time use cases.
+- Uses Cases:
+  - Improves the performance of web applications, as it allows you to retrieve data fast from memory with high throughput and low latency. Use as distributed cache with sub millisecond performance.
   - primary data store for use cases that don't require durability like session stores, gaming leaderboards, streaming, and analytics
 - There are two types of in-memory caching engines:
   - Memcached — designed for simplicity, so used with you need the simplest model possible.
   - Redis — works for a wide range of use cases and have multi AZ. You can also complete backups/restores of redis.
-    - Use password/token to access data using Redis Auth
-    - HIPAA Compliant
+    - Use password/token to access data using Redis Auth.
+    - HIPAA Compliant.
 - Services capable of caching
   - CloudFront
   - API Gateway
@@ -1274,20 +1280,22 @@ Go to [Index](#index)
 
 ### Redshift
 
+- KeyWords: SQL for BI, Compression, Massive Parallel Processing
+
 ![AWS Redshift](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-Redshift%402x.6c8ada98ebf822d3ddc113e6b802abe08fd4a4d2.png)
 
-- Amazon Redshift uses SQL to analyze structured and semi-structured data across data warehouses, operational databases, and data lakes, using AWS-designed hardware and machine learning to deliver the best price performance at any scale.
+- Saas that uses **SQL** to analyze **structured and semi-structured data across data warehouses, operational databases, and data lakes**, using AWS-designed hardware and machine learning (**ML**) to deliver the best price performance at any scale.
 - It can be used for **Business Intelligence (BI)**, allowing integrations with tools like AWS Quicksight or Tableau for analytics
-- Redshift uses Advanced compression: Has column compression — compress columns instead of rows because of similar data because similar data is stored sequentially on disk.
-- Backups:
-  - Enabled by default with a 1 day retention period (Maximum is 35 days)
-  - Redshift always attempts to maintain at least three copies of your data (the original and replica on the compute nodes and a backup in Amazon S3).
-  - Redshift can also asynchronously replicate your snapshots to S3 in another region for DR.
+- It uses Advanced compression: Has column compression — compress columns instead of rows because of similar data because similar data is stored sequentially on disk.
+- Automated Backups (not manual snapshots)
+  - Enabled **by default** with a 1 day retention period (Maximum is 35 days)
+  - It tries to maintain at least three copies of your data (the original and replica on the compute nodes and a backup in Amazon S3).
+  - It can also asynchronously replicate your snapshots to S3 in another region for DR.
   - Only Redshift can delete these automated snapshots, you can’t delete them manually.
 - Security Considerations
   - Encrypted in transit using SSL
   - Encrypted at rest using AES-256 encryption
-  - By default Redshift takes care of key management
+  - By default, Redshift takes care of key management
 - Pricing — compute node hours, backups and data transfer
 - It can be configured as follows:
   - Single Node (160Gb)
@@ -1295,26 +1303,28 @@ Go to [Index](#index)
     1. Leader Node (manages client connections and receives queries)
     2. Compute Node (store data and perform queries and computations). Up to 128 Compute Nodes.
 - Availability
-  - Currently only in 1 AZ (check AWS to confirm for the latest)
+  - **Currently only in 1 AZ** (check AWS to confirm for the latest)
   - Can restore snapshots to new AZs in the event of an outage
-- It supports Massive Parallel Processing (MPP): Amazon Redshift automatically distributes data and query load across all nodes. Amazon Redshift makes it easy to add nodes to your data warehouse and enables you to maintain fast query performance as your data warehouse grows.
+- It supports Massive Parallel Processing (MPP): It automatically distributes data and query load across all nodes, making easy to add nodes to your data warehouse and enables you to maintain fast query performance as your data warehouse grows.
 
 ### Amazon Kinesis
 
+- KeyWords: Streaming media
+
 ![Amazon Kinesis](https://d1.awsstatic.com/Digital%20Marketing/House/1up/products/kinesis/Product-Page-Diagram_Amazon-Kinesis-Data-Streams.e04132af59c6aa1e9372cabf44a17749f4a81b16.png)
 
-- Kinesis is a fully managed platform for collecting, processing, and analyzing streaming real-time data in the cloud (video, audio, logs, analytics etc.) and process/analyse that data in real time. Real-time data generally comes from IoT devices, gaming applications, vehicle tracking, click stream, etc.
+- It is PaaS for collecting, processing, and analyzing streaming real-time data in the cloud (video, audio, logs, analytics etc.) and process/analyse that data in real time. Real-time data generally comes from IoT devices, gaming applications, vehicle tracking, click stream, etc.
 
 #### Kinesis Video Streams
 
-- Fully managed service that makes it easy to securely (Automatically encrypts it at rest) stream live video from devices to the cloud.
+- It is SaaS that makes it easy to securely (Automatically encrypts it at rest) stream live video from devices to the cloud.
 - Enables playback, analytics and machine learning on video data that has been ingested.
 
 #### Kinesis Data Streams
 
-- Amazon Kinesis Data Streams is a serverless streaming data service that makes it easy to capture, process, and store data streams at any scale.
-  Automatically stores data and encrypts it at rest
-- Takes data from a producer and passes it through a SHARD to the consumer
+- It is SaaS for streaming data that makes it easy to capture, process, and store data streams at any scale.
+- Automatically stores data and encrypts it at rest
+- Takes data from a producer and passes it through a **SHARD** to the consumer
   - Producer can be Amazon Kinesis Agent, SDK, or Kinesis Producer Library (KPL)
   - Consumer can be Kinesis Data Analytics, Kinesis Data Firehose, or Kinesis Consumer Library (KCL)
   - Data Retention period from 24 hours (default) to 365 days (max).
@@ -1328,41 +1338,49 @@ Go to [Index](#index)
 
 #### Kinesis Firehose
 
-- Kinesis Data Firehose load data streams into AWS data stores such as S3, Amazon Redshift and ElastiSearch. Transform data using lambda functions and store failed data to another S3 bucket.
-- Can compress, transform and batch data to minimise the amount of storage.
+- It is SaaS for **ETL** with streaming data
+  - load data streams into AWS data stores such as S3, Amazon Redshift and ElastiSearch.
+  - Transform data using lambda functions and store failed data to another S3 bucket.
+  - Can compress, transform and batch data to minimise the amount of storage.
 - Encrypts your data streams before loading.
 - Pay for the volume of data that transmits through the service.
 
 #### Kinesis Analytics
 
-- Kinesis Analytics allows you to analyse streaming data in real time to gain actionable insights.
+- It is SaaS to allows you to analyse streaming data in real time to gain **actionable insights**.
 - Allows you to process and analyse data using standard SQL.
 - Can gain realtime dashboards and create real time metrics.
 - Can use with Data Streams or Firehose as the streaming source.
 
 ### Amazon EMR
 
+- KeyWord: BigData, ETL, Petabyte-scale analysis
+
 ![Amazon EMR](https://d1.awsstatic.com/products/EMR/Product-Page-Diagram_Amazon-EMR.803d6adad956ba21ceb96311d15e5022c2b6722b.png)
 
-- Amazon EMR (EMR = Elastic MapReduce) is the industry-leading cloud **Big Data** platform for processing vast amounts of data using open-source tools such as Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi and Presto.
-  - With EMR, you can run petabyte-scale analysis at less than half the cost of traditional on-premises solutions and over 3x faster than standard Apache Spark.
-- EMR can be used to perform data transformation workloads - Extract, transform, load (ETL)
-- Use case: Analyze Clickstream data from S3 using Apache Spark and Hive to deliver more effective ads
+- Amazon EMR (EMR = Elastic MapReduce) is the industry-leading cloud **Big Data** platform for processing vast amounts of data using open-source tools such as **Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi and Presto**.
+  - With EMR, you can run **petabyte-scale analysis** at less than half the cost of traditional on-premises solutions and over 3x faster than standard Apache Spark.
+  - EMR can be used to perform **ETL** operations
+- Use case: Analyze Clickstream data from S3 using Apache Spark and Hive to deliver more effective ads.
 - The central component of Amazon EMR is the cluster. A cluster is a collection of Amazon EC2 instances. Each instance in the cluster is called a Node, each node has a role within the cluster, referred to as the node type (different software components is installed on each node type)
 
   - Master node: A node that manages the cluster. The master node tracks the status of tasks and monitors the Health of the cluster. Every cluster has a master node.
-    - By default - log data is stored on the master node. Alternatively, it can be configured (only at the moment of creation not after) a cluster to periodically archive the log files to Amazon S3 (at five-minute intervals). This ensures the log files are available after the cluster terminates, whether this is through normal shutdown or due to an error.
+    - By default - log data is stored on the master node. Alternatively, it can be configured (only at the moment of creation not after) a cluster to periodically archive the log files to Amazon S3 (at five-minute intervals). This ensures the log files are available after the cluster terminates (due to normal shutdown or an error)
   - Core node: A node with software components that **Runs tasks and Stores data**. Multi-node clusters have at least one core node.
   - Task node: A node with software components that **only runs tasks** and does not store data. Task nodes are optional.
 
 ### Neptune
 
+- KeyWord: Graph Database for Graph applications
+
 ![AWS Neptune](https://d1.awsstatic.com/products/Neptune/product-page-diagram_Amazon-Neptune%402x.8af655592b659339933079725a914c14cbc0d831.png)
 
-- Amazon Neptune is a fully managed Graph Database service built for the cloud that makes it easier to build and run graph applications. Neptune provides built-in security, continuous backups, serverless compute, and integrations with other AWS services.
+- It is a SaaS for Graph Database (relation between elements) that makes it easier to build and run graph applications. Neptune provides built-in security, continuous backups, serverless compute, and integrations with other AWS services.
 - Use case: high relationship data, social networking data, knowledge graphs (Wikipedia)
 
 ### OpenSearch (old ElasticSearch)
+
+- KeyWord: ElasticSearch, Logs Indexing and Analysis.
 
 ![OpenSearch](https://d1.awsstatic.com/product-marketing/Elasticsearch/product-page-diagram_Amazon-OpenSearch-Service_HIW%402x.f20d73b8aa110b5fb6ca1d9ebb439066a5e31ef5.png)
 
