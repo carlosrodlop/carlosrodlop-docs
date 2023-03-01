@@ -1395,7 +1395,7 @@ Go to [Index](#index)
 
 ### AWS Snow Family
 
-- AWS snow family are **Physical device** used for on-premises large scale data migration to S3 buckets and processing data **at low network locations**.
+- AWS snow family are **Physical devices** used **FROM on-premises** large scale data migration **TO S3 buckets** and processing data **at low network locations**.
 - Use case: Addresses a lot of the common challenges that typically comes with with large-scale data transfers, including high network costs, long transfer times, and security concerns.
 
 | Family Member | Storage | RAM | Migration Type   | DataSync | Migration Size |
@@ -1478,8 +1478,9 @@ Go to [Index](#index)
 ![mgn](https://d1.awsstatic.com/pdp-headers/2022/application-migration/MGN-How-It-Works-Diagram_biggerfonts1.1cb6cd71af1796ed95842d71c7b7a588a81c442d.jpg)
 
 - It helps on automating the conversion of your **Source servers (VM)** (VMware vSphere, Microsoft Hyper-V or Microsoft Azure) **to run natively on AWS**. It also simplifies application modernization with built-in and custom optimization options.
-- AWS Application Migration Service (new) utilizes continuous, block-level replication and enables cutover windows measured in minutes
-- AWS Server Migration Service (legacy) utilizes incremental, snapshot-based replication and enables cutover windows measured in hours.
+- AWS Application Migration Service: Legacy vs New.
+  - New, it utilizes continuous, block-level replication and enables cutover windows measured in minutes.
+  - Legacy, it utilizes incremental, snapshot-based replication and enables cutover windows measured in hours.
 
 ## Networking
 
@@ -1504,11 +1505,11 @@ Go to [Index](#index)
   - Default VPC is user friendly, allowing you to immediately deploy instances.
   - All subnets in a default VPC have a route out to the internet.
   - Each EC2 instance has both a public and private IP address.
-  - If you delete a default VPC, you can recover it now. Try not to delete it.
+  - In case it is delated, it can be recovered. But, try not to delete it.
 - Auto assigning a public IP Address is turned off by default, this will need to be updated if you want a public subnet.
 - You are not charged for using a VPC, however you are charged for the components used within it e.g. gateway, traffic monitoring etc.
 - One way to save costs when it comes to networking is to use private IP addresses instead of public IP addresses as they utilise the AWS Backbone network.
-- If you want to cut all network costs, group all EC2 instances in same AZ and use private IP addresses.
+  - If you want to cut all network costs, group all EC2 instances in same AZ and use private IP addresses.
 - Types of tenancy: On set up of your VPC you will be asked to choose either:
   - Dedicated → Everything on dedicated hardware (Very expensive)
   - Default → multi-tenant share underlying hardware with other AWS customers
@@ -1526,10 +1527,13 @@ Go to [Index](#index)
 
 - A range of IP addresses within a VPC.
   - You assign one CIDR block per Subnet within CIDR range of your VPC. Should not overlap with other Subnet’s CIDR in your VPC.
-  - Amazon don’t allow /8 prefix as it is too large — the largest they allow is /16
-  - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use. For e.g. If you need 29 IP addresses to use, your should choose CIDR /26 = 64 IP and not /27 = 32 IP, since 5 IPs are reserved and can not use.
+  - Amazon don't allow /8 prefix as it is too large — the largest they allow is /16
+  - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use.
+    - For e.g. If you need 29 IP addresses to use, your should choose CIDR /26 = 64 IP and not /27 = 32 IP, since 5 IPs are reserved and can not use.
   - Enable Auto assign public IPv4 address in public subnets, EC2 instances created in public subnets will be assigned a public IPv4 address
-  - If you have 3 AZ in a region then you create total 6 subnets - 3 private subnets (1 in each AZ) and 3 public subnets (1 in each AZ) for multi-tier and highly-available architecture. API gateway and ALB reside in public subnet, EC2 instances, Lambda, Database reside in private subnet.
+- Use Case: Multi-tier and highly-available architecture: If you have 3 AZ in a region then you create total 6 subnets
+  - 3 private subnets (1 in each AZ) for EC2 instances, Lambda, Database.
+  - 3 public subnets (1 in each AZ) for API gateway and ELB reside in public subnet.
 - Each subnet is tied to one Availability Zone, one Route Table, and one Network ACL
   - A subnet can not span multiple availability zones. However an AZ can have multiple subnets.
 
@@ -1547,11 +1551,11 @@ Go to [Index](#index)
 
 ![Internet Gateway](https://docs.aws.amazon.com/images/vpc/latest/userguide/images/internet-gateway-basics.png)
 
+- Allows your VPC (**public subnet**) to communicate with the Internet. 
+  - Performs network address translation for instances.
 - It is known as Internet gateway or Virtual Private Gateway
 - 1 VPC <-> 1 Internet Gateway. Each Internet Gateway is associated with one VPC only, and each VPC has one Internet Gateway only (one-to-one mapping)
-- Allows your VPC to communicate with the Internet. Internet Gateway allows public subnet access to the internet and accessible from internet
 - For internet communication, you must set up a route in your route table that directs traffic to the Internet Gateway
-- Performs network address translation for instances
 
 ##### C/ Route Table (Created by default)
 
@@ -1562,35 +1566,37 @@ Go to [Index](#index)
 - Cardinality
   - 1 Subnet -> 1 Route Table. A subnet can only be associated with one route table at a time
   - N Subnet -> Same Roue Table. Multiple subnets can be associated with the same route table For e.g. you create 4 subnets in your VPC where 2 subnets associated with one route table with no internet access rules know as private subnets and another 2 subnets are associated with another route table with internet access rules known as public subnets
-- By default subnets are associated with the Main route table, but this can be a security risk e.g. if you were to put a route out to the public internet in the route table all subnets would automatically be made public.
+- By default subnets are associated with the Main route table, but this can be a security risk.
+  - e.g. if you were to put a route out to the public internet in the route table all subnets would automatically be made public.
   - To resolve this — keep main route table as private and then have separate route tables that use the main one, but have additional routes.
 - Public vs Private Subnet
   - Public subnet ==> It is a subnet that’s associated with a route table having **rules to connect to internet using Internet Gateway**.
-  - Private subnet ==> It is a subnet that’s associated with a route table having **no rules to connect to internet using Internet Gateway**. When our Subnets connected to the Private Route Table need access to the internet, we set up a NAT Gateway in the public Subnet. We then add a rule to our Private Route Table saying that all traffic looking to go to the internet should point to the NAT Gateway.
+  - Private subnet ==> It is a subnet that’s associated with a route table having **no rules to connect to internet using Internet Gateway**.
+    - Private subnet connect to the internet by setting a rule to a NAT Gateway in a public Subnet.
 
 ##### D/ Network Access Control List (Created by default)
 
 - Extra layer of security **for your VPC** (acts as a Firewall) as it can be used to control the traffic in and out of subnets.
-- Similar to security groups, as they contain rules, but you can you can **block IP addresses** with a NACL (unlike Security Groups).
+- Similar to security groups, as they contain rules, but you can  **block IP addresses** with a NACL (unlike Security Groups).
 - NACL are **stateless**, when you create an inbound rule and an outbound rule is not automatically created. It means they can have separate inbound and outbound rules (unlike Security Groups).
-- A NACL can be associated with many Subnets, but a subnet can only have one NACL
-- PCs comes with a modifiable default NACL. By default, it allows all inbound and outbound traffic.
-- You can create custom NACL. By default, each custom network ACL denies all inbound and outbound traffic until you add rules.
+- A NACL can be associated with many Subnets, but a subnet can only have one NACL.
+- VPCs comes with a modifiable default NACL it allows all inbound and outbound traffic (by default)
+  - You can create custom NACL --> denies all inbound and outbound traffic until you add rules  (by default)
 - Each subnet within a VPC must be associated with only 1 NACL
   - If you don’t specify, auto associate with default NACL.
   - If you associate with new NACL, auto remove previous association
 - Apply to all instances in associated subnet
 - Rules
-  - Support both Allow and Deny rules
+  - **Support both Allow and Deny rules**
   - Evaluate rules in number order, starting with lowest numbered rule. NACL rules have number(1 to 32766) and higher precedence to lowest number for e.g. #100 ALLOW <IP> and #200 DENY <IP> means IP is allowed
-  - Each network ACL also includes a rule with rule number as asterisk *. If any of the numbered rule doesn’t match, it’s denies the traffic. You can’t modify or remove this rule.
+  - Each network ACL also includes a rule with rule number as asterisk *. If any of the numbered rule doesn’t match, it’s denies the traffic. You can't modify or remove this rule.
   - Recommended to create numbered rules in increments (for example, increments of 10 or 100) so that you can insert new rules where you need to later on.
 
 ##### E/ Security Groups (Created by default)
 
 - Control inbound and outbound traffic **at EC2 instance level**
-- You can specify allows rule, but not deny rules. You can specify a source in security group rule to be an IP range, A specific IP (/32), or another security group.
-- When you first create a security group, bu default
+- You can specify **allows rule, but not deny rules**. You can specify a source in security group rule to be an IP range, a specific IP (/32), or another security group.
+- When you first create a security group, by default
   - All outbound traffic is allowed.
   - All inbound traffic is blocked.
 - **Stateful** when you create an inbound rule and an outbound rule is automatically created.
