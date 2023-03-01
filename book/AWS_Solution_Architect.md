@@ -1611,7 +1611,7 @@ Go to [Index](#index)
 ![NAT vs IG](https://miro.medium.com/max/1400/1*gftv4LSqU_12kRqNwYISJw.webp)
 
 - NAT gateways/instances provides **private subnets access to internet traffic**, but ensures internet traffic does not initiate a connection with the instances.
-- The NAT gateway/instance must live in a public subnet and then for a private subnet to connect to it, the private subnet must have a route in its route table that directs traffic to it.
+- The NAT gateway/instance **must live in a public subnet and then for a private subnet to connect to it**, the private subnet must have a route in its route table that directs traffic to it.
 - Use Case: For example this can enable our EC2 Instances in a private subnet to go out and download software by communicating with our Internet Gateway.
 - NAT Gateway/Instances works with IPv4
 
@@ -1620,34 +1620,35 @@ Go to [Index](#index)
 - NAT Instances are individual EC2 instances. Community AMIs exist to launch NAT Instances. Works same as NAT Gateway.
 - NAT instances are managed by you.
 - It can be associated with security groups to control inbound and outbound traffic.
-- Since NAT Instances send and receive traffic from different sources/destinations, it can cause some issues as EC2 does source/destination checks automatically — so when using a NAT Instance you need to **disable source/destination checks** on the EC2 instance when creating it.
+- Since NAT Instances send and receive traffic from different sources/destinations, it can cause some issues as EC2 does source/destination checks automatically — so **when using a NAT Instance you need to disable source/destination checks** on the EC2 instance when creating it.
 
 ###### NAT Gateway (latest, best practice)
 
-- NAT Gateways are preferred by enterprise as they are **highly available**, can **scale** and are **managed by AWS**.  It is a managed service which launches redundant instances within the selected AZ (can survive failure of EC2 instance)
-- You can create an AZ independent architecture with Network Gateways to reduce the risks of failures. This can be done by creating a NAT Gateway in each AZ and then configuring the routing to ensure resources in the same NAT Gateway are in the same AZ.
+- NAT Gateways are preferred by enterprise as they are **highly available** (redundant instances within the selected AZ), can **scale** and are **managed by AWS**.
+  - You can create an AZ independent architecture with Network Gateways to reduce the risks of failures. This can be done by creating a NAT Gateway in each AZ and then configuring the routing to ensure resources in the same NAT Gateway are in the same AZ.
 - Can not be associated with security groups, but you can associate the resources behind the NAT Gateway with security groups.
-- Automatically assigned public IP Address
+- Automatically assigned public IP Address.
 - You don’t need to worry about disabling source & destination checks on the instance.
 
 ###### Bastion Host
 
-- A Bastion host is used to **securely administer EC2 instances** in private subnet (using SSH or RDP). Bastions are called Jump Boxes in Australia.
+- A Bastion host is used to **securely administer EC2 instances** in private subnet (using SSH or RDP). (Bastions are called Jump Boxes in Australia).
 - A NAT Gateway or a NAT instance is used to provide **internet traffic** to EC2 instances in a private subnets. **They cannnot be used as Bastion Host**.
 
 ##### VPC Peering
 
-- VPC peering connect two VPC over a direct network route using private IP addresses
-- Instances on peered VPCs behave just like they are on the same network
-- Must have no overlapping CIDR Blocks
-- VPC peering connection are 1 to 1 (not transitive) i.e. VPC-A peering VPC-B and VPC-B peering to VPC-C doesn’t mean VPC-A peering VPC-C
-- Route tables must be updated in both VPC that are peered so that instances can communicate
-- Can connect one VPC to another in same or different region. VPC peering in different region called as VPC inter-region peering
+- It connects two VPC over a direct network route using private IP addresses.
+- Instances on peered VPCs behave just like they are on the same network.
+- Its connections are 1 to 1 (not transitive) i.e. VPC-A peering VPC-B and VPC-B peering to VPC-C doesn’t mean VPC-A peering VPC-C.
+- Can connect one VPC to another in same or different region. VPC peering in different region called as VPC inter-region peering.
 - Can connect one VPC to another in same or different AWS account
+- Requirements:
+  - Route tables must be updated in both VPC that are peered so that instances can communicate.
+  - Must have no overlapping CIDR Blocks.
 
 ##### VPC Flow Logs
 
-- Capture information about **IP traffic information** (not hostnames) entering and leaving interfaces in your VPC.
+- It captures information about **IP traffic information** (not hostnames) entering and leaving interfaces in your VPC.
   - They allow you to monitor the traffic reaching your instances and can help you see if your security groups are restrictive enough.
 - They can be created at 3 levels: VPC, Subnet, Network Interface level.
 - You can publish these flow logs with CloudWatch or S3. Query VPC flow logs using Athena on S3 or CloudWatch logs insight.
@@ -1659,17 +1660,16 @@ Go to [Index](#index)
 - Allows transitive peering between VPCs and on-premises data centres through a central hub.
 - Works on regional bases but can span multiple regions.
 - Supports IP Multicast, so can distribute the same content to multiple specific destinations (NOT supported by any other service).
-- Overall used to simplify network typology.
+- Use Case: Simplify network topology.
 
 ##### VPC endpoints
 
 - Allows you to **privately connect a VPC to other AWS resources** and it is powered by Private Link.
 - Instances in your VPC do not require public IP addresses to communicate with resources in the service. So traffic between your VPC and other services does not leave the Amazon network.
-- Eliminates the need of an Internet Gateway and NAT Gateway for instances in public and private subnets to access the other AWS services through public internet
-- Eliminates the need of an Internet Gateway and NAT Gateway for instances in public and private subnets to access the other AWS services through public internet.
+- Eliminates the need of an Internet Gateway and NAT Instances/Gateway for instances in public and private subnets to access the other AWS services through public internet.
 - 2 types:
   - Interface endpoint → Attach an Elastic Network Interface (ENI) with a private IP address onto your EC2 instance for it to communicate to services using AWS network. It serves as an entry point for traffic destined to a supported service.
-  - Gateway endpoints → Create it as a route table target for traffic to services, like NAT gateways — its supported for only S3 & Dynamo.
+  - Gateway endpoint → Create it as a route table target for traffic to services, like NAT gateways — its supported for only S3 & Dynamo.
 
 ###### VPC Private Link
 
@@ -1684,12 +1684,12 @@ Go to [Index](#index)
 - If you have multiple sites, each with its own VPN connection, you can use AWS VPN CloudHub to connect those sites together.
 - Low cost easy to manage.
 - Operates over public internet, but all traffic is encrypted.
-- Hub and Spoke model
+- Hub and Spoke model.
 
 ### AWS Direct Connect
 
-- **Directly connects** your on-premise datacenter to an AWS VPC using a dedicated network connection over a standard ethernet **fiber-optic cable**.
-- Provide 1GB to 100GB/s network bandwidth for fast transfer of data from on-premises to Cloud
+- Directly **connects your on-premise datacenter to an AWS VPC** using a dedicated network connection over a standard ethernet **fiber-optic cable**.
+- Provide 1GB to 100GB/s network bandwidth for fast transfer of data from on-premises to Cloud.
 - Benefits of using Direct Connect includes: reduced network costs and increase in bandwidth throughput.
 
 | AWS VPN | AWS Direct Connect |
@@ -1698,24 +1698,25 @@ Go to [Index](#index)
 | Configured in minutes    | Configured in days |
 | low to modest bandwidth   | high bandwidth 1 to 100 GB/s |
 
-- Exam question: A VPN connection keeps dropping out because the amount of throughput, and what kinds of things could you do to solve that? Answer: Direct Connect
+- Use Case: Use Direct Connect to solve a VPN connection keeping dropping out because the amount of throughput.
 
 ### AWS VPN
 
-- AWS Site-to-Site VPN connection is created to communicate between your remote network and Amazon VPC over the internet
+- AWS Site-to-Site VPN connection is created to communicate between your remote network and Amazon VPC over the internet.
 - **VPN connection**: A secure connection between your on-premises equipment and your Amazon VPCs.
 - **VPN tunnel**: An encrypted link where data can pass from the customer network to or from AWS. Each VPN connection includes two VPN tunnels which you can simultaneously use for high availability.
 - Customer gateway: An AWS resource which provides information to AWS about your customer gateway device.
 - Customer gateway device: A physical device or software application on customer side of the Site-to-Site VPN connection.
-- Virtual private gateway: The VPN concentrator on the Amazon side of the Site-to-Site VPN connection. You use a virtual private gateway or a transit gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
-- Transit gateway: A transit hub that can be used to interconnect your VPCs and on-premises networks. You use a transit gateway or virtual private gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
+- You use a virtual private gateway or a transit gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
+  - Virtual private gateway: The VPN concentrator on the Amazon side of the Site-to-Site VPN connection.
+  - Transit gateway: A transit hub that can be used to interconnect your VPCs and on-premises networks.
 
 ### Amazon API Gateway
 
-- It is at a fully managed service to Create and Manage APIs that acts as a front door for back-end systems running on EC2, AWS Lambda, etc. It makes easy for developers to publish, maintain, monitor and secure APIs at any scale.
-- API Gateway Types - HTTP, WebSocket, and REST
-- API Gateway has caching capabilities to increase performance
-- API Gateway is low cost and scales automatically
+- It is Saas that **creates and manages APIs from back-end systems running on AWS Compute** (EC2, AWS Lambda, etc). 
+  - It makes easy for developers to publish, maintain, monitor and secure APIs at any scale (auto-scaling).
+- Types - HTTP, WebSocket, and REST.
+- It has caching capabilities to increase performance.
 - Allows you to track and control usage of API. Set throttle limit (default 10,000 req/s) to prevent from being overwhelmed by too many requests and returns `429 Too Many Request` error response.
 - You can log results to CloudWatch
 - If you are using Javascript/AJAX that uses multiple domains with API Gateway, ensure that you have enable CORS on API Gateway.
@@ -1725,8 +1726,9 @@ Go to [Index](#index)
 
 ![global_accelerator](https://d1.awsstatic.com/product-page-diagram_AWS-Global-Accelerator%402x.dd86ff5885ab5035037ad065d54120f8c44183fa.png)
 
-- It is a service which you create accelerators to improve availability and performance of your applications for **global users**.
-  - How? It directs traffic to optimal endpoints over the AWS Global network to avoid congestion.
+- It Saas which you create accelerators to improve availability and performance of your applications for **global users**.
+  - How? It directs traffic to **optimal endpoints** over the AWS Global network to **avoid congestion**.
+- Steps:
   - First you create global accelerator, which provisions two anycast static IP addresses.
   - Then you register one or more endpoints with Global Accelerator. Each endpoint can have one or more AWS resources such as NLB, ALB, EC2, S3 Bucket or Elastic IP.
 - You can control traffic using traffic dials. This is done within the endpoint group.
@@ -1737,34 +1739,34 @@ Go to [Index](#index)
 
 ![cloudfront](https://docs.aws.amazon.com/images/AmazonCloudFront/latest/DeveloperGuide/images/how-you-configure-cf.png)
 
-- It is a global service.
-- It is a Content Delivery Network (CDN) uses AWS edge locations to cache and securely deliver cached content (such as images and videos) based on the geographic locations of the user, the origin of the webpage and a content delivery server (Requests to content are automatically routed to nearest geographical edge location). Advantages ==> Low latency and high transfer speeds.
-  - Edge Location → Location where content will be cached (different to an AWS Region). They are not just read, you can also write to them.
-  - Origin → Location where all the files THAT the CDN will distribute are stored — can be an S3 Bucket, EC2, ELB etc (Any type of AWS resource)
-  - Distribution → Name of the CDN, which consists of a collection of edge locations. There are two types:
+- It is a **global service**.
+- It is a **Content Delivery Network (CDN)** uses `AWS edge locations` to **cache and securely deliver** cached content (such as images and videos) based on the **geographic locations** of the user, the origin of the webpage and a content delivery server (Requests to content are automatically routed to nearest geographical edge location). Advantages ==> **Low latency and high transfer speeds**.
+  - `Edge Location` → Location where content will be cached (different to an AWS Region). It can be used for read and write.
+  - `Origin` → Location that hosts all the files that the CDN will distribute — can be an S3 Bucket, EC2, ELB etc (Any type of AWS resource).
+  - `Distribution` → Name of the CDN, which consists of a collection of edge locations. There are two types:
     - Web Distributions which are used for websites (Download Data)
     - RTMP Distributions which are used for streaming media (Stremming Access)
-  - Invalidations → these can be files or subfolders that you can select to not be on the edge locations. Useful when you need to remove a file from an edge cache before it expires
-  - Versioning → can be used to serve a different version of a file under a different name.
-- Objects are cached for the Time To Live (TTL) - default 24 hours.
+  - `Invalidations` → these can be files or subfolders that you can select to not be on the edge locations. Useful when you need to remove a file from an edge cache before it expires
+  - `Versioning` → can be used to serve a different version of a file under a different name.
+- Objects are cached for the `Time To Live (TTL)` - default 24 hours.
   - If requested resources does not exist on CloudFront — it will query the original server and then cache it on the edge location. Next requests get a cached copy from the Edge Location instead of downloading it again from the server until TTL expires.
   - It is possible to clear cached objects, however you will incur a charge.
 - Can integrate with AWS Shied, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
 - It supports Geo restriction (Geo-Blocking) to whitelist or blacklist countries that can access the content.
 
-#### Restricting Access to CloudFront: Signed URL ir Signed Cookies
+#### Restricting Access to CloudFront: Signed URL or Signed Cookies
 
-- It used to restrict access to the resource to certain people so that it is only accessible through CloudFront and not directly through the AWS resource.
-  - Example: Netflix - Option in AWS CloudFront is "Restrict Viewer access (Use Signed URL's or Signed cookies)")
+- It is used to restrict access to the resource to certain people so that it is **only accessible through CloudFront and not directly through the AWS resource**.
   - If your origin is EC2, then use CloudFront Signed URL.
-  - If your origin is S3, then use S3 signed URL instead of CloudFront Signed URL. (REVIEW THIS)
+  - If your origin is S3, then use S3 signed URL (instead of CloudFront Signed URL).
 - You can restrict access using signed URLs or Signed Cookies.
   - A signed URL is for individual files, 1 files = 1 URL.
   - A signed cookie is for multiple file, 1 cookie = multiple files.
-- When we create a signed URL or signed cookie, we attach a policy. The policy can include:
+- When we create a signed URL or signed cookie, a policy is attached that includes:
   a. URL expiration.
   b. IP ranges
   c. Trusted Signers (which AWS accounts can create signed URL's)
+- Use Case: Netflix - Option in AWS CloudFront is "Restrict Viewer access (Use Signed URL's or Signed cookies)")
 
 ##### Features of a signed url
 
@@ -1777,30 +1779,29 @@ Go to [Index](#index)
 
 ![route53](https://d1.awsstatic.com/Route53/product-page-diagram_Amazon-Route-53_HIW%402x.4c2af00405a0825f83fca113352b480b19d9210e.png)
 
-- Route 53 is AWS’s highly available, universal (not region specific) and scalable DNS service.
-- Route 53 allows you to perform Domain Registration, DNS routing and also Health Checking.
+- It is a Saas for **DNS** highly available, universal (not region specific) and scalable
+- It allows you to perform **Domain Registration, DNS routing and also Health Checking**.
   - If you want to use Route 53 for domain purchased from 3rd party websites (example GoDaddy).
     - AWS - You need to create a Hosted Zone in Route 53
     - 3 party DNS provider - update the 3rd party registrar NS (name server) records to use Route 53.
 - It also works well with other AWS services — it allows you to connect requests to your infrastructure such as to EC2 instances, ELBs or S3 buckets.
 - Private Hosted Zone is used to create an internal (intranet) domain name to be used within Amazon VPC. You can then add some DNS record and routing policy for that internal domain. That internal domain is accessible from EC2 instances or any other resource within VPC.
-- There is a default limit of 50 domain names. However, this limit can be increased by contacting AWS support.
 
 #### Terminology
 
-- Internet Protocol (IP) → is a numerical label assigned to devices and used by computers to identify each other on a network.
-- Domain Name System (DNS) → used to convert human friendly domain names into IP addresses.
-- Domain Registrars → authority that can assign domain names
-- Start of Authority Record (SOA) → type of resource record that every DNS must begin with, it contains the following information:
+- `Internet Protocol (IP)` → is a numerical label assigned to devices and used by computers to identify each other on a network.
+- `Domain Name System (DNS)` → used to convert human friendly domain names into IP addresses.
+- `Domain Registrars` → authority that can assign domain names
+- `Start of Authority Record (SOA)` → type of resource record that every DNS must begin with, it contains the following information:
   - Stores the name of the server supplying the data
   - Stores the admin zone
   - Currently version of data file
   - Time to live
-- Name Server (NS) records→ used by top level domain servers to direct traffic to the content DNS server. It specifies which DNS server is authoritative for a domain.
-- A Records (Address Record) → type of DNS record, used by computer to translate a logical domain name to an IP address.
-- Time To Live (TTL) → length of time the DNS record is cached on the server for in seconds. Default is 48 hours.
-- Canonical Name (CName)→ It is used to resolve one domain name (hostname) to another (Map to a reference). Only works with subdomains e.g. something.mydomain.com
-- Alias Record (A or AAAA) → Similar to CName but can be used:
+- `Name Server (NS) records` → used by top level domain servers to direct traffic to the content DNS server. It specifies which DNS server is authoritative for a domain.
+- `A Records (Address Record)` → type of DNS record, used by computer to translate a logical domain name to an IP address.
+- `Time To Live (TTL)` → length of time the DNS record is cached on the server for in seconds. Default is 48 hours.
+- `Canonical Name (CName)` → It is used to resolve one domain name (hostname) to another (Map to a reference). Only works with subdomains e.g. something.mydomain.com
+- `Alias Record (A or AAAA)` → Similar to CName but can be used:
   - At the top node of a DNS namespace, also known as the zone apex (a naked domain name) e.g. example.com
   - Points hostname to an AWS Resource like ALB, API Gateway, CloudFront, S3 Bucket, Global Accelerator, Elastic Beanstalk, VPC interface endpoint etc.
   - Works with both root-domain and subdomains
@@ -1809,23 +1810,23 @@ Go to [Index](#index)
 
 In order for Route 53 to respond to queries, you need to define one of the following routing policies:
 
-- **Simple** You can only have one record with multiple IP addresses. If you specify multiple values in a record, Route 53 returns all values to the user in a random order — so you never know which EC2 you are hitting and it can be shuffled on refreshed!
+- `Simple`You can only have one record with multiple IP addresses. If you specify multiple values in a record, Route 53 returns all values to the user in a random order — so you never know which EC2 you are hitting and it can be shuffled on refreshed!
   - You can't have any health checks.
-- **Weighted** Split traffic based on different custom proportions you assign.
+- `Weighted` Split traffic based on different custom proportions you assign.
   - You can set health checks on individual record sets. If a recordset fails a health check it will be removed from Route53 until it passes the health check.
   - Example: you can set 10% of your traffic to go to US-EAST-1 and 90% to EU-WEST-1.
-- **Latency** Allows you to route your traffic based on the lowest network latency for your end user (ie which region will give them the fastest response time).
+- `Latency` Allows you to route your traffic based on the lowest network latency for your end user (ie which region will give them the fastest response time).
   - Example: create 3 DNS records with region us-east-1, eu-west-2, and ap-east-1.
-- **Failover** to route traffic from Primary to Secondary (DR scenario) in case of failover (active/passive set-up)
+- `Failover` to route traffic from Primary to Secondary (DR scenario) in case of failover (active/passive set-up)
   - It is mandatory to create health check for both IP and associate to record. The traffic goes to main site when its healthy and then can route traffic to the secondary site when the main one becomes unhealthy.
   - Example create 2 DNS records for primary site in EU-WEST-2 and secondary (DR) IP in AP-SOUTHEAST-2.
-- **Geolocation** to route traffic to specific IP based on user geolocation (select Continent or Country).
+- `Geolocation` to route traffic to specific IP based on user geolocation (select Continent or Country).
   - For this you need to create separate record sets for each required location. It also requires a default (select Default location) policy in case there’s no match on location.
   - For Example: You might want all queries from Europe to be routed to a fleet of EC2 instances that are specifically configured for European customers. These servers may have the local language of European customers and all prices are displayed in Euros.
-- **Geoproximity** to route traffic to specific IP based on user geolocation AND location of your resources.
+- `Geoproximity` to route traffic to specific IP based on user geolocation AND location of your resources.
   - You can also optionally choose to route more traffic or less to a given resource by specifying a value, known as a bias A bias expands or shrinks the size of the geographic region from which traffic is routed to a resource.
   - To use Geoproximity Routing, you must use Route 53 traffic flow.
-- **Multivalue Answer** configure Amazon Route 53 to return multiple values, such as IP addresses for your web servers, in response to DNS queries.
+- `Multivalue Answer` configure Amazon Route 53 to return multiple values, such as IP addresses for your web servers, in response to DNS queries.
   - You can specify multiple value for almost any record, but multivalue answer routing also lets you check the health of each resource, so Route 53 returns only values from healthy resources.
   - Similar to Simple Routing only you can put health checks on each record set so that only healthy resources are returned.
   - Use case: Your company hosts 10 web servers all serving the same web content in AWS. They want Route 53 to serve traffic to random web servers.
@@ -1844,8 +1845,8 @@ Go to [Index](#index)
 
 ![cloudwatch](https://d1.awsstatic.com/reInvent/reinvent-2022/cloudwatch/Product-Page-Diagram_Amazon-CloudWatch.095eb618193be7422d2d34e3abd5fdf178b6c0e2.png)
 
-- CloudWatch is a monitoring & observability service for AWS resources (EC2, ALB, S3, Lambda, DynamoDB, RDS etc.) and applications to watch **performance**.
-  - It can collect these Inputs: Metrics and Log files
+- CloudWatch is Saas for **monitoring & observability** of AWS resources (EC2, ALB, S3, Lambda, DynamoDB, RDS etc.) and applications to watch **performance**.
+  - It can collect these Inputs: **Metrics and Log files**.
   - It allows you to create these Outputs:
     - Dashboards: Creates dashboards to see what is happening with your AWS environment
     - Alarms: Allows you to set Alarms that notify you when particular metric thresholds are hit
@@ -1862,15 +1863,16 @@ Go to [Index](#index)
 
 ![CloudTrail](https://d1.awsstatic.com/product-marketing/CloudTrail/product-page-diagram_AWS-CloudTrail_HIW.feb63815c1869399371b4b9cc1ae00e78ed9e67f.png)
 
-- CloudTrail is used for governance, compliance & operational **auditing**, security analysis
-  - It collect as Inputs: of all the actions taken on any user on Management Console, AWS service, CLI, or SDK across AWS infrastructure.
-  - Can detect user behaviour patterns and also unusual activity. Use case: check in the CloudTrail if any resource is deleted from AWS without anyone’s knowledge.
+- It is Saas for governance, compliance & operational **auditing**, security analysis.
+  - It collect as Inputs: of all the **actions taken on any user on Management Console, AWS service, CLI, or SDK across AWS infrastructure**.
+  - Can detect user behaviour patterns and also unusual activity.
 - CloudTrail works per AWS account and is enabled per region.
   - It is enabled by default for all regions
   - It can consolidate logs using S3 bucket:
     - Turn on CloudTrail in paying account.
     - Create a bucket policy that allows cross-account access.
     - Turn on CloudTrail in the other accounts and use the bucket in the paying account.
+- Use case: check in the CloudTrail if any resource is deleted from AWS without anyone’s knowledge.
 
 ### AWS CloudFormation
 
@@ -1895,8 +1897,8 @@ Go to [Index](#index)
   - Description — Describes what the template is used for. This is optional, but if you use it, it needs to follow the Format Version.
   - MetaData — any additional info about the template. (Optional)
   - Transform — used for serverless applications, allows you to specify the SAM version to use (Optional)
-- Allows DependsOn attribute to specify that the creation of a specific resource follows another
-- Allows DeletionPolicy attribute to be defined for resources in the template
+- Allows `DependsOn` attribute to specify that the creation of a specific resource follows another
+- Allows `DeletionPolicy` attribute to be defined for resources in the template
   - retain to preserve resources like S3 even after stack deletion
   - snapshot to backup resources like RDS after stack deletion
 - Supports Bootstrap scripts to install packages, files and services on the EC2 instances by simple describing them in the template
@@ -1923,7 +1925,7 @@ Go to [Index](#index)
   - Passenger or Puma for Ruby applications
   - Microsoft IIS 7.5 for .NET applications
   - Single and Multi Container Docker
-- You can also launch an environment with following environment tier:-
+- You can also launch an environment with following environment tier:
   - An application that serves HTTP requests runs in a web server environment tier.
   - A backend environment that pulls tasks from an Amazon Simple Queue Service (Amazon SQS) queue runs in a worker environment tier.
 - It costs nothing to use Elastic Beanstalk, only the resources it provisions e.g. EC2, ASG, ELB, and RDS etc.
@@ -1940,7 +1942,7 @@ Go to [Index](#index)
 
 ![AWSStepFunctions](https://d1.awsstatic.com/video-thumbs/Step-Functions/AWS_Step_Functions_HIW.bc3d2930f00dd0401269367b8e8617a7dba5915c.png)
 
-- Build serverless visual workflow to orchestrate your Lambda functions
+- Build serverless visual workflow to orchestrate your Lambda functions.
 - You write state machine in declarative JSON, you write a decider program to separate activity steps from decision steps.
 
 ### AWS Simple Workflow Service (SWF)
@@ -1956,12 +1958,12 @@ Go to [Index](#index)
 - Global Services that lets you create new AWS accounts at no additional charge.
   - With accounts in an organization, you can easily allocate resources, group accounts, and apply governance policies to accounts or groups, consolidate billing across all accounts (single payment method)
   - It has a master account and multiple member accounts
-  - Member Acccounts or Organization Units (OUs) are based on department, cost center or environment, OU can have other OUs (hierarchy)
-  - You can apply Service Control Policies (SCPs) at OU or account level, SCP is applied to all user and roles in that account. SPC Deny take precedence over Allow in the full OU tree of an account for e.g. allowed at account level but deny at OU level is = deny
+  - Member Acccounts or `Organization Units (OUs)` are based on department, cost center or environment, OU can have other OUs (hierarchy)
+  - You can apply `Service Control Policies (SCPs)` at OU or account level, SCP is applied to all user and roles in that account. SPC Deny take precedence over Allow in the full OU tree of an account for e.g. allowed at account level but deny at OU level is = deny
 - Best practices with AWS Organizations.
   - Always enable multi-factor authentication on root or master account.
   - Always use strong and complex passwords on root account.
-  - Paying account should be used for billing purposes only. Do not deploy resources into the paying account, into the root account or the master account,
+  - Paying account should be used for billing purposes only. Do not deploy resources into the paying account, into the root account or the master account.
   - Enable and disable AWS services using service control policies (SCPs) either on organisational units or on individual accounts.
 
 ### AWS OpsWorks
@@ -1971,7 +1973,7 @@ Go to [Index](#index)
 
 ### AWS Glue
 
-- Serverless, fully managed **ETL (extract, transform, and load)** service.
+- It is a **ETL (extract, transform, and load)** Saas.
 - AWS Glue Crawler scan data from data source such as S3 or DynamoDB table, determine the schema for data, and then creates metadata tables in the AWS Glue Data Catalog.
 - AWS Glue provide classifiers for CSV, JSON, AVRO, XML or database to determine the schema for data
 
@@ -1979,18 +1981,18 @@ Go to [Index](#index)
 
 Go to [Index](#index)
 
-- ECR (Elastic Container Registry) is Docker Registry to pull and push Docker images, managed by Amazon.
-- ECS (Elastic Container Service) is container management service to run, stop, and manage Docker containers on a cluster
-- ECS Task Definition where you configure task and container definition
+- `ECR (Elastic Container Registry)` is Docker Registry to pull and push Docker images, managed by Amazon.
+- `ECS (Elastic Container Service)` is container management service to run, stop, and manage Docker containers on a cluster
+- `ECS Task Definition` where you configure task and container definition
   - Specify ECS Task IAM Role for ECS task (Docker container instance) to access AWS services like S3 bucket or DynamoDB
   - Specify Task Execution IAM Role i.e. ecsTaskExecutionRole for EC2 (ECS Agent) to pull docker images from ECR, make API calls to ECS service and publish container logs to Amazon CloudWatch on your behalf
   - Add container by specifying docker image, memory, port mappings, healthcheck, etc.
-- You can create multiple ECS Task Definitions - e.g. one task definition to run web application on Nginx server and another task definition to run microservice on Tomcat.
+  - You can create multiple ECS Task Definitions - e.g. one task definition to run web application on Nginx server and another task definition to run microservice on Tomcat.
 - ECS Service Definition where you configure cluster, ELB, ASG, task definition, number of tasks to run multiple similar ECS Task, which deploy a docker container on EC2 instance. One EC2 instance can run multiple ECS tasks.
-- Amazon EC2 Launch Type: You manage EC2 instances of ECS Cluster. You must install ECS Agent on each EC2 instances. Cheaper. Good for predictable, long running tasks.
-- ECS Agent The agent sends information about the EC2 instance’s current running tasks and resource utilization to Amazon ECS. It starts and stops tasks whenever it receives a request from Amazon ECS
-- Fargate Launch Type: Serverless, EC2 instances are managed by Fargate. You only manage and pay for container resources. Costlier. Good for variable, short running tasks
-- EKS (Elastic Kubernetes Service) is managed Kubernetes clusters on AWS
+- `Amazon EC2 Launch Type`: You manage EC2 instances of ECS Cluster. You must install ECS Agent on each EC2 instances. Cheaper. Good for predictable, long running tasks.
+- ECS Agent sends information about the EC2 instance’s current running tasks and resource utilization to Amazon ECS. It starts and stops tasks whenever it receives a request from Amazon ECS
+- `Fargate Launch Type`: Serverless, EC2 instances are managed by Fargate. You only manage and pay for container resources. Costlier. Good for variable, short running tasks.
+- `EKS (Elastic Kubernetes Service)` is managed Kubernetes clusters on AWS
 
 ## References
 
