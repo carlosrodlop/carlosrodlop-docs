@@ -10,6 +10,7 @@
 - [Continuous Delivery Landscape](https://landscape.cd.foundation/)
 - [GitHub emoji cheat sheet](https://github.com/ikatyang/emoji-cheat-sheet)
 - [A guide to Kubernetes Monitoring: In this 5 part series from Grafana Labs you'll learn about key metrics and best practices for getting the most from your K8s monitoring. : kubernetes](https://www.reddit.com/r/kubernetes/comments/10q9dn1/a_guide_to_kubernetes_monitoring_in_this_5_part/)
+- [liveBook · Manning](https://livebook.manning.com/)
 
 ## SRE
 
@@ -44,6 +45,7 @@
 - [Online IP Subnet Calculator](https://www.subnet-calculator.com/)
 - [Shields.io: Quality metadata badges for open source projects](https://shields.io/)
 - [Network Policy Editor for Kubernetes](https://editor.cilium.io/?id=Duo0R0Wc7egzNHrM)
+- [Linux Command Library](https://linuxcommandlibrary.com/)
 
 ## YouTube
 
