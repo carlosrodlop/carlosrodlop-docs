@@ -318,6 +318,8 @@ b. `Identity pools`: Cognito elements grant users temporary credentials to other
 
 Steps: You first authenticate user using `Cognito User Pools` and then exchange token with `Cognito Identity Pools` which further use `AWS STS` to generate temporary AWS credentials to access AWS Resources.
 
+Exam tip: To make it easier to remember the different between User Pools and Identity Pools, think of Users Pools as being like IAM Users or Active Directory and an Identity Pools as being like an IAM Role.
+
 ### AWS Key Management Service (KMS)
 
 ![AWS Key Management Service (KMS)](https://d1.awsstatic.com/Security/aws-kms/Group%2017aws-kms.6dc3dbbbe5b75b46c4f62218d0531e5bed7276ce.png)
@@ -344,6 +346,8 @@ Steps: You first authenticate user using `Cognito User Pools` and then exchange 
       - AWS services that integrate with KMS DO NOT support asymmetric keys.
   - `AWS Managed CMKs` (Dedicated to my account) → These are free and are created by an AWS service on your behalf and are managed for you. However, only that service can use them. Used by default if you pick encryption in most AWS services
   - `AWS Owned CMKs` (No Dedicated to my account) → owned and managed by AWS and shared across many accounts.
+
+Exam tip: Encryption keys are regional.
 
 ### AWS CloudHSM
 
@@ -486,6 +490,8 @@ Go to [Index](#index)
 - EC2 Design
   - Place all the EC2 instances in same AZ to reduce the data transfer cost.
   - Design for failure. Have one EC2 instance in each availability zone.
+
+Exam tip: You can stop and start an EC2 instance to move it to a different physical host if EC2 status checks are failing or there is planned maintenance on the current physical host.
 
 #### EC2 Hibernate
 
@@ -669,24 +675,27 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 - Use Case: Test & Dev to keep costs low.
 - It is not very intelligent — it can’t route traffic based on content like Application Load Balancers.
 
-## ASG (Auto Scaling Group)
+### ASG (AutoScaling Group)
 
 ![ASG](https://d1.awsstatic.com/product-marketing/AutoScaling/aws-auto-scaling-how-it-works-diagram.d42779c774d634883bdcd0463de7bd86f6e2231d.png)
 
 - Monitors and scales applications to optimise performance and costs.
-- It Can be used across a number of different services including EC2 instances and Spot Fleets, ECS tasks, Aurora replicas and DynamoDB tables.
+- It can be used across a number of different services including EC2 instances and Spot Fleets, ECS tasks, Aurora replicas and DynamoDB tables.
 - Instances are created in ASG using Launch Configuration (Legacy) or Launch Template (Recommended option)
   - You can create ASG that launches both Spot and On-Demand Instances or multiple instance types using launch template, not possible with launch configuration.
   - You cannot change the launch configuration for an ASG, you must create a new launch configuration and update your ASG with it.
 - You can add Lifecycle Hooks to ASG to perform custom action during:
   1. scale-out to run script, install softwares and send complete-lifecycle-action command to continue
   2. scale-in e.g. download logs, take snapshot before termination
+- Use Case: A company hosts a multiplayer game on AWS. The application uses Amazon EC2 instances in a single Availability Zone and users connect over Layer 4. How to make the architecture highly available and also more cost-effective.
+  - Enable ASG to add and remove instances **across multiple availability zones**. This architecture will also be cost-effective as the Auto Scaling group will ensure the right number of instances are running based on demand.
+  - Uses ALB or NLB to distribute the traffic to the instances.
 
-### Scaling options
+#### Scaling options
 
 Auto Scaling offers both dynamic scaling and predictive scaling options:
 
-#### Dynamic Scaling
+##### Dynamic Scaling
 
 - Dynamic scaling scales the capacity of your Auto Scaling group as traffic changes occur.
 - Types Dynamic Scaling Policies => Increase and decrease the current capacity of the group based on:
@@ -697,7 +706,7 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
   - `Simple scaling`: A `single scaling adjustment`, with a `cooldown period` between each scaling activity.
     - CloudWatch alarm CPUUtilization (>80%) - add 2 instances
 
-#### Predictive scaling
+##### Predictive scaling
 
 Predictive is only available for EC2 auto scaling groups and the scaling can work in a number of ways:
 
@@ -737,6 +746,11 @@ Predictive is only available for EC2 auto scaling groups and the scaling can wor
   - `/temp` directory size to download file can’t exceed 512 MB
   - Max environment variables size can be 4KB
   - Compressed `.zip` and uncompressed code can’t exceed 50MB and 250MB respectively
+
+Exam tip:
+
+1. If a Lambda function needs to connect to a VPC and needs Internet access, make sure you connect to a private subnet that has a route to a NAT Gateway (the NAT Gateway will be in a public subnet).
+2. Functions can be registered to target groups using the API, AWS Management Console or the CLI.
 
 ## Application_Integration
 
@@ -1038,6 +1052,8 @@ mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 - It can be attached to an EC2 instance only when the instance is launched and cannot be dynamically resized
 - Deliver very low-latency and high random I/O performance
 
+EXAM TIP: Instance stores offer very high performance and low latency. If you can afford to lose an instance, i.e. you are replicating your data, these can be a good solution for high performance/low latency requirements. Look out for questions that mention distributed or replicated databases that need high I/O. Also, remember that the cost of instance stores is included in the instance charges so it can also be more cost-effective than EBS Provisioned IOPS.
+
 ### EBS (Elastic Block Store)
 
 ![EBS AWS diagram](https://d1.awsstatic.com/product-marketing/Storage/EBS/Product-Page-Diagram_Amazon-Elastic-Block-Store.5821c6ee4297f3c01cba37e304922451c828fb04.png)
@@ -1112,8 +1128,10 @@ mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 
 ![FSx for Windows AWS diagram](https://d1.awsstatic.com/pdp-how-it-works-assets/Product-Page-Diagram_Managed-File-System-How-it-Works_Updated@2x.c0c4e846c0fca27e8f43bd1651883b21b4cc1eec.png)
 
-- Fully managed, highly performant, native Microsoft Windows file system that supports SMB protocol & Windows NTFS. It also supports Microsoft Active Directory (AD) integration, ACLs, user quotas.
-- Use case: When you need centralised storage for Windows-based applications such as Sharepoint, Microsoft SQL Server, Workspaces, IIS Web Server or any other native Microsoft Application.
+- Fully managed, highly performant, native Microsoft Windows file system that supports SMB protocol & Windows NTFS. It also supports Microsoft Active Directory (AD) integration, ACLs, user quotas, DFS namespaces and DFS replication
+- Use cases:
+  1. When you need centralised storage for Windows-based applications such as Sharepoint, Microsoft SQL Server, Workspaces, IIS Web Server or any other native Microsoft Application.
+  2. Migration from on-premises a Microsoft Windows file server farm to the cloud
 
 ### FSx for Lustre
 
@@ -1145,13 +1163,13 @@ Go to [Index](#index)
 
 ![Homogeneos](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Database-Migration-Service_Homogenous-Database-Migrations_Reduced%402x.053ebcf3f38feed093d6180bb7a351c5551a30a1.png)
 
-  - Hetrogenous Migrations — Different (e.g. SQLServer to Aurora). It requires a Schema Conversion Tool (SCT)
+  - Heterogenous Migrations — Different (e.g. SQLServer to Aurora). It requires a Schema Conversion Tool (SCT)
 
 ![Heterogeneos](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
 
 ### RDS (Relational Database Service)
 
-- KeyWords: Relation Database
+- KeyWords: Relation Database, Different Enginees
 
 ![AWS RDS](https://d1.awsstatic.com/video-thumbs/RDS/product-page-diagram_Amazon-RDS-Regular-Deployment_HIW-V2.96bc5b3027474538840af756a5f2c636093f311f.png)
 
@@ -1183,6 +1201,8 @@ Go to [Index](#index)
     - User-initiated, must be manually done by yourself
     - Stored until you explicitly delete them, even after you delete the original RDS instance they are still persisted (This is not the case with automated backups).
 - Offers **encryption at rest** — done with KMS - Once your RDS instance is encrypted, as are its automated backups, read replicas, and snapshots.
+  - You cannot change the encryption status of an existing RDS DB instance. Encryption must be specified when creating the RDS DB instance.
+  - The best way to encrypt an existing database is to take a snapshot, encrypt a copy of the snapshot and restore the snapshot to a new RDS DB instance. This results in an encrypted database that is a new instance. Applications must be updated to use the new RDS DB endpoint.
 
 ### Amazon Aurora
 
@@ -1277,6 +1297,8 @@ Go to [Index](#index)
   - Dynamo DB Accelerator
 - Caching is a balancing act between up-to-date accurate information and latency.
 - The further up you cache in your architecture the better e.g. at CloudFront level instead of waiting to DB level.
+
+Exam tip: the key use cases for ElastiCache are offloading reads from a database and storing the results of computations and session state. Also, remember that ElastiCache is an in-memory database and it’s a managed service (so you can’t run it on EC2).
 
 ### Redshift
 
@@ -1424,7 +1446,11 @@ Go to [Index](#index)
 
 ![storagegateway](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_AWS-Storage-Gateway_HIW@2x.6df96d96cdbaa61ed3ce935262431aabcfb9e52d.png)
 
-- Store gateway is a **hybrid cloud service** to connect on-premises applications (data) with cloud storage.
+- It is a set of **hybrid cloud storage** services that provide on-premises access to virtually unlimited cloud storage.
+- How? Applications connect to the Storage Gateway service through a virtual machine or hardware appliance that is installed on site and uses standard protocols such as NFS, SMB, and iSCSI. This local device connects to the Storage Gateway service which in turn connects to AWS storage services such as Amazon S3, Amazon S3 Glacier, Amazon S3 Glacier Deep Archive and Amazon EBS, thus providing storage for your applications. This device is also used as a local cache to provide low latency access to the most active data. Since our priority at AWS is security, the connection to the AWS Storage Gateway service is made through a secure channel using HTTPS.
+
+![storagegateway_how](https://d2908q01vomqb2.cloudfront.net/4d134bc072212ace2df385dae143139da74ec0ef/2020/11/05/image002-2.png)
+
 - Types:
 
 | Storage Gateway  | Protocol   | Backed by                               | Use Case                                                                                                                             |
@@ -1473,6 +1499,11 @@ Go to [Index](#index)
 **B/** Heterogenous migrations (origin and target different technology) such as MS SQL to Amazon Aurora. It requires to run AWS SCT (Schema Conversion Tool) at source
 
 ![dms_heterogeneous](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
+
+Exam Tip: Migration from on-premises Databases to AWS RDS (e.g Microsoft SQL Server)
+- Select the same Database Engine in the origin and destination
+- Move data using [AWS DMS](#database-migration-service-dms)
+  - You only need the Schema Conversion Tool (SCT) if origin and destination are different enginees
 
 ### AWS Application Migration Service (MGN)
 
@@ -1805,7 +1836,7 @@ There are several methods of connecting to a VPC, including connection from Data
   - If requested resources does not exist on CloudFront — it will query the original server and then cache it on the edge location. Next requests get a cached copy from the Edge Location instead of downloading it again from the server until TTL expires.
   - It is possible to clear cached objects, however you will incur a charge.
 - Can integrate with AWS Shied, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
-- It supports Geo restriction (Geo-Blocking) to whitelist or blacklist countries that can access the content.
+- It supports **Geo restriction (Geo-Blocking)** to whitelist or blacklist countries that can access the content.
 
 #### Restricting Access to CloudFront: Signed URL or Signed Cookies
 
@@ -1943,7 +1974,8 @@ Go to [Index](#index)
   - Resources — specify the actual resources you want to create (REQUIRED)
   - Parameters — Any values that you want to pass into your template at run time. (Optional)
   - Rules — used to validate parameters passed into the stack (Optional)
-  - Mappings — mapping of key value pairs that can be used to specify conditions (Optional)
+  - Mappings — mapping of key value pairs that can be used to specify conditions (Optional). 
+    - Exam tip: with mappings you can, for example, set values based on a region. You can create a mapping that uses the region name as a key and contains the values you want to specify for each specific region.
   - Outputs — values that are displayed when you check the stacks properties (Optional)
   - Conditions — can control whether a resource is created or whether certain properties are assigned depending on a particular criteria. (Optional)
   - Format Version — Version that the template conforms to (Optional)
@@ -2046,6 +2078,7 @@ Go to [Index](#index)
 - ECS Agent sends information about the EC2 instance’s current running tasks and resource utilization to Amazon ECS. It starts and stops tasks whenever it receives a request from Amazon ECS
 - `Fargate Launch Type`: Serverless, EC2 instances are managed by Fargate. You only manage and pay for container resources. Costlier. Good for variable, short running tasks.
 - `EKS (Elastic Kubernetes Service)` is managed Kubernetes clusters on AWS
+  - Exam tip: The principle use case is when organizations need a consistent control plane for managing containers across hybrid clouds and multicloud environments.
 
 ## References
 
