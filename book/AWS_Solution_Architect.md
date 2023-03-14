@@ -1837,6 +1837,7 @@ There are several methods of connecting to a VPC, including connection from Data
   - It is possible to clear cached objects, however you will incur a charge.
 - Can integrate with AWS Shied, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
 - It supports **Geo restriction (Geo-Blocking)** to whitelist or blacklist countries that can access the content.
+- Use Case: A company offers an online product brochure that is delivered from a static website running on Amazon S3. The company’s customers are mainly in the United States, Canada, and Europe. With Amazon CloudFront you can set the price class to determine where in the world the content will be cached. One of the price classes is “U.S, Canada and Europe” and this is where the company’s users are located. Choosing this price class will result in lower costs and better performance for the company’s users.
 
 #### Restricting Access to CloudFront: Signed URL or Signed Cookies
 
