@@ -7,13 +7,13 @@
 1. [Global](#global)
 2. [Security](#security)
 3. [Compute](#compute)
-4. [Application Integration](#application_integration)
-5. [Storage](#storage)
-6. [Database](#database)
-7. [Migration](#migration)
-8. [Networking](#networking)
-9. [Management_and_Governance](#management_and_governance)
-10. [Containers](#containers)
+4. [Containers](#containers)
+5. [Application Integration](#application_integration)
+6. [Storage](#storage)
+7. [Database](#database)
+8. [Migration](#migration)
+9. [Networking](#networking)
+10. [Management_and_Governance](#management_and_governance)
 11. [References](#references)
 
 ## Global
@@ -517,21 +517,23 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 
 #### EC2 Pricing Types
 
-- **On-Demand** - Pay a fixed rate by the hour (or by the second) with no commitment. Pay as you use, costly.
+- `On-Demand` - Pay a fixed rate by the hour (or by the second) with no commitment. Pay as you use, costly.
   - Use Cases:
+    - **Non-Production Enviroment**
+      - Applications being developed or tested on Amazon EC2 for the first time.
+      - Applications with short term, spiky or unpredictable workloads that cannot be interrupted.
     - Users that want the low cost and flexibility of Amazon EC2 without any up-front payment for long-term commitment.
-    - Applications with short term, spiky or unpredictable workloads that cannot be interrupted.
-    - Applications being developed or tested on Amazon EC2 for the first time.
-- **Reserved** - Provides you with a capacity reservation, and offer significant discount on the hourly charge for an instance, but it requires to have a Contracts for 1 - 3 year terms. Higher discount with upfront payments and longer contracts. However, you can't move between regions.
+- `Reserved` - Provides you with a capacity reservation, and offer significant discount on the hourly charge for an instance, but it requires to have a Contracts for 1 - 3 year terms. Higher discount with upfront payments and longer contracts. However, you can't move between regions.
   - Uses Cases:
-    - Applications with steady or predictable usage.
-    - Applications that require reserved capacity.
+    - **Production Enviroment**
+      - Applications with steady or predictable usage.
+      - Applications that require reserved capacity.
     - Users able to make upfront payments to reduce their total computing costs even further.
   - Types:
-    - **Standard Reserved Instances** Provides the most discount (up to 75% off). Unused instanced can be sold in AWS reserved instance marketplace
-    - **Convertible Reserved Instances** up to 54% off. It can be exchanged for another Convertible Reserved Instance with different instance attributes e.g. you to change between instance types e.g. t1-t4 as long as its of greater or equal value
-    - **Scheduled Reserved Instances** - reserve capacity that is scheduled to recur daily, weekly, or monthly, with a specified start time and duration, for a one-year term.
-- **Spot Instances** - Enables you to bid whatever price you want for instance capacity. when AWS has excess capacity it drops the price so people can use that capacity —but they can take it back at any time. You can set the price you are willing to pay and it will run when its below or at that price — if it goes above that price you lose it.
+    - `Standard Reserved Instances` Provides the most discount (up to 75% off). Unused instanced can be sold in AWS reserved instance marketplace
+    - `Convertible Reserved Instances` up to 54% off. It can be exchanged for another Convertible Reserved Instance with different instance attributes e.g. you to change between instance types e.g. t1-t4 as long as its of greater or equal value
+    - `Scheduled Reserved Instances` - reserve capacity that is scheduled to recur daily, weekly, or monthly, with a specified start time and duration, for a one-year term.
+- `Spot Instances` - Enables you to bid whatever price you want for instance capacity. when AWS has excess capacity it drops the price so people can use that capacity —but they can take it back at any time. You can set the price you are willing to pay and it will run when its below or at that price — if it goes above that price you lose it.
   - It provides up to 90% discount and typically used for apps with flexible start/end times, But don’t use for anything critical that needs to be online all the time. It can handle interruptions and recover gracefully.
   - Imp Note: If the spot instance is terminated by Amazon EC2, you will not be charged for a partial hour of usage. However, if you terminate the instance yourself, you will be charged for any hour in which the instance ran.
   - Uses Cases
@@ -539,8 +541,8 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
     - Applications that are only feasible at very low compute prices.
     - Users with urgent computing needs for large amounts of additional capacity.
   - Types
-    - **Spot Blocks** can also be launched with a required duration, which are not interrupted due to changes in the Spot price.
-    - **Spot Fleet**
+    - `Spot Blocks` can also be launched with a required duration, which are not interrupted due to changes in the Spot price.
+    - `Spot Fleet`
       - Collection of spot instances and optionally on-demand instances. Attempts to launch a number of them together to meet a certain capacity within your price budget.
       - The allocation of spot instances depends on how they fulfil your spot fleet request from the possible pool of instances.
       - Strategies:
@@ -549,8 +551,8 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
         - Capacity Optimised → Pool for optimal capacity for the number of instances launching.
         - InstancePoolsToUseCount → Distributed across the number of pools you specify — this can only be used with the lowest price option.
 
-- **Dedicated Instance** - Your instance runs on a dedicated hardware provide physical isolation, single-tenant
-- **Dedicated Hosts** - Your instances run on a dedicated physical server. More visibility how instances are placed on server. Dedicated Hosts can help reduce costs by letting you use existing server-bound software licenses and address corporate compliance and regulatory requirements.
+- `Dedicated Instance` - Your instance runs on a dedicated hardware provide physical isolation, single-tenant
+- `Dedicated Hosts` - Your instances run on a dedicated physical server. More visibility how instances are placed on server. Dedicated Hosts can help reduce costs by letting you use existing server-bound software licenses and address corporate compliance and regulatory requirements.
   - Can be purchased On-Demand (hourly)
   - Can be purchased as a Reservation for up to 70% off the On-Demand price.
   - Uses Cases
@@ -689,7 +691,7 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
   2. scale-in e.g. download logs, take snapshot before termination
 - Use Case: A company hosts a multiplayer game on AWS. The application uses Amazon EC2 instances in a single Availability Zone and users connect over Layer 4. How to make the architecture highly available and also more cost-effective.
   - Enable ASG to add and remove instances **across multiple availability zones**. This architecture will also be cost-effective as the Auto Scaling group will ensure the right number of instances are running based on demand.
-  - Uses ALB or NLB to distribute the traffic to the instances.
+  - Uses NLB (layer 4) to distribute the traffic to the instances.
 
 #### Scaling options
 
@@ -697,7 +699,7 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
 
 ##### Dynamic Scaling
 
-- Dynamic scaling scales the capacity of your Auto Scaling group as traffic changes occur.
+- Dynamic scaling scales the capacity of your Auto Scaling group as traffic changes occur, based on demand.
 - Types Dynamic Scaling Policies => Increase and decrease the current capacity of the group based on:
   - `Target tracking scaling`: A Amazon CloudWatch metric and a target value (it can combine more than one target). Health checks are performed to ensure resource level is maintained.
     - Use Case: Keep the average aggregate CPU utilization of your Auto Scaling group at 40% (and request count per target of your ALB target group at 1000)
@@ -708,7 +710,7 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
 
 ##### Predictive scaling
 
-Predictive is only available for EC2 auto scaling groups and the scaling can work in a number of ways:
+Predictive is **only available for EC2** auto scaling groups and the scaling can work in a number of ways:
 
 - Set `Maximum Capacity`: You specify minimum and maximum instances or desired capacity required and EC2 autoscaling manages the progress of creating/terminating based on what you have specified. min <= desired <= max
 
@@ -752,11 +754,66 @@ Exam tip:
 1. If a Lambda function needs to connect to a VPC and needs Internet access, make sure you connect to a private subnet that has a route to a NAT Gateway (the NAT Gateway will be in a public subnet).
 2. Functions can be registered to target groups using the API, AWS Management Console or the CLI.
 
+## Containers
+
+### Elastic Container Registry (ECR)
+
+- It is Docker Registry to pull and push Docker images, managed by Amazon.
+
+### Elastic Container Service (ECS)
+
+- It is a highly scalable, high performance container management service that supports Docker containers magement and lifecyle
+- Using API calls you can launch and stop container-enabled applications, query the complete state of clusters, and access features like security groups, Elastic Load Balancing, EBS volumes and IAM roles.
+- Amazon ECS can be used to schedule the placement of containers across clusters based on resource needs and availability requirements.
+- There is no additional charge for Amazon ECS. You pay for:
+  - Resources created with the EC2 Launch Type (e.g. EC2 instances and EBS volumes).
+  - The number and configuration of tasks you run for the Fargate Launch Type.
+
+#### Elastic Container Service for Kubernetes (Amazon EKS)
+
+- Amazon also provide the Elastic Container Service for Kubernetes (Amazon EKS) which can be used to deploy, manage, and scale containerized applications using Kubernetes on AWS.
+
+| ECS                                     | EKS                   |
+| ----------------------------------------| ----------------------|
+| AWS-specific platform that supports Docker Containers | Compatible with upstream Kubernetes so it’s easy to lift and shift from other Kubernetes deployments |
+| Considered simpler and easier to use | Considered more feature-rich and complex with a steep learning curve |
+| Leverages AWS services like Route 53, ALB, and CloudWatch | A hosted Kubernetes platform that handles many things internally |
+| “Tasks” are instances of containers that are run on underlying compute but more of less isolated | “Pods” are containers collocated with one another and can have shared access to each other |
+| Limited extensibility | Extensible via a wide variety of third-party and community add-ons. |
+
+- Use Case: EKS is used when organizations need a consistent control plane for managing containers across hybrid clouds and multicloud environments.
+
+#### Launch types
+
+![Launch Type](https://digitalcloud.training/wp-content/uploads/2022/01/amazon-ecs-ec2-vs-fargate-1.jpeg)
+
+An Amazon ECS launch type determines the type of infrastructure on which your tasks and services are hosted.
+
+| Amazon EC2                              | Amazon Fargate        |
+| ----------------------------------------| ----------------------|
+| You can explicitly provision EC2 instances | Serverless. The control plane asks for resources and Fargate automatically provisions.|
+| You’re responsible for upgrading, patching, care of EC2 pool | Fargate provisions compute as needed |
+| You must handle cluster optimization | Fargate handles customer optimizations |
+| More granular control over infrastructure | Limited control, as infrastructure is automated |
+| Support DockerHub, ECR and Selef-Hosted | Only supports DockerHub, ECR |
+| Cheaper | Costlier |
+| Good for predictable, long running tasks | Good for variable, short running tasks. |
+
+#### ECS
+
+##### Terminology
+
+- Cluster: Logical Grouping of EC2 Instances
+- Container Instance: EC2 instance running the ECS agent
+- Task Definition: Blueprint that describes how a docker container should launch 
+- Task: A running container using settings in a Task Definition
+- Service: Defines long running tasks – can control task count with Auto Scaling and attach an ELB
+
 ## Application_Integration
 
 Go to [Index](#index)
 
-### SQS (Amazon Simple Queue Service)
+### Amazon Simple Queue Service (SQS)
 
 ![SQS](https://d1.awsstatic.com/product-page-diagram_Amazon-SQS%402x.8639596f10bfa6d7cdb2e83df728e789963dcc39.png)
 
@@ -777,26 +834,37 @@ Go to [Index](#index)
   - Visibility Timeout — Immediately after a message is received, it remains in the queue. Amazon SQS doesn't automatically delete the message because it is a distributed system
     - To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds.
     - Use Case: If you are getting messages delivered twice, the cause could be your visibility timeout is too low.
+- Exam Tip: Amazon SQS is pull-based (polling) not push-based (use SNS for push-based).
+- Use Case: A new application will run across multiple Amazon ECS tasks. Front-end application logic will process data and then pass that data to a back-end ECS task to perform further processing and write the data to a datastore. The Architect would like to reduce-interdependencies so failures do no impact other components ==> Create an Amazon SQS queue and configure the front-end to add messages to the queue and the back-end to poll the queue for messages
+
+#### Types od Queues
 
 There are two types of queues: Standard & FIFO
 
-#### Standard Queues
+##### Standard Queues
 
 - Default queue type.
 - Nearly unlimited number of API calls per second.
 - Guarantees message delivered at least once.
 - Occasionally more than one copy of a message might be delivered out of order. However, standard queues provide **best-effort ordering** which ensures that messages are generally delivered in the same order as they are sent.
 
-#### FIFO Queues
+##### FIFO Queues
 
 - First in First Out => The **order in which the messages are sent is preserved**.
 - Has high throughput
 - Limits: support up to 3,000 transactions per API batch call.
 - Processed exactly once and duplicates are not introduced to the queue.
 
-### SNS (Amazon Simple Notification Service)
+#### Dead-Letter Queue
 
-- Managed Messaging Service that allows you **push** (Instantaneous) messages on SNS topic and all topic subscribers receive those messages.
+- The main task of a dead-letter queue is handling message failure.
+  - Messages are moved to the dead-letter queue when the `ReceiveCount` for a message exceeds the `maxReceiveCount` for a queue.
+- It is not a queue type; it is a standard or FIFO queue that has been specified as a dead-letter queue in the configuration of another standard or FIFO queue.
+  - Dead-letter queues will break the order of messages in FIFO queues.
+
+### Amazon Simple Notification Service (SNS)
+
+- Managed Messaging Service that allows you **push** (Instantaneous) **messages on SNS topic and all topic subscribers receive those messages**.
 - Can group multiple recipients through topics.
 - Highly available as all messages stored across multiple regions.
 - One topic can support deliveries to multiple endpoint types - for example, you can group together iOS, Android and SMS recipients. When you publish once to a topic, SNS delivers appropriately formatted copies of your message to each subscriber.
@@ -1064,6 +1132,7 @@ EXAM TIP: Instance stores offer very high performance and low latency. If you ca
   - Each Amazon EBS volume is automatically replicated within it's Availability Zone to protect you from component failure.
 - It is Block-based storage: It needs to be **mounted to an EC2 instance within the same Availability Zone (Region)** (EBS Volume think like a "USB stick")
   - 1 EBS - 1 EC2. It can be attached to only one EC2 instance at a time in the same AZ (different from EFS ==> 1 EFS - 1..N EC2).
+    - Exception: [EBS multi-attach](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html) supported for Linux on the Nitro instances in the same AZ. Only support Provisioned IOPS SSD (io1 and io2) volumes.
   - 1 EC2 - 1..N EBS. Can attach multiple EBS volumes to single EC2 instance. Data persist after detaching from EC2
 - EBS Snapshots
   - It is an **incremental** backup of EBS Volume at a point in time saved into Amazon S3
@@ -1108,15 +1177,15 @@ EXAM TIP: Instance stores offer very high performance and low latency. If you ca
 
 ![EFS AWS diagram](https://d1.awsstatic.com/legal/AmazonEFS/product-page-diagram_Amazon-EFS-Replication_HIW%402x.ccbabcc8777609fc0d23d7ff5ee1d52d5000dbf5.png)
 
-- Fully managed, high scalable (elastic) and distributed (available) file storage that supports Network File Storage version 4 (NFSv4) and can be mounted to your EC2 instance.
-  - Highly Scalable - can automatically scale from gigabytes to petabytes of data without needing to provision storage, growing and shrinking as you add/remove files. (you don't need to pre-provision storage like you do with EBS)
+- Fully managed, High scalable (Elastic) and Distributed (available) file storage that supports **Network File Storage version 4 (NFSv4.x)** and can be mounted to your EC2 instance.
+  - Highly Scalable - scale on-demand to petabytes (growing and shrinking as you add/remove files) Note: you don't need to pre-provision storage like you do with EBS.
     - With burst mode, the throughput increase, as file system grows in size.
   - Highly Available - stores data redundantly across multiple Availability Zones.
   - Network File System (NFS) that can be mounted on and accessed concurrently in multiple AZs without sacrificing performance.
-  - EFS file systems can be accessed by Amazon EC2 **Linux** instances, Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda functions via a file system interface such as NFS protocol. (EBS only for EC2 instances)
+  - EFS file systems can be accessed by Amazon EC2 Linux instances, Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda functions via a file system interface such as NFS protocol. (EBS only for EC2 instances)
+    - Native to Unix & Linux, but not supported on Windows instances.
 - EFS is a POSIX-compliant file-based storage.
 - EFS supports file systems semantics - strong read after write consistency and file locking.
-- Native to Unix & Linux, but not supported on Windows instances.
 - Only pay for what you use
 - Performance Mode:
   - General Purpose for most file system for low-latency file operations, good for content-management, web-serving etc.
@@ -1215,8 +1284,8 @@ Go to [Index](#index)
   - Provides 3x better performance than Postgres SQL
 - **Distributed**: 2 copies of your data is contained in each Availability Zone (AZ) — minimum of 3 AZ’s and 6 copies.
   - Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
-    - Primary DB instance - Only one primary instance, supports both read and write operation
-    - Replicas - Each Aurora DB cluster has built-in replication between multiple DB instances, you can choose between built-in features such as Aurora global databases or the traditional replication mechanisms for the MySQL or PostgreSQL DB engines
+    - Primary DB instance - Only one primary instance, supports both read and write operation.
+    - Read Replicas - There are two types of replication: Aurora replica (up to 15, In-region), MySQL Read Replica (up to 5, Cross-region).
 - **Fault tolerant**: It can handle the loss of up to 2 copies without affecting write ability and the lose of up to 3 copies of data without affecting read ability.
 - **Self-healing storage system** (Data blocks and disks are continuously scanned for errors and repaired automatically.)
 - **Autoscaling for storage and computer capacity**
@@ -1226,6 +1295,8 @@ Go to [Index](#index)
   - Backups do not impact performance.
   - Automated Backups are Enabled by default.
   - You can also take manual snapshots with Aurora. Snapshots can be shared with other AWS accounts.
+- Use Case: A company runs a web application that store data in an Amazon Aurora database. A solutions architect needs to make the application more resilient to sporadic increases in request rates.
+  - To resolve this situation Amazon Aurora Read Replicas can be used to serve read traffic which offloads requests from the main database.
 
 #### Aurora Serverless
 
@@ -1462,12 +1533,15 @@ Go to [Index](#index)
 
 ### AWS DataSync
 
-- Data transfer service for moving large amounts of data into AWS. Has built in security capabilities (e.g. encryption in transit)
-- Use cases
+- Data transfer service for **moving large amounts of data into AWS**. Has built in **security capabilities** (e.g. encryption in transit)
+- Types
 
 **A/** FROM an on-premise data center (using NFS and SMB storage protocol) TO AWS Storage: S3 (any storage type) , EFS, or FSx for Windows, AWS Snowcone. => Installing AWS Data Sync Agent on a VM, Amazon s3 Outspots or Snowcone
 
 ![on premise](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync_On-Premises-to-AWS%402x.8769b9dea1615c18ee0597b236946cbe0103b2da.png)
+
+  - Use Case: A company runs an application in an on-premises data center that collects environmental data from production machinery. The data consists of JSON files stored on network attached storage (NAS) and around 5 TB of data is collected each day. The company must upload this data to Amazon S3 where it can be processed by an analytics application. The data must be transferred securely ==> The most reliable and time-efficient solution that keeps the data secure is to use AWS DataSync and synchronize the data from the NAS device directly to Amazon S3
+    - Use `AWS Direct Connect` connection to ensure reliability, speed, and security.
 
 **B/** BETWEEN AWS storage services (e.g. to replicate EFS to EFS)
 
@@ -1837,7 +1911,10 @@ There are several methods of connecting to a VPC, including connection from Data
   - It is possible to clear cached objects, however you will incur a charge.
 - Can integrate with AWS Shied, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
 - It supports **Geo restriction (Geo-Blocking)** to whitelist or blacklist countries that can access the content.
-- Use Case: A company offers an online product brochure that is delivered from a static website running on Amazon S3. The company’s customers are mainly in the United States, Canada, and Europe. With Amazon CloudFront you can set the price class to determine where in the world the content will be cached. One of the price classes is “U.S, Canada and Europe” and this is where the company’s users are located. Choosing this price class will result in lower costs and better performance for the company’s users.
+- Use Cases:
+  1. A company offers an online product brochure that is delivered from a static website running on Amazon S3. The company’s customers are mainly in the United States, Canada, and Europe. With Amazon CloudFront you can set the price class to determine where in the world the content will be cached. One of the price classes is “U.S, Canada and Europe” and this is where the company’s users are located. Choosing this price class will result in lower costs and better performance for the company’s users.
+  2. A company runs a web application that serves weather updates. The application runs on a fleet of Amazon EC2 instances in a Multi-AZ Auto scaling group behind an Application Load Balancer (ALB). A solutions architect needs to make the application more resilient to sporadic increases in request rates.
+  - On the frontend an Amazon CloudFront distribution can be placed in front of the ALB and this will cache content for better performance and also offloads requests from the backend.
 
 #### Restricting Access to CloudFront: Signed URL or Signed Cookies
 
@@ -2062,24 +2139,6 @@ Go to [Index](#index)
 - It is a **ETL (extract, transform, and load)** Saas.
 - AWS Glue Crawler scan data from data source such as S3 or DynamoDB table, determine the schema for data, and then creates metadata tables in the AWS Glue Data Catalog.
 - AWS Glue provide classifiers for CSV, JSON, AVRO, XML or database to determine the schema for data
-
-## Containers
-
-Go to [Index](#index)
-
-- `ECR (Elastic Container Registry)` is Docker Registry to pull and push Docker images, managed by Amazon.
-- `ECS (Elastic Container Service)` is container management service to run, stop, and manage Docker containers on a cluster
-- `ECS Task Definition` where you configure task and container definition
-  - Specify ECS Task IAM Role for ECS task (Docker container instance) to access AWS services like S3 bucket or DynamoDB
-  - Specify Task Execution IAM Role i.e. ecsTaskExecutionRole for EC2 (ECS Agent) to pull docker images from ECR, make API calls to ECS service and publish container logs to Amazon CloudWatch on your behalf
-  - Add container by specifying docker image, memory, port mappings, healthcheck, etc.
-  - You can create multiple ECS Task Definitions - e.g. one task definition to run web application on Nginx server and another task definition to run microservice on Tomcat.
-- ECS Service Definition where you configure cluster, ELB, ASG, task definition, number of tasks to run multiple similar ECS Task, which deploy a docker container on EC2 instance. One EC2 instance can run multiple ECS tasks.
-- `Amazon EC2 Launch Type`: You manage EC2 instances of ECS Cluster. You must install ECS Agent on each EC2 instances. Cheaper. Good for predictable, long running tasks.
-- ECS Agent sends information about the EC2 instance’s current running tasks and resource utilization to Amazon ECS. It starts and stops tasks whenever it receives a request from Amazon ECS
-- `Fargate Launch Type`: Serverless, EC2 instances are managed by Fargate. You only manage and pay for container resources. Costlier. Good for variable, short running tasks.
-- `EKS (Elastic Kubernetes Service)` is managed Kubernetes clusters on AWS
-  - Exam tip: The principle use case is when organizations need a consistent control plane for managing containers across hybrid clouds and multicloud environments.
 
 ## References
 
