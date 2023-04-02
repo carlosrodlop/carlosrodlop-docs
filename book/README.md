@@ -1,7 +1,6 @@
 # Index
 
 ## Pages
-* [AWESOME.md](AWESOME.md)
 * [ElasticSearch.md](ElasticSearch.md)
 
 ## Diagrams
