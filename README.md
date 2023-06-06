@@ -52,6 +52,11 @@
 - [Kubernetes - Awesome Software Architecture](https://awesome-architecture.com/devops/kubernetes/kubernetes/)
 - [Cloud Native - Awesome Software Architecture](https://awesome-architecture.com/cloud-native/)
 
+### YouTube channels
+
+- [DevOps Toolkit - YouTube](https://www.youtube.com/c/DevOpsToolkit)
+- [That DevOps Guy - YouTube](https://www.youtube.com/c/MarcelDempers)
+
 ### AWS
 
 - [Digital Cloud AWS Cheat Sheets](https://digitalcloud.training/aws-cheat-sheets/)
