@@ -20,10 +20,11 @@
 
 Go to [Index](#index)
 
-### Infrastructure
+### [Global Infrastructure](https://aws.amazon.com/about-aws/global-infrastructure/)
 
-- [30 Regions with 96 Availability Zones](http://clusterfrak.com/notes/certs/aws_saa_notes/#security-and-identity).
-- Edge locations are CDN endpoints for CloudFront. Currently there are over 50 edge locations. Not the same as an AZ.
+- In June 2023
+  - [31 Regions with 99 Availability Zones](http://clusterfrak.com/notes/certs/aws_saa_notes/#security-and-identity).
+  - +400 Edge locations are CDN endpoints for CloudFront. 13 Regional Edge Caches.
 
 #### AWS Region
 
@@ -37,7 +38,7 @@ Exam Tip: Multi-Region Architecture => Disaster Recovery
 
 - Each AWS Region consists of multiple, isolated, and physically separate AZs (Availability Zones) within a geographic area.
 - An AZ is one or more discrete data centers with redundant power, networking, and connectivity
-- All AZs in an AWS Region are interconnected with high-bandwidth, low-latency networking.
+- All AZs in an AWS Region are interconnected with high-bandwidth, **low-latency networking**.
 - AZs in a region are usually 3, min is 2 and max is 6 for e.g. 3 AZs in Ohio are us-east-2a, us-east-2b, and us-east-2c.
 
 Exam Tip: Multi-Az Architecture => HA & Fault Tolerant
@@ -181,7 +182,7 @@ Go to [Index](#index)
       - They are assigned **Access Key ID & Secret Access Keys** when first created => You can get to view these once. If you lose them, you have to regenerate them.
       - In order for a new IAM user to be able to log into the console, the user must have a password set
   - `Groups` are a collection of users, and cannot contains other groups. Groups allow you to define permissions for all the users within it.
-    - You cannot identify a user group as a `Principal` in a resource-based policy because groups relate to permissions, not authentication, and principals are authenticated IAM entities
+    - IMPORTANT: You cannot identify a user group as a `Principal` in a resource-based policy because groups relate to permissions, not authentication, and principals are authenticated IAM entities
   - `Roles`
     - Types of Roles
       - `Service Roles` (To assign permission to AWS Resources), specifying what the resource (such as EC2) is allowed to access on another resource (S3).
@@ -194,7 +195,7 @@ Go to [Index](#index)
 - `Policies` JSON Document that defines permissions (`Allow` or `Deny` access to an action that can be performed on AWS resources) for Access Entities (user, group or role)
   - If a resource has multiple policies — AWS joins them ==> **IAM Policy Evaluation Logic** ➔ Explicit Deny ➯ Organization SCPs ➯ Resource-based Policies (optional) ➯ IAM Permission Boundaries ➯ Identity-based Policies.
     - Anything that is not explicitly allowed is implicitly denied
-    - `Service control policies (SCPs)` are a type of **Organization policy** that you can use to manage permissions in your organization.
+    - [`Service control policies (SCPs)`](#scp) are a type of **Organization policy** that you can use to manage permissions in your organization.
       - It offers central control over the maximum available permissions for all accounts in your organization.
       - It helps you to ensure your accounts stay within your organization’s access control guidelines.
     - `IAM Permission Boundaries` to set at individual user or role for maximum allowed permissions. When you use a policy to set the permissions boundary for a user, it limits the user's permissions but does not provide permissions on its own.
@@ -2594,7 +2595,7 @@ Go to [Index](#index)
   - With accounts in an organization, you can easily allocate resources, group accounts, and apply governance policies to accounts or groups, **consolidate billing across all accounts (single payment method)**
   - It has a master account and multiple member accounts
   - Member Acccounts or `Organization Units (OUs)` are based on department, cost center or environment, OU can have other OUs (hierarchy)
-  - `Service Control Policies (SCPs)` (IAM Organization Policy)
+  - <a name="scp">`Service Control Policies (SCPs)` (IAM Organization Policy)</a>
     - It can work at OU level or account level
     - It offers central control over the maximum available permissions for all accounts in your organization.
     - It helps you to ensure your accounts stay within your organization’s access control guidelines.
