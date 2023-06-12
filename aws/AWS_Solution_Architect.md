@@ -196,8 +196,6 @@ Go to [Index](#index)
   - If a resource has multiple policies — AWS joins them ==> **IAM Policy Evaluation Logic** ➔ Explicit Deny ➯ Organization SCPs ➯ Resource-based Policies (optional) ➯ IAM Permission Boundaries ➯ Identity-based Policies.
     - Anything that is not explicitly allowed is implicitly denied
     - [`Service control policies (SCPs)`](#scp) are a type of **Organization policy** that you can use to manage permissions in your organization.
-      - It offers central control over the maximum available permissions for all accounts in your organization.
-      - It helps you to ensure your accounts stay within your organization’s access control guidelines.
     - `IAM Permission Boundaries` to set at individual user or role for maximum allowed permissions. When you use a policy to set the permissions boundary for a user, it limits the user's permissions but does not provide permissions on its own.
   - Types of policies
     - `Identity-based policies` are attached to an IAM identity (a user, group, or role). You can use these policies to grant permissions to perform specific actions on resources. In those cases, the principal is implicitly the identity where the policy is attached.
@@ -216,43 +214,15 @@ Go to [Index](#index)
     - `Condition` (optional) one or more conditions to satisfy for policy to be applicable, otherwise ignore the policy.
       -  `aws:PrincipalOrgID` condition key lets you specify the AWS organization ID of the principal entity (root user, IAM user, or IAM role) making the request.
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Deny-Barclay-S3-Access",
-      "Effect": "Deny",
-      "Principal": { "AWS": ["arn:aws:iam:123456789012:barclay"] },
-      "Action": ["s3:GetObject", "s3:PutObject", "s3:List*"],
-      "Resource": ["arn:aws:s3:::mybucket/*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": "iam:CreateServiceLinkedRole",
-      "Resource": "*",
-      "Condition": {
-        "StringLike": {
-          "iam:AWSServiceName": [
-            "rds.amazonaws.com",
-            "rds.application-autoscaling.amazonaws.com"
-          ]
-        }
-      }
-    }
-  ]
-}
-```
-
 - `Root account` is created by default with full administration powers. Root account is email address that you used to register your account
   - Best practices
     - Not to use the root account for anything other than billing (not login)
     - Always setup Multifactor Authentication on your root account.
 - `Power user access` → Access to all AWS services except the management of groups and users within IAM
 - Use Case:
-  1. An application running on an Amazon ECS container instance needs permissions to write data to Amazon DynamoDB. How can you assign these permissions only to the specific ECS task that is running the application? ==> To specify permissions for a specific task on Amazon ECS you should use IAM Roles for Tasks. The permissions policy can be applied to tasks when creating the task definition, or by using an IAM task role override using the AWS CLI or SDKs. The taskRoleArn parameter is used to specify the policy.
+  1. An application running on an Amazon ECS container instance needs permissions to write data to Amazon DynamoDB. How can you assign these permissions only to the specific ECS task that is running the application? ==> Use IAM Roles for Tasks. The permissions policy can be applied to tasks during its creation, or by using an IAM task role override using the AWS CLI or SDKs. The taskRoleArn parameter is used to specify the policy.
   2. A company requires that all AWS IAM user accounts have specific complexity requirements and minimum password length. How to accomplish this? ==> Update the password policy that applies to the entire AWS account.
-  3. To accelerate experimentation and agility, a company allows developers to apply existing IAM policies to existing IAM roles. Nevertheless, the security operations team is concerned that the developers could attach the existing administrator policy, circumventing any other security policies ==> Use Permisssion Boundaries.
+  3. To accelerate experimentation and agility, a company allows developers to apply existing IAM policies to existing IAM roles. Nevertheless, the security operations team is concerned that the developers could attach the existing administrator policy, circumventing any other security policies ==> Use Permission Boundaries.
 
 ### Access AWS
 
@@ -345,33 +315,32 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 ![AWS Key Management Service (KMS)](https://d1.awsstatic.com/Security/aws-kms/Group%2017aws-kms.6dc3dbbbe5b75b46c4f62218d0531e5bed7276ce.png)
 
 - AWS managed **centralized key management** service to create, manage and rotate `Customer Master Keys (CMKs)` for **encryption at REST**.
-- Can integrate with most other AWS services to increase security and make it easier to encrypt your data.
-- You can enable automatic master key rotation once per year. Service keeps the older version of master key to decrypt old encrypted data.
-- Allows you to control access to the keys using things like IAM policies or key policies.
+- Can integrate with most other AWS services to increase security and make it easier to encrypt your data
 - Encrypt/decrypt up to 4KB.
 - Pay per API call.
 - Validated under `FIPS 140–2 (Level 2)` security standard.
 - Types of `Customer Master Keys` (CMKs)
-  - `Customer Managed` CMKs (Dedicated to my account) → Keys that you have created in AWS, that you own and manage. You are responsible for managing their **key policies (who can access), rotating them and enabling/disabling them**.
+  - `Customer Managed` CMKs (Dedicated to my account) → Keys that you have created in AWS, that you own and manage.
+    - It gives you more control over your keys, allowing to define IAM Key policies (who can access), to audit key usage, and rotate keys.
+    - You can enable automatic master key rotation once per year. Service keeps the older version of master key to decrypt old encrypted data.
     - It can be created for encyption for client and server side.
-    - You can create customer-managed `Symmetric` (single key for both encrypt and decrypt operations) or `Asymmetric` (public/private key pair for encrypt/decrypt or sign/verify operations) master keys.
-    - Symmetric CMKs
-      - With symmetric keys, the same key is used to encrypt and decrypt
-      - The key never leaves AWS unencrypted
-      - Must call the KMS API to use a symmetric key
-      - **The AWS services that integrate with KMS use symmetric CMKs**
-    - Asymmetric CMKs
-      - Asymmetric keys are mathematically related public and private key pairs.
-      - The private key never leaves AWS unencrypted.
-      - You can call the KMS API with the public key, which can be downloaded and used outside of AWS.
-      - AWS services that integrate with KMS DO NOT support asymmetric keys.
+    - Types of CMKs:
+      - Symmetric CMKs
+        - With symmetric keys, the same key is used to encrypt and decrypt
+        - The key never leaves AWS unencrypted
+        - Must call the KMS API to use a symmetric key
+        - **The AWS services that integrate with KMS use symmetric CMKs**
+      - Asymmetric CMKs
+        - Asymmetric keys are mathematically related public and private key pairs.
+        - The private key never leaves AWS unencrypted.
+        - You can call the KMS API with the public key, which can be downloaded and used outside of AWS.
+        - AWS services that integrate with KMS DO NOT support asymmetric keys.
   - `AWS Managed` CMKs (Dedicated to my account) → These are **free** and are created by an AWS service on your behalf and are managed for you. However, only that service can use them. Used by default if you pick encryption in most AWS services. Only for server side Encryption.
-  - `AWS Owned` CMKs (No Dedicated to my account) → owned and managed by AWS and shared across many accounts.
+  - `AWS Owned` CMKs (No Dedicated to my account) → Owned and managed by AWS and shared across many accounts.
 
 **Exam Tip :** Encryption keys are regional.
 
-- Use Case: A company is planning to use Amazon S3 to store documents uploaded by its customers. The images must be encrypted at rest in Amazon S3. The company does not want to spend time managing and rotating the keys, but it does want to control who can access those keys.
-  - Customer managed CMK (not AWS Managed) because you want to control who can access the keys (policies).
+- Use Case: A company is planning to use Amazon S3 to store documents uploaded by its customers. The images must be encrypted at rest in Amazon S3. The company does not want to spend time managing and rotating the keys, but it does want to control who can access those keys ==> Customer managed CMK (not AWS Managed) because you want to control who can access the keys (policies). Rotation can be automatic.
 
 ### AWS CloudHSM
 
@@ -411,10 +380,11 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 ![AWS Secrets Manager](https://d1.awsstatic.com/diagrams/Secrets-HIW.e84b6533ffb6bd688dad66cfca36622c2fa7c984.png)
 
 - Secret Manager is mainly used to store, manage, and rotate **secrets (passwords)** such as database credentials, API keys, and OAuth tokens.
-- Generate random secrets: Apply the new key/passwords in RDS for you.
-- Secret rotation
-  - It has **native support to rotate database credentials of RDS databases** - MySQL, PostgreSQL and Amazon Aurora. Automatically rotate secrets.
-  - For other secrets such as API keys or tokens, you need to use the **lambda for customized rotation function**.
+- Built-in password generation and rotation.
+  - Generate secrets based on policies (or ramdom): Apply the new key/passwords in RDS for you.
+  - Secret rotation
+    - It has **native support to rotate database credentials of RDS databases** - MySQL, PostgreSQL and Amazon Aurora. Automatically rotate secrets.
+    - For other secrets such as API keys or tokens, you need to use the **lambda for customized rotation function**.
 - Differences with AWS Systems Manager - Parameter Store
   - Secrets Manager is specifically for secrets, whereas Parameter Store is for generic strings.
   - Secrets Manager has built-in password generation, rotatoion.
@@ -456,7 +426,7 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
   - AWS AppSync
 - How? => AWS WAF lets you create **Rules** to **filter web traffic** based on **conditions that include IP addresses, HTTP headers and body, or custom URIs**.
   - Those rules can **allow or block** what you specify. It also allows to count the requests that match a certain pattern.
-  - It offers a set of pre-configured managed rules that you can use to get started quickly. They cover things like the OWASP Top 10 Security risks.
+  - It offers a set of **pre-configured managed rules** that you can use to get started quickly, covering things like the **OWASP Top 10 Security risks**.
   - Conditions are used in WAFs to specify when you want to allow/block requests. Below are some examples of conditions that you might:
     - Values on the request header
     - The country a request comes from
@@ -472,8 +442,7 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 ### AWS Network Firewall
 
 - Keywords: VPC level, Layer 3-7
-
-- With AWS Network Firewall, you can define **firewall rules** that provide fine-grained control over network traffic. Network Firewall works together with AWS Firewall Manager so you can build policies based on Network Firewall rules and then centrally apply those policies across your **virtual private clouds (VPCs) and accounts**.
+- It defines **firewall rules for virtual private clouds (VPCs)**.
 - Its primary objective is to separate a secured zone from a less secure zone and control communications between the two. Without it, any computer with a public Internet Protocol (IP) address is accessible outside the network and potentially at risk of attack.
 
 ![AWS Network Firewall](https://d1.awsstatic.com/Product-Page-Diagram_AWS-Network-Firewall%402x.68dc577022a7624450c24747789d214ccf0f1178.png)
@@ -489,12 +458,12 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 
 ![AWS Firewall Manager](https://d1.awsstatic.com/products/firewall-manager/product-page-diagram_AWS-Firewall-Manager%402x%20(1)1.ad6bf5281dc2c33c0493e9988e3504dd1590eaa2.png)
 
-- Use AWS Firewall Manager to **centrally configure and manage Firewall Rules across an Organization**: AWS WAF rules, AWS Shield Advanced, Network Firewall rules, and Route 53 DNS Firewall Rules
+- Use AWS Firewall Manager to **centrally configure and manage Firewall Rules across an Organization** (different account): AWS WAF rules, AWS Shield Advanced, Network Firewall rules, and Route 53 DNS Firewall Rules
 - Use case: Meet Gov regulations to deploy AWS WAF rule to block traffic from embargoed countries across accounts and resources
 
 ### AWS GuardDuty
 
-- Keywords: **Anomalous Behaviour**, Exiting Treat Exploided, Compromised, Detect and Remediate
+- Keywords: Anomalous Behaviour, **Exiting Treat Exploided (Compromised), Detect and Remediate**
 
 ![AWS GuardDuty](https://d1.awsstatic.com/Security/Amazon-GuardDuty/Amazon-GuardDuty_HIW.057a144483974cb73ab5f3f87a50c7c79f6521fb.png)
 
@@ -507,7 +476,7 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 
 ### Amazon Inspector
 
-- Keywords: Workload, Software Vulnerabilities, Network Exposure, Agent, Prevention, Only detects
+- Keywords: Workload, Software Vulnerabilities, Network Exposure, Agent, **Prevention, Only detects**
 
 ![Amazon Inspector](https://d1.awsstatic.com/reInvent/re21-pdp-tier1/amazon-inspector/Amazon-Inspector_HIW%402x.c26d455cb7e4e947c5cb2f9a5e0ab0238a445227.png)
 
@@ -518,11 +487,11 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 
 ### Amazon Macie
 
-- Keywords: **sensitive data**
+- Keywords: **sensitive data**, s3
 
 ![Amazon Macie](https://d1.awsstatic.com/reInvent/reinvent-2022/macie/Product-Page-Diagram_Amazon-Macie.a51550cca0a731ba2e4a26e8463ed5f5a81202e3.png)
 
-- Managed service to discover and protect your **sensitive data** in AWS s3.
+- Managed service to discover and protect your **sensitive data in AWS s3**.
 - Can automatically discover **Personally Identifiable Information (PII)** in your data and can alert you once identified (e.g. selected S3 buckets)
 - Can produce dashboards, reporting and alerts
 - Benefits of Macie
