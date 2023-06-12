@@ -57,13 +57,27 @@
 - [DevOps Toolkit - YouTube](https://www.youtube.com/c/DevOpsToolkit)
 - [That DevOps Guy - YouTube](https://www.youtube.com/c/MarcelDempers)
 
-### AWS
+### Infrastructure
+
+#### Terraform
+
+- [My Terraform Stars](https://github.com/stars/carlosrodlop/lists/iac-terraform)
+- [Terraform Registry](https://registry.terraform.io/)
+- [Documentation | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/docs)
+- [otf](https://docs.otf.ninja/en/latest/)
+- [Cloud comparison Tables](https://media.licdn.com/dms/image/C5622AQEWNRJe_IJN1Q/feedshare-shrink_2048_1536/0/1678887625639?e=1681948800&v=beta&t=izj3rSdiOc4iMoqd8UuYScEzZXp6epoSSb7x9tFLFOc)
+- [Cloud Design Patterns - Awesome Software Architecture](https://awesome-architecture.com/cloud-design-patterns/cloud-design-patterns/)
+- [Cloud Best Practices - Awesome Software Architecture](https://awesome-architecture.com/cloud-best-practices/)
+- Posts
+  - [Automating Jenkins Deployment with Advanced Terraform Techniques | by Bill Salvaggio | Apr, 2023 | Medium](https://medium.com/@bill.salvaggio/automating-jenkins-deployment-with-advanced-terraform-techniques-c41007151e8d)
+
+#### AWS
 
 - [Digital Cloud AWS Cheat Sheets](https://digitalcloud.training/aws-cheat-sheets/)
 - [IAM Policy Simulator](https://policysim.aws.amazon.com/home/index.jsp?#)
 - [AWS Observability Best Practices](https://aws-observability.github.io/observability-best-practices/)
 
-#### EKS
+##### EKS
 
 - [Awesome AWS/EKS Repos](https://github.com/stars/carlosrodlop/lists/aws-eks)
 - [EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/)
@@ -73,29 +87,11 @@
 - [aws-samples/hardeneks: Runs checks to see if an EKS cluster follows EKS Best Practices.](https://github.com/aws-samples/hardeneks)
 - [Amazon EKS Workshop](https://www.eksworkshop.com/)
 
-##### Architecture Samples
-
-- [EKS reference](https://imgur.com/a/WVxr0kZ)
-
-### GCP
+#### GCP
 
 - [Terraform blueprints and modules for Google Cloud](https://cloud.google.com/docs/terraform/blueprints/terraform-blueprints)
 - [Google Cloud and HashiCorp](https://github.com/terraform-google-modules)
 
-#### GKE
+##### GKE
 
 - [Best practices  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/best-practices)
-
-### Terraform
-
-- [My Terraform Stars](https://github.com/stars/carlosrodlop/lists/iac-terraform)
-- [Terraform Registry](https://registry.terraform.io/)
-- [Documentation | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/docs)
-- [otf](https://docs.otf.ninja/en/latest/)
-- [Cloud comparison Tables](https://media.licdn.com/dms/image/C5622AQEWNRJe_IJN1Q/feedshare-shrink_2048_1536/0/1678887625639?e=1681948800&v=beta&t=izj3rSdiOc4iMoqd8UuYScEzZXp6epoSSb7x9tFLFOc)
-- [Cloud Design Patterns - Awesome Software Architecture](https://awesome-architecture.com/cloud-design-patterns/cloud-design-patterns/)
-- [Cloud Best Practices - Awesome Software Architecture](https://awesome-architecture.com/cloud-best-practices/)
-
-#### Post
-
-- [Automating Jenkins Deployment with Advanced Terraform Techniques | by Bill Salvaggio | Apr, 2023 | Medium](https://medium.com/@bill.salvaggio/automating-jenkins-deployment-with-advanced-terraform-techniques-c41007151e8d)
