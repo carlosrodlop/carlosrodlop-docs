@@ -553,7 +553,8 @@ Exam tip: You can stop and start an EC2 instance to move it to a different physi
 
 #### EC2 Hibernate
 
-- Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume. Amazon EC2 persists the instance's EBS root volume and any attached EBS data volumes. When you start your instance:
+- Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume. Amazon EC2 persists the instance's EBS root volume and any attached EBS data volumes. 
+- When you start your instance:
   - The EBS root volume is restored to its previous state
   - The RAM contents are reloaded
   - The processes that were previously running on the instance are resumed
