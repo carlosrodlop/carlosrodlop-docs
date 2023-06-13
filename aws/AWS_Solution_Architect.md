@@ -644,9 +644,8 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 - Placement group names need to be unique within your account
 - Only certain types of instances can be launched in a placement group (Compute Optimised, GPU, Memory Optimised, Storage Optimised)
 - You can’t merge placement groups, but you can move an existing instance into a placement group (the instance must be in the stopped state before moving it)
-  - Move or remove can only be done via AWS Console (an instance using the AWS CLI or AWS SDK).
 - There is no charge associated with creating placement groups
-- Types (A clustered placement group can't span multiple AZ's, others can)
+- Types:
   - **Cluster** - Grouping instances close together within a **single Availability Zone, Same Rack**. It is used to achieve **low Network latency & high throughput, High Performance Computing (HPC)**.
     - AWS recommend homogeneous instances within clustered placement groups.
   - **Spread** - Opposite to clustered placement group. Instance are placed on **Different AZ, Distinct Rack**. It used for Critical Applications that requires to be seperated on each other to ensure **High Availability** in case of failure. Spread placement groups can span multiple Availability Zones.
@@ -656,7 +655,6 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 
 - **Customized image of an EC2 instance**, having built-in OS, softwares, configurations, etc.
 - AMI's can be created **from both Volumes and Snapshots**.
-  - You can create an AMI from EC2 instance and launch a new EC2 instance from AMI.
 - AMI **are built for a specific region and can be copied across regions** (Important for Disaster Recovery)
 - Use Case:
   1. A company's application is running on Amazon EC2 instances in a single Region. In the event of a disaster, how do you ensure that the resources can also be deployed to a second Region?
@@ -664,31 +662,30 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
      - Launch a new EC2 instance from an Amazon Machine Image (AMI) in the second Region
   2. An application has been migrated to Amazon EC2 Linux instances. The EC2 instances run several 1-hour tasks on a schedule. There is no common programming language among these tasks, as they were written by different teams. Currently, these tasks run on a single instance, which raises concerns about performance and scalability. Which solution will meet these requirements with the LEAST Operational overhead?
      - The best solution is to create an AMI of the EC2 instance, and then use it as a template for which to launch additional instances using an Auto Scaling Group, allowing the EC2 instances to automatically scale and be launched across multiple Availability Zones.
-     - Lambda is not the best solution because it is not designed to run for 1 hour (mx 15 min)
+     - Lambda is not the best solution because it is not designed to run for 1 hour (max 15 min)
 
 ### Elastic Load Balancing (ELB)
 
-- Designed to help **balance the load of incoming traffic** by distributing it across multiple targets/destinations.
+- Designed to help **balance the load of incoming traffic** by distributing it across multiple **targets**/destinations.
   - Target group (ALB o CLB) can have one or more EC2 instances, IP Addresses, lambda functions.
-- It makes the **traffic Scale and Fault Tolerant** (It can balance load **across one or more Availability Zones**)
-- Internal Load Balancers are load balancers that are inside private subnets
+  - Internal Load Balancers are load balancers which their targets hosted inside Private Subnets
+- It makes the **traffic Scale and Fault Tolerant**. It can balance load **across one or more Availability Zones** (Not in different regions).
 - Load Balancers have their own **static DNS name** (e.g. <http://myalb-123456789.us-east-1.elb.amazonaws.com>) — you will NEVER be given an IP address
   - If you need the IPv4 address of your end user, look for the `X-Forwarded-For` header.
 - `Health Checks`
-  - Instances monitored by ELB are reported as; InService, or OutofService
-  - Health Checks checks the instance health by talking to it.
+  - Targets monitored by ELB are reported as: `InService`, or `OutofService`
   - `504 Error` means that the gateway has timed out. This means that the application not responding within the idle timeout period.
 - Advanced Load Balancers Theory
   - `Stickiness` (a.k.a. Session Affinity, Sticky Sessions):
-    - Allows you to **bind a users session to a specific instance**, ensuring all requests in that specific session are sent to the same instance.
+    - Allows you to **bind a users session to a specific target**, ensuring all requests in that specific session are sent to the same target.
     - Use Cases: If you have got an EC2 instance or an application, where you're writing to an EC2 instance like local disk, then of course you would want to enable Sticky.
     - Exam Question: A user trying to visit a website behind a classic load balancer and essentially what's happening is it's just sending all the traffic to one EC2 instance. Answer: Disable Sticky session.
     - It works in CLB and ALB. (It doesn’t work with NLB)
   - `Cross Zone load Balancing`
-    - It enables **EC2 instances to get equal share of traffic/load across multiple AZs**
+    - It enables **Targets to get equal share of traffic/load across multiple AZs**
     - Use Cases: Route 53 is used for DNS, and it is splitting of our traffic 50/50 and sending the requests to EC2's in two diff AZ's. Each AZ has a Load Balancer, The first AZ (US-EAST-1A) has 4 EC2 instances and the second (US-EAST-1B) has only one EC2 instance. As result first AZ will split 50% to 4 instances and the second AZ receives 50% on 1 instance.
       - When we enable Cross Zone Load Balancing: The Load balancer will distribute the load evenly among instances on both AZ's.
-  - `Path Patterns` (path-based routing) → can **direct traffic to different EC2 instances based on request URL (path)**.
+  - `Path Patterns` (path-based routing) → can **direct traffic to different targets based on request URL (path)**.
     - Use Case: We got a user and we are using Route 53 for our DNS, enabling Path Patterns we could send request to `www.myurl.com` to AZ1 and `www.myurl.com/images` to instances in AZ2.
 
 - Types of ELB
