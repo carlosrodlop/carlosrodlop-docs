@@ -629,24 +629,6 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
     - Useful for regulatory requirements that may not support multi-tenant virtualisation.
     - Great for licensing which doesn't support multi-tenancy or cloud.
 
-#### Security Groups
-
-- A security group acts as a **virtual firewall for your EC2 instances** to control incoming and outgoing traffic.
-- If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
-- Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
-- When you create a New Security Group
-  - **All inbound traffic is blocked by default** - so we enable some IP and ports using Security Groups.
-    - To let All IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
-    - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
-  - **All outbound traffic is allowed**.
-    - Common Ports: HTTP (80) and HTTPS (443)
-- Cardinality: N Security Group <-> N EC2 Instance
-  - You can have any number of EC2 instances within a security group.
-  - You can have multiple Security Groups attached/assigned to EC2 instances.
-- Security Groups vs ACL
-  - **Security Groups are STATEFUL, when you create an inbound rule and an outbound rule is automatically created**. However, NACL's are STATELESS, when you create an inbound rule and an outbound rule is not automatically created.
-  - **Security Groups are only permisse**, you can specify allows rule, but **not deny rules**. You CANNOT block specific IP's/Port's using Security Groups instead use Network Access Control Lists.
-
 #### EC2 Enhanced Networking
 
 - Elastic Network Interface (ENI) is a virtual network card, which you attach to EC2 instance in same AZ which is used to **ensure a good network performance**.
@@ -1983,16 +1965,21 @@ Go to [Index](#index)
 ##### E/ Security Groups (Created by default)
 
 - It **acts as a Firewall**, it controls inbound and outbound traffic **at EC2 instance level**, specific for each instance.
-- Differences with Security groups:
-  - You **cannot block IP addresses**, it does not allows Deny Rules
-  - **Stateful** when you create an inbound rule and an outbound rule is automatically created.
+- If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
+- Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
 - You can specify a source in security group rule to be an IP range, a specific IP (/32), or another security group.
 - When you first create a security group, by default (no rules)
-  - All **outbound** traffic is **allowed**.
-  - All **inbound** traffic is **blocked**.
+  - **All inbound traffic is blocked by default** - so we enable some IP and ports using Security Groups.
+    - To let All IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
+    - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
+  - **All outbound traffic is allowed**.
+    - Common Ports: HTTP (80) and HTTPS (443)
 - Cardinality: N Security Group <--> N EC2 instance.
   - You can have any number of EC2 instances within a security group.
   - You can have multiple Security Groups attached/assigned to EC2 instances. Evaluate all rules before deciding whether to allow traffic. Meaning if you have one security group which has no Allow and you add an allow in another than it will Allow
+- Differences with NACL:
+  - **Security Groups are STATEFUL, when you create an inbound rule and an outbound rule is automatically created**. However, NACL's are STATELESS, when you create an inbound rule and an outbound rule is not automatically created.
+  - **Security Groups are only permisse**, you can specify allows rule, but **not deny rules**. You CANNOT block specific IP's/Port's using Security Groups instead use Network Access Control Lists.
 - Use Cases:
   1. An architect is designing a two-tier web application. The application consists of a public-facing web tier hosted on Amazon EC2 in public subnets. The database tier consists of Microsoft SQL Server running on Amazon EC2 in a private subnet. Security is a high priority for the company. How should security groups be configured in this situation?
      - Web Tier: **inbound rule** is required to allow traffic from any internet client to the web front end on SSL/TLS port 443. The source should therefore be set to `0.0.0.0/0` to allow any inbound traffic.
