@@ -862,7 +862,7 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 | Leverages AWS services like Route 53, ALB, and CloudWatch | A hosted Kubernetes platform that handles many things internally |
 | “Tasks” are instances of containers that are run on underlying compute but more of less isolated | “Pods” are containers collocated with one another and can have shared access to each other |
 | Limited extensibility | Extensible via a wide variety of third-party and community add-ons. |
-| Lauch Types: EC2 and Fargate: | Node Groups Types: Self-managed, Managed and Fargate |
+| Lauch Types: EC2 and Fargate | Node Groups Types: Self-managed, Managed and Fargate |
 
 - [Types of Node Groups](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html)
   - Self-managed: You bring your own servers and have more control of the server. You have to manage it yourself though.
@@ -873,11 +873,9 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 
 Go to [Index](#index)
 
-Services that help to **decouple components**.
-
 ### Amazon Simple Queue Service (SQS)
 
-- Keywords: Pulling Messages, Only 1 consumer
+- Keywords: Pulling Messages, Only 1 consumer, Decoupling, Dead Letter, Visibility Timeout
 
 ![SQS](https://d1.awsstatic.com/product-page-diagram_Amazon-SQS%402x.8639596f10bfa6d7cdb2e83df728e789963dcc39.png)
 
@@ -885,10 +883,11 @@ Services that help to **decouple components**.
 - It **decouples infraestructure** (acts like a buffer between) the software component producing/saving data and the component receiving data for processing.
 - Specification for Standard SQS:
   - SQS guarantees that your **messages will be processed at least once**.
-  - Can have unlimited number of messages waiting in queue however, there is a quota of 120,000 for the number of inflight messages for a standard queue and 20,000 for a FIFO queue
-    - Messages are inflight ==> consuming by component, but have not yet been deleted from the queue.
+  - It can have unlimited number of messages waiting to be processed in queue, however there is a quota for inflight messages (inflight messages = they have been consumed/processed, but have not yet been deleted from the queue.)
+    - Standard: 120,000
+    - FIFO: 20,000
   - Default retention period is 4 days (min 1 min. and max 14 days)
-  - Can send message upto 256KB in size (To send messages larger than 256 KB -up tp 2GB- using library allows you to send an Amazon SQS message that contains a reference to a message payload in Amazon S3)
+  - It can send message upto 256KB in size (To send messages larger than 256 KB -up tp 2GB- using library allows you to send an Amazon SQS message that contains a reference to a message payload in Amazon S3)
   - Unlimited throughput and low latency (<10ms on publish and receive)
   - **Can have duplicate messages** (At least once delivery)
   - **Can have out of order messages** (best effort ordering)
@@ -897,15 +896,15 @@ Services that help to **decouple components**.
 
 - One or Multiple Producers can push messages to The Queue. **Only one consumer** will read an individual message (**Pull message from the Queue**)
   - Consumer/Producers Examples: EC2 instance, Lambda, ECS task, etc.
-  - Exam Tip: Amazon SQS vs SNS:
-    - SQS pull-based (polling). Only 1 Consumer
-    - SNS Push-based. Multiple Consumers
   - Polling types:
     - Short Polling (`ReceiveMessageWaitTimeSeconds` = 0) - Keeps polling queue looking for work, even if it’s empty.
     - Long Polling (`ReceiveMessageWaitTimeSeconds` > 0) - Reduces the number of empty responses by allowing Amazon SQS to wait until a message is available before sending a response to a ReceiveMessage request, helps to reduce the cost.
   - `Visibility Timeout` — **Immediately after a message is received, it remains in the queue. Amazon SQS doesn't automatically delete the message because it is a distributed system**
     - To prevent other consumers from processing the message again, Amazon SQS sets a `visibility timeout`, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds.
     - Exam Tip: If you are getting messages delivered twice, the cause could be your visibility timeout is too low.
+- Exam Tip: Amazon SQS vs SNS:
+  - SQS pull-based (polling). Only 1 Consumer
+  - SNS Push-based. Multiple Consumers
 - Use Cases:
   1. A new application will run across multiple Amazon ECS tasks. Front-end application logic will process data and then pass that data to a back-end ECS task to perform further processing and write the data to a datastore. How to reduce-interdependencies so failures do no impact other components? ==> Create an Amazon SQS queue and configure the front-end to add messages to the queue and the back-end to poll the queue for messages.
   2. A web application allows users to upload photos. The application offers two tiers of service: free and paid. Photos uploaded by paid users should be processed before those submitted using the free tier. The photos are uploaded to an Amazon S3 bucket which uses an event notification to send the job information to Amazon SQS. How to meet the requirements ? ==> AWS recommend using separate queues when you need to provide prioritization of work. The logic can then be implemented at the application layer to prioritize the queue for the paid photos over the queue for the free photos.
@@ -939,21 +938,21 @@ There are two types of queues: Standard & FIFO.
 
 ### Amazon Simple Notification Service (SNS)
 
-- Keywords: Pushing Messages, Multiple consumer (subscribers)
+- Keywords: Pushing Messages, Multiple consumer (subscribers), Decoupling
 
 ![A2A](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS_Event-Driven-SNS-Compute%402x.03cb54865e1c586c26ee73f9dff0dc079125e9dc.png)
 
 ![producer-consumer](https://betterdev.blog/app/uploads/2021/08/sns-messaging.png)
 
 - Managed Messaging Service that allows you **push** (Instantaneous) **messages on SNS topic and all topic subscribers receive those messages**.
-- Consumers needs to subscribe to the topic to receive the messages. Then, one topic can support deliveries to multiple endpoint types:
+- Consumers **needs to subscribe to the topic to receive the messages**. Then, one topic can support deliveries to multiple endpoint types:
   - Lambda function
   - SQS ==> Fanout pattern: Messages sent to the SNS topic and then forwarded to multiple SQS queues that are subscribed to the topic. The messages can then be processed by different consumer applications from these queues.
+  - Kinesis Firehose
   - HTTP endpoint
   - Mobile phone – via SMS
   - Mobile app – via push notification
   - Email
-  - Kinesis Firehose
 - Highly available as all messages stored across multiple regions.
 - You can setup a Subscription Filter Policy which is JSON policy to send the filtered messages to specific subscribers.
 - Inexpensive, pay-as-you-go model with no up-front costs.
@@ -1059,13 +1058,14 @@ https://s3.<aws-region>.amazonaws.com/<bucket-name>
 
 - **Enable `S3 Versioning` and `MFA` to protect against accidental delete of S3 Object**.
 - **Enable `S3 Object Lock` to store object using write-once-read-many (WORM) model** to prevent objects from being deleted or overwritten for a fixed amount of time (`Retention period`) or indefinitely (`Legal hold`).
-  - Amazon S3 currently does not support enabling object lock after a bucket has been created.
-  - Retention:
-    - Each version of object can have different retention-period.
-    - S3 has two types of retention mode:
-      - `Governance Mode` → Users can’t overwrite , delete or alter the object version locked unless they have special permissions (permissions requires to be granted).
-      - `Compliance Mode` → A protected object version can’t be overwritten or deleted by ANY user including the root user during its retention period.
-- `Glacier Vault Lock` → enforce compliance controls on individual S3 Glacier vaults using a Vault Lock policy.
+  - s3
+    - It does not support enabling object lock after a bucket has been created.
+    - Retention:
+      - Each version of object can have different retention-period.
+      - S3 has two types of retention mode:
+        - `Governance Mode` → Users can’t overwrite , delete or alter the object version locked unless they have special permissions (permissions requires to be granted).
+        - `Compliance Mode` → A protected object version can’t be overwritten or deleted by ANY user including the root user during its retention period.
+  - `Glacier Vault Lock` → enforce compliance controls on individual S3 Glacier vaults using a Vault Lock policy.
 - You can host **Static websites on S3 bucket** consists of HTML, CSS, client-side JavaScript, and images.
   - Requirements:
     - Enable Static website hosting and Public access for S3 to avoid 403 forbidden error.
@@ -1077,25 +1077,25 @@ https://s3.<aws-region>.amazonaws.com/<bucket-name>
 https://<bucket-name>.s3-website[.-]<aws-region>.amazonaws.com
 ```
 
-- `S3 Select` or `Glacier Select` can be used to retrieve subset of data from S3 Objects using SQL query. S3 Objects can be CSV, JSON, or Apache Parquet. GZIP & BZIP2 compression is supported with CSV or JSON format with server-side encryption.
+- `S3 Select` or `Glacier Select` can be used to **retrieve subset** of data from S3 Objects **using SQL query**. S3 Objects can be CSV, JSON, or Apache Parquet. GZIP & BZIP2 compression is supported with CSV or JSON format with server-side encryption.
   - Allows you to save money on data transfer and increase speed.
 - Using `Range` HTTP Header in a GET Request to download the specific range of bytes of S3 object, known as Byte Range Fetch.
 - High Availability: Enable `S3 Cross-Region Replication` for asynchronous **replication of object across buckets in another region**.
   - Requirement:
     - An existing bucket to Replicate data
     - Versioning enabled on both SOURCE & DESTINATION bucket.
-  - If enabled, existing objects are not replicated automatically, only subsequent updated files (new objects).
+  - If enabled on existing buckets, existing objects are not replicated automatically, only subsequent updated files (new objects).
   - You can have this enabled for the entire bucket or just for specific prefixes.
   - Delete markers ARE NOT replicated.
-- Enable `Server access logging` for logging object-level fields object-size, total time, turn around time, and Http referrer. Not available with CloudTrail.
-- Use `VPC S3 gateway endpoint` to access S3 bucket within AWS VPC to reduce the overall data transfer cost.
+- [Login with s3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/logging-with-S3.html): Auditing actions on S3 bucket: `CloudTrail` (recommened) or `S3 Server Access Logging`. Both requires another S3 bucket to store logs
+- Use `VPC S3 gateway endpoint` to access S3 bucket **within AWS VPC** to reduce the overall data transfer cost.
 - Enable `S3 Transfer Acceleration` for faster transfer (high throughput) to S3 bucket (mainly uploads).
 
 #### Integrations
 
 ##### CloudFront to authenticate request to s3: Origin Access Control (OAC) and Origin Access Identity (OAI)
 
-- OAC is the recoemmended option
+- OAC is the recommended option
 - It is a function of CloudFront distribution that you can enable when you select **S3 buckets as origin**. If you don’t use an OAI/OAC, the S3 bucket must allow public access for downloading objects.
   - It makes faster **cached** content delivery (mainly reads) over long distances between your client and S3.
   - **Restrict the access of S3 bucket endpoint directly**, only making it possible through CloudFront only endpoints
@@ -1148,7 +1148,7 @@ d2whx7jax6hbi5.cloudfront.net/pics/logo.png
 
 - Types:
   - `Standard`: **General purpose** storage for any type of frequently used data very high availability, and fast retrieval.
-  - `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective storage class automatically, without performance impact.
+  - `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective access tier. One tier is optimized for frequent access, one lower-cost tier is optimized for infrequent access, and another very low-cost tier is optimized for rarely accessed data.
     - Use case: automatic cost savings for data with **unknown/changing access patterns or frequency**. But you can use S3 Intelligent-Tiering as the default storage class for most workloads.
   - `Standard-IA`: Cost effective for **infrequent access files** which **cannot be recreated**.
     - For data that is not accessed very frequently — but once it is accessed it needs to be retrieved rapidly.
@@ -1167,23 +1167,13 @@ d2whx7jax6hbi5.cloudfront.net/pics/logo.png
      - S3 standard is the best choice in this scenario for a short term storage solution. In this case the size and number of logs is unknown and it would be difficult to fully assess the access patterns at this stage. Therefore, using S3 standard is best as it is cost-effective, provides immediate access, and there are no retrieval fees or minimum capacity charge per object.
   2. A video production company is planning to move some of its workloads to the AWS Cloud. The company will require around 5 TB of storage for video processing with the maximum possible I/O performance. They also require over 400 TB of extremely durable storage for storing video files and 800 TB of storage for long-term archival. Which combinations of services would meet these requirements?
      - Amazon EC2 instance store for maximum performance, Amazon S3 for durable data storage, and Amazon S3 Glacier for archival storage.
-  3. Application log files needs to backup from an online ecommerce store to Amazon S3. It is unknown how often the logs will be accessed or which logs will be accessed the most. From the following options "S3 Standard-Infrequent Access (S3 Standard-IA)", "S3 One Zone-Infrequent Access (S3 One Zone-IA)", "S3 Intelligent-Tiering" and "S3 Glacier". Which is the most cost effective? ==> "S3 Intelligent-Tiering" It works by storing objects in two access tiers: one tier that is optimized for frequent access and another lower-cost tier that is optimized for infrequent access. The other options are not valid, because they charge retrieval fees and the accesibility is unknown.
-  4. A company migrated a two-tier application from its on-premises data center to AWS Cloud. A Multi-AZ Amazon RDS for Oracle deployment is used for the data tier, along with 12 TB of General Purpose SSD Amazon EBS storage. With an average document size of 6 MB, the application processes, and stores documents as binary large objects (blobs) in the database. Over time, the database size has grown, which has reduced performance and increased storage costs. A highly available and resilient solution is needed to improve database performance. Which solution could meet these requirements MOST cost-effectively?
-     - Set up an Amazon S3 bucket. The application should be updated to use S3 buckets to store documents. Store the object metadata in the existing database
+  3. Application log files needs to backup from an online ecommerce store to Amazon S3. It is unknown how often the logs will be accessed or which logs will be accessed the most. From the following options "S3 Standard-Infrequent Access (S3 Standard-IA)", "S3 One Zone-Infrequent Access (S3 One Zone-IA)", "S3 Intelligent-Tiering" and "S3 Glacier". Which is the most cost effective? ==> "S3 Intelligent-Tiering". The other options are not valid, because they charge retrieval fees and the accesibility is unknown.
+  4. A company migrated a two-tier application from its on-premises data center to AWS Cloud. A Multi-AZ Amazon RDS for Oracle deployment is used for the data tier, along with 12 TB of General Purpose SSD Amazon EBS storage. With an average document size of 6 MB, the application processes, and stores documents as binary large objects (blobs) in the database. Over time, the database size has grown, which has reduced performance and increased storage costs. A highly available and resilient solution is needed to improve database performance. Which solution could meet these requirements MOST cost-effectively? ==> Set up an Amazon S3 bucket. The application should be updated to use S3 buckets to store documents. Store the object metadata in the existing database
   5. An application runs on Amazon EC2 Linux instances. The application generates log files which are written using standard API calls. A storage solution is required that can be used to store the files indefinitely and must allow concurrent access to all files. Which storage service meets these requirements and is the MOST cost-effective? ==> The application is writing the files using API calls which means it will be compatible with Amazon S3 which uses a REST API and it is the most cost-effective solution that EFS.
-
-
-#### Sharing S3 buckets Across Accounts
-
-For multiple accounts within the same organisation, to share S3 buckets among account:
-
-- Bucket policy & IAM — applies to entire bucket, but programmatic access only.
-- Using bucket ALCs & IAM — can apply to individual objects — programatic access only.
-- Cross Account IAM roles — programatic and console access.
 
 #### S3 Security
 
-- By default newly created buckets are private, but you can make them public if needed, for example - you would need to make it public for static web hosting purposes.
+- By default **newly created buckets are private**, but you can make them public if needed, for example - you would need to make it public for static web hosting purposes.
 
 #####  Access
 
@@ -1214,9 +1204,9 @@ aws s3 presign s3://mybucket/myobject --expires-in 300
 - `Encryption in Transit` — encrypting network traffic (between client and S3) using SSL/TLS.
 - `Encryption at Rest (Server Side)` — By default, Amazon S3 encrypts your objects before saving them on disks in AWS data centers and then decrypts the objects when you download them. All new object uploads to Amazon S3 are automatically encrypted at no additional cost and with no impact on performance.
   - Types:
-    - `SSE-S3` (Default encryption): S3 Managed Keys (SSE-S3), AWS Managed Keys.
-    - `SSE-KMS`: AWS Key Management Service (SSE-KMS) AWS & you manage keys together.
-    - `SSE-C`: Customer provided keys — give AWS you own keys that you manage.
+    - `SSE-S3` (Default encryption): AWS Provides and Manages the Keys.
+    - `SSE-KMS`: Customer Managed Keys but Provided by AWS.
+    - `SSE-C`: Customer Provides and Manages the keys..
   - If you require your data uploads to be encrypted, use the header `x-amz-server-side-encryption` to encrypt the object using specific configuration, for example `"s3:x-amz-server-side-encryption": "AES256"`
 - To meet PCI-DSS or HIPAA compliance, encrypt S3 using SSE-C + Client Side Encryption.
 
@@ -1266,10 +1256,10 @@ mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 ![storagegateway](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_AWS-Storage-Gateway_HIW@2x.6df96d96cdbaa61ed3ce935262431aabcfb9e52d.png)
 
 - It enables hybrid storage between on-premises environments and the AWS Cloud.
-- How?
+- How? ==> 2 copies of your data: 1 on premises, 1 in AWS Cloud.
   - AWS Storage Gateway is installed on site datacenter => Implemented using a VM (VMware or Hyper-V virtual appliance).
   - On premises applications are connected to AWS Storage Gateway
-  - It provides low-latency performance by caching frequently accessed data on premises (**local cache**)
+  - It provides low-latency performance by caching frequently accessed data on premises (**local cache**). For File and Volumen Gateway.
   - It replicates data storage securely and durably into Amazon S3 and Glacier.
   - AWS proceses the replicated data in AWS Cloud (ETL, Lifecycle rules, Backups, Migration...).
 - Security:
@@ -1280,9 +1270,9 @@ mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 
 | Storage Gateway  | Interface   | Use Case                                                                                                                             |
 | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| File Gateway  | NFS & SMB  | Allow on-prem or EC2 instances to store objects in S3 via NFS or SMB mount points |
-| Volume Gateway  | iSCSI (Block Storage) | Use S3 as point on time snapshots of EBS volumen. Two types: Cached (Primary data stored in S3, Store a subset of frequent access data locally) and Stored (Asynchronous replication of on-prem data to S3 AWS, Entire dataset) |
-| Tape Gateway     | iSCSI  | Virtual media changer and tape library for use with existing backup software, Archive in Glacier |
+| File Gateway  | NFS & SMB  | Allow on-prem instance to store objects in **S3** via NFS or SMB mount points. Other AWS Services will process the store data from s3 |
+| Volume Gateway  | iSCSI (Block Storage) | It provides point-in-time backups of your volumes as **EBS snapshots** and are available in two operational modes: Cached (Primary data stored in S3, Store a subset of frequent access data locally) and Stored (Asynchronous replication of on-prem data to S3 AWS, Entire dataset) |
+| Tape Gateway | iSCSI  | Virtual media changer and tape library for use with **existing backup software on prem**. **Outcomes are Archive in Glacier** |
 
 ![storagegateway_how](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/aws-storage-gateway-768x520.jpg)
 
@@ -1323,8 +1313,8 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
     - Incremental => only blocks that have changed since your last snapshot (first snapshots takes longer)
   - Snapshots can be taken while the instance is running but ...
     - To create a snapshot for Amazon EBS volumes that serve as a root devices — best practice to terminate it first.
-  - Snapshots can be shared with other AWS accounts or made public.
-    - You can share snapshots, but only if they are unencrypted. If they are encrypted, ou need to share the encryption key with the other account.
+  - Snapshots can be shared with other AWS accounts or made public but only if they are unencrypted. 
+    - **If they are encrypted, the encryption key needs to be shared with other account**.
   - Mechanism to move Volumen data (EBS) to a different AZ location (EBS volume cannot be mount to an EC2 into a different AZ directly)
     - To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then **copy the AMI from one region to other**. Then use the copied AMI to launch the new EC2 instance in the new region.
     - An AMI's can be created from both Volumes and Snapshots.
@@ -1340,7 +1330,7 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
   - You can have encrypted an unencrypted EBS volumes attached to an instance at the same time.
 - Types of EBS volumes:
 
-**A/ SSD** for small/random IO operations, High IOPS means number of read and write operations per second, Only SSD EBS Volumes can be used as boot volumes for EC2
+**A/ SSD** for small/random IO operations, High IOPS means number of read and write operations per second, **Only SSD EBS Volumes can be used as boot volumes for EC2**
 
 | SSD VolumeTypes                  |  Description                         |  Usage                                                                                                             |
 | -------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
@@ -1363,7 +1353,6 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
 - Use Case:
   1. A company has multiple AWS accounts for several environments (Prod, Dev, Test etc.). A Solutions Architect would like to copy an Amazon EBS snapshot from DEV to PROD. The snapshot is from an EBS volume that **was encrypted** with a custom key
   - When an EBS volume is encrypted with a custom key you must **share the custom key** with the PROD account. You also need to modify the permissions on the snapshot to share it with the PROD account. The PROD account must copy the snapshot before they can then create volumes from the snapshot
-  - Note that you cannot share encrypted volumes created using a default CMK key and you cannot change the CMK key that is used to encrypt a volume.
 
 ### EFS (Elastic File System)
 
@@ -1372,7 +1361,7 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
 ![EFS AWS diagram](https://d1.awsstatic.com/legal/AmazonEFS/product-page-diagram_Amazon-EFS-Replication_HIW%402x.ccbabcc8777609fc0d23d7ff5ee1d52d5000dbf5.png)
 
 - Fully managed, High scalable (Elastic) and Distributed (available) file storage that supports **Network File Storage version 4 (NFSv4.x)** and can be mounted to your EC2 instance.
-  - Highly Scalable - scale on-demand to petabytes (growing and shrinking as you add/remove files) Note: you don't need to pre-provision storage like you do with EBS.
+  - Highly **Scalable on-demand** to petabytes (growing and shrinking as you add/remove files) Note: you don't need to pre-provision storage like you do with EBS.
     - With burst mode, the throughput increase, as file system grows in size.
   - Highly Available - stores data redundantly across multiple Availability Zones.
   - Network File System (NFS) that can be mounted on and accessed concurrently in multiple AZs without sacrificing performance.
@@ -1386,7 +1375,8 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
   - Max I/O is optimized to use with 10s, 100s, 1000s of EC2 instances with high aggregated throughput and IOPS, slightly higher latency for file operations, good for big data analytics, media processing workflow
 - Use case: When you need scalable and resilient storage for linux instances
   - Share files, images, software updates, or computing across all EC2 instances in ECS, EKS cluster
-- EFS it works similartly to s3 regrading the storage classes (Standard, Standard Infrequent Access, One Zone, and One Zone Infrequent Access) and lifecycle policies.
+- [EFS Storage Classes](https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) works similartly to s3 storage classes but without archiving options (Standard, Standard Infrequent Access, One Zone, and One Zone Infrequent Access) and lifecycle policies.
+  - One Zone storage classes are ideal for workloads such as development, build, and staging environments, and applications such as analytics and simulation and media transcoding which don’t require the highest levels of availability and durability of Amazon EFS Standard storage classes.
 
 ### FSx for Windows
 
@@ -1412,7 +1402,7 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
 - Fully managed and High performance file system for **fast processing of workload** with consistent **sub-millisecond latencies**, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS.
 - Lustre = Linux + Cluster is a **POSIX-compliant parallel linux file system**, which stores data across multiple network file servers.
 - **Seamless integration with Amazon S3** (optional) - connect your S3 data sets to your FSx for Lustre file system, run your analyses, write results back to S3, and delete your file system.
-- You can use **FSx for Lustre as hot storage** for your highly accessed files, and **Amazon S3 as cold storage** for rarely accessed files.
+  - You can use **FSx for Lustre as hot storage** for your highly accessed files, and **Amazon S3 as cold storage** for rarely accessed files.
 - FSx for Lustre provide two deployment options:
   - **Scratch file systems** - for temporary storage and short term processing
   - **Persistent file systems** - for high available & persist storage and long term processing
@@ -1424,7 +1414,7 @@ Go to [Index](#index)
 
 ### RDS (Relational Database Service)
 
-- KeyWords: Relation Database (SQL), Different Enginees, HA/DR (Multi AZ Deployment), Scalable (Read Replicas), Cross Region, Multiple RDBS Enginnes Support
+- KeyWords: Relation Database (SQL), Multiple RDBS Enginnes Support, HA (Multi AZ Deployment), Scalable, Read Replicas, RDS Proxy.
 
 ![AWS RDS](https://d1.awsstatic.com/video-thumbs/RDS/product-page-diagram_Amazon-RDS-Regular-Deployment_HIW-V2.96bc5b3027474538840af756a5f2c636093f311f.png)
 
@@ -1433,7 +1423,7 @@ Go to [Index](#index)
   - RDS runs on Virtual Machines (can’t log in to the OS or SSH in)
   - RDS is not serverless — (one exception Aurora Serverless)
 - RDS Main Features
-  - **Multi AZ Deployment** > Used for HA (**not cross regions**)
+  - **Multi AZ Deployment** > Used for HA
     - Have a primary and secondary database, if you lose the primary database, AWS would detect and automatically update the DNS to point at the secondary database.
     - You can force a fail-over from AZ to another by rebooting the RDS instance.
   - **Read Replicas** > Used for Scaling, improving Performance (not millisecond latency)
@@ -1471,23 +1461,24 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 - Use Cases:
   1. To change the encryption status of an existing RDS DB instance ==> Create a new master DB by taking a snapshot of the existing DB, and then creating the new DB from the snapshot (during creation). You can then create the encrypted cross-region Read Replica of the master DB. Applications must be updated to use the new RDS DB endpoint.
   2. A company uses an Amazon RDS MySQL database instance to store customer order data. The security team have requested that SSL/TLS encryption in transit must be used for encrypting connections to the database from application servers. The data in the database is currently encrypted at rest using an AWS KMS key. How can a Solutions Architect enable encryption in transit? => You can download a root certificate from AWS that works for all Regions or you can download Region-specific intermediate certificates.
-  3. A team uses an Amazon RDS MySQL database running for running resource-intensive tests each month. The instance has Performance Insights enabled and is only used once a month for up to 48 hours. The team wants to reduce the cost of running the tests without reducing the memory and compute attributes of the DB instance. Which solution meets these requirements MOST cost-effectively? ==> Create a snapshot of the database when the tests are completed. Terminate the DB instance. Create a new DB instance from the snapshot when required
+  3. A team uses an Amazon RDS MySQL database running for running resource-intensive tests each month. The instance has Performance Insights enabled and is only used once a month for up to 48 hours. The team wants to reduce the cost of running the tests without reducing the memory and compute attributes of the DB instance. Which solution meets these requirements MOST cost-effectively? ==> Create a snapshot of the database when the tests are completed. Terminate the DB instance. Create a new DB instance from the snapshot when required.
 
 ### Amazon Aurora
 
-- KeyWords: Relation Database (SQL), Scalable (Read Replicas - across AZs for HA), Global Database (**across Regions**), AWS proprietary Database, Serveless (optional), RDBS Enginnes Support only MySQL and PostgreSQL
+- KeyWords: Relation Database (SQL), Scalable, HA (Multi AZ Deployment), Read Replicas, Global Database (**across Regions**), AWS proprietary Database, Serveless (optional), RDBS Enginnes Support only MySQL and PostgreSQL
 
 ![AWS Aurora](https://d1.awsstatic.com/Product-Page-Diagram_Amazon-Aurora_How-it-Works.b1c2b37e7548757780b195c6dcceb58511de5b1d.png)
 
 - It is Saas which manages own AWS engine for relational database (Aurora Global Database) **compatible with MySQL and PostgreSQL**
   - Provides 5x better performance than MySQL
   - Provides 3x better performance than Postgres SQL
+- It allows multiAZ deployment for redundancy and HA (same as Amazon RDS)
 
 ![Aurora Replicas](https://digitalcloud.training/wp-content/uploads/2022/01/amazon-aurora-fault-tolerance.jpeg)
 
 - **Replicas**: 2 copies of your data is contained in each Availability Zone (AZ) — minimum of 3 AZ’s and 6 copies.
-  - It works **in-region and cross-regions**
-  - Typically operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
+  - It works **in-region and cross-regions** (Cross region ==> Global Database)
+  - It operates as a DB cluster consist of one or more DB instances and a cluster volume that manages cluster data with each AZ having a copy of volume.
     - Primary DB instance - Only one primary instance, supports both read and write operation.
     - Read Replicas - There are two types of replication: Aurora replica (up to 15, In-region), MySQL Read Replica (up to 5, Cross-region).
   - **Fault tolerant**: It can handle the loss of up to 2 copies without affecting write ability and the lose of up to 3 copies of data without affecting read ability.
@@ -1499,8 +1490,9 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 ![Aurora Global](https://digitalcloud.training/wp-content/uploads/2022/01/aurora-global-database.jpeg)
 
 - **Global Database**: For globally distributed applications you can use Global Database, where a single Aurora database can span **multiple AWS regions** to enable fast local reads and quick disaster recovery.
-  - **Disaster Recovery**: You can use a secondary region as a backup option in case you need to recover quickly from a regional degradation or outage.
-    - It supports a Recovery Point Objective (RPO) of 1 second and a Recovery Time Objective (RTO) of 1 minute
+  - Main DB is in one region
+  - Read replicas can be spread across different regions for reducing the latency for global users.
+  - **Disaster Recovery**: You can use a secondary region as a backup option in case you need to recover quickly from a regional degradation or outage. There is asynchronous replication between the primary and secondary regions, so there may be a small amount of data loss when failing over to the secondary region ==> It supports a Recovery Point Objective (RPO) of 1 second and a Recovery Time Objective (RTO) of 1 minute.
 
 - Backups (Mix)
   - Backups do not impact performance.
@@ -1513,8 +1505,7 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
   - Used for simple, cost effective (Only pay for invocation), infrequently used, intermittent or unpredictable workloads.
 
 - Use Cases:
-  1. A company runs a web application that store data in an Amazon Aurora database. A solutions architect needs to make the application more resilient to sporadic increases in request rates.
-  - To resolve this situation Amazon Aurora Read Replicas can be used to serve read traffic which offloads requests from the main database.
+  1. A company runs a web application that store data in an Amazon Aurora database. A solutions architect needs to make the application more resilient to sporadic increases in request rates ==> To resolve this situation Amazon Aurora Read Replicas can be used to serve read traffic which offloads requests from the main database.
   2. An insurance company has a web application that serves users in the United Kingdom and Australia. The application includes a database tier using a MySQL database hosted in eu-west-2. The web tier runs from eu-west-2 and ap-southeast-2. Amazon Route 53 geoproximity routing is used to direct users to the closest web tier. It has been noted that Australian users receive slow response times to queries. How to improve the performance? ==> Migrate the database to an Amazon Aurora global database in MySQL compatibility mode. Configure read replicas in ap-southeast-2
   3. An application requires a MySQL database which will only be used several times a week for short periods. The database needs to provide automatic instantiation and scaling ==> Aurora Severless
   4. An store uses an Amazon Aurora database. The database is deployed as a Multi-AZ deployment. Recently, metrics have shown that database read requests are high and causing performance issues which result in latency for write requests. How to separate the read requests from the write requests? ==> Update the application to read from the Aurora Replica. An Aurora Replica already exists as this is a Multi-AZ configuration and the standby is an Aurora Replica that can be used for read traffic.
@@ -1522,7 +1513,7 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 
 ### DynamoDB
 
-- KeyWords: NoSQL, AWS proprietary, Eventual Consistent Read, Strongly Consistent Reads, IoT, Near Real Time Performance, key-value database, Session Data, Global tables (Cross Regions)
+- KeyWords: NoSQL, AWS proprietary, Eventual Consistent Read, Strongly Consistent Reads, IoT, Near Real Time Performance, key-value database, Session Data, Global tables (Cross Regions), DynamoDB Accelerator (DAX)
 
 ![AWS Dynamo DB](https://d1.awsstatic.com/product-page-diagram_Amazon-DynamoDBa.1f8742c44147f1aed11719df4a14ccdb0b13d9a3.png)
 
@@ -1573,7 +1564,7 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 
 ![AWS ElasticCache](https://d1.awsstatic.com/elasticache/EC_Use_Cases/product-page-diagram_ElastiCache_how-it-works.ec509f8b878f549b7fb8a49669bf2547878303f6.png)
 
-- It is SaaS for **in-memory caching** supporting flexible, real-time use cases. In-memory key/value store, not persistent in the traditional sense.
+- It is SaaS for **in-memory caching** supporting flexible, real-time use cases. In-memory key/value store, **not persistent** in the traditional sense.
 - Fully managed implementations of two popular in-memory data stores – Redis and Memcached.
   - Memcached — A widely adopted in-memory key store, and historically the gold standard of web caching. For simple Uses Cases Memcached is also **multithreaded**, meaning it makes good use of larger Amazon EC2 instance sizes with multiple cores.
   - Redis — An increasingly popular open-source key-value store that supports more advanced data structures (such as sorted sets, hashes, and lists). Unlike Memcached, Redis has **disk persistence** built in and it also supports replication, which can be used to achieve **Multi-AZ redundancy** (HA).
@@ -1823,7 +1814,6 @@ Go to [Index](#index)
   - Schedule/Run a Replication Task (Replication Instance - VM) to move the data
   - No downtime (Source stays functioning the whole time during the migration)
 - Types of migrations:
-- Types:
 
 **A/** Homogenous migrations (origin and target same technology) e.g. On-premise PostgreSQL => AWS RDS PostgreSQL
 
@@ -1832,12 +1822,6 @@ Go to [Index](#index)
 **B/** Heterogenous migrations (origin and target different technology) such as MS SQL to Amazon Aurora. It requires to run AWS SCT (Schema Conversion Tool) at source
 
 ![dms_heterogeneous](https://d1.awsstatic.com/reInvent/reinvent-2022/data-migration-services/product-page-diagram_AWS-DMS_Heterogenous-Brief.e64d5fda98f36a79ab5ffcefa82b2735f94540ea.png)
-
-Exam Tip: Migration from on-premises Databases to AWS RDS (e.g Microsoft SQL Server)
-
-- Select the same Database Engine in the origin and destination
-- Move data using [AWS DMS](#database-migration-service-dms)
-  - You only need the Schema Conversion Tool (SCT) if origin and destination are different enginees
 
 ### AWS Application Migration Service (MGN)
 
@@ -1892,7 +1876,7 @@ Go to [Index](#index)
 
 - A **range of IP addresses** within a VPC.
   - You assign **one CIDR block per Subnet**. It should not overlap with other Subnet’s CIDR in your VPC.
-  - Amazon don't allow /8 prefix as it is too large — the largest they allow is /16
+  - Amazon doesn't allow /8 prefix as it is too large — the largest they allow is /16
   - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use.
     - For e.g. If you need 29 IP addresses to use, your should choose CIDR /26 = 64 IP and not /27 = 32 IP, since 5 IPs are reserved and can not use.
   - Enable Auto assign public IPv4 address in public subnets, EC2 instances created in public subnets will be assigned a public IPv4 address
@@ -1907,11 +1891,11 @@ Go to [Index](#index)
 
 - It is an internet protocol address allocation and route aggregation methodology. CIDR block has two components - Base IP (WW.XX.YY.ZZ) and Subnet Mask (From /0 to /32)
 - Examples - Base IP 192.168.0.0
-  - 192.168.0.0/32 means 2 raised to (32-**32**) = **1 single IP**
+  - 192.168.0.0/**32** means 2 raised to (32-**32**) = **1 single IP**
   - 192.168.0.0/24 means 2 raised to (32-**24**) = 256 IPs ranging from 192.168.0.0 to 192.168.0.255 (last number can change)
   - 192.168.0.0/16 means 2 raised to (32-**16**) = 65,536 IPs ranging from 192.168.0.0 to 192.168.255.255 (last 2 numbers can change) - Max for AWS
   - 192.168.0.0/8 means 2 raised to (32-8)= 16,777,216 IPs ranging from 192.0.0.0 to 192.255.255.255 (last 3 numbers can change)
-  - 0.0 0.0.0.0/0 means 232-0= All IPs ranging from 0.0.0.0 to 255.255.255.255 (all 4 numbers can change)
+  - 0.0 0.0.0.0/**0** means 232-0= All IPs ranging from 0.0.0.0 to 255.255.255.255 (all 4 numbers can change)
 
 ##### B/ Internet Gateway (No created by default)
 
@@ -1941,18 +1925,16 @@ Go to [Index](#index)
 ##### D/ Network Access Control List (Created by default)
 
 - It **acts as a Firewall**, it controls the inbound and ourbound traffic **at Subnets level** ==> It applies to all instances in associated subnet.
-- Differences with Security groups:
-  - You can **block IP addresses**, it allows Deny Rules
-  - They are **stateless**, when you create an inbound rule and an outbound rule is not automatically created. It means they can have separate inbound and outbound rules.
+- STATELESS, when you create an inbound rule and an outbound rule is not automatically created.
 - Cardinality: A NACL can be associated with many Subnets, but a subnet can only have one NACL.
 - VPCs comes with a modifiable default NACL it allows all inbound and outbound traffic (by default)
   - You can create custom NACL --> denies all inbound and outbound traffic until you add rules (by default)
 - Each subnet within a VPC must be associated with only 1 NACL
   - If you don’t specify, auto associate with default NACL
   - If you associate with new NACL, auto remove previous association
-- Rules
+- Rules:
   - **Support both Allow and Deny rules**
-  - **Evaluate rules in number order**, starting with lowest numbered rule. NACL rules have number (1 to 32766) and **higher precedence to lowest number** for e.g. #100 ALLOW <IP> and #200 DENY <IP> means IP is allowed
+  - **Evaluate rules in number order**. NACL rules have number (1 to 32766) and **higher precedence to lowest number** for e.g. #100 ALLOW <IP> and #200 DENY <IP> means IP is allowed
     - Tip: It is recommended to create numbered rules in increments (for example, increments of 10 or 100) so that you can insert new rules where you need to later on.
   - Each network ACL also includes a rule with rule number as asterisk *. If any of the numbered rule doesn’t match, it’s denies the traffic. You can't modify or remove this rule.
 
@@ -1961,13 +1943,13 @@ Go to [Index](#index)
 - It **acts as a Firewall**, it controls inbound and outbound traffic **at EC2 instance level**, specific for each instance.
 - If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
 - Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
-- You can specify a source in security group rule to be an IP range, a specific IP (/32), or another security group.
-- When you first create a security group, by default (no rules)
+- You can specify a source in security group rule to be an IP range, a specific IP (/32), **or another security group**.
+- When you first create a security group by default (no rules):
   - **All inbound traffic is blocked by default** - so we enable some IP and ports using Security Groups.
     - To let All IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
     - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
   - **All outbound traffic is allowed**.
-    - Common Ports: HTTP (80) and HTTPS (443)
+    - Common Ports: HTTP (80) and HTTPS (443).
 - Cardinality: N Security Group <--> N EC2 instance.
   - You can have any number of EC2 instances within a security group.
   - You can have multiple Security Groups attached/assigned to EC2 instances. Evaluate all rules before deciding whether to allow traffic. Meaning if you have one security group which has no Allow and you add an allow in another than it will Allow
@@ -1976,10 +1958,10 @@ Go to [Index](#index)
   - **Security Groups are only permisse**, you can specify allows rule, but **not deny rules**. You CANNOT block specific IP's/Port's using Security Groups instead use Network Access Control Lists.
 - Use Cases:
   1. An architect is designing a two-tier web application. The application consists of a public-facing web tier hosted on Amazon EC2 in public subnets. The database tier consists of Microsoft SQL Server running on Amazon EC2 in a private subnet. Security is a high priority for the company. How should security groups be configured in this situation?
-     - Web Tier: **inbound rule** is required to allow traffic from any internet client to the web front end on SSL/TLS port 443. The source should therefore be set to `0.0.0.0/0` to allow any inbound traffic.
-     - Web - DataBase Tier: To secure the connection from the web frontend to the database tier, an **outbound rule** should be created from the public EC2 security group with a destination of the private EC2 security group. The port should be set to 1433 for MySQL. The private EC2 security group will also need to allow inbound traffic on 1433 from the public EC2 security group.
+  - Web Tier: **inbound rule** is required to allow traffic from any internet client to the web front end on SSL/TLS port 443. The source should therefore be set to `0.0.0.0/0` to allow any inbound traffic.
+  - Web - DataBase Tier: To secure the connection from the web frontend to the database tier, an **outbound rule** should be created from the public EC2 security group with a destination of the private EC2 security group. The port should be set to 1433 for MySQL. The private EC2 security group will also need to allow inbound traffic on 1433 from the public EC2 security group.
   2. An application is running on Amazon EC2 behind an Elastic Load Balancer (ELB). Content is being published using Amazon CloudFront and you need to restrict the ability for users to circumvent CloudFront and access the content directly through the ELB.
-     - The only way to get this working is by using a VPC Security Group for the ELB that is configured to allow only the internal service IP ranges associated with CloudFront. As these are updated from time to time, you can use AWS Lambda to automatically update the addresses. This is done using a trigger that is triggered when AWS issues an SNS topic update when the addresses are changed.
+  - The only way to get this working is by using a VPC Security Group for the ELB that is configured to allow only the internal service IP ranges associated with CloudFront. As these are updated from time to time, you can use AWS Lambda to automatically update the addresses. This is done using a trigger that is triggered when AWS issues an SNS topic update when the addresses are changed.
 
 #### NAT Gateway/Instances
 
