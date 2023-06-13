@@ -735,10 +735,12 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 
 ![ASG](https://d1.awsstatic.com/product-marketing/AutoScaling/aws-auto-scaling-how-it-works-diagram.d42779c774d634883bdcd0463de7bd86f6e2231d.png)
 
-- Monitors and scales applications to optimise performance and costs.
-- It can be used across a number of **different services** including EC2 instances and Spot Fleets, ECS tasks, Aurora replicas and DynamoDB tables.
+- It monitors and scales AWS Services to optimise performance and costs.
 - Autoscaling **across different AZs empowers High Availability** for instances or services.
   - Exam tip: ASG cannot created instances across different Regions.
+- It can be used across a number of **different services** including:
+  - Compute-type: EC2 instances and Spot Fleets, ECS tasks.
+  - Database-type: Aurora replicas and DynamoDB tables.
 - Instances are created in ASG using **Launch Configuration (Legacy) or Launch Template (Recommended option)**
   - You can create ASG that launches both Spot and On-Demand Instances or multiple instance types using launch template, not possible with launch configuration.
   - You cannot change the launch configuration for an ASG, you must create a new launch configuration and update your ASG with it.
@@ -757,13 +759,11 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
 ##### Dynamic Scaling
 
 - Dynamic scaling scales the capacity of your Auto Scaling group **as traffic changes occur, based on demand**.
-- Types of Dynamic Scaling Policies => Increase and decrease the current capacity of the group based on:
+- Types of Dynamic Scaling Policies
   - `Target tracking scaling`: Using **AWS CloudWatch metric with a target value** (it can combine more than one target). Health checks are performed to ensure resource level is maintained. **Most cost-effective**.
-    - Use Case:
-      1. A company runs an internal browser-based application. The application runs on Amazon EC2 instances behind an Application Load Balancer. The instances run in an Amazon EC2 Auto Scaling group across multiple Availability Zones. The Auto Scaling group scales up to 20 instances during work hours, but scales down to 2 instances overnight. Staff are complaining that the application is very slow when the day begins, although it runs well by midmorning. How should the scaling be changed to address the staff complaints and keep **costs to a minimum**?
-         - Though this sounds like a good use case for scheduled actions, using scheduled scaling will have a fixed number of instances (e.g. 20) running regardless of actual demand. A better option to be more cost effective is to use a target tracking action that triggers at a lower CPU threshold.
-      2. A web application is being deployed on an Amazon ECS. The application is expected to receive a large volume of traffic initially. The company wishes to ensure that performance is good for the launch and that costs reduce as demand decreases
-         - Use Amazon ECS Service Auto Scaling with target tracking policies to scale when an Amazon CloudWatch alarm is breached. A Target Tracking Scaling policy increases or decreases the number of tasks that your service runs based on a target value for a specific metric.
+    - Use Case: A company runs an internal browser-based application. The application runs on Amazon EC2 instances behind an Application Load Balancer. The instances run in an Amazon EC2 Auto Scaling group across multiple Availability Zones. The Auto Scaling group scales up to 20 instances during work hours, but scales down to 2 instances overnight. Staff are complaining that the application is very slow when the day begins, although it runs well by midmorning. How should the scaling be changed to address the staff complaints and keep **costs to a minimum**?
+      - Though this sounds like a good use case for scheduled actions, using scheduled scaling will have a fixed number of instances (e.g. 20) running regardless of actual demand. A better option to be more cost effective is to use a target tracking action that triggers at a lower CPU threshold.
+
   - `Step scaling`: A set of scaling adjustments, known as _step adjustments_, that vary based on the size of the alarm breach.
     - CloudWatch alarm `CPUUtilization` (60%-80%)- add 1, (>80%) - add 3 more, (30%-40%) - remove 1, (<30%) - remove 2 more
   - `Simple scaling`: A `single scaling adjustment`, with a `cooldown period` between each scaling activity.
@@ -774,7 +774,6 @@ Auto Scaling offers both dynamic scaling and predictive scaling options:
 Predictive is **only available for EC2** auto scaling groups and the scaling can work in a number of ways:
 
 - Set `Maximum Capacity`: You specify minimum and maximum instances or desired capacity required and EC2 autoscaling manages the progress of creating/terminating based on what you have specified. min <= desired <= max
-
 - Scale Based on a `Schedule`: Scaling performed as a function of time to reflect forecasted load. For example, if you know there will be increased load on the application at 9am every morning you can choose to scale at this time.
   - Use Case: A company runs an application using an Amazon EC2 Auto Scaling group behind an ALB. When running month-end reports on a specific day and time each month the application becomes unacceptably slow. Amazon CloudWatch metrics show the CPU utilization hitting 100%.
     - The best solution ==> Configure an EC2 Auto Scaling scheduled scaling policy based on the monthly schedule. In this case the scaling action can be scheduled to occur just prior to the time that the reports will be run each month.
@@ -783,7 +782,7 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 
 ### Lambda
 
-- FaaS (**Function as a Service**), Serverless. You don’t have to worry about OS or scaling (scale on demand)
+- FaaS (**Function as a Service**), **Serverless**. You don’t have to worry about OS or scaling
   - Concurrency is the number of in-flight requests your AWS Lambda function is handling at the same time. For each concurrent request, Lambda provisions a separate instance of your execution environment. As your functions receive more requests, Lambda automatically handles scaling the number of execution environments until you reach your account's concurrency limit. By default, Lambda provides your account with a total concurrency limit of 1,000 across all functions in a region.
 - Lambda function supports many languages such as Node.js, Python, Java, C#, Golang, Ruby, etc.
 - It is cheaper than EC2 because there is **no charge when your code is not running**. What determines price for Lambda?
@@ -810,8 +809,6 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
   - **Max environment variables size can be 4KB**
   - Compressed `.zip` and uncompressed code can’t exceed **50MB and 250MB respectively**
 
-
-
 - Uses Case: A a new service that will use an Amazon API Gateway API on the frontend is being designed. The service will need to persist data in a backend database using key-value requests. Which combination of AWS services would meet the most cost efective and scalable solution?
   - Amazon RDS or Dynamo DB => DynamoDB is built for key-value data storage requirements (No-SQL). Moreover, it is serverless and easily scalable.
   - For EC2, AWS fargate, Lambda => Lambda can perform the computation and store the data in an Amazon DynamoDB table (as long as it does not go over its limitations). Lambda can scale concurrent executions to meet demand easily.
@@ -820,7 +817,7 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 
 ### Elastic Container Registry (ECR)
 
-- It is Docker Registry to pull and push Docker images, managed by Amazon.
+- It is Container Images Registry managed by Amazon.
 
 ### Elastic Container Service (ECS)
 
@@ -833,13 +830,13 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 - Terminology:
   - Cluster: Logical Grouping of EC2 Instances
   - Container Instance: EC2 instance running the ECS agent
-  - Task Definition: Blueprint that describes how a docker container should launch
+  - Task Definition: Blueprint that describes how a container should launch
   - Task: A running container using settings in a Task Definition
   - Service: Defines long running tasks – can control task count with Auto Scaling and attach an ELB
+- Launch type determines the type of infrastructure on which your tasks and services are hosted.
 
 ![Launch Type](https://digitalcloud.training/wp-content/uploads/2022/01/amazon-ecs-ec2-vs-fargate-1.jpeg)
 
-An Amazon ECS launch type determines the type of infrastructure on which your tasks and services are hosted.
 
 | Amazon EC2                              | Amazon Fargate        |
 | ----------------------------------------| ----------------------|
