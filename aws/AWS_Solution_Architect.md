@@ -833,7 +833,7 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
   - Task Definition: Blueprint that describes how a container should launch
   - Task: A running container using settings in a Task Definition
   - Service: Defines long running tasks – can control task count with Auto Scaling and attach an ELB
-- Launch type determines the type of infrastructure on which your tasks and services are hosted.
+- `Launch type` determines the type of infrastructure on which your tasks and services are hosted.
 
 ![Launch Type](https://digitalcloud.training/wp-content/uploads/2022/01/amazon-ecs-ec2-vs-fargate-1.jpeg)
 
@@ -857,11 +857,12 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 
 | ECS                                     | EKS                   |
 | ----------------------------------------| ----------------------|
-| AWS-specific platform that supports Docker Containers | Compatible with upstream Kubernetes so it’s easy to lift and shift from other Kubernetes deployments |
+| AWS-specific platform that supports Containers | Compatible with upstream Kubernetes so it’s easy to lift and shift from other Kubernetes deployments |
 | Considered simpler and easier to use | Considered more feature-rich and complex with a steep learning curve |
 | Leverages AWS services like Route 53, ALB, and CloudWatch | A hosted Kubernetes platform that handles many things internally |
 | “Tasks” are instances of containers that are run on underlying compute but more of less isolated | “Pods” are containers collocated with one another and can have shared access to each other |
 | Limited extensibility | Extensible via a wide variety of third-party and community add-ons. |
+| Lauch Types: EC2 and Fargate: | Node Groups Types: Self-managed, Managed and Fargate |
 
 - [Types of Node Groups](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html)
   - Self-managed: You bring your own servers and have more control of the server. You have to manage it yourself though.
@@ -910,7 +911,6 @@ Services that help to **decouple components**.
   2. A web application allows users to upload photos. The application offers two tiers of service: free and paid. Photos uploaded by paid users should be processed before those submitted using the free tier. The photos are uploaded to an Amazon S3 bucket which uses an event notification to send the job information to Amazon SQS. How to meet the requirements ? ==> AWS recommend using separate queues when you need to provide prioritization of work. The logic can then be implemented at the application layer to prioritize the queue for the paid photos over the queue for the free photos.
   3. A company is working with a partner that has an application that must be able to send messages to one of the company’s Amazon SQS queues. The partner company has its own AWS account. How can least privilege access to the partner be provided? ==> Amazon SQS supports resource-based policies. The best way to grant the permissions using the **principle of least privilege** is to use a resource-based policy attached to the SQS queue that grants the partner company’s AWS account the `sqs:SendMessage` privilege.
   4. Integration: It can be configured to scale EC2 instances using Auto Scaling based on the number of jobs waiting in the SQS queue. It can be used the backlog per instance metric with the target value being the acceptable backlog per instance to maintain.
-
 
 #### Types of Queues
 
