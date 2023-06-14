@@ -2182,11 +2182,12 @@ Go to [Index](#index)
 
 - Options
   - It has **caching** capabilities for a Stage to increase performance ==> When it is enabled the Stage cache responses instead of your endpoint for a specified time-to-live (TTL) period, in seconds (min - max: 0 - 3600).
-  - Throttling settings: Allows you to **track and control usage of API** (Set throttle limit (default 10,000 req/s) to prevent from being overwhelmed by too many requests and returns `429 Too Many Request` error response). Different types:
+  - Throttling settings: Allows you to **track and control usage of API** (Set throttle limit (default 10,000 req/s) to prevent from being overwhelmed by too many requests and returns `429 Too Many Request` error response).
     - AWS throttling limits are applied across all accounts and clients in a region
-    - Per-account limits are applied to all APIs in an account in a specified Region
-    - Per-API, per-stage throttling limits are applied at the API method level for a stage.
-    - Per-client throttling limits are applied to clients that use API keys associated with your usage plan as client identifier
+    - Different types:
+      - Per-account limits are applied to all APIs in an account in a specified Region
+      - Per-API, per-stage throttling limits are applied at the API method level for a stage.
+      - Per-client throttling limits are applied to clients that use API keys associated with your usage plan as client identifier
   - You can log results to CloudWatch
 - If you are using Javascript/AJAX that uses multiple domains with API Gateway, ensure that you have enable CORS on API Gateway.
   - CORS: Cross-Origin Resource Sharing ==> It is a mechanism that allows restricted resources on a domain (eg: `example.com`) to be requested from another domain outside the domain from which the first resource was served (eg: `fonts.com`).
@@ -2197,8 +2198,7 @@ Go to [Index](#index)
 
 ### AWS AppSync
 
-- It is a serverless GraphQL and Pub/Sub API service that simplifies building modern web and mobile applications.
-- AWS AppSync GraphQL APIs simplify application development by providing a single endpoint to securely query or update data from multiple databases, microservices, and APIs
+- It is a serverless GraphQL and Pub/Sub API service that simplifies building modern web and mobile applications ==> It provides a single endpoint to securely query or update data from multiple databases, microservices, and APIs
 
 ### AWS Global Accelerator
 
@@ -2213,7 +2213,7 @@ Go to [Index](#index)
   - First you create global accelerator using **static IP addresses** (Seamless failover is ensured => IP does not change when failing over between regions so there are no issues with client caches having incorrect entries that need to expire). Two options:
     - Using new static anycast IP
     - Using existing public IPs (migration)
-  - Then you register one or more endpoints with Global Accelerator (HTTP nd non-HTTP). Each endpoint can have one or more AWS resources such as NLB, ALB, EC2, S3 Bucket or Elastic IP.
+  - Then you register one or more endpoints with Global Accelerator (HTTP and non-HTTP). Each endpoint can have one or more AWS resources such as NLB, ALB, EC2, S3 Bucket or Elastic IP.
 - Within endpoint, global accelerator monitor health checks of all AWS resources to send traffic to healthy resources only
 - Adjustment in the Endpoints
   - You can control traffic using traffic dials. This is done within the endpoint group.
@@ -2231,6 +2231,7 @@ Go to [Index](#index)
 - It is a **Content Delivery Network (CDN)** uses `AWS edge locations` to **cache and securely deliver** cached content (such as images and videos) based on the **geographic locations** of the user, the origin of the webpage and a content delivery server (Requests to content are automatically routed to nearest geographical edge location). Advantages ==> **Low latency and high transfer speeds**.
   - `Edge Location` → Location where content will be cached (different to an AWS Region). It can be used for read and write.
   - `Origin` → Location that hosts all the files that the CDN will distribute — can be an S3 Bucket, EC2, ELB etc (Any type of AWS resource).
+    - For s3 as Origin you can use Origin Access Control (OAC) and Origin Access Identity (OAI) to avoid the S3 bucket to have public access for downloading objects when it is selected as Origin for CDN.
   - `Distribution` → Name of the CDN, which consists of a collection of edge locations. There are two types:
     - Web Distributions which are used for websites (Download Data)
     - RTMP Distributions which are used for streaming media (Stremming Access)
@@ -2239,15 +2240,13 @@ Go to [Index](#index)
 - Objects are cached for the `Time To Live (TTL)` - default 24 hours.
   - **If requested resources does not exist on CloudFront — it will query the original server and then cache it on the edge location**. Next requests get a cached copy from the Edge Location instead of downloading it again from the server until TTL expires.
   - It is possible to clear cached objects, however you will incur a charge.
-- Can integrate with AWS Shield, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
+- It can integrate with AWS Shield, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
 - It supports **Geo restriction (Geo-Blocking)** to whitelist or blacklist countries that can access the content.
 - Use Cases:
   1. A company offers an online product brochure that is delivered from a static website running on Amazon S3. The company’s customers are mainly in the United States, Canada, and Europe. With Amazon CloudFront you can set the price class to determine where in the world the content will be cached. One of the price classes is “U.S, Canada and Europe” and this is where the company’s users are located. Choosing this price class will result in lower costs and better performance for the company’s users.
-  2. A company runs a web application that serves weather updates. The application runs on a fleet of Amazon EC2 instances in a Multi-AZ Auto scaling group behind an Application Load Balancer (ALB). How to make the application more resilient to sporadic increases in request rates?
-     - On the frontend an Amazon CloudFront distribution can be placed in front of the ALB and this will cache content for better performance and also offloads requests from the backend.
+  2. A company runs a web application that serves weather updates. The application runs on a fleet of Amazon EC2 instances in a Multi-AZ Auto scaling group behind an Application Load Balancer (ALB). How to make the application more resilient to sporadic increases in request rates? ==> On the frontend an Amazon CloudFront distribution can be placed in front of the ALB and this will cache content for better performance and also offloads requests from the backend.
   3. An organization want to share regular updates about their charitable work using static webpages. The pages are expected to generate a large amount of views from around the world. The files are stored in an Amazon S3 bucket. How to design an efficient and effective solution => Amazon CloudFront can be used to cache the files in edge locations around the world and this will improve the performance of the webpages. Possible configuration. Using a REST API endpoint or Using a website endpoint as the origin with anonymous (public) access allowed or with access restricted by a Referer header.
-  4. An Amazon S3 bucket in the us-east-1 Region hosts the static website content of a company. The content is made available through an Amazon CloudFront origin pointing to that bucket. A second copy of the bucket is created in the ap-southeast-1 Region using cross-region replication. The chief solutions architect wants a solution that provides greater availability for the website. Which combination of actions should be taken to increase availability?
-     - You can set up CloudFront with origin failover for scenarios that require high availability. To get started, you create an origin group with two origins: a primary and a secondary. If the primary origin is unavailable or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.
+  4. An Amazon S3 bucket in the us-east-1 Region hosts the static website content of a company. The content is made available through an Amazon CloudFront origin pointing to that bucket. A second copy of the bucket is created in the ap-southeast-1 Region using cross-region replication. The chief solutions architect wants a solution that provides greater availability for the website. Which combination of actions should be taken to increase availability? ==> **You can set up CloudFront with origin failover for scenarios that require high availability**. To get started, you create an origin group with two origins: a primary and a secondary. If the primary origin is unavailable or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.
   5. A company runs a dynamic website that is hosted on an on-premises server in the United States. The company is expanding to Europe and is investigating how they can optimize the performance of the website for European users. The website’s backed must remain in the United States. The company requires a solution that can be implemented within a few days. Best Practice => A custom origin can point to an on-premises server and CloudFront is able to cache content for dynamic websites. Additionally, connections are routed from the nearest Edge Location to the user across the AWS global network. If the on-premises server is connected via a Direct Connect (DX) link this can further improve performance.
   6. An application generates **unique files** that are returned to customers after they submit requests to the application. The application uses an Amazon CloudFront distribution for sending the files to customers. The company wishes to reduce data transfer costs without modifying the application. How can this be accomplished?
      - Use Lambda@Edge to compress the files as they are sent to users
@@ -2274,6 +2273,8 @@ Go to [Index](#index)
 - Contains additional information e.g. expiration date/time.
 - Can have different origins and can utilise caching features.
 
+#### Running Code in CloudFront/Customization
+
 ##### Lambda@Edge
 
 - It is a feature of Amazon CloudFront that lets you run code closer to users of your application, which improves performance and reduces latency.
@@ -2297,7 +2298,7 @@ Go to [Index](#index)
     - AWS - You need to create a Hosted Zone in Route 53
     - 3 party DNS provider - update the 3rd party registrar NS (name server) records to use Route 53.
 - It also works well with other AWS services — it allows you to connect requests to your infrastructure such as to EC2 instances, ELBs or S3 buckets.
-- Private Hosted Zone is used to create an internal (intranet) domain name to be used within Amazon VPC. You can then add some DNS record and routing policy for that internal domain. That internal domain is accessible from EC2 instances or any other resource within VPC.
+- `Private Hosted Zone` is used to create an internal (intranet) domain name to be used within Amazon VPC. You can then add some DNS record and routing policy for that internal domain. That internal domain is accessible from EC2 instances or any other resource within VPC.
 
 #### Terminology
 
@@ -2344,7 +2345,7 @@ example.com Alias(A) dualstack.elb123.us-east 1.elb.amazonaws.com.
 
 #### DNS Record: Routing Policy
 
-**Exam Tip**: For Applying any type of Routing Policy is required more that one endpoint (AWS reasource). Exception: Simple Routing Policy.
+**Exam Tip**: For Applying any type of Routing Policy is required more that one endpoint (AWS resource: EC2, s3, etc.). Exception: Simple Routing Policy.
 
 In order for Route 53 to respond to queries, you need to define one of the following routing policies:
 
@@ -2369,19 +2370,60 @@ In order for Route 53 to respond to queries, you need to define one of the follo
 - `Geoproximity` to route traffic to specific IP based on **user AND AWS resources geolocation**.
   - You can also optionally choose to route more traffic or less to a given resource by specifying a value, known as a bias A bias expands or shrinks the size of the geographic region from which traffic is routed to a resource.
   - To use Geoproximity Routing, you must use **Route 53 traffic flow**.
-
-- Use Case: A company hosts data in an Amazon S3 bucket that users around the world download from their website using a URL that resolves to a domain name. The company needs to provide low latency access to users and plans to use Amazon Route 53 for hosting DNS records.
-  - The best solution here is to use Amazon CloudFront to cache the content in Edge Locations around the world. This involves creating a web distribution that points to an S3 origin (the bucket) and then create **an Alias** record in Route 53 that resolves the applications URL to the CloudFront distribution endpoint with **Simply routing**.
-  - In this scenarios routing strategies like `Geoproximity` would not work ==> There is only a single endpoint (the Amazon S3 bucket) so this strategy would not work. Much better to use CloudFront to cache in multiple locations.
+  - Use Case: A company hosts data in an Amazon S3 bucket that users around the world download from their website using a URL that resolves to a domain name. The company needs to provide low latency access to users and plans to use Amazon Route 53 for hosting DNS records.
+    - The best solution here is to use Amazon CloudFront to cache the content in Edge Locations around the world. This involves creating a web distribution that points to an S3 origin (the bucket) and then create **an Alias** record in Route 53 that resolves the applications URL to the CloudFront distribution endpoint with **Simply routing**.
+    - In this scenarios routing strategies like `Geoproximity` would not work ==> There is only a single endpoint (the Amazon S3 bucket) so this strategy would not work. Much better to use CloudFront to cache in multiple locations.
 
 #### DNS Failover
 
 - `Active-Active` failover when you want all resources to be available the majority of time. All records have same name, same type, and same routing policy such as **weighted or latency**
 - `Active-Passive` failover when you have active primary resources and standby secondary resources. You create two records - primary & secondary with **failover routing policy**
 
+### AWS Outposts
+
+- It is a **pool of AWS compute and storage capacity deployed at a customer site**, extending AWS infrastructure and services
+  - AWS operates, monitors, and manages this capacity as part of an AWS Region.
+  - You can create subnets on your Outpost and specify them when you create AWS resources such as EC2 instances, EBS volumes, ECS clusters, and RDS instances.
+  - Instances in Outpost subnets communicate with other instances in the AWS Region using private IP addresses, all within the same VPC.
+- AWS Outposts is good for workloads that require **low latency** access to on-premises systems, local data processing, or local data storage.
+
+![Outposts architecture example](https://documentation.commvault.com/img/129254.png)
+
 ## Management_and_Governance
 
 Go to [Index](#index)
+
+### AWS Organization
+
+![Organization](https://d1.awsstatic.com/diagrams/organizations-HIW.1870c83be9fdfc55680172a1861080a91b700fff.png)
+
+- Global Services that lets you create new AWS accounts at no additional charge.
+  - With accounts in an organization, you can easily allocate resources, group accounts, and apply governance policies to accounts or groups, **consolidate billing across all accounts (single payment method)**
+  - It has a master account and multiple member accounts
+  - Member Acccounts or `Organization Units (OUs)` are based on department, cost center or environment, OU can have other OUs (hierarchy)
+  - <a name="scp">`Service Control Policies (SCPs)` (IAM Organization Policy)</a>
+    - It can work at OU level or account level
+    - It offers central control over the maximum available permissions for all accounts in your organization.
+    - It helps you to ensure your accounts stay within your organization’s access control guidelines.
+- Best practices with AWS Organizations.
+  - Always enable multi-factor authentication on root or master account.
+  - Always use strong and complex passwords on root account.
+  - Paying account should be used for billing purposes only. Do not deploy resources into the paying account, into the root account or the master account.
+  - Enable and disable AWS services using service control policies (SCPs) either on organisational units or on individual accounts.
+- Use Cases:
+  1. An AWS Organization has an OU with multiple member accounts in it. The company needs to restrict the ability to launch only specific Amazon EC2 instance types. How can this policy be applied across the accounts with the least effort?
+     - Use a Service Control Policy (SCP) in the AWS Organization. The way you would do this is to create a deny rule that applies to anything that does not equal the specific instance type you want to allow.
+  2. A company has divested a single business unit and needs to move the AWS account owned by the business unit to another AWS Organization. How can this be achieved?
+     - Migrate the account using the AWS Organizations console. To do this you must have root or IAM access to both the member and master accounts. Resources will remain under the control of the migrated account.
+
+#### Consolidated Billing
+
+- It helps to consolidate billing and payment for multiple AWS accounts.
+- Consolidated billing has the following benefits:
+  - One bill – You get one bill for multiple accounts.
+  - Easy tracking – You can track the charges across multiple accounts and download the combined cost and usage data.
+  - Combined usage – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans. This can result in a lower charge for your project, department, or company than with individual standalone accounts. For more information, see Volume discounts.
+  - No extra fee – Consolidated billing is offered at no additional cost.
 
 ### Amazon CloudWatch
 
@@ -2395,7 +2437,7 @@ Go to [Index](#index)
   - `Alarms`: Allows you to set Alarms that notify you when particular metric thresholds are hit
   - `Events`: CloudWatch Events helps you to respond to state changes in your AWS resources.
   - `Logs`: CloudWatch Logs helps you to aggregate, monitor and store logs.
-- Share Dashboards to people outside the AWS account/organization (or embeed CloudWatch Dashboards into an external website) => CloudWatch > Dashboard > Select your board > Share Dashboard >Share your dashboard and require a username and password>Enter mail address.
+- Share Dashboards to people outside the AWS account/organization (or embeed CloudWatch Dashboards into an external website) => CloudWatch > Dashboard > Select your board > Share Dashboard > Share your dashboard and require a username and password > Enter mail address.
 
 #### CloudWatch with EC2
 
@@ -2520,41 +2562,11 @@ Go to [Index](#index)
 
 ### AWS Simple Workflow Service (SWF)
 
+![swf](https://media.geeksforgeeks.org/wp-content/uploads/20220302223230/HowamazonSWFworks.png)
+
 - It is a service that makes it easy to **coordinate work across distributed application components** in the AWS Cloud.
 - A task represents a logical unit of work that is performed by a component of your workflow. SWF coordinates tasks in a workflow involving the manage intertask dependencies, schedulle, and concurrency in accordance with the logical flow of the application.
 - Use cases: including media processing, web application back-ends, business process workflows and analytics pipelines, to be designed as a coordination of tasks.
-
-### AWS Organization
-
-![Organization](https://d1.awsstatic.com/diagrams/organizations-HIW.1870c83be9fdfc55680172a1861080a91b700fff.png)
-
-- Global Services that lets you create new AWS accounts at no additional charge.
-  - With accounts in an organization, you can easily allocate resources, group accounts, and apply governance policies to accounts or groups, **consolidate billing across all accounts (single payment method)**
-  - It has a master account and multiple member accounts
-  - Member Acccounts or `Organization Units (OUs)` are based on department, cost center or environment, OU can have other OUs (hierarchy)
-  - <a name="scp">`Service Control Policies (SCPs)` (IAM Organization Policy)</a>
-    - It can work at OU level or account level
-    - It offers central control over the maximum available permissions for all accounts in your organization.
-    - It helps you to ensure your accounts stay within your organization’s access control guidelines.
-- Best practices with AWS Organizations.
-  - Always enable multi-factor authentication on root or master account.
-  - Always use strong and complex passwords on root account.
-  - Paying account should be used for billing purposes only. Do not deploy resources into the paying account, into the root account or the master account.
-  - Enable and disable AWS services using service control policies (SCPs) either on organisational units or on individual accounts.
-- Use Cases:
-  1. An AWS Organization has an OU with multiple member accounts in it. The company needs to restrict the ability to launch only specific Amazon EC2 instance types. How can this policy be applied across the accounts with the least effort?
-     - Use a Service Control Policy (SCP) in the AWS Organization. The way you would do this is to create a deny rule that applies to anything that does not equal the specific instance type you want to allow.
-  2. A company has divested a single business unit and needs to move the AWS account owned by the business unit to another AWS Organization. How can this be achieved?
-     - Migrate the account using the AWS Organizations console. To do this you must have root or IAM access to both the member and master accounts. Resources will remain under the control of the migrated account.
-
-#### Consolidated Billing
-
-- It helps to consolidate billing and payment for multiple AWS accounts.
-- Consolidated billing has the following benefits:
-  - One bill – You get one bill for multiple accounts.
-  - Easy tracking – You can track the charges across multiple accounts and download the combined cost and usage data.
-  - Combined usage – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans. This can result in a lower charge for your project, department, or company than with individual standalone accounts. For more information, see Volume discounts.
-  - No extra fee – Consolidated billing is offered at no additional cost.
 
 ### AWS Control Tower
 
@@ -2583,13 +2595,6 @@ Go to [Index](#index)
 
 - Keywords: Batch computing
 - It empowers developers, scientists, and engineers to run efficiently **hundreds of thousands of batch** and ML computing jobs **running in parallel** while optimizing compute resources, so you can focus on analyzing results and solving problems. Removes the heavy lifting of configuring and managing the required infrastructure,
-
-### AWS Outposts
-
-- It is a fully managed service that **extends virtually** any AWS infrastructure, AWS services, APIs, and tools to **any datacenter (on-premises)**, co-location space, or on-premises facility for a truly consistent hybrid experience.
-- AWS Outposts is good for workloads that require **low latency** access to on-premises systems, local data processing, or local data storage.
-
-![Outposts architecture example](https://documentation.commvault.com/img/129254.png)
 
 ## References
 
