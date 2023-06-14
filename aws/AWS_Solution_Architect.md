@@ -1941,15 +1941,18 @@ Go to [Index](#index)
 ##### E/ Security Groups (Created by default)
 
 - It **acts as a Firewall**, it controls inbound and outbound traffic **at EC2 instance level**, specific for each instance.
-- If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
 - Changes to a security groups rules take effect immediately and are automatically applied to all instances associated with that group.
 - You can specify a source in security group rule to be an IP range, a specific IP (/32), **or another security group**.
-- When you first create a security group by default (no rules):
-  - **All inbound traffic is blocked by default** - so we enable some IP and ports using Security Groups.
-    - To let All IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
-    - Common Ports: Linux (port 22) and Microsoft - RDP (port 3389)
-  - **All outbound traffic is allowed**.
-    - Common Ports: HTTP (80) and HTTPS (443).
+- If you don't specify a Security Group, the EC2 instance is linked to the default Security Group.
+  - This has no inbound rules and a single outbound rule, which allows all traffic to any destination (0.0.0.0/0).
+- When you first create a custom security group (similar to the deafult security group):
+  - **All inbound traffic is blocked by default**
+    - No rules
+    - When adding rules, you can enable all IPs in `0.0.0.0/0`. To let a single IP address in `X.X.X.X/32` (32 means this ip address)
+    - Ports restrictions: Linux (port 22) and Microsoft - RDP (port 3389)
+  - **All outbound traffic is allowed**
+    - 1 rule to for `0.0.0.0/0` All ports. It can be modified to allow only specific IPs.
+    - Ports restrictions: HTTP (80) and HTTPS (443).
 - Cardinality: N Security Group <--> N EC2 instance.
   - You can have any number of EC2 instances within a security group.
   - You can have multiple Security Groups attached/assigned to EC2 instances. Evaluate all rules before deciding whether to allow traffic. Meaning if you have one security group which has no Allow and you add an allow in another than it will Allow
@@ -1958,10 +1961,10 @@ Go to [Index](#index)
   - **Security Groups are only permisse**, you can specify allows rule, but **not deny rules**. You CANNOT block specific IP's/Port's using Security Groups instead use Network Access Control Lists.
 - Use Cases:
   1. An architect is designing a two-tier web application. The application consists of a public-facing web tier hosted on Amazon EC2 in public subnets. The database tier consists of Microsoft SQL Server running on Amazon EC2 in a private subnet. Security is a high priority for the company. How should security groups be configured in this situation?
-  - Web Tier: **inbound rule** is required to allow traffic from any internet client to the web front end on SSL/TLS port 443. The source should therefore be set to `0.0.0.0/0` to allow any inbound traffic.
-  - Web - DataBase Tier: To secure the connection from the web frontend to the database tier, an **outbound rule** should be created from the public EC2 security group with a destination of the private EC2 security group. The port should be set to 1433 for MySQL. The private EC2 security group will also need to allow inbound traffic on 1433 from the public EC2 security group.
+     - Web Tier: **inbound rule** is required to allow traffic from any internet client to the web front end on SSL/TLS port 443. The source should therefore be set to `0.0.0.0/0` to allow any inbound traffic.
+     - Web - DataBase Tier: To secure the connection from the web frontend to the database tier, an **outbound rule** should be created from the public EC2 security group with a destination of the private EC2 security group. The port should be set to 1433 for MySQL. The private EC2 security group will also need to allow inbound traffic on 1433 from the public EC2 security group.
   2. An application is running on Amazon EC2 behind an Elastic Load Balancer (ELB). Content is being published using Amazon CloudFront and you need to restrict the ability for users to circumvent CloudFront and access the content directly through the ELB.
-  - The only way to get this working is by using a VPC Security Group for the ELB that is configured to allow only the internal service IP ranges associated with CloudFront. As these are updated from time to time, you can use AWS Lambda to automatically update the addresses. This is done using a trigger that is triggered when AWS issues an SNS topic update when the addresses are changed.
+     - The only way to get this working is by using a VPC Security Group for the ELB that is configured to allow only the internal service IP ranges associated with CloudFront. As these are updated from time to time, you can use AWS Lambda to automatically update the addresses. This is done using a trigger that is triggered when AWS issues an SNS topic update when the addresses are changed.
 
 #### NAT Gateway/Instances
 
@@ -2094,21 +2097,6 @@ Go to [Index](#index)
   - Note: IPSec encryption is not possible to be enabled on the Direct Connect connection => It requires a VPN connection to encrypt the traffic.
   2. Low-cost, short-term option for adding resilience to an AWS Direct Connect connection. What is the MOST cost-effective solution to provide a backup for the Direct Connect connection? => Implement an IPSec VPN connection and use the same BGP prefix. With this option both the Direct Connect connection and IPSec VPN are active and being advertised using the Border Gateway Protocol (BGP). The Direct Connect link will always be preferred unless it is unavailable.
 
-###### Transit Gateway
-
-- A transit **hub** that can be used to interconnect **multiple VPCs** and on-premises networks, and as a VPN endpoint for the Amazon side of the Site-to-Site VPN connection.
-- It simplifies your network (no complex peering relationships, do not use route tables).
-- It acts as a highly scalable cloud router—each new connection is made only once.
-- Difference with Transit VPC: **Transit VPC is more of a network architecture concept while Transit Gateway is a service**.
-
-![Transit Gateway](https://d1.awsstatic.com/products/transit-gateway/product-page-diagram_AWS-Transit-Gateway%402x.921cf305305867447fcabfc6b7acae9f0e5bc9d5.png)
-
-- Use Case:
-  1. A company runs a number of core enterprise applications in an on-premises data center. The data center is connected to an Amazon VPC using AWS Direct Connect. The company will be creating additional AWS accounts and these accounts will also need to be quickly, and cost-effectively connected to the on-premises data center in order to access the core applications. Which solution will cause least overhead?
-     - Configure AWS Transit Gateway between the accounts. Assign Direct Connect to the transit gateway and route network traffic to the on-premises servers. With AWS Transit Gateway, you can quickly add Amazon VPCs, AWS accounts, VPN capacity, or AWS Direct Connect gateways to meet unexpected demand, without having to wrestle with complex connections or massive routing tables. This is the operationally least complex solution and is also cost-effective.
-  2.A company has a Production VPC and a Pre-Production VPC. The Production VPC uses VPNs through a customer gateway to connect to a single device in an on-premises data center. The Pre-Production VPC uses a virtual private gateway attached to two AWS Direct Connect (DX) connections. Both VPCs are connected using a single VPC peering connection. How can this architecture be improved by removing any single point of failure?
-     - The only single point of failure in this architecture is the customer gateway device in the on-premises data center. If this device is a single device, then if it fails the VPN connections will fail.  ==> Add additional VPNs to the Production VPC from a second customer gateway device
-
 ###### Transit VPC
 
 ![Transit VPC](https://docs.aws.amazon.com/images/whitepapers/latest/aws-vpc-connectivity-options/images/image23.png)
@@ -2116,9 +2104,21 @@ Go to [Index](#index)
 - What: Common strategy for connecting geographically dispersed VPCs and locations to create a global network transit center (central hub)
 - When: Locations and VPC-deployed assets across multiple regions that need to communicate with one another
 - Pros: Ultimate flexibility and manageability but also AWS-managed VPN hub-and-spoke between VPCs. Supports IP Multicast, so can distribute the same content to multiple specific destinations (NOT supported by any other service). Simplify network topology
-- Cons: You must design for any redundancy across the whole chain
+- Cons: **You must design for any redundancy across the whole chain**
 - How: Providers like Cisco, Juniper Networks, and Riverbed have offerings which work with their equipment and AWS VPC
 
+###### Transit Gateway
+
+- A transit **hub** that can be used to interconnect **multiple VPCs** and on-premises networks, and as a VPN endpoint for the Amazon side of the Site-to-Site VPN connection.
+- It simplifies your network (**no complex peering relationships, do not use route tables**).
+- It acts as a **highly scalable** cloud router—each new connection is made only once.
+- Difference with Transit VPC: **Transit VPC is more of a network architecture concept while Transit Gateway is a service**.
+
+![Transit Gateway](https://d1.awsstatic.com/products/transit-gateway/product-page-diagram_AWS-Transit-Gateway%402x.921cf305305867447fcabfc6b7acae9f0e5bc9d5.png)
+
+- Use Cases:
+  1. A company runs a number of core enterprise applications in an on-premises data center. The data center is connected to an Amazon VPC using AWS Direct Connect. The company will be creating additional AWS accounts and these accounts will also need to be quickly, and cost-effectively connected to the on-premises data center in order to access the core applications. Which solution will cause least overhead? ==> Configure AWS Transit Gateway between the accounts. Assign Direct Connect to the transit gateway and route network traffic to the on-premises servers. With AWS Transit Gateway, you can quickly add Amazon VPCs, AWS accounts, VPN capacity, or AWS Direct Connect gateways to meet unexpected demand, without having to wrestle with complex connections or massive routing tables. This is the operationally least complex solution and is also cost-effective.
+  2. A company has a Production VPC and a Pre-Production VPC. The Production VPC uses VPNs through a customer gateway to connect to a single device in an on-premises data center. The Pre-Production VPC uses a virtual private gateway attached to two AWS Direct Connect (DX) connections. Both VPCs are connected using a single VPC peering connection. How can this architecture be improved by removing any single point of failure? ==> The only single point of failure in this architecture is the customer gateway device in the on-premises data center. If this device is a single device, then if it fails the VPN connections will fail.  ==> Add additional VPNs to the Production VPC from a second customer gateway device
 
 ##### Case B: Among VPCs
 
@@ -2141,7 +2141,7 @@ Go to [Index](#index)
 ![private link](https://d1.awsstatic.com/products/privatelink/product-page-diagram_AWS-PrivateLink.fc899b8ebd46fa0b3537d9be5b2e82de328c63b8.png)
 
 - What: AWS-provided **connectivity technology between VPCs, AWS services and/or datacenters using interface endpoints**, securely on the Amazon network backbone.
-- When: Keep private subnets truly private by using the AWS backbone rather than using the public internet. Best way to expose your VPC to hundreds or thousands of other VPC’s. Can secure your traffic and simplify network management.
+- When: **Keep private subnets truly private** by using the AWS backbone rather than using the public internet (**only private IPs for communitcation**). Best way to expose your VPC to hundreds or thousands of other VPC’s. Can secure your traffic and simplify network management.
 - Pros: Redundant; uses AWS backbone
 - Cons: ?
 - How: Create endpoint for required AWS or Marketplace service in all required subnets; access via the provided DNS hostname
