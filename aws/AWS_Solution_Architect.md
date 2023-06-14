@@ -1,6 +1,5 @@
 # AWS Solution Architect
 
-
 <p align="center">
   <img alt="terraform-icon" src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" height="160" />
   <p align="center">Notes for my AWS Certification Exam</p>
@@ -368,7 +367,7 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
 
 ### AWS Systems Manager
 
-- Keywords: Configuration and Secrets store
+- Keywords: Configuration at scale and Secrets store
 
 ![AWS Systems Manager](https://d1.awsstatic.com/AWS%20Systems%20Manager/Product-Page-Diagram_AWS-Systems-Manager.9184df66edfbc48285d16c810c3f2d670e210479.png)
 
@@ -376,6 +375,8 @@ b. `Identity pools`: It grants to Federated users temporary credentials to other
   - Use case: Centralized configuration for dev/uat/prod environment to be used by CLI, SDK, and Lambda function
 - `Run Command` allows you to automate common administrative tasks and perform one-time configuration changes on EC2 instances at scale
 - `Session Manager` replaces the need for Bastions to access instances in private subnet
+
+- Use Case: A PowerShell script is required to be executed on a fleet of Amazon EC2 instances running Microsoft Windows. The instances have already been launched. What tool can be used ==> Run Command
 
 ### AWS Secrets Manager
 
@@ -531,7 +532,8 @@ Go to [Index](#index)
 - When you restart an EC2 instance, its public IP can change. Use `Elastic IP` to assign a fixed public IPv4 to your EC2 instance.
   - By default, all AWS accounts are limited to five (5) Elastic IP addresses per Region.
 - The EC2 Root volume is a virtual disk where the OS is installed, it can only be launched on SSD or Magnetic.
-- Bootstrap scripts are code that gets ran as soon as your EC2 instance first boots up.
+- `User data` can be used to perform common automated configuration tasks and even run scripts after the instance starts at launch time.
+  - Exam Tip: If the a script needs to be run after launch, use Run Command (Systems Manager).
 - EC2 Information Endpoints (can be obteined via `curl`):
   - `http://169.254.169.254/latest/meta-data` ==> Metadata Private & public IP
   - `http://169.254.169.254/latest/user-data` ==> user-defined data
@@ -668,6 +670,11 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 
 - Designed to help **balance the load of incoming traffic** by distributing it across multiple **targets**/destinations.
   - Target group (ALB o CLB) can have one or more EC2 instances, IP Addresses, lambda functions.
+  - It is possible to use one ELB for from connected to different VPCs.
+    - AWS resources that are addressable by IP address and port.
+    - VPC are connected
+      - Instances in a peered VPC
+      - On-premises resources linked to AWS through Direct Connect or a VPN connection.
   - Internal Load Balancers are load balancers which their targets hosted inside Private Subnets
 - It makes the **traffic Scale and Fault Tolerant**. It can balance load **across one or more Availability Zones** (Not in different regions).
 - Load Balancers have their own **static DNS name** (e.g. <http://myalb-123456789.us-east-1.elb.amazonaws.com>) — you will NEVER be given an IP address
@@ -687,6 +694,7 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
       - When we enable Cross Zone Load Balancing: The Load balancer will distribute the load evenly among instances on both AZ's.
   - `Path Patterns` (path-based routing) → can **direct traffic to different targets based on request URL (path)**.
     - Use Case: We got a user and we are using Route 53 for our DNS, enabling Path Patterns we could send request to `www.myurl.com` to AZ1 and `www.myurl.com/images` to instances in AZ2.
+  - `Connection draining` is enabled by default and provides a period of time for existing connections to close cleanly. When connection draining is in action an CLB will be in the status “InService: Instance deregistration currently in progress”.
 
 - Types of ELB
 
@@ -709,6 +717,7 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 
 - Best suitable for protocol HTTP, HTTPS, WebSocket | Layer 7 (Application layer)
 - Routes traffic based on request content (hostname, request path, params, headers, source IP etc.).
+- Enable Access logs to capture information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. It is stored in S3.
 - Use Case: It is **Intelligent** and can send specific requests to specific servers.
 
 #### Network Load Balancer (NLB)
@@ -899,9 +908,10 @@ Go to [Index](#index)
   - Polling types:
     - Short Polling (`ReceiveMessageWaitTimeSeconds` = 0) - Keeps polling queue looking for work, even if it’s empty.
     - Long Polling (`ReceiveMessageWaitTimeSeconds` > 0) - Reduces the number of empty responses by allowing Amazon SQS to wait until a message is available before sending a response to a ReceiveMessage request, helps to reduce the cost.
-  - `Visibility Timeout` — **Immediately after a message is received, it remains in the queue. Amazon SQS doesn't automatically delete the message because it is a distributed system**
-    - To prevent other consumers from processing the message again, Amazon SQS sets a `visibility timeout`, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds.
-    - Exam Tip: If you are getting messages delivered twice, the cause could be your visibility timeout is too low.
+  - `Visibility Timeout` — It is the amount of time a message is invisible in the queue after a reader picks up the message,  a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds.
+    - If a job is processed within the visibility timeout the message will be deleted.
+    - If a job is **not** processed within the visibility timeout the message will become visible again (could be delivered twice)
+    - Exam Tip: If you are getting messages delivered twice, the message was not processed within the visibility timeout.
 - Exam Tip: Amazon SQS vs SNS:
   - SQS pull-based (polling). Only 1 Consumer
   - SNS Push-based. Multiple Consumers
@@ -910,6 +920,7 @@ Go to [Index](#index)
   2. A web application allows users to upload photos. The application offers two tiers of service: free and paid. Photos uploaded by paid users should be processed before those submitted using the free tier. The photos are uploaded to an Amazon S3 bucket which uses an event notification to send the job information to Amazon SQS. How to meet the requirements ? ==> AWS recommend using separate queues when you need to provide prioritization of work. The logic can then be implemented at the application layer to prioritize the queue for the paid photos over the queue for the free photos.
   3. A company is working with a partner that has an application that must be able to send messages to one of the company’s Amazon SQS queues. The partner company has its own AWS account. How can least privilege access to the partner be provided? ==> Amazon SQS supports resource-based policies. The best way to grant the permissions using the **principle of least privilege** is to use a resource-based policy attached to the SQS queue that grants the partner company’s AWS account the `sqs:SendMessage` privilege.
   4. Integration: It can be configured to scale EC2 instances using Auto Scaling based on the number of jobs waiting in the SQS queue. It can be used the backlog per instance metric with the target value being the acceptable backlog per instance to maintain.
+  5. An application makes calls to a REST API running on Amazon EC2 instances behind an Application Load Balancer (ALB). Most API calls complete quickly. However, a single endpoint is making API calls that require much longer to complete and this is introducing overall latency into the system. ==> SQS can be used to offload and decouple the long-running API requests. They can then be processed asynchronously by separate EC2 instances.
 
 #### Types of Queues
 
@@ -999,13 +1010,6 @@ There are two types of queues: Standard & FIFO.
 - AWS Private 5G is a managed service that makes it easy to deploy, operate, and scale your own private cellular network, with all required hardware and software provided by AWS.
 
 ![Private 5G](https://d1.awsstatic.com/reInvent/re21-pdp-tier1/private-5g/AWS-Private-5G-HIW%402x.368b813d6263444746862d2a0dad345efb0ccf5d.png)
-
-### Amazon Athena
-
-- It provides a simplified, flexible way to analyze **petabytes of data** where it lives. Analyze data or build applications from an Amazon Simple Storage Service (S3) data lake and 30 data sources, including on-premises data sources or other cloud systems using SQL or Python.
-- It is a managed services built on open-source Trino and Presto engines and Apache Spark frameworks
-
-![Athena](https://d1.awsstatic.com/products/athena/product-page-diagram_Amazon-Athena-Connectors%402x.867e3023b0e6b33862d65aa8e786cce46b88cb61.png)
 
 ### Amazon Transcribe
 
@@ -1109,10 +1113,20 @@ d2whx7jax6hbi5.cloudfront.net/pics/logo.png
 
 ![Origin Access Identity](https://img-c.udemycdn.com/redactor/raw/test_question_description/2021-05-18_05-32-57-0cec77f550d1e2e6100046094949925b.jpg)
 
-##### s3 + Athena
+##### Data Analyst
 
-- Use `AWS Athena` (Serverless Query Engine) to perform **analytics directly against S3 objects using SQL** query and save the analysis report in another S3 bucket.
+###### AWS Athena
+
+- It performs **analytics directly against S3 objects using SQL** query and save the analysis report in another S3 bucket.
+- It is a managed services built on open-source Trino and Presto engines and Apache Spark frameworks
   - Use Case: one time SQL query on S3 objects, S3 access log analysis, serverless queries on S3, IoT data analytics in S3, etc.
+
+![Athena](https://d1.awsstatic.com/products/athena/product-page-diagram_Amazon-Athena-Connectors%402x.867e3023b0e6b33862d65aa8e786cce46b88cb61.png)
+
+###### Amazon Redshift Spectrum
+
+- It queries and retrieve structured and semistructured data from files in Amazon S3 without having to load the data into Amazon Redshift tables. Redshift Spectrum queries employ massive parallelism to run very fast against large datasets (better performance than Athena but more expensive).
+- Use AWS Redshit Spectrum instead of Athena when it is needed your queries to be closely tied to a Redshift data warehouse. A Redshift table can be created by joining S3 data with Redshift data. Spectrum makes it easy to do this.
 
 ##### Amazon S3 Event Notifications
 
@@ -1148,13 +1162,14 @@ d2whx7jax6hbi5.cloudfront.net/pics/logo.png
 
 - Types:
   - `Standard`: **General purpose** storage for any type of frequently used data very high availability, and fast retrieval.
-  - `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective access tier. One tier is optimized for frequent access, one lower-cost tier is optimized for infrequent access, and another very low-cost tier is optimized for rarely accessed data.
+  - `Intelligent Tiering`: Analyze your Object’s usage and move them to the appropriate cost-effective access tier: one tier that is optimized for frequent access and another lower-cost tier that is optimized for infrequent access.
     - Use case: automatic cost savings for data with **unknown/changing access patterns or frequency**. But you can use S3 Intelligent-Tiering as the default storage class for most workloads.
   - `Standard-IA`: Cost effective for **infrequent access files** which **cannot be recreated**.
     - For data that is not accessed very frequently — but once it is accessed it needs to be retrieved rapidly.
     - It is cheaper than standard S3, but you do get charged a retrieval fee.
   - `One-Zone IA`(also called S3 RRS): Cost effective for **infrequent access** files which **can be recreated**.
     - Low cost option for data that is not accessed frequently and does not require the redundancy, **if the zone fails, we loose the data**.
+    - It is the only one which is not replicated across multiple AZs.
     - Use case: re-creatable infrequently accessed data that needs milliseconds access.
   - `S3 Glacier Instant Retrieval`: Amazon S3 Glacier Instant Retrieval is an archive storage class that delivers the **lowest-cost storage for long-lived data** that is rarely accessed and requires retrieval in **milliseconds**
     - With S3 Glacier Instant Retrieval, you can save up to 68% on storage costs compared to using the S3 Standard-Infrequent Access (S3 Standard-IA) storage class, when your data is accessed once per quarter.
@@ -1221,7 +1236,7 @@ aws s3 presign s3://mybucket/myobject --expires-in 300
 
 #### S3 Performance
 
-S3 Has extremely low latency
+S3 has extremely low latency
 
 ##### Performance limitations
 
@@ -1284,10 +1299,10 @@ mybucketname/folder1/subfolder1/myfile.jpg >  /folder1/subfolder1 is the prefix
 
 ###  Instance Store
 
-- KeyWords: Block Storage, Ephemeral, Fastest storage, Lowest Latency
+- KeyWords: **Block Storage**, Ephemeral, Fastest storage, Lowest Latency
 - Instance Store is an **Ephemeral/temporal block-based** storage physically attached to an EC2 instance
   - **Data persists on instance reboot, data doesn’t persist on stop or termination**
-- It can be attached to an EC2 instance only when the instance is launched and cannot be dynamically resized
+- It can be attached to an EC2 instance **only when the instance is launched** and cannot be dynamically resized
 - Deliver very **low-latency and high random I/O performance**.
 - It is the fastest storage that an EC2 instance can have.
 - It is included in the price of the EC2 instance so it can also be **more cost-effective than EBS Provisioned IOPS**.
@@ -1328,6 +1343,7 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
   - EBS volumes restored from encrypted snapshots are encrypted automatically.
   - Volumes created from unencrypted snapshots can be encrypted only at the time of creation
   - You can have encrypted an unencrypted EBS volumes attached to an instance at the same time.
+  - All instance families support encryption, but not all instance types.
 - Types of EBS volumes:
 
 **A/ SSD** for small/random IO operations, High IOPS means number of read and write operations per second, **Only SSD EBS Volumes can be used as boot volumes for EC2**
@@ -1335,14 +1351,14 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
 | SSD VolumeTypes                  |  Description                         |  Usage                                                                                                             |
 | -------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | General Purpose _SSD_ (gp2/gp3)  | Max **16000 IOPS**                       | Balances price and performance (most cost-effective) and can be used for most workloads (boot volumes, dev environment, virtual desktop) |
-| Provisioned IOPS _SSD_ (io1/io2) | 16000 - 64000 IOPS, EBS Multi-Attach | Mission critical business application, Databases (large SQL and NoSQL database workloads)                          |
+| Provisioned IOPS _SSD_ (io1/io2) | 16000 - 64000 IOPS, EBS Multi-Attach | Mission critical business application, **Databases (large SQL and NoSQL database workloads)**                          |
 
 **B/ HDD** (Hard Disk Drive) or Magnectic for large/sequential IO operations, High Throughput means number of bytes read and write per second
 
 | HDD VolumeTypes                  |  Description                                                                 |  Usage                                                                                                                      |
 | -------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Throughput Optimized _HDD_ (st1) | Low cost, frequently accessed, throughput intensive. Max 500 IOPS per volume | Big Data, Data warehouses, log processing                                                                                   |
-| Cold _HDD_ (sc1)                 | Lowest cost, infrequently accessed. Max 250 IOPS per volume                  | Used for less frequently accessed workloads and when lowest storage cost is important. Common use could be for file servers |
+| Throughput Optimized _HDD_ (st1) | Low cost, frequently accessed, throughput intensive. Max 500 IOPS per volume | **Big Data, Data warehouses, log processing**                                                                                   |
+| Cold _HDD_ (sc1)                 | Lowest cost, infrequently accessed. Max 250 IOPS per volume                  | Used for less frequently accessed workloads and when lowest storage cost is important. Common use could be for **file servers** |
 | Magnetic (Standard)              | Max 40–200 IOPS per volume.                                                  | Previous generation hard disk drive typically used for infrequently accessed workloads.                                     |
 
 - EBS Volumes with two types of RAID configuration:
@@ -1367,7 +1383,8 @@ EXAM TIP: If you can afford to lose an instance (i.e. you are **replicating your
   - Network File System (NFS) that can be mounted on and accessed concurrently in multiple AZs without sacrificing performance.
   - EFS file systems can be accessed by Amazon EC2 Linux instances, Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda functions via a file system interface such as NFS protocol. (EBS only for EC2 instances)
     - Native to Unix & Linux, **but not supported on Windows instances**.
-- EFS is a POSIX-compliant file-based storage.
+- EFS is a POSIX-compliant file-based storage. It can control access to files and directories from host by user or group
+- EFS Security Groups act as a firewall, and the rules you add define the traffic flow.
 - EFS supports file systems semantics - strong read after write consistency and file locking.
 - Only pay for what you use
 - Performance Mode:
@@ -1423,14 +1440,13 @@ Go to [Index](#index)
   - RDS runs on Virtual Machines (can’t log in to the OS or SSH in)
   - RDS is not serverless — (one exception Aurora Serverless)
 - RDS Main Features
-  - **Multi AZ Deployment** > Used for HA
+  - **Multi AZ Deployment** > Used for Primary Database HA
     - Have a primary and secondary database, if you lose the primary database, AWS would detect and automatically update the DNS to point at the secondary database.
     - You can force a fail-over from AZ to another by rebooting the RDS instance.
   - **Read Replicas** > Used for Scaling, improving Performance (not millisecond latency)
     - A Read Replica allows you to have read-only copies (Upto 5 Read replicas) of your production database. This is achieved by using Asynchronous replication so reads are eventually consistent. Every time you write to the main database, it is replicated in the secondary databases.
-    - Once RDS is selected as MultiAZ ==> Create a **read replica as a Multi-AZ DB instance**.
-      - Exam Tip: Do not confuse with "Deploy a read replica in a different AZ to the master DB instance" (this is not Multi-AZ and not HA)
-      - Amazon RDS creates a standby of your replica in another Availability Zone for failover support for the replica, even in a different Region of your running RDS instance. You pay for replication cross Region, but not for cross AZ.
+    - Once RDS Master is selected as MultiAZ ==> Create a **read replica as a Multi-AZ DB instance**.
+      - Exam Tip: For HA Master DB and Read Replica must be in different AZs.
     - Requirement: **Source DB must have automatic backups turned on in order to deploy a read replica**.
     - You can have read replicas of read replicas (but watch out for latency)
     - Each read replica will have its own DNS end point.
@@ -1447,6 +1463,10 @@ Go to [Index](#index)
   - Manual Database Snapshot
     - User-initiated, must be manually done by yourself
     - Stored until you explicitly delete them, even after you delete the original RDS instance they are still persisted (This is not the case with automated backups).
+  - Restore:
+    - Restored DBs will always be a new RDS instance with a new DNS endpoint (You cannot restore from a DB snapshot to an existing DB)
+    - You can restore up to the last 5 minutes
+    - The default DB security group is applied to the new DB instance (it can be changed)
 - Amazon RDS Proxy is a fully managed, highly available database proxy for Amazon Relational Database Service (RDS) that makes applications more scalable, more resilient to database failures, and more secure.
   - Use Case: A company hosts a serverless application on AWS. The application uses Amazon RDS for PostgreSQL. During times of peak traffic and when traffic spikes are experienced, the company notices an increase in application errors caused by database connection timeouts. The company is looking for a solution that will reduce the number of application failures with the least amount of code changes.
     - Amazon RDS Proxy allows applications to pool and share connections established with the database, improving database efficiency and application scalability.
@@ -1519,10 +1539,10 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 
 - AWS proprietary, a fast and flexible **NoSQL** database service for all applications that need consistent, **single-digit millisecond latency/response** at any scale.
 - It is fully Managed and Serverless (no servers to provision, patch, or manage) database.
-- Its **flexible data model** and reliable performance make it a great fit for mobile, web, gaming, ad-tech, IoT, and many other applications. It supports both:
+- Its **flexible data model** and reliable performance make it a great fit for mobile, web, gaming, ad-tech, IoT, and many other applications.It supports both:
   - Document (limit of 400KB item size. E.g. JSON documents, or session data.)
   - **Key-value data models**.
-- Spread across 3 geographically distinct data centers.
+- It supports auto scaling to automatically adjust your table’s capacity based on the specified utilization rate to ensure application performance while reducing costs.
 - It supports eventually consistent and strongly consistent reads (eventual consistency is default).
   - Eventual Consistent Read (Default): Consistency across data within a second, meaning the response might not reflect the results of a just completed write operation, but if you repeat the read request again it should return the updated data (Best Read Performance).
   - Strongly Consistent Reads: Returns the latest data. Results should reflect all writes that received a successful response prior to that read!
@@ -1555,6 +1575,7 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 ####  DynamoDB Accelerator (DAX)
 
 - Add DAX (DynamoDB Accelerator) cluster in front of DynamoDB to **cache** (in memory) frequently read values and offload the heavy read on hot keys of DynamoDB, prevent`ProvisionedThroughputExceededException`
+- It comes with a cost 
 - It improves the performance (up to x10) of DynamoDB. Request time reduced to microseconds.
 - Compatible with Dynamo API calls.
 
@@ -1566,8 +1587,8 @@ CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
 
 - It is SaaS for **in-memory caching** supporting flexible, real-time use cases. In-memory key/value store, **not persistent** in the traditional sense.
 - Fully managed implementations of two popular in-memory data stores – Redis and Memcached.
-  - Memcached — A widely adopted in-memory key store, and historically the gold standard of web caching. For simple Uses Cases Memcached is also **multithreaded**, meaning it makes good use of larger Amazon EC2 instance sizes with multiple cores.
-  - Redis — An increasingly popular open-source key-value store that supports more advanced data structures (such as sorted sets, hashes, and lists). Unlike Memcached, Redis has **disk persistence** built in and it also supports replication, which can be used to achieve **Multi-AZ redundancy** (HA).
+  - `Memcached` — Historically the gold standard of web caching. For simple Uses Cases Memcached is also **multithreaded**, meaning it makes good use of larger Amazon EC2 instance sizes with multiple cores.
+  - `Redis` — It supports more advanced data structures (such as sorted sets, hashes, and lists). Unlike Memcached, Redis has **disk persistence** built in and it also supports replication, which can be used to achieve **Multi-AZ redundancy (HA)**.
     - `Redis Auth` --> Redis authentication tokens enable Redis to require a token (**password**) before allowing clients to execute commands, thereby improving data security.
     - HIPAA Compliant.
 - `in-transit encryption` is an optional feature that allows you to increase the security of your data at its most vulnerable points—when it is in transit from one location to another.
@@ -1832,6 +1853,10 @@ Go to [Index](#index)
   - New, it utilizes continuous, block-level replication and enables cutover windows measured in minutes.
   - Legacy, it utilizes incremental, snapshot-based replication and enables cutover windows measured in hours.
 
+### AWS IoT Core
+
+- AWS IoT Core is a managed cloud service that lets connected devices easily and securely interact with cloud applications and other devices.
+
 ## Networking
 
 Go to [Index](#index)
@@ -1852,10 +1877,15 @@ Go to [Index](#index)
   - **Every region comes with default VPC**.
   - You can create upto 5 VPC per Region by default (soflimit, it can be extended)
 - Default VPC vs Custom VPC
-  - **Default VPC is user friendly**, allowing you to immediately deploy instances.
-  - All **subnets in a default VPC are public** (have a route out to the internet).
-  - Each EC2 instance has both a public and private IP address.
-  - In case it is delated, it can be recovered (but, try not to delete it).
+  - Default VPC
+    - Instance lunched into a default VPC
+      - It has both a public and private IP address and DNS hostnames (correspond to the public IPv4 and private IPv4 addresses for the instance).
+    - **Default VPC is user friendly**, allowing you to immediately deploy instances.
+    - All **subnets in a default VPC are public** (have a route out to the internet).
+    - In case it is delated, it can be recovered (but, try not to delete it).
+  - Custom VPC
+    - Instance lunched into a custom VPC
+      - It has comes with private IP address and DNS hostnames. VPC can be configured to have a public IP address and DNS hostnames.
 - You are not charged for using a VPC, however you are charged for the components used within it e.g. gateway, traffic monitoring etc.
 - One way to save costs when it comes to networking is to use private IP addresses instead of public IP addresses as they utilise the AWS Backbone network.
   - If you want to cut all network costs, group all EC2 instances in same AZ and use private IP addresses.
@@ -1927,8 +1957,9 @@ Go to [Index](#index)
 - It **acts as a Firewall**, it controls the inbound and ourbound traffic **at Subnets level** ==> It applies to all instances in associated subnet.
 - STATELESS, when you create an inbound rule and an outbound rule is not automatically created.
 - Cardinality: A NACL can be associated with many Subnets, but a subnet can only have one NACL.
-- VPCs comes with a modifiable default NACL it allows all inbound and outbound traffic (by default)
-  - You can create custom NACL --> denies all inbound and outbound traffic until you add rules (by default)
+- **Default NACL** vs Custom NACL
+  - Default NACL: it allows all inbound and outbound traffic
+  - Custom NACL: **denies all inbound and outbound traffic until you add rules**
 - Each subnet within a VPC must be associated with only 1 NACL
   - If you don’t specify, auto associate with default NACL
   - If you associate with new NACL, auto remove previous association
@@ -1970,11 +2001,13 @@ Go to [Index](#index)
 
 ![NAT vs IG](https://miro.medium.com/max/1400/1*gftv4LSqU_12kRqNwYISJw.webp)
 
-- NAT gateways/instances provides **private subnets access to internet traffic**, but ensures internet traffic does not initiate a connection with the instances.
+- NAT gateways/instances provides to **private subnets OUTBOUT traffic to Internet**, but ensures internet traffic does not initiate a connection with the instances.
+  - Exam Tip: A NAT gateway/instance is NOT used for providing **inbound traffic** to private Subnets. Options:
+    - ELB running in Public Subnet in the same AZ than the private subnet
+    - Bastion Host in the Public Subnet operate with servies running in the private subnet
 - The NAT gateway/instance **must live in a public subnet and then for a private subnet to connect to it**, the private subnet must have a route in its route table that directs traffic to it.
 - Use Case: For example this can enable our EC2 Instances in a private subnet to go out and download software by communicating with our Internet Gateway.
 - NAT Gateway/Instances works with IPv4
-- Exam Tip: A NAT gateway/instance is used for **outbound traffic** not inbound traffic and cannot make applications available to internet-based clients.
 
 ##### NAT Instances (legacy)
 
@@ -2035,14 +2068,14 @@ Go to [Index](#index)
 - How: VPC Peering request made; acceptor accepts request (either within or across accounts)
 - Requirements:
   - `Virtual Private Gateway`: It is the **VPN endpoint on the Amazon side** of your Site-to-Site VPN connection that can be attached to a **single VPC**. It is a **redundant** device.
-  - Customer gateway device: **One physical device or software application** on the on-premises Data Center side (out of AWS) of the Site-to-Site VPN connection.
-  - For route propagation **you need to point your VPN-only subnet’s route tables at the VGW**. (Not Nat gateways)
+  - `Customer gateway device`: **One physical device or software application** on the on-premises Data Center side (out of AWS) of the Site-to-Site VPN connection.
+  - For route propagation **you need to point your VPN-only subnet’s route tables at the VGW**.
 
 ###### VPN CloudHub
 
 ![VPN CloudHub](https://digitalcloud.training/wp-content/uploads/2022/01/VPC-4.jpg)
 
-- What: Connect locations in a **hub and spoke manner** using AWSs `Virtual Private Gateway`
+- What: Connect locations in a **hub and spoke manner** using AWSs `Virtual Private Gateway` for multiple Customer Gateways
 - When: Link remote offices for backup or primary WAN access to AWS resources and each other
 - Pros: Reuses existing Internet connections; supports BGP routes to direct traffic
 - Cons: Dependent on Internet connections; no inherent redundancy
@@ -2242,13 +2275,14 @@ Go to [Index](#index)
   - It is possible to clear cached objects, however you will incur a charge.
 - It can integrate with AWS Shield, Web Application Firewall and Route 53 to advance security (to protect from layer 7 attacks).
 - It supports **Geo restriction (Geo-Blocking)** to whitelist or blacklist countries that can access the content.
+- Enable `Field-level encryption` to secure sensitive information to your web servers. The sensitive information provided by your users is encrypted at the edge, close to the user, and remains encrypted throughout your entire application stack.
+- It can be used for HA ==>  CloudFront with origin failover: Create an origin group with two origins: a primary and a secondary. If the primary origin is unavailable or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.
 - Use Cases:
   1. A company offers an online product brochure that is delivered from a static website running on Amazon S3. The company’s customers are mainly in the United States, Canada, and Europe. With Amazon CloudFront you can set the price class to determine where in the world the content will be cached. One of the price classes is “U.S, Canada and Europe” and this is where the company’s users are located. Choosing this price class will result in lower costs and better performance for the company’s users.
   2. A company runs a web application that serves weather updates. The application runs on a fleet of Amazon EC2 instances in a Multi-AZ Auto scaling group behind an Application Load Balancer (ALB). How to make the application more resilient to sporadic increases in request rates? ==> On the frontend an Amazon CloudFront distribution can be placed in front of the ALB and this will cache content for better performance and also offloads requests from the backend.
   3. An organization want to share regular updates about their charitable work using static webpages. The pages are expected to generate a large amount of views from around the world. The files are stored in an Amazon S3 bucket. How to design an efficient and effective solution => Amazon CloudFront can be used to cache the files in edge locations around the world and this will improve the performance of the webpages. Possible configuration. Using a REST API endpoint or Using a website endpoint as the origin with anonymous (public) access allowed or with access restricted by a Referer header.
-  4. An Amazon S3 bucket in the us-east-1 Region hosts the static website content of a company. The content is made available through an Amazon CloudFront origin pointing to that bucket. A second copy of the bucket is created in the ap-southeast-1 Region using cross-region replication. The chief solutions architect wants a solution that provides greater availability for the website. Which combination of actions should be taken to increase availability? ==> **You can set up CloudFront with origin failover for scenarios that require high availability**. To get started, you create an origin group with two origins: a primary and a secondary. If the primary origin is unavailable or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.
-  5. A company runs a dynamic website that is hosted on an on-premises server in the United States. The company is expanding to Europe and is investigating how they can optimize the performance of the website for European users. The website’s backed must remain in the United States. The company requires a solution that can be implemented within a few days. Best Practice => A custom origin can point to an on-premises server and CloudFront is able to cache content for dynamic websites. Additionally, connections are routed from the nearest Edge Location to the user across the AWS global network. If the on-premises server is connected via a Direct Connect (DX) link this can further improve performance.
-  6. An application generates **unique files** that are returned to customers after they submit requests to the application. The application uses an Amazon CloudFront distribution for sending the files to customers. The company wishes to reduce data transfer costs without modifying the application. How can this be accomplished?
+  4. A company runs a dynamic website that is hosted on an on-premises server in the United States. The company is expanding to Europe and is investigating how they can optimize the performance of the website for European users. The website’s backed must remain in the United States. The company requires a solution that can be implemented within a few days. Best Practice => A custom origin can point to an on-premises server and CloudFront is able to cache content for dynamic websites. Additionally, connections are routed from the nearest Edge Location to the user across the AWS global network. If the on-premises server is connected via a Direct Connect (DX) link this can further improve performance.
+  5. An application generates **unique files** that are returned to customers after they submit requests to the application. The application uses an Amazon CloudFront distribution for sending the files to customers. The company wishes to reduce data transfer costs without modifying the application. How can this be accomplished?
      - Use Lambda@Edge to compress the files as they are sent to users
      - Using caching capabilities on the CloudFront is not an valid option as the files are unique and will not be cached.
 
