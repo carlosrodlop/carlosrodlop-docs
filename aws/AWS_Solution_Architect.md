@@ -718,6 +718,7 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
 - Best suitable for protocol HTTP, HTTPS, WebSocket | Layer 7 (Application layer)
 - Routes traffic based on request content (hostname, request path, params, headers, source IP etc.).
 - Enable Access logs to capture information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. It is stored in S3.
+- Security Groups: You must ensure that your load balancer can communicate with registered targets on both the listener port and the health check port.
 - Use Case: It is **Intelligent** and can send specific requests to specific servers.
 
 #### Network Load Balancer (NLB)
@@ -749,6 +750,7 @@ You can choose EC2 instance type based on requirement for e.g. `m5.2xlarge` has 
   - Exam tip: ASG cannot created instances across different Regions.
 - It can be used across a number of **different services** including:
   - Compute-type: EC2 instances and Spot Fleets, ECS tasks.
+    - Exam TIP: [Within the Launh Confiuration for EC2](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html): It is possible to select and AMIs when you need to launch instances with an specific configuration.
   - Database-type: Aurora replicas and DynamoDB tables.
 - Instances are created in ASG using **Launch Configuration (Legacy) or Launch Template (Recommended option)**
   - You can create ASG that launches both Spot and On-Demand Instances or multiple instance types using launch template, not possible with launch configuration.
@@ -845,7 +847,6 @@ Predictive is **only available for EC2** auto scaling groups and the scaling can
 - `Launch type` determines the type of infrastructure on which your tasks and services are hosted.
 
 ![Launch Type](https://digitalcloud.training/wp-content/uploads/2022/01/amazon-ecs-ec2-vs-fargate-1.jpeg)
-
 
 | Amazon EC2                              | Amazon Fargate        |
 | ----------------------------------------| ----------------------|
@@ -1910,8 +1911,10 @@ Go to [Index](#index)
   - Amazon always reserve 5 IP addresses within your subnets (First 4 IPs and the last IP): Network Address, Router Address, DNS Server Address, Broadcast address and 1 more for future use.
     - For e.g. If you need 29 IP addresses to use, your should choose CIDR /26 = 64 IP and not /27 = 32 IP, since 5 IPs are reserved and can not use.
   - Enable Auto assign public IPv4 address in public subnets, EC2 instances created in public subnets will be assigned a public IPv4 address
-- Private vs Public Subnets:
-  - Public Subnet: A subnet that does have a route to the internet gateway.
+- Public vs Private Subnet
+  - Public subnet ==> It is a subnet that’s associated with a route table having **rules to connect to internet using Internet Gateway**.
+  - Private subnet ==> It is a subnet that’s associated with a route table having **no rules to connect to internet using Internet Gateway**.
+    - Private subnet connect to the internet by setting a rule to a **NAT Gateway in a public Subnet**.
 - Use Case: Multi-tier and highly-available architecture: If you have 3 AZ in a region then you create total 6 subnets.
   - 3 private subnets (1 in each AZ) for EC2 instances, Lambda, Database.
   - 3 public subnets (1 in each AZ) for **API gateway and ELB reside in public subnet**.
@@ -1941,16 +1944,14 @@ Go to [Index](#index)
 - A **set of rules (called routes) that are used to determine where network traffic is directed**.
   - Each Route table route has `Destination` like IPs and `Target` like local, IG, NAT, VPC endpoint etc.
   - Allows subnets to talk to each other.
+- It is important to **control the Network Traffic within your VPC and AWS**, for exampling forcing to pass cross on Service (WAF, ALB, IGW, etc.)
 - Each subnet in your VPC must be associated with a route table.
 - Cardinality:
   - 1 Subnet -> 1 Route Table. A subnet can only be associated with one route table at a time
   - 1 Route Table -> N Subnets. Multiple subnets can be associated with the same route table For e.g. you create 4 subnets in your VPC where 2 subnets associated with one route table with no internet access rules know as private subnets and another 2 subnets are associated with another route table with internet access rules known as public subnets
 - By default subnets are associated with the Main route table, but this can be a security risk (e.g. if you were to put a route out to the public internet in the route table all subnets would automatically be made public).
   - To resolve this — keep main route table as private and then have separate route tables that use the main one, but have additional routes.
-- Public vs Private Subnet
-  - Public subnet ==> It is a subnet that’s associated with a route table having **rules to connect to internet using Internet Gateway**.
-  - Private subnet ==> It is a subnet that’s associated with a route table having **no rules to connect to internet using Internet Gateway**.
-    - Private subnet connect to the internet by setting a rule to a **NAT Gateway in a public Subnet**.
+- Use Case: An Amazon EC2 instance runs in a VPC network, and the network must be secured. The EC2 instances contain highly sensitive data and have been launched in private subnets. Company policy restricts EC2 instances that run in the VPC from accessing the internet.The instances need to access the software repositories using a third-party URL to download and install software product updates. All other internet traffic must be blocked, with no exceptions ==> Configure the route table for the private subnet so that it routes the outbound traffic to an AWS Network Firewall firewall then configure domain list rule groups.
 
 ##### D/ Network Access Control List (Created by default)
 
@@ -2143,7 +2144,10 @@ Go to [Index](#index)
 ###### Transit Gateway
 
 - A transit **hub** that can be used to interconnect **multiple VPCs** and on-premises networks, and as a VPN endpoint for the Amazon side of the Site-to-Site VPN connection.
-- It simplifies your network (**no complex peering relationships, do not use route tables**).
+- It simplifies your network (**no complex peering relationships, do not use route tables**). With AWS Transit Gateway, you can quickly add Amazon VPCs, AWS accounts, VPN capacity, or AWS Direct Connect gateways to meet unexpected demand, without having to wrestle with complex connections or massive routing tables.
+
+![Transtit gateway](https://img-c.udemycdn.com/redactor/raw/test_question_description/2020-11-27_10-12-08-05293542d6a09dfb24fcf7e9a59f123e.jpg)
+
 - It acts as a **highly scalable** cloud router—each new connection is made only once.
 - Difference with Transit VPC: **Transit VPC is more of a network architecture concept while Transit Gateway is a service**.
 
