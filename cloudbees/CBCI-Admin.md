@@ -54,6 +54,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 
 * Configuration as Code: Explore [JCasc](https://github.com/jenkinsci/configuration-as-code-plugin), and pay special attention to the [Handling secrets](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/docs/features/secrets.adoc) and the [Exporting configuration tool](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/docs/features/configExport.md) sections.
 * Plugins Management: Jenkins comes with a series of bundle plugins (required) but its capabilities can be extended via [Manage Plugins](https://www.jenkins.io/doc/book/managing/plugins/). There are more than 1800+ community-contributed plugins (see [Jenkins Plugins Index](https://plugins.jenkins.io/)).
+  * Not all the plugins have the same [Health Score](https://plugin-health.jenkins.io/probes). Use OSS plugins with High Health Score value.
   * ⚠️ Note that [Advanced installation](https://www.jenkins.io/doc/book/managing/plugins/#advanced-installation) does manage transitive dependencies requirements.
   * Air-gapped environments: The [plugin manager tools](https://github.com/jenkinsci/plugin-installation-manager-tool) downloads plugins and their dependencies into a folder so that they can be easily imported into an instance of Jenkins.
 * Prepare the instance to onboard developers:
