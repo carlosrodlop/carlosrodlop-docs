@@ -36,18 +36,18 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
 - Branch Source plugins like The [GitHub Branch Source plugin](https://plugins.jenkins.io/github-branch-source/) allow you to create a new project based on the repository structure of one or more GitHub users or organizations. You can either:
   - Use [Multibranch Pipelines](https://www.jenkins.io/doc/book/pipeline/multibranch/) to import a single repository’s branches, pull requests, and tags as Pipeline projects.
   - :octocat: Use a GitHub Organization project to import all or a subset of repositories belonging to a GitHub user or organization as "Multibranch Pipeline" projects.
+- Install [Pipeline Utility Steps](https://github.com/jenkinsci/pipeline-utility-steps-plugin/blob/master/docs/STEPS.md) for adding useful Goodies For Parsing Configs, Maven POMs, etc
 - 🏃 Make Jenkins Builds Faster by:
   - Use the [Performance optimized](https://www.jenkins.io/doc/book/pipeline/scaling-pipeline/#suggested-best-practices-and-tips-for-durability-settings) mode for most pipelines and especially basic build-test Pipelines or anything that can simply be run again if needed.
   - Cache:
     - [🎥 CloudBees CI populates Remote Build Cache](https://www.cloudbees.com/videos/speeding-up-jenkins-and-maven-build-cache), a developer can benefit pull locally the remote cache.
-    - Via Volumen Storage Mount like [Maven and EFS](https://sneha-wadhwa.medium.com/speeding-up-ci-pipelines-on-jenkins-63efff817d1d)) to speed up the build times.
+    - Via Volumen Storage Mounts like [Maven](https://sneha-wadhwa.medium.com/speeding-up-ci-pipelines-on-jenkins-63efff817d1d) and EFS](https://sneha-wadhwa.medium.com/speeding-up-ci-pipelines-on-jenkins-63efff817d1d)) to speed up the build times.
       - ⚠️ Kubernetes particularities: [Improve Build Times on Kubernetes-Based Jenkins with Stateful Agents](https://blog.hiya.com/kubernetes-base-jenkins-stateful-agents/).
     - Via Plugins:
       - [jenkinsci/jobcacher-plugin](https://github.com/jenkinsci/jobcacher-plugin)
       - [j3t/jenkins-pipeline-cache-plugin](https://github.com/j3t/jenkins-pipeline-cache-plugin)
   - Using [Parallel](https://www.jenkins.io/doc/book/pipeline/syntax/#parallel) stages when it is possible.
-- Install [Pipeline Utility Steps](https://github.com/jenkinsci/pipeline-utility-steps-plugin/blob/master/docs/STEPS.md) for adding useful Goodies For Parsing Configs, Maven POMs, etc
-- 🐳 Docker Agents
+- 🐳 Docker Agents (Ephemeral)
   - Traditional Platform
     - [Using Docker with Pipeline](https://www.jenkins.io/doc/book/pipeline/docker/)
   - Modern Platform (Kubernetes)
@@ -64,8 +64,9 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
     - [vfarcic/jenkins-shared-libraries](https://github.com/vfarcic/jenkins-shared-libraries)
 - 🍬 Review [Pipeline Best Practices](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-best-practices) docs, and also this post [Best Practices for Scalable Pipeline Code](https://www.jenkins.io/blog/2017/02/01/pipeline-scalability-best-practice/).
 
-## CloudBees: Make Jenkins Pipelines more scalable and reliable
+## CloudBees: Make Jenkins Pipelines more scalable, reliable and faster 🚀
 
+- 👓 Visualize your Pipelines like a PRO using [CloudBees Pipeline Explorer Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/pipelines/cloudbees-pipeline-explorer-plugin) (Performant Viewing and Search, Tree view and issue explorer)
 - Make pipelines more resilient with:
   - ↪️ [Checkpoints](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/inserting-checkpoints)
   - [Aborted builds](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/controlling-builds#aborted-builds) detect restore scenario and attempts to bring your instance back up quickly after the loss of environment.
@@ -73,4 +74,5 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
   - 🚓 [Pipelines Policies](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-policies) ([🎥 Demo video](https://www.youtube.com/watch?v=Js4d35kv19I))
   - [Pipeline Template Catalogs](https://docs.cloudbees.com/docs/admin-resources/latest/pipeline-templates-user-guide/setting-up-a-pipeline-template-catalog)([🎥 Demo video](https://www.youtube.com/watch?v=pPwI_kTSCmA))
   - 📌 [Markerfile](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-as-code#custom-pac-scripts) restricts/selects which pipeline branches are candidates to be built within a Project.
-- Make Pipeline Faster with: Workspace caching
+- 🏃 Make Pipeline Faster with [CloudBees Workspace caching]() provides configurations and pipeline steps to download/upload caches to an external storage provider S3 compatible.
+- Extend [🎥 Suppress automatic SCM triggering](https://www.youtube.com/watch?v=2XK8ikOCpOw) with [CloudBees Build Strategies]() to avoid Build Storm permanently (not just the initial build) for easier migrations and onboarding of new Teams.
