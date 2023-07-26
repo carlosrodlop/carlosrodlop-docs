@@ -63,6 +63,7 @@
 
 #### General
 
+- [Cloud Comparison Table](https://media.licdn.com/dms/image/D4E22AQHj5Br5RDAAyg/feedshare-shrink_1280/0/1690299923621?e=1693440000&v=beta&t=kTiodoHryO297i1wU2D8o5JeQm0GGnhVG-fyVnIMEus)
 - [Cloud Design Patterns - Awesome Software Architecture](https://awesome-architecture.com/cloud-design-patterns/cloud-design-patterns/)
 - [Cloud Best Practices - Awesome Software Architecture](https://awesome-architecture.com/cloud-best-practices/)
 
