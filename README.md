@@ -91,6 +91,8 @@
   - [EKS Examples](https://github.com/aws-ia/terraform-aws-eks-blueprints/tree/main/examples)
 - [aws-samples/hardeneks: Runs checks to see if an EKS cluster follows EKS Best Practices.](https://github.com/aws-samples/hardeneks)
 - [Amazon EKS Workshop](https://www.eksworkshop.com/)
+- [AWS Observability Accelerator for Terraform](https://aws-observability.github.io/terraform-aws-observability-accelerator/)
+-
 
 #### GCP
 
