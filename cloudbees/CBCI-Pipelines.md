@@ -40,6 +40,7 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
 - 🏃 Make Jenkins Builds Faster by:
   - Use the [Performance optimized](https://www.jenkins.io/doc/book/pipeline/scaling-pipeline/#suggested-best-practices-and-tips-for-durability-settings) mode for most pipelines and especially basic build-test Pipelines or anything that can simply be run again if needed.
   - Cache:
+    - Shared Libraries checkout `Cache fetched versions on master for quick retrieval`
     - [🎥 CloudBees CI populates Remote Build Cache](https://www.cloudbees.com/videos/speeding-up-jenkins-and-maven-build-cache), a developer can benefit pull locally the remote cache.
     - Via Volumen Storage Mounts like [Maven](https://sneha-wadhwa.medium.com/speeding-up-ci-pipelines-on-jenkins-63efff817d1d) and EFS](https://sneha-wadhwa.medium.com/speeding-up-ci-pipelines-on-jenkins-63efff817d1d)) to speed up the build times.
       - ⚠️ Kubernetes particularities: [Improve Build Times on Kubernetes-Based Jenkins with Stateful Agents](https://blog.hiya.com/kubernetes-base-jenkins-stateful-agents/).
