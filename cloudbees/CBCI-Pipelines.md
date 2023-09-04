@@ -67,7 +67,7 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
 
 ## CloudBees: Make Jenkins Pipelines more scalable, reliable and faster 🚀
 
-- 👓 Visualize your Pipelines like a PRO using [CloudBees Pipeline Explorer Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/pipelines/cloudbees-pipeline-explorer-plugin) (Performant Viewing and Search, Tree view and issue explorer)
+- 👓 Visualize your Pipelines like a PRO using [CloudBees Pipeline Explorer Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/pipelines/cloudbees-pipeline-explorer-plugin) (Performant Viewing and Search, Tree view and issue explorer) [🎥 Troubleshooting Pipelines With CloudBees Pipeline Explorer - YouTube](https://www.youtube.com/watch?v=OMXm6eYd1EQ)
 - Make pipelines more resilient with:
   - ↪️ [Checkpoints](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/inserting-checkpoints)
   - [Aborted builds](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/controlling-builds#aborted-builds) detect restore scenario and attempts to bring your instance back up quickly after the loss of environment.
