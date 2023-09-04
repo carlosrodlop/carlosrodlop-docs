@@ -2,7 +2,7 @@
 
 <p align="center">
   <img alt="cloudbees-icon" src="https://images.ctfassets.net/vtn4rfaw6n2j/7FKeUjwsXI1d2JPUIvSMZJ/be286872ace9ca3b6b66a64adbb3c16a/cb-tag-sm.svg" height="160" />
-  <p align="center">CloudBees CD</strong> rol</p>
+  <p align="center">CloudBees CD</strong></p>
 </p>
 
 ---
