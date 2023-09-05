@@ -12,9 +12,18 @@
 ## Admin
 
 - [downloads.cloudbees.com/cloudbees-cd/](https://downloads.cloudbees.com/cloudbees-cd/)
+- [CloudBees CD plugins](https://docs.cloudbees.com/plugins/cd)
 
 ## Pipelines
 
-- [CloudBees CD APIs: ectool, REST, Perl, Groovy](https://docs.cloudbees.com/docs/cloudbees-cd-api/latest/)
-- [electric-cloud-community/DSL-Samples](https://github.com/electric-cloud-community/DSL-Samples)
-- [electric-cloud/Groovy-Samples](https://github.com/electric-cloud/Groovy-Samples)
+- [CloudBees CD APIs Reference: ectool, REST, Perl, Groovy](https://docs.cloudbees.com/docs/cloudbees-cd-api/latest/)
+
+### DSL
+
+- Configuration as Code: [DSL automation as code](https://docs.cloudbees.com/docs/cloudbees-cd-api/latest/flow-api/dslautomation-as-code)
+- Test and Evaluate: [DSL editors](https://docs.cloudbees.com/docs/cloudbees-cd-api/latest/flow-api/dslide)
+- Examples: [electric-cloud-community/DSL-Samples](https://github.com/electric-cloud-community/DSL-Samples)
+
+### Groovy
+
+- Examples: [electric-cloud/Groovy-Samples](https://github.com/electric-cloud/Groovy-Samples)
