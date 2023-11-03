@@ -59,15 +59,13 @@
 - [DevOps Toolkit - YouTube](https://www.youtube.com/c/DevOpsToolkit)
 - [That DevOps Guy - YouTube](https://www.youtube.com/c/MarcelDempers)
 
-### Infrastructure
-
-#### General
+### Cloud Architecture
 
 - [Cloud Comparison Table](https://media.licdn.com/dms/image/D4E22AQHj5Br5RDAAyg/feedshare-shrink_1280/0/1690299923621?e=1693440000&v=beta&t=kTiodoHryO297i1wU2D8o5JeQm0GGnhVG-fyVnIMEus)
 - [Cloud Design Patterns - Awesome Software Architecture](https://awesome-architecture.com/cloud-design-patterns/cloud-design-patterns/)
 - [Cloud Best Practices - Awesome Software Architecture](https://awesome-architecture.com/cloud-best-practices/)
 
-#### Terraform
+### Terraform
 
 - [My Terraform Stars](https://github.com/stars/carlosrodlop/lists/iac-terraform)
 - [Terraform Registry](https://registry.terraform.io/)
@@ -76,13 +74,13 @@
 - Posts
   - [Automating Jenkins Deployment with Advanced Terraform Techniques | by Bill Salvaggio | Apr, 2023 | Medium](https://medium.com/@bill.salvaggio/automating-jenkins-deployment-with-advanced-terraform-techniques-c41007151e8d)
 
-#### AWS
+### AWS
 
 - [Digital Cloud AWS Cheat Sheets](https://digitalcloud.training/aws-cheat-sheets/)
 - [IAM Policy Simulator](https://policysim.aws.amazon.com/home/index.jsp?#)
 - [AWS Observability Best Practices](https://aws-observability.github.io/observability-best-practices/)
 
-##### EKS
+#### EKS
 
 - [Awesome AWS/EKS Repos](https://github.com/stars/carlosrodlop/lists/aws-eks)
 - [EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/)
@@ -94,11 +92,18 @@
 - [AWS Observability Accelerator for Terraform](https://aws-observability.github.io/terraform-aws-observability-accelerator/)
 -
 
-#### GCP
+### GCP
 
 - [Terraform blueprints and modules for Google Cloud](https://cloud.google.com/docs/terraform/blueprints/terraform-blueprints)
 - [Google Cloud and HashiCorp](https://github.com/terraform-google-modules)
 
-##### GKE
+#### GKE
 
 - [Best practices  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/best-practices)
+
+### Go
+
+- [Go Packages - Go Packages](https://pkg.go.dev/)
+- [Standard library - Go Packages](https://pkg.go.dev/std)
+- [Gophercises - Coding exercises for budding gophers](https://gophercises.com/)
+- [Configure Visual Studio Code for Go development - Go on Azure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/developer/go/configure-visual-studio-code)
