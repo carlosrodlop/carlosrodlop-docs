@@ -19,39 +19,39 @@ Check out my GitHub start repositories for [CloudBees CI Admin](https://github.c
 
 ## Jenkins: Starting with a solid Open Source core
 
-- Jenkins is an open source automation server. It helps automate the parts of SDLF, facilitating CI and CD [check in Wikipedia](<https://en.wikipedia.org/wiki/Jenkins_(software)>).
+- Jenkins is an open-source automation server. It helps automate the parts of SDLF, facilitating CI and CD [checks in Wikipedia](<https://en.wikipedia.org/wiki/Jenkins_(software)>).
 - Spot Jenkins inside the [CD Landscape Map](https://landscape.cd.foundation/)
 - Get a first look at the Jenkins UI accessing the instance [jenkins.io](https://ci.jenkins.io/) as a Guest. Jenkins uses Jenkins for the CI of their plugins and core ("Dogfooding").
 
 ### Jenkins: Installation and Architecture
 
-- High level overview of the [Jenkins architecture](https://www.jenkins.io/doc/developer/architecture/)
+- High-level overview of the [Jenkins architecture](https://www.jenkins.io/doc/developer/architecture/)
 - [Install Jenkins](https://www.jenkins.io/doc/book/installing/) in your desired platform following the recommendations explained in [Prepare Jenkins for Support](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/best-practices/prepare-jenkins-for-support)
 - Always install the latest available version. It is a good practice to review [LTS Changelog](https://www.jenkins.io/changelog-stable/) to understand the new features and bug fixes (specifically for upgrades)
 - Additional [Jenkins Features are controlled with System Properties](https://www.jenkins.io/doc/book/managing/system-properties/).
-- Capacity planning: How many Jenkins instances does my Organization needs to perform efficiently their CI pipelines?
-  - Number of Controllers: Generally speaking, **one per Development Team**. Additionally. there are references to **estimate number of controllers** based on the [number of jobs and developers](https://www.jenkins.io/doc/book/scaling/architecting-for-scale/#Calculating-how-many-jobs)
+- Capacity planning: How many Jenkins instances does my Organization need to perform efficiently their CI pipelines?
+  - Number of Controllers: Generally speaking, **one per Development Team**. Additionally. there are references to **estimate numbers of controllers** based on the [number of jobs and developers](https://www.jenkins.io/doc/book/scaling/architecting-for-scale/#Calculating-how-many-jobs)
     - [🎥 Big Monolithic Controllers are performance killers](https://www.cloudbees.com/videos/splitting-monolithic-jenkins-controllers-for-increased-performance). Check this [Guide to Slipt Controllers](https://docs.cloudbees.com/docs/cloudbees-ci-migration/latest/splitting-controllers/)
   - Compute resources per Controller Node:
-    - [Minumum requirements](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/system-requirements)
+    - [Minimum requirements](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/system-requirements)
     - [Memory max up to 16GB](https://docs.cloudbees.com/docs/admin-resources/latest/jvm-troubleshooting/#_heap_size)
-    - [4 CPU unit is a good number for production](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-reference-architecture/ra-for-eks/#_controller_sizing_guidelines)
+    - [4 CPU units is a good number for production](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-reference-architecture/ra-for-eks/#_controller_sizing_guidelines)
     - Storage:
       - [Scalable](https://www.jenkins.io/doc/book/scaling/architecting-for-scale/#scalable-storage-for-master) strating by 50 GB
       - For Kubernetes add [`allowVolumeExpansion: true`](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/cloudbees-ci-on-modern-cloud-platforms/how-to-expand-a-pvc-on-cloudbees-ci) and `volumeBindingMode: WaitForFirstConsumer` (for Nodes using multi AZs - recommended) to the Storage Classes)
         - ⚠️ Note [Limitation for EBS and ASG regarding HA](https://aws.amazon.com/blogs/containers/amazon-eks-cluster-multi-zone-auto-scaling-groups/)
 - Network Requirements
   - [Ports and Proxy configuration](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-secure-guide/configuring-network-requirements)
-  - Firewall: [Required URLs to allowlist](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-secure-guide/url-list) (Note some of the URL are only required for CloudBees)
+  - Firewall: [Required URLs to allowlist](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-secure-guide/url-list) (Note some of the URLs are only required for CloudBees)
   - Running Jenkins on Private Subnets: Use software Agent for inbound SCM webhooks.
     - [🎥 Smee.io](https://www.youtube.com/watch?v=ULe7c-2aPYY)
     - [Webhookrelay](https://webhookrelay.com/blog/2017/11/23/github-jenkins-guide/)
-  - For your [Agents Nodes design](https://www.jenkins.io/doc/book/managing/nodes/), use [Websockets](https://www.jenkins.io/blog/2020/02/02/web-socket/) for the in-bound types to connect via via HTTPS.
+  - For your [Agents Nodes design](https://www.jenkins.io/doc/book/managing/nodes/), use [Websockets](https://www.jenkins.io/blog/2020/02/02/web-socket/) for the in-bound types to connect via HTTPS.
 
 ### Jenkins: Data Persistence
 
 Jenkins depends on a Fyle System to store its configuration and build data: [$JENKINS_HOME](https://docs.cloudbees.com/docs/admin-resources/latest/backup-restore/jenkins-home)
-Nevertheless, some of it outcomes can be storage outside of the Filesystem see [Pluggable Storage](https://www.jenkins.io/sigs/cloud-native/pluggable-storage/)
+Nevertheless, some of its outcomes can be storage outside of the Filesystem see [Pluggable Storage](https://www.jenkins.io/sigs/cloud-native/pluggable-storage/)
 
 ### Jenkins: Configuration
 
@@ -59,7 +59,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 - Plugins Management: Jenkins comes with a series of bundle plugins (required) but its capabilities can be extended via [Manage Plugins](https://www.jenkins.io/doc/book/managing/plugins/) which connects to [Jenkins Update Center](https://www.jenkins.io/templates/updates/). There are more than 1800+ community-contributed plugins (see [Jenkins Plugins Index](https://plugins.jenkins.io/)).
   - Not all the plugins have the same [Health Score](https://plugin-health.jenkins.io/probes). Use OSS plugins with High Health Score value.
   - ⚠️ Note that [Advanced installation](https://www.jenkins.io/doc/book/managing/plugins/#advanced-installation) does manage transitive dependencies requirements.
-  - Air-gapped environments: The [plugin manager tools](https://github.com/jenkinsci/plugin-installation-manager-tool) downloads plugins and their dependencies into a folder so that they can be easily imported into an instance of Jenkins.
+  - Air-gapped environments: The [plugin manager tools](https://github.com/jenkinsci/plugin-installation-manager-tool) download plugins and their dependencies into a folder so that they can be easily imported into an instance of Jenkins.
 - Prepare the instance to onboard developers:
   - 🔑 Add [Credentials](https://www.jenkins.io/doc/book/using/using-credentials/) to the Jenkins Internal Store to connect to your third-party systems (Security Realm, SCM, Artifactory Registry). Check out that you [understand different scopes](https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc#credentials-scopes).
   - 🔒 Define Jenkins [Access Control](https://www.jenkins.io/doc/book/security/managing-security/#access-control). Among the different options, the most common setup would be:
@@ -69,9 +69,9 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
   - [Configure Agents](https://www.jenkins.io/doc/book/managing/nodes/#managing-nodes) to perform your builds (🍬 check [best practices](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/best-practices/remoting-best-practices)
     - Jenkins supports different types of OS (Windows, Linux and MacOS) and deployments [Static Agents](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/agents#static-agents) vs Cloud [Kubernetes Plugin](https://plugins.jenkins.io/kubernetes/))
   - Integrate with an Artifact Registry like [Artifactory](https://plugins.jenkins.io/artifactory/) to store artifacts (build outcome) for Continuos Delivery or Release Orchestration
-    - ⚠️ For intermediate artifacts to be used by others Jenkins builds (e.g. [archiveArtifacts](https://www.jenkins.io/doc/pipeline/steps/core/#archiveartifacts-archive-the-artifacts)), do not use `$JENKINS_HOME` but S3 compatible storage like [Artifact Manager on S3](https://plugins.jenkins.io/artifact-manager-s3/)
+    - ⚠️ For intermediate artifacts to be used by other Jenkins builds (e.g. [archiveArtifacts](https://www.jenkins.io/doc/pipeline/steps/core/#archiveartifacts-archive-the-artifacts)), do not use `$JENKINS_HOME` but S3 compatible storage like [Artifact Manager on S3](https://plugins.jenkins.io/artifact-manager-s3/)
 - Housekeeping: [Configure Global Build Discarders](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/best-practices/deleting-old-builds-best-strategy-for-cleanup-and-disk-space-management#_resolution) helps to reduce the **disk space** consumption on build data for jobs ([🎥 How to Clean up Old Jenkins Builds](https://www.youtube.com/watch?v=_Z7BlaTTGlo))
-  - 🍬 Build data consume more Disk space and has higher IO rates that the rest of the elements outside the `$JENKINS_HOME`. Why do not place it a more appropiate disk according to its requirements outside the `$JENKINS_HOME` thanks to [jenkins.model.Jenkins.buildsDir](https://www.jenkins.io/doc/book/managing/system-properties/#jenkins-model-jenkins-buildsdir)?
+  - 🍬 Build data consumes more Disk space and has higher IO rates that rest of the elements outside the `$JENKINS_HOME`. Why do not place it on a more appropriate disk according to its requirements outside the `$JENKINS_HOME` thanks to [jenkins.model.Jenkins.buildsDir](https://www.jenkins.io/doc/book/managing/system-properties/#jenkins-model-jenkins-buildsdir)?
 
 ### Jenkins: Administration
 
@@ -79,7 +79,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
   - By default, the [Metrics](https://plugins.jenkins.io/metrics/) plugin exposes a set of metrics including System and Java Virtual Machine metrics, Web UI metrics and Jenkins-specific metrics. Other plugins might add additional metrics like the [CloudBees Disk Usage Simple](https://plugins.jenkins.io/cloudbees-disk-usage-simple/)
     - Recommended resources to watch for performance: memory usage percentage, CPU usage percentage, JENKINS_HOME disk usage percentage, JENKINS_HOME IOPS, operations center and managed controller response time, Remaining build nodes capacity, Remaining master nodes capacity and Build/master nodes instances usage.
     - Integrate Jenkins with an external solution like [🎥 Prometheus and Graphana](https://www.youtube.com/watch?v=3H9eNIf9KZs). (⚠️ Using [Monitoring plugin](https://plugins.jenkins.io/monitoring/) for production environment is not a good approach because Jenkins is being monitored inside Jenkins).
-      - 🍬 Grafana offers series of ready-built [dashboards for Jenkins](https://grafana.com/grafana/dashboards/?search=jenkins)
+      - 🍬 Grafana offers a series of ready-built [dashboards for Jenkins](https://grafana.com/grafana/dashboards/?search=jenkins)
       - 🍬 Must-have alerts for Jenkins can be found at [Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules#jenkins)
   - Identifying where are the pipeline bottlenecks by [🎥 Tracing Your Jenkins Pipelines With OpenTelemetry and Jaeger](https://www.youtube.com/watch?v=3XzVOxvNpGM) (Additionally [Troubleshooting Slow Builds](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/troubleshooting-guides/how-to-identify-cause-for-building-times-increase)).
 - 🔬 Auditing:
@@ -88,7 +88,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 - 💾 [Backup/Restore](https://www.jenkins.io/doc/book/system-administration/backing-up/)
   - [Thinbackup plugin](https://plugins.jenkins.io/thinBackup/) for process automation.
     - Backup storage: Directory/Mount point accessible from `$JENKINS_HOME`
-    - Currently, it is no integrated in JCasc [JENKINS-53442](https://issues.jenkins.io/browse/JENKINS-53442)
+    - Currently, it is not integrated in JCasc [JENKINS-53442](https://issues.jenkins.io/browse/JENKINS-53442)
 - Operate remotely with Jenkins
   - [Jenkins CLI](https://www.jenkins.io/doc/book/managing/cli/) (🍬 If you use the Jenkins CLI tool regularly, [configure an alias](https://docs.cloudbees.com/docs/admin-resources/latest/cli-guide/config-alias) to avoid having to type the entire command each time).
     - `$JENKINS_URL/cli` contains up-to-date docs about remoting cli commands.
@@ -101,12 +101,13 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 ### Jenkins: Support 🏥
 
 - Find your answers within the [community](https://community.jenkins.io/) in different channels like [Stack Overflow](https://stackoverflow.com/questions/tagged/jenkins)
-- Use [Support Core plugin](https://plugins.jenkins.io/support-core/) to export a snaphot of the configuration of your instance.
+- Use [Support Core plugin](https://plugins.jenkins.io/support-core/) to export a snapshot of the configuration of your instance.
 - Create a [Custom log Recorder](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-do-i-create-a-logger-in-jenkins-for-troubleshooting-and-diagnostic-information) to increase visibility on the failure components.
 - If you are stuck, report your request or bug in the [Jenkins Jira](https://issues.jenkins.io/secure/Dashboard.jspa)
 
 ### Jenkins: Inspiring Talks
 
+- [🎥 DevSecOps Pipeline Project: Deploy Netflix Clone on Kubernetes](https://www.youtube.com/watch?v=g8X5AoqCJHc&t=3922s)
 - [🎥 MANGO: Orchestrating a Terraform pipeline with Jenkins](https://www.youtube.com/watch?v=61C6wD_y1HA)
 - [🎥 DevOps Toolkit: Running Jenkins In Kubernetes](https://www.youtube.com/watch?v=2Kc3fUJANAc)
 
@@ -116,12 +117,12 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 
 - There are two plataform types to install CloudBees CI:
   - [Traditional platform](https://docs.cloudbees.com/docs/cloudbees-ci/latest/architecture/ci-trad) (see [diagram](https://docs.cloudbees.com/docs/cloudbees-ci/latest/architecture/_images/cloudbees-ci-traditional-arch.574b6fc.svg))
-    - Make your CI builds **more resilient** by scaling Jenkins thanks to [HA/HS](https://docs.cloudbees.com/docs/cloudbees-ci/latest/ha-install-guide/specific-ha-installation-traditional) (Active - Active)
+    - Make your CI builds **more resilient** by scaling Jenkins thanks to [HA/HS](https://docs.cloudbees.com/docs/cloudbees-ci/latest/ha-install-guide/specific-ha-installation-traditional) (Active-Active)
       - If HA/HS is not an option, consider the _old_ [High Availability](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/high-availability) (Active - Passive) (see [architecture diagram](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/_images/ha-network-diagram.e8469d2.png)). [🎥 Getting Started With CloudBees CI HA active/active Traditional](https://www.youtube.com/watch?v=Qkf9HaA2wio)
-        - ⚠️ Ensure to meet the requirements from [NFS Guide](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/nfs-guide)
+        - ⚠️ Ensure to meet the requirements from the [NFS Guide](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/nfs-guide)
   - [Modern platform](https://docs.cloudbees.com/docs/cloudbees-ci/latest/architecture/ci-cloud) (see [architecture diagram](https://docs.cloudbees.com/docs/cloudbees-ci/latest/architecture/_images/k8s-ci-architecture.31527cd.svg))
     - CloudBees CI on Kubernetes additionally benefits from the robust container management of the Kubernetes control plane. Aside from the operations center and managed controllers running as `StatefulSets`, controllers use the Jenkins Kubernetes plugin to schedule builds on disposable agent pods, eliminating the need to explicitly manage worker infrastructure.
-    - Make your CI builds **more resilient** by scaling Jenkins thanks to [HA/HS](https://docs.cloudbees.com/docs/cloudbees-ci/latest/ha-install-guide/install-ha-on-platforms) (Active - Active)
+    - Make your CI builds **more resilient** by scaling Jenkins thanks to [HA/HS](https://docs.cloudbees.com/docs/cloudbees-ci/latest/ha-install-guide/install-ha-on-platforms) (Active-Active)
     - Make your CI build **more elastic** thanks to:
       - Configure autoscaling (for [example in EKS](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/eks-auto-scaling-nodes))
       - Configure [Hibernation on Controllers](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/managing-controllers#_hibernation_in_managed_masters) to save computing cost
@@ -131,7 +132,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 - License: Get a Trial or [Import your Key and Certificate pair](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/what-is-a-cloudbees-jenkins-enterprise-instance-id-and-how-do-i-find-it)
 - Always install the latest version and review [CloudBees CI Release Notes](https://docs.cloudbees.com/docs/release-notes/latest/cloudbees-ci/) to understand the new features and bug fixes.
 - Network Requirements
-  - For inbound agents but also for [Controllers use Wesockets](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-setup-guide/websockets) to make connections simpler, more straightforward, and easier to establish via HTTPS.
+  - For inbound agents but also [Controllers use Websockets](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-setup-guide/websockets) to make connections simpler, more straightforward, and easier to establish via HTTPS.
 - 🔒 Installations more secure with:
   - [Signed Docker images](https://docs.cloudbees.com/docs/cloudbees-ci/latest/kubernetes-install-guide/verifying-cloud-docker-images)
   - [Signed Helm Charts](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/helm-verification)
@@ -139,7 +140,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
 ### CloudBees CI: Configuration
 
 - If you come from Jenkins Open source, [Migrate](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/migrating-jenkins-instances) your configuration and transit data (builds) to CloudBees CI. See [🎥 Migrating from Jenkins LTS to CloudBees CI](https://cloudbees.wistia.com/medias/x5ixxnvhy4)
-  - For this types of scenarios or any type of service maintenance, [CloudBees Quiet Start](https://docs.cloudbees.com/docs/admin-resources/latest/plugins/quiet-start) can help to not run all your builds immediately after restart.
+  - For this type of scenario or any type of service maintenance, [CloudBees Quiet Start](https://docs.cloudbees.com/docs/admin-resources/latest/plugins/quiet-start) can help to not run all your builds immediately after restart.
 - Configuration as Code: Extend JCasc with more enriched features thanks to Casc.
   - [Operation Center](https://docs.cloudbees.com/docs/cloudbees-ci/latest/casc-oc/)
   - [Controllers](https://docs.cloudbees.com/docs/cloudbees-ci/latest/casc-oc/)
@@ -147,29 +148,29 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
   - Controllers types:
     - Traditional: [Client Controllers](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-setup-guide/connecting-cms)
     - Modern: [Managed Controllers](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/managing-controllers).
-      - Note, Modern also supports Client Controllers.
-  - Use [Move/Copy/Promote](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/move-copy-promote) to disribute items across your Plataform.
+      - Note that Modern also supports Client Controllers.
+  - Use [Move/Copy/Promote](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/move-copy-promote) to distribute items across your Plataform.
   - [Cluster Operations](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cluster-operations) perform maintenance operations on various items in operations center, such as Client/Managed Controllers.
   - Shared Agent Configuration
     - [Shared Agent](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/shared-agents) for static agents.
     - [Shared Cloud](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/pushed-clouds), including Kubernetes ([Globally editing pod templates in operations center](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/agents#_globally_editing_pod_templates_in_operations_center))
   - [Centrally managing security for controllers SSO](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/using-sso).
-- Ease plugins operations and get additional Enterprise plugins
+- Ease plugin operations and get additional Enterprise plugins
   - Switch from Jenkins Update Center ([https://updates.jenkins-ci.org/](https://updates.jenkins-ci.org/)) to CloudBees Update Center ([https://jenkins-updates.cloudbees.com/](https://jenkins-updates.cloudbees.com/)) to add the OSS plugins list a set of [Enterprise grade plugins developed and supported by CloudBees](https://docs.cloudbees.com/search?type=ci-plugins&plugins-tier=verified&group=cloudbees-ci&search=show).
   - Enable [Beekeeper Upgrade Assistant](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/beekeeper-upgrade-assistant) to guarantee plugin compatibility with the Jenkins core version thanks to the [CloudBees Assurance Program (CAP)](https://docs.cloudbees.com/docs/admin-resources/latest/assurance-program/)
-    - [Plugins in the CAP are categorized into three tiers](https://docs.cloudbees.com/search?type=ci-plugins&search=show), adding to Jenkins comunity plugin a set of Propietary plugins, when you are trying to determine if you should install a particular plugin, [choosing plugins that are part of CAP](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/find-support-tier) (Tier 1 and Tier 2) provides the assurance of greater stability and security.
-    - Have flexibility to override CAP on a plugin-by-plugin basis with [Beekeeper plugin exceptions](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/beekeeper-exceptions)
+    - [Plugins in the CAP are categorized into three tiers](https://docs.cloudbees.com/search?type=ci-plugins&search=show), adding to Jenkins community plugin a set of Proprietary plugins, when you are trying to determine if you should install a particular plugin, [choosing plugins that are part of CAP](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/find-support-tier) (Tier 1 and Tier 2) assures greater stability and security.
+    - Have the flexibility to override CAP on a plugin-by-plugin basis with [Beekeeper plugin exceptions](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/beekeeper-exceptions)
     - Extend Beekeeper with plugins outside CAP (e.g. custom plugins) with the [Plugin Catalog](https://docs.cloudbees.com/docs/admin-resources/latest/plugin-management/configuring-plugin-catalogs)
   - Air-gapped Environment: Use [kyounger/casc-plugin-dependency-calculation:](https://github.com/kyounger/casc-plugin-dependency-calculation) to calculate target plugin.yaml and plugin-catalog.yaml
 - 🔒 Increase your Security
   - Adding roles to your authorization strategy using [RBAC](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/rbac) ([setup example](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/operations-center/rbac-multiple-configurations-in-a-cjoc-cje-architecture))
-    - ⚠️ Remember to map your AD/LDAP Groups with CloudBees RBAC Groups as membership. Mapping to AD/LDAP individual users increase the complexity to mantein your security.
+    - ⚠️ Remember to map your AD/LDAP Groups with CloudBees RBAC Groups as membership. Mapping to AD/LDAP individual users increase the complexity to maintain your security.
   - Support for [Self-signed certificates in Kubernetes](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/kubernetes-self-signed-certificates)
   - 🔑 Credentials:
     - CloudBees HashiCorp Vault plugin (coming soon) - Note: The [OSS plugin](https://plugins.jenkins.io/hashicorp-vault-plugin/) only works in jobs.
     - Restrictions with:
       - [Folders and RBAC](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/ssh-credentials-management-with-jenkins#_architecture_with_credential_management_in_folders)
-      - [Restricted Credentials](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/restricted-credentials) lets you define restricted credentials with built-in access control using the full item names define in allowlists and denylists.
+      - [Restricted Credentials](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/restricted-credentials) lets you define restricted credentials with built-in access control using the full item names defined in allowlists and denylists.
     - Adding [CyberArk plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/cyberark) provider.
   - [Trigger restrictions](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/trigger-restrictions) restrict which upstream jobs are allowed to trigger builds of other jobs.
 - [Folder plus](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/folders-plus) adds the following features to the Standard folder plugin: Define environment variables that are passed to the builds of all jobs within a folder, Display selected jobs types from subfolders in a higher-level view, and Restrict which agents each team has access to and Restrict which kinds of items may be created in a folder (useful for Compliance)
@@ -184,7 +185,7 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
   - New UI replacement for [Blue Ocean](https://www.jenkins.io/doc/book/blueocean/getting-started/): [CloudBees Pipeline Explorer Plugin](https://docs.cloudbees.com/docs/release-notes/latest/plugins/cloudbees-pipeline-explorer-plugin/).
 - Housekeeping
   - [CloudBees Inactive Items plugin](https://docs.cloudbees.com/docs/admin-resources/latest/plugins/inactive-items): Identify **unused items** which are good candidate to be removed from the instance.
-  - [CloudBees Usage plugin](https://docs.cloudbees.com/docs/admin-resources/latest/plugins/plugin-usage): Curated list of **plugins usage** at instance level. It is recommeded to only install plugin the instance required.
+  - [CloudBees Usage plugin](https://docs.cloudbees.com/docs/admin-resources/latest/plugins/plugin-usage): Curated list of **plugins usage** at the instance level. It is recommended to only install plugin the instance required.
 
 ### CloudBees CI: Administration
 
@@ -196,8 +197,8 @@ Nevertheless, some of it outcomes can be storage outside of the Filesystem see [
     - It can be integrated with [Cluster Operation to take a backup](https://docs.cloudbees.com/docs/admin-resources/latest/backup-restore/backup-cluster) for every controller connected to the controller.
 - Operate remotely with Jenkins
   - API REST
-    - 🔒 [CloudBees Request Filter Plugin](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-do-i-use-the-cloudbees-request-filter-plugin) can block any specifict API endpoint request that has been identified like potential damage for the performance or security instance.
-    - New API Endpoints are adding for [Casc](https://docs.cloudbees.com/docs/cloudbees-ci-api/latest/bundle-management-api) and [RBAC](https://docs.cloudbees.com/docs/cloudbees-ci-api/latest/rbac-api)
+    - 🔒 [CloudBees Request Filter Plugin](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-do-i-use-the-cloudbees-request-filter-plugin) can block any specific API endpoint request that has been identified like potential damage to the performance or security instance.
+    - New API Endpoints are added for [Casc](https://docs.cloudbees.com/docs/cloudbees-ci-api/latest/bundle-management-api) and [RBAC](https://docs.cloudbees.com/docs/cloudbees-ci-api/latest/rbac-api)
 
 ### CloudBees CI: Support 🏥
 

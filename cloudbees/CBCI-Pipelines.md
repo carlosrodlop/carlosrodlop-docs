@@ -17,14 +17,14 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
 
 ## Jenkins: Starting with a solid Open Source core
 
-- [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) stores the definition of a pipeline as code. It can be [created via UI](https://www.jenkins.io/doc/book/pipeline/getting-started/#through-the-classic-ui) or [imported from SCM](https://www.jenkins.io/doc/book/pipeline/getting-started/#defining-a-pipeline-in-scm) ( 🍬 The second option is [the recommendation](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-best-practices#_store_pipeline_definitions_in_a_source_code_management_scm_tool), although the first one might be interesting to deploy "Hello World" examples via the assistant.
+- [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) stores the definition of a pipeline as code. It can be [created via UI](https://www.jenkins.io/doc/book/pipeline/getting-started/#through-the-classic-ui) or [imported from SCM](https://www.jenkins.io/doc/book/pipeline/getting-started/#defining-a-pipeline-in-scm) (🍬 The second option is [the recommendation](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-best-practices#_store_pipeline_definitions_in_a_source_code_management_scm_tool), although the first one might be interesting to deploy "Hello World" examples via the assistant.
   - 🍬 [Declarative Pipeline Migration Assistant](https://plugins.jenkins.io/declarative-pipeline-migration-assistant/) can automate the migration process of existing Freestyles projects to Pipelines.
   - The Jenkinsfile supports two types of syntax [Scripted syntax](https://www.jenkins.io/doc/book/pipeline/syntax/#scripted-pipeline) vs [Declarative syntax](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline) ( 🍬 use [Declarative syntax as default](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-best-practices#_when_writing_a_pipeline_definition_use_declarative_syntax) )
     - The best source of truth: [Built-in Documentation](https://www.jenkins.io/doc/book/pipeline/getting-started/#built-in-documentation): Snippet Generator (Pipeline steps), Global Variable Reference, and Declarative Directive Generator.
     - [Declarative steps](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-steps) may use all the available steps documented in the [Pipeline Steps reference](https://www.jenkins.io/doc/pipeline/steps/)
       - ⚠️ [Any processing within a Pipeline should occur within an agent](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-best-practices#_do_all_the_work_within_an_agent) inside the [sh](https://www.jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#sh-shell-script) (Linux Build) or [bat](https://www.jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#bat-windows-batch-script) (Windows Build) (🍬 See this [🎥 How to Run a Shell Script in Jenkins Pipeline](https://www.youtube.com/watch?v=mbeQWBNaNKQ))
       - [script block](https://www.jenkins.io/doc/book/pipeline/syntax/#script) takes a block of Scripted Pipeline and executes that in the Declarative Pipeline.
-    - ⚠️ It is important to understand [String Interpolation](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#string-interpolation), especially for security implication with [credentials](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#interpolation-of-sensitive-environment-variables) or [injection](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#injection-via-interpolation).
+    - ⚠️ It is important to understand [String Interpolation](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#string-interpolation), especially for security implications with [credentials](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#interpolation-of-sensitive-environment-variables)](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#interpolation-of-sensitive-environment-variables) or [injection](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#injection-via-interpolation).
     - Learn by examples with:
       - [cloudbees/intro-to-declarative-pipeline](https://github.com/cloudbees/intro-to-declarative-pipeline)
       - [darinpope/jenkinsfile-library](https://github.com/darinpope/jenkinsfile-library)
@@ -38,7 +38,7 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
   - :octocat: Use a GitHub Organization project to import all or a subset of repositories belonging to a GitHub user or organization as "Multibranch Pipeline" projects.
 - Install [Pipeline Utility Steps](https://github.com/jenkinsci/pipeline-utility-steps-plugin/blob/master/docs/STEPS.md) for adding useful Goodies For Parsing Configs, Maven POMs, etc
 - 🏃 Make Jenkins Builds Faster by:
-  - Use the [Performance optimized](https://www.jenkins.io/doc/book/pipeline/scaling-pipeline/#suggested-best-practices-and-tips-for-durability-settings) mode for most pipelines and especially basic build-test Pipelines or anything that can simply be run again if needed.
+  - Use the [Performance optimized](https://www.jenkins.io/doc/book/pipeline/scaling-pipeline/#suggested-best-practices-and-tips-for-durability-settings) mode for most pipelines especially basic build-test Pipelines or anything that can simply be run again if needed.
   - Cache:
     - Shared Libraries checkout `Cache fetched versions on master for quick retrieval`
     - Dependencies (Workspace)
@@ -59,7 +59,7 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
     - [Windows containers](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/agents#_setting_up_a_kubernetes_cluster_with_linux_and_windows_node_pools) are supported.
 - 📚 [Shared Library](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
   - It allows to:
-    - [Prototype steps and pipelines using Global vars](https://github.com/aimtheory/jenkins-pipeline-best-practices)
+    - [Prototype steps and pipelines using Global Vars](https://github.com/aimtheory/jenkins-pipeline-best-practices)
     - Perform [Unit Testing](https://github.com/jenkinsci/JenkinsPipelineUnit)
   - [Resource folder](https://www.jenkins.io/doc/book/pipeline/shared-libraries/#loading-resources) to load agent configuration and scripts ([🎥 Using Resource Files From a Jenkins Shared Library](https://www.youtube.com/watch?v=eV7roTXrEqg))
   - Learn by examples with:
@@ -78,5 +78,5 @@ Check out my GitHub start repositories for [CI Pipeline Developer](https://githu
   - [Pipeline Template Catalogs](https://docs.cloudbees.com/docs/admin-resources/latest/pipeline-templates-user-guide/setting-up-a-pipeline-template-catalog)([🎥 Demo video](https://www.youtube.com/watch?v=pPwI_kTSCmA))
   - 📌 [Markerfile](https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-as-code#custom-pac-scripts) restricts/selects which pipeline branches are candidates to be built within a Project.
 - 🏃 Make Pipeline Faster with [CloudBees Workspace caching](https://docs.cloudbees.com/docs/cloudbees-ci/latest/pipelines/cloudbees-cache-step) provides configurations and pipeline steps to download/upload caches to an external storage provider S3 compatible.
-  - [🎥  CloudBees Workspace Caching ](https://www.youtube.com/watch?v=ESU9oN9JUCw)
-- Extend [🎥 Suppress automatic SCM triggering](https://www.youtube.com/watch?v=2XK8ikOCpOw) with [CloudBees Build Strategies]() to avoid Build Storm permanently (not just the initial build) for easier migrations and onboarding of new Teams.
+  - [🎥  CloudBees Workspace Caching](https://www.youtube.com/watch?v=ESU9oN9JUCw)
+- Extend [🎥 Suppress automatic SCM triggering](https://www.youtube.com/watch?v=2XK8ikOCpOw) with [CloudBees Build Strategies](https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-admin-guide/cloudbees-build-strategies-plugin#_prevent_the_multibranch_pipelineorganization_folder_from_triggering_builds_on_the_initial_indexing) to avoid Build Storm permanently (not just the initial build) for easier migrations and onboarding of new Teams.
