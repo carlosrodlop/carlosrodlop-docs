@@ -16,9 +16,10 @@
 
 ### Companies
 
-- [talent.io | Get the tech job you deserve](https://www.talent.io/p/en-fr/home)
+- [Crunchbase: Discover innovative companies and the people behind them](https://www.crunchbase.com/)
 - [Glassdoor Job Search | You deserve a job that loves you back](https://www.glassdoor.com/index.htm)
 - [Levels.fyi](https://www.levels.fyi/2022/?from=top_banner)
+- [talent.io | Get the tech job you deserve](https://www.talent.io/p/en-fr/home)
 
 ### SRE
 
