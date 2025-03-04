@@ -468,3 +468,61 @@ Two options here:
 
 * `mvn clean package -Dmaven.test.skip=true`
 * Run all unit Test for the project > Place on Test folder > java > Run 'All Test'
+
+## Plugin Management
+
+References/methods:
+
+- Legacy: old and generally out of date or not recommended but explains CAP and the Beekeeper Upgrade Assistant
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/plugin-management/plugin-management-decision-tree
+- CasC: this is generally preferred (notice apiVersion 1 vs 2)
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/casc-oc/plugin-management
+- Manual via UI:
+A valid option if you are going it without CasC
+
+Questions:
+
+- Plugin installation/update (RBAC, etc):
+- Can anyone install/update a plugin, or should the server be locked down?
+- Should updates to 3rd party plugins be possible?
+- Who gets to choose which plugins are accepted?
+
+The following are with respect to CasC
+
+- CAP Plugin versions:
+- CAP shouldn't be a problem - bundled with the image.
+- CAP exceptions are not recommended.
+- Dependencies are managed internally so, again, nothing the worry about
+
+3rd Party plugins:
+
+where are you pulling them from? internet or nexus/artifactory?
+setting up a pull through cache on an artifact repository?
+this solution sets up a local cluster internal cache for caching plugins
+might need the values updating (here is a working set)
+it has also been used pull from artifactory (so artifactory as main pull through, and internal as a cluster local cache)
+dependencies:
+apiVersion 1 - need to be calculated and added to the list and plugin catalog yaml (this repo helps)
+apiVersion 2 - calculated automatically
+however, will always take latest available on restart unless the version is pinned or URL specified in the plugins.yaml
+updates:
+if pinned using the plugin-catalog.yaml, updates never shown but:
+you need to recalculate the catalog on each upgrade
+you need to manage the bundle used by the server accordingly
+if using the plugins.yaml the apiVersion 2, it will take the latest according to the UC unless pinned (as mentioned above)
+overhead calculating the version, etc, is then similar to apiVersion 1
+Alternatively you can create and specify a static UC so as to not get any updates https://docs.cloudbees.com/docs/cloudbees-ci/latest/casc-oc/alternate-plugin-download-site
+this only works with CasC - the UI would still show updates
+how to create a static UC is explained here by 
+@Andreas Grob
+ https://docs.google.com/document/d/1Ua5AbppZl-ZgKmc_IzN_TrTpT7W9jznISMNItQAlg18/edit?tab=t.0#heading=h.oceti6o6ce9l
+NOTE: asking Jake for links on this
+there is also an action item from PM/Engg to create static URL's per UC update/revision so that we can use ..../2.463.2.3/core-mm/2 which points to revision 2 of the UC and will not change.
+this will be awesome since we can then effectively pin an entire UC - no more unexpected updates
+this, when fixed/implemented would allow setting a static URL for the entire controller (so no updates visible in UI either)
+Best practice? Difficult: Right now with CasC on a recent version of CI?
+maybe - restrict admin access to stop unwanted plugin installation/updates
+definitely - set up caching (either repo/local or both)
+definitely - use apiVersion 2 if possible
+maybe - depending on how strict you are, set up the alternative UC json
+maybe - depending on how strict you are, alternatively pin the versions
