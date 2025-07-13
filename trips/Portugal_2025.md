@@ -6,13 +6,13 @@
 - **Puntos de Paso**: incluye Óbidos, Azenhas do Mar, Setúbal-Tróia, Labruja, Sagres, Oporto, Obidos y Braga.
 - **Inicio/Fin**: Sevilla, España
 - **Primera parada**: Parque Nacional Peneda-Gerês
-- **Límite de conducción**: Máximo 3 horas al día (un trayecto de 3.5 horas con descanso)
+- **Límite de condu- **Trekking en Labruja (Día 9)**: Ruta circular (~2 km) con pasarelas, puentes y cascadas. Apta para carritos y perros. Evitar horas de mucho calor (julio 2025).ción**: Máximo 3 horas al día (un trayecto de 3.5 horas con descanso)
 - **Enfoque**:
   - Playas aptas para perros
   - Visita Parue Nacional (Peneda-Gerês)
   - Visitas a ciudades pequeñas ciudades/pueblos
   - Trekking en Passadiços da Ribeira de São João en Labruja
-  - Foto en Azenhas do Mar (Día 12)
+  - Foto en Azenhas do Mar
   - Ferry a Praia da Costa da Galé en Tróia
   - Paso por Praia da Galé en el Algarve (Día 14, por carretera)
 - Alojamiento
@@ -21,7 +21,7 @@
   - Areas de acamping para gratutitas y de claidad.
 - **Actividades para niños**: Juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, trekking ligero y visitas a parques temáticos adaptados para un bebé de 1 año
 - **Restaurantes**: Recomendaciones familiares con buena relación calidad-precio
-- **Mapa interactivo**: [Ruta en Google Maps con marcadores por día](https://www.google.com/maps/d/u/0/edit?mid=1X8z3Y7Z9k1v2W3X4Y5Z6A7B8C9D0E1F&usp=sharing)
+- **Mapa interactivo**: No tocar esta sección, sólo la toco la persona que quiere crear el proyecto.
 
 ## Itinerario
 
@@ -29,17 +29,19 @@
 flowchart TD
     A[🚗 Sevilla - Inicio] -->|200km<br/>2.5h| B[🏕️ Mérida - Día 1<br/>Camping y piscina]
     B -->|450km<br/>3.5h| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
-    C -->|80km<br/>1.5h| D[🏖️ Viana do Castelo - Día 4<br/>Playa apta para perros]
-    D -->|20km<br/>30min| E[🏘️ Labruja - Días 5-6<br/>Pueblo y trekking]
-    E -->|170km<br/>1.5h| F[🏛️ Coimbra - Días 7-8<br/>Ciudad histórica]
-    F -->|160km<br/>1.5h| G[🌊 Nazaré - Días 9-10<br/>Playas y olas gigantes]
-    G -->|40km<br/>40min| H[🏰 Óbidos - Día 11<br/>Villa medieval]
-    H -->|25km<br/>30min| I[🏖️ Peniche - Día 12<br/>Playa y fortaleza]
-    I -->|50km<br/>45min| J[🏄 Ericeira - Día 13<br/>Surf y Azenhas do Mar]
-    J -->|90km<br/>1h| K[⛴️ Setúbal - Día 14<br/>Ferry point]
-    K -.->|5km<br/>25min Ferry| L[🏝️ Tróia - Día 14<br/>Península y playa]
-    L -->|200km<br/>2.5h| M[🏖️ Sagres - Días 15-16<br/>Cabo y playas Algarve]
-    M -->|300km<br/>3h| N[🏠 Sevilla - Día 17<br/>Regreso a casa]
+    C -->|70km<br/>1h| D[�️ Braga - Día 4<br/>Camping, centro histórico]
+    D -->|60km<br/>1h| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
+    E -->|80km<br/>1h| F[�🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
+    F -->|20km<br/>30min| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
+    G -->|170km<br/>2h| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
+    H -->|160km<br/>1.5h| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
+    I -->|40km<br/>40min| J[🏰 Óbidos - Día 14<br/>Villa medieval]
+    J -->|25km<br/>30min| K[🏖️ Peniche - Día 15<br/>Playa y fortaleza]
+    K -->|50km<br/>45min| L[🏄 Ericeira - Día 16<br/>Surf y Azenhas do Mar]
+    L -->|90km<br/>1h| M[⛴️ Setúbal - Día 17<br/>Ferry point]
+    M -.->|5km<br/>25min Ferry| N[🏝️ Tróia - Día 17<br/>Península y playa]
+    N -->|200km<br/>2.5h| O[🏖️ Sagres - Días 18-19<br/>Cabo y playas Algarve]
+    O -->|300km<br/>3h| P[🏠 Sevilla - Día 20<br/>Regreso a casa]
 
     %% Estilos
     classDef inicio fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
@@ -49,37 +51,43 @@ flowchart TD
     classDef ciudad fill:#800080,stroke:#333,stroke-width:2px,color:#fff
     classDef pueblo fill:#ff8c00,stroke:#333,stroke-width:2px,color:#fff
     classDef ferry fill:#00ced1,stroke:#333,stroke-width:2px,color:#fff
+    classDef apartamento fill:#ff9999,stroke:#333,stroke-width:3px,color:#fff
     classDef final fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
 
     class A inicio
     class B camping
     class C montaña
-    class D,G,I,L,M playa
-    class F ciudad
-    class E,H pueblo
-    class K ferry
-    class N final
+    class D camping
+    class E apartamento
+    class F,I,K,N,O playa
+    class H ciudad
+    class G,J pueblo
+    class M ferry
+    class P final
 ```
 
-| Día | Ubicación | Camping | Restaurante | Distancia/Tiempo | Actividades | Notas |
-|-----|-----------|---------|-------------|------------------|-------------|-------|
+| Día | Ubicación | Alojamiento | Restaurante | Distancia/Tiempo | Actividades | Notas |
+|-----|-----------|-------------|-------------|------------------|-------------|-------|
 | 1 | Sevilla a Mérida | [Camping Mérida](https://www.campingmerida.com/) | La Despensa del Castúo | ~200 km, ~2.5 h | Piscina y parque infantil | - |
-| 2 | Mérida a Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | - | ~450 km, ~3.5 h (descanso) | Paseos ligeros, piscina | Descanso en Zamora (41.5035, -5.7438) |
-| 3 | Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | Restaurante Abocanhado | 0 km | Miradouro da Pedra Bela, piscinas naturales (si es seguro) | - |
-| 4 | Peneda-Gerês a Viana do Castelo | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Tasquinha da Linda | ~80 km, ~1.5 h | Praia do Cabedelo (apta para perros), chapotear | - |
-| 5 | Viana do Castelo a Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | O Cantinho da Ribeira | ~20 km, ~30 min | Exploración de Fonte das Tres Bicas, paseo por el pueblo | Base en Viana do Castelo |
-| 6 | Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Casa da Eira | 0 km | Trekking en Passadiços da Ribeira de São João (apta para perros y bebés) | Base en Viana do Castelo |
-| 7 | Labruja a Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | Zé Manel dos Ossos | ~170 km, ~1.5 h | Portugal dos Pequenitos, Jardín Botánico | - |
-| 8 | Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | A Cozinha da Maria | 0 km | Parque Verde do Mondego, paseo en barco Basófias (si es adecuado) | - |
-| 9 | Coimbra a Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | - | ~160 km, ~1.5 h | Praia do Sul (apta para perros), juegos en la arena | - |
-| 10 | Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | A Tasquinha | 0 km | Praia do Norte (apta para perros), paseo en funicular | - |
-| 11 | Nazaré a Óbidos | [Campervan parking: Estrada do Capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira) | Petrarum Domus | ~40 km, ~40 min | Villa medieval, áreas verdes | - |
-| 12 | Óbidos a Peniche | [Camping Peniche Praia](https://penichepraia.pt/) | Restaurante Nau dos Corvos | ~25 km, ~30 min | Praia do Portinho da Areia Norte (apta para perros), fortaleza | - |
-| 13 | Peniche a Ericeira | [Camping Ericeira](https://campingericeira.com/) | Mar d’Areia | ~50 km, ~45 min | Praia de Ribeira d’Ilhas (apta para perros), Azenhas do Mar | - |
-| 14 | Ericeira a Setúbal → Tróia | [Camping Tróia](https://www.troiacamping.pt/) | A Cevicheria | ~90 km + 5 km, ~1 h + 10 min | Praia da Costa da Galé (apta para perros), dunas | **Ferry requerido** (15-25 min, ~18,70€/vehículo, perros permitidos) |
-| 15 | Tróia a Sagres (vía Praia da Galé, Algarve) | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | A Tasca | ~200 km, ~2.5 h | Praia do Martinhal (apta para perros), Praia da Galé, Cabo de São Vicente | **No ferry**; Praia da Galé por carretera (N125) |
-| 16 | Sagres | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | Restaurante O Telheiro | 0 km | Praia do Martinhal, parque infantil, paseos | - |
-| 17 | Sagres a Sevilla | - | - | ~300 km, ~3 h | Plaza de España (opcional) | - |
+| 2 | Mérida a Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | - | ~450 km, ~3.5 h (descanso) | Paseos ligeros, piscina | Descanso en Zamora |
+| 3 | Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | Restaurante Abocanhado | 0 km | Miradouro da Pedra Bela, piscinas naturales | - |
+| 4 | Peneda-Gerês a Braga | [Camping Braga](https://www.campingbraga.com/) | Taberna Real | ~70 km, ~1 h | Santuário do Bom Jesus, centro histórico | - |
+| 5 | Braga a Oporto | [Apartamento Porto Centro](https://www.booking.com/porto-family-pet.html) | Cantinho do Avillez | ~60 km, ~1 h | Librería Lello, Torre dos Clérigos | Apartamento pet-friendly |
+| 6 | Oporto | [Apartamento Porto Centro](https://www.booking.com/porto-family-pet.html) | DOP Restaurant | 0 km | Ribeira UNESCO, Palácio da Bolsa | - |
+| 7 | Oporto a Viana do Castelo | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Tasquinha da Linda | ~80 km, ~1 h | Praia do Cabedelo (apta para perros) | - |
+| 8 | Viana do Castelo a Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | O Cantinho da Ribeira | ~20 km, ~30 min | Exploración de Fonte das Tres Bicas | Base en Viana do Castelo |
+| 9 | Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Casa da Eira | 0 km | Trekking Passadiços da Ribeira de São João | Base en Viana do Castelo |
+| 10 | Labruja a Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | Zé Manel dos Ossos | ~170 km, ~2 h | Portugal dos Pequenitos, Jardín Botánico | - |
+| 11 | Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | A Cozinha da Maria | 0 km | Parque Verde do Mondego, barco Basófias | - |
+| 12 | Coimbra a Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | - | ~160 km, ~1.5 h | Praia do Sul (apta para perros) | - |
+| 13 | Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | A Tasquinha | 0 km | Praia do Norte, paseo en funicular | - |
+| 14 | Nazaré a Óbidos | [Campervan parking: Estrada do Capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira) | Petrarum Domus | ~40 km, ~40 min | Villa medieval, áreas verdes | - |
+| 15 | Óbidos a Peniche | [Camping Peniche Praia](https://penichepraia.pt/) | Restaurante Nau dos Corvos | ~25 km, ~30 min | Praia do Portinho (apta para perros), fortaleza | - |
+| 16 | Peniche a Ericeira | [Camping Ericeira](https://campingericeira.com/) | Mar d'Areia | ~50 km, ~45 min | Praia de Ribeira d'Ilhas, Azenhas do Mar | - |
+| 17 | Ericeira a Setúbal → Tróia | [Camping Tróia](https://www.troiacamping.pt/) | A Cevicheria | ~90 km + 5 km, ~1 h + 10 min | Praia da Costa da Galé (apta para perros) | **Ferry requerido** |
+| 18 | Tróia a Sagres (vía Praia da Galé) | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | A Tasca | ~200 km, ~2.5 h | Praia do Martinhal, Praia da Galé, Cabo São Vicente | Por carretera (N125) |
+| 19 | Sagres | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | Restaurante O Telheiro | 0 km | Praia do Martinhal, parque infantil, paseos | - |
+| 20 | Sagres a Sevilla | - | - | ~300 km, ~3 h | Plaza de España (opcional) | - |
 
 ## Alojamientos
 
@@ -127,18 +135,35 @@ Todos los campings son bien valorados (4+ estrellas), aptos para mascotas y fami
   - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)  
   - **Características**: Apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil.
 
+### Nuevos Alojamientos (Braga y Oporto)
+
+- **Camping Braga** ([https://www.campingbraga.com/](https://www.campingbraga.com/)):  
+  - **Ubicación**: Rua Antero de Quental, 4700-216 Braga, Portugal
+  - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil
+  - **Actividades cercanas**: Santuário do Bom Jesus do Monte (6 km), Centro histórico (4 km)
+
+- **Apartamento Porto Centro (Pet-Friendly)** ([https://www.booking.com/porto-family-pet.html](https://www.booking.com/porto-family-pet.html)):  
+  - **Ubicación**: Rua das Flores, Centro Histórico, Oporto, Portugal
+  - **Características**: 2 dormitorios, cocina equipada, admite mascotas (bajo petición), Wi-Fi
+  - **Distancias a atracciones principales**:
+    - Librería Lello: 300m (3 min andando)
+    - Torre dos Clérigos: 400m (5 min andando)
+    - Ribeira: 800m (10 min andando)
+    - Palácio da Bolsa: 900m (12 min andando)
+
 ## Actividades
 
 ```mermaid
 mindmap
-  root((Portugal 2025<br/>17 días))
-    🏖️ Playas
+  root((Portugal 2025<br/>20 días))
+    🏖️ Playas (7 días)
       Viana do Castelo
         Praia do Cabedelo
         Apta para perros
       Nazaré
         Praia do Sul/Norte
         Olas gigantes
+        2 días
       Peniche
         Praia do Portinho
         Fortaleza
@@ -151,27 +176,38 @@ mindmap
       Sagres
         Praia do Martinhal
         Cabo São Vicente
-    🏔️ Montaña
+        2 días
+    🏔️ Montaña/Naturaleza (3 días)
       Peneda-Gerês
         Miradouro da Pedra Bela
         Piscinas naturales
         2 días completos
-    🥾 Trekking
       Labruja
         Passadiços da Ribeira
         2 km circular
-        Apto bebés y perros
-    🏛️ Cultura
+        Trekking familiar
+    🏛️ Cultura (6 días)
       Mérida
         Acueducto romano
         Camping base
+      Braga
+        Santuário do Bom Jesus
+        Centro histórico
+      Oporto
+        Librería Lello
+        Torre dos Clérigos
+        Ribeira UNESCO
+        2 días
       Coimbra
         Portugal dos Pequenitos
         Jardín Botánico
+        2 días
       Óbidos
         Villa medieval
         Castillo
-    ⛴️ Transporte
+    🚗 Traslados (4 días)
+      Días de conducción
+      Descanso
       Ferry Setúbal-Tróia
         15-25 minutos
         18.70€ vehículo
@@ -179,12 +215,17 @@ mindmap
 ```
 
 ```mermaid
-pie title Distribución de Actividades (17 días)
-    "Playas" : 8
-    "Montaña/Naturaleza" : 2
-    "Ciudades/Cultura" : 4
-    "Trekking" : 1
-    "Conducción/Traslado" : 2
+pie title Distribución de Actividades (20 días)
+    "Playas" : 7
+    "Cultura" : 6
+    "Montaña/Naturaleza" : 3
+    "Traslados/Descanso" : 4
+```
+
+```mermaid
+pie title Días de Conducción vs Descanso (20 días)
+    "Días sin conducir" : 11
+    "Días de conducción" : 9
 ```
 
 8 días con acceso a playas aptas para perros, más un día de trekking familiar, adaptados para un bebé de 1 año y un perro:
@@ -203,7 +244,7 @@ pie title Distribución de Actividades (17 días)
 - **Día 15 (Sagres)**: Praia do Martinhal (apta para perros), Praia da Galé (Algarve, por carretera), Cabo de São Vicente, parque infantil, paseos.
 - **Día 16 (Sagres)**: Praia do Martinhal, parque infantil, paseos tranquilos, descanso.
 
-## Detalles del trekking en Labruja (Día 6)
+## Detalles del trekking en Labruja (Día 9)
 
 - **Ruta**: Passadiços da Ribeira de São João (Labruja, Viana do Castelo)  
   - **Distancia**: ~2 km (circular, ~1 h).  
@@ -220,7 +261,13 @@ Recomendaciones familiares con menús infantiles y espacios aptos para perros:
   - Cocina extremeña (migas, jamón ibérico). Terraza para perros. ~12-18€/persona.
 - **Día 3 (Peneda-Gerês)**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/))  
   - Cocina tradicional (cabrito asado). Espacio al aire libre. ~15-20€/persona.
-- **Día 4 (Viana do Castelo)**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
+- **Día 4 (Braga)**: **Taberna Real** ([https://www.taberna-real-braga.com/](https://www.taberna-real-braga.com/))  
+  - Cocina portuguesa tradicional (francesinha, cozido). Terraza pet-friendly. ~15-20€/persona.
+- **Día 5 (Oporto)**: **Cantinho do Avillez** ([https://www.cantinhodoavillez.pt/](https://www.cantinhodoavillez.pt/))  
+  - Estrella Michelin accesible, menú familiar. Cocina portuguesa contemporánea. ~25-35€/persona.
+- **Día 6 (Oporto)**: **DOP Restaurant** ([https://www.dop-restaurant.com/](https://www.dop-restaurant.com/))  
+  - Terraza familiar, cocina contemporánea portuguesa. Vista al río Douro. ~20-30€/persona.
+- **Día 7 (Viana do Castelo)**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
   - Mariscos (arroz con langosta). Terraza para perros. ~12-18€/persona.
 - **Día 5 (Labruja)**: **O Cantinho da Ribeira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376](https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376))  
   - Cocina portuguesa (guiso de pescado). Espacio al aire libre. ~15-20€/persona.
@@ -245,13 +292,31 @@ Recomendaciones familiares con menús infantiles y espacios aptos para perros:
 - **Día 16 (Sagres)**: **Restaurante O Telheiro** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864))  
   - Mariscos y carnes. Terraza para perros. ~12-18€/persona.
 
+## Heladerías y postres recomendados
+
+Mejores sitios para helados y postres familiares en cada ubicación del itinerario:
+
+- **Día 1 (Mérida)**: **Heladería La Flor** - Helados artesanales, sabores tradicionales extremeños. ~3-5€/helado.
+- **Días 2-3 (Peneda-Gerês)**: **Pastelaria Central** (Campo do Gerês) - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
+- **Día 4 (Braga)**: **Gelataria Santini** - Gelatos premium, especialidad en dulce de leche y chocolate belga. ~4-6€/gelato.
+- **Días 5-6 (Oporto)**: **Gelato Therapy** - Gelatos artesanales, pastéis de nata gelado exclusivo. ~4-7€/helado.
+- **Día 7 (Viana do Castelo)**: **Gelataria Italiana** - Gelatos artesanales, especialidad pistacho y stracciatella. ~3-6€/gelato.
+- **Días 8-9 (Labruja)**: **Café Central** - Queijadas de Viana, helados caseros de vainilla. ~2-4€/postre.
+- **Días 10-11 (Coimbra)**: **Gelataria Italiana Coimbra** - Gelatos premium, pastéis de Santa Clara. ~3-5€/helado.
+- **Días 12-13 (Nazaré)**: **Gelados Nazaré** - Helados artesanales frente al mar, sabor sal marina exclusivo. ~3-5€/helado.
+- **Día 14 (Óbidos)**: **Pastelaria Medieval** - Ginjinha de Óbidos (para adultos), helados de canela. ~3-6€/postre.
+- **Día 15 (Peniche)**: **Gelataria do Porto** - Gelatos de maracuyá y coco, granizado de limón. ~3-5€/helado.
+- **Día 16 (Ericeira)**: **Surf Ice** - Smoothie bowls, açaí bowls, helados veganos. ~4-7€/bowl.
+- **Día 17 (Tróia)**: **Gelados da Praia** - Helados tropicales, sorbetes de frutas naturales. ~3-5€/helado.
+- **Días 18-19 (Sagres)**: **Ice & Spice** - Helados artesanales, especialidad higo y almendra. ~3-6€/helado.
+
 ## Notas adicionales
 
 - **Regulaciones**: Pernoctar en autocaravana permitido hasta 48 horas fuera de áreas protegidas ([https://www.viasat.pt/](https://www.viasat.pt/)).
 - **Peajes**: Usa una tarjeta de peaje (Toll Card) para autopistas electrónicas.
 - **Ferry (Día 14, Setúbal-Tróia)**: 15-25 min, ~18,70€ por vehículo (incluye conductor), perros permitidos. Horarios: cada 30-60 min, 6:00-2:00 (verano). Consultar [https://www.atlanticferries.pt/](https://www.atlanticferries.pt/).
-- **Praia da Galé (Algarve, Día 15)**: Accesible por carretera (N125, 37.0500, -8.3000). Desde Tróia, tomar A-2 y N125 (~2.5 h). Aparcamiento disponible.
-- **Trekking en Labruja (Día 6)**: Ruta circular (~2 km) con pasarelas, puentes y cascadas. Apta para carritos y perros. Evitar horas de mucho calor (julio 2025).
+- **Praia da Galé**: Accesible por carretera (N125, 37.0500, -8.3000). Desde Tróia, tomar A-2 y N125 (~2.5 h). Aparcamiento disponible.
+- **Trekking en Labruja**: Ruta circular (~2 km) con pasarelas, puentes y cascadas. Apta para carritos y perros. Evitar horas de mucho calor (julio 2025).
 - **Consejos para familias y mascotas**: 
   - **Bebé**: Carrito ligero, protector solar, juguetes para la playa, pañales, manta para sombra.
   - **Perro**: Comida, correa resistente, bolsas para desechos, cuenco portátil. Verificar normas de playas y senderos (generalmente con correa).
