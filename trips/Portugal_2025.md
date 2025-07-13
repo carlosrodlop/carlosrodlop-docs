@@ -33,8 +33,8 @@
 
 ```mermaid
 flowchart TD
-    A[🚗 Sevilla - Inicio] -->|200km<br/>2.5h| B[🏕️ Mérida - Día 1<br/>Camping y piscina]
-    B -->|450km<br/>3.5h| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
+    A[🚗 Sevilla - Inicio] -->|220km<br/>2.5h| B[� Cáceres - Día 1<br/>UNESCO Medieval]
+    B -->|430km<br/>3h| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
     C -->|70km<br/>1h| D[�️ Braga - Día 4<br/>Camping, centro histórico]
     D -->|60km<br/>1h| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
     E -->|80km<br/>1h| F[�🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
@@ -51,6 +51,7 @@ flowchart TD
 
     %% Estilos
     classDef inicio fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
+    classDef medieval fill:#8b4513,stroke:#333,stroke-width:2px,color:#fff
     classDef camping fill:#8b4513,stroke:#333,stroke-width:2px,color:#fff
     classDef montaña fill:#228b22,stroke:#333,stroke-width:2px,color:#fff
     classDef playa fill:#1e90ff,stroke:#333,stroke-width:2px,color:#fff
@@ -61,7 +62,7 @@ flowchart TD
     classDef final fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
 
     class A inicio
-    class B camping
+    class B medieval
     class C montaña
     class D camping
     class E apartamento
@@ -74,23 +75,23 @@ flowchart TD
 
 ## Detalles por localización
 
-## Mérida
+## Cáceres (1 día)
 
-- **Camping Mérida** ([https://www.campingmerida.com/](https://www.campingmerida.com/)):  
-  - **Ubicación**: Ctra. A-5, 06800 Mérida, España (38.9358, -6.3050)  
-  - **Características**: Apto para mascotas, 2 piscinas, áreas verdes, restaurante, Wi-Fi, parque infantil.
-- **Alternativa Gratuita**: **Área de Autocaravanas Mérida** ([https://www.park4night.com/lieu/34567](https://www.park4night.com/lieu/34567))
-  - **Ubicación**: Avda. José Álvarez Sáez de Buruaga, 06800 Mérida (38.9180, -6.3380)
-  - **Características**: Área municipal gratuita, servicios básicos (agua, vaciado), bien iluminada, cerca del centro histórico (~1.5 km)
-  - **Apto para bebés**: Sí, zona segura y tranquila, supermercado Mercadona a 500m
-  - **Valoración**: 4.2/5 (Park4Night), muy recomendada para familias
-- **Restaurante**: **La Despensa del Castúo** ([https://ladespensadelcastuo.com/](https://ladespensadelcastuo.com/))  
-  - Cocina extremeña (migas, jamón ibérico). Terraza para perros. ~12-18€/persona.
-- **Heladería**: **Heladería La Flor** ([https://www.tripadvisor.com/Restaurant_Review-g187428-d10734568](https://www.tripadvisor.com/Restaurant_Review-g187428-d10734568)) - Helados artesanales, sabores tradicionales extremeños. ~3-5€/helado.
-- **Supermercado**: **Mercadona** (Av. de Portugal, 10) - Horario: 9:00-21:30, productos frescos, marcas blancas de calidad.
-- **Actividades**: Parque infantil, piscina (área poco profunda), paseos con el perro.
+- **Camping**: **Camping Ciudad de Cáceres** ([https://www.campingcaceres.com/](https://www.campingcaceres.com/)):  
+  - **Ubicación**: Ctra. N-521, km 2, 10003 Cáceres, España (39.4753, -6.3728)  
+  - **Características**: Apto para mascotas, piscina, áreas verdes, restaurante, Wi-Fi, parque infantil.
+- **Alternativa Gratuita**: **Área de Autocaravanas Cáceres Centro** ([https://www.park4night.com/lieu/45321](https://www.park4night.com/lieu/45321))
+  - **Ubicación**: Av. de la Universidad, 10003 Cáceres (39.4720, -6.3680)
+  - **Características**: Área municipal gratuita, servicios básicos (agua, vaciado), bien iluminada, cerca del casco histórico (~800m)
+  - **Apto para bebés**: Sí, zona muy segura y tranquila, supermercado Mercadona a 400m
+  - **Valoración**: 4.4/5 (Park4Night), excelente para familias y patrimonio UNESCO
+- **Restaurante**: **Atrio** ([https://www.restauranteatrio.com/](https://www.restauranteatrio.com/))  
+  - Estrella Michelin, cocina extremeña moderna. Terraza para perros. ~35-45€/persona (menú degustación disponible).
+- **Heladería**: **Heladería Jijonenca** ([https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521](https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521)) - Helados artesanales, especialidad en sabores extremeños (higo, miel). ~3-5€/helado.
+- **Supermercado**: **Mercadona** (Av. de la Universidad, 2) - Horario: 9:00-21:30, productos frescos, cercano al área de autocaravanas.
+- **Actividades**: Casco histórico UNESCO (accesible con carrito), Plaza Mayor, Torre de Bujaco, Casa de los Golfines, murallas medievales, paseos con el perro por calles empedradas.
 
-## Peneda-Gerês
+## Peneda-Gerês (2 días)
 
 - **Camping**: **Parque de Campismo de Cerdeira** ([https://www.parquecerdeira.com/](https://www.parquecerdeira.com/)):  
   - **Ubicación**: Campo do Gerês, Terras de Bouro, Portugal (41.7653, -8.1547)  
@@ -106,7 +107,7 @@ flowchart TD
 - **Supermercado**: **Intermarché** (Campo do Gerês) - Horario: 8:30-20:00, productos locales, sección bio.
 - **Actividades**: Sendero de la Preguiça (1 km, accesible con carrito), parque infantil, piscina, observación de aves con el perro. Trekking relevante del Parque Nacional. Miradouro da Pedra Bela, piscinas naturales.
 
-## Braga
+## Braga (1 día)
 
 - **Camping**: **Camping Braga** ([https://www.campingbraga.com/](https://www.campingbraga.com/)):  
   - **Ubicación**: Rua Antero de Quental, 4700-216 Braga, Portugal
@@ -123,7 +124,7 @@ flowchart TD
 - **Supermercado**: **Continente** (Centro Comercial BragaParque) - Horario: 8:00-24:00, amplia variedad, parking gratuito.
 - **Actividades**: Santuário do Bom Jesus, centro histórico, espacios familiares.
 
-## Oporto
+## Oporto (2 días)
 
 - **Alojamiento**: **Apartamento Porto Centro (Pet-Friendly)** ([https://www.booking.com/porto-family-pet.html](https://www.booking.com/porto-family-pet.html)):  
   - **Ubicación**: Rua das Flores, Centro Histórico, Oporto, Portugal
@@ -139,7 +140,7 @@ flowchart TD
 - **Supermercado**: **El Corte Inglés** (Rua Gonçalo Sampaio, 350) - Horario: 10:00-23:00, gourmet, productos internacionales.
 - **Actividades**: Librería Lello, Torre dos Clérigos, Ribeira UNESCO, Palácio da Bolsa, paseos familiares.
 
-## Viana do Castelo
+## Viana do Castelo (1 día)
 
 - **Camping**: **Parque de Campismo Orbitur Viana do Castelo** ([https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo)):  
   - **Ubicación**: Viana do Castelo, Portugal (41.6789, -8.8156)  
@@ -155,7 +156,7 @@ flowchart TD
 - **Supermercado**: **Pingo Doce** (Estrada de Sta. Marta de Portuzelo) - Horario: 8:00-21:00, productos frescos del mar.
 - **Actividades**: Praia do Cabedelo (apta para perros, con correa), chapotear, paseos por el pinar.
 
-## Labruja
+## Labruja (2 días)
 
 - **Restaurante**: **O Cantinho da Ribeira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376](https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376))  
   - Cocina portuguesa (guiso de pescado). Espacio al aire libre. ~15-20€/persona.
@@ -172,7 +173,7 @@ flowchart TD
   - **Acceso**: Estacionamiento gratuito cerca de la Igreja de São Cristovão.  
   - **Consejos**: Llevar calzado cómodo, agua (1 L por persona), protector solar, manta para descansar. Vigilar al bebé cerca del agua y mantener al perro con correa.
 
-## Coimbra
+## Coimbra (2 días)
 
 - **Camping**: **Ar Puro - Camping Coimbra** ([https://arpurocampings.com/](https://arpurocampings.com/)):  
   - **Ubicación**: Rua da Escola, Alto do Areeiro, 3030-011 Coimbra, Portugal (40.188974, -8.399933)  
@@ -188,7 +189,7 @@ flowchart TD
 - **Supermercado**: **Continente** (Forum Coimbra) - Horario: 8:00-24:00, sección infantil, parking disponible.
 - **Actividades**: Portugal dos Pequenitos, Jardín Botánico, Parque Verde, barco Basófias (30 min, si es adecuado), paseos con el perro.
 
-## Nazaré
+## Nazaré (2 días)
 
 - **Camping**: **Camping Orbitur Valado** ([https://www.orbitur.pt/en/destinations/centro/orbitur-valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado)):  
   - **Ubicación**: Nazaré, Portugal (39.5972, -9.0764)  
@@ -204,7 +205,7 @@ flowchart TD
 - **Supermercado**: **Pingo Doce** (Rua Gil Vicente, 37) - Horario: 8:00-21:00, mariscos frescos, productos de playa.
 - **Actividades**: Praia do Sul o Norte (aptas para perros), chapotear, funicular (10 min), parque infantil, paseos costeros.
 
-## Óbidos
+## Óbidos (1 día)
 
 - **Camping**: **Campervan parking: Estrada do Capeleira** ([https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira)):  
   - **Ubicación**: Óbidos, Portugal (39.3600, -9.1567)  
@@ -215,7 +216,7 @@ flowchart TD
 - **Supermercado**: **Intermarché** (Caldas da Rainha) - Horario: 8:30-21:00, productos regionales, vinos locales.
 - **Actividades**: Calles medievales con carrito, áreas verdes, paseos con el perro.
 
-## Peniche
+## Peniche (1 día)
 
 - **Camping**: **Camping Peniche Praia** ([https://penichepraia.pt/](https://penichepraia.pt/)):  
   - **Ubicación**: Peniche, Portugal (39.3500, -9.3833)  
@@ -231,7 +232,7 @@ flowchart TD
 - **Supermercado**: **Continente** (Rua Alexandre Herculano) - Horario: 8:00-22:00, pescado fresco, productos para camping.
 - **Actividades**: Praia do Portinho da Areia Norte (apta para perros), fortaleza, parque infantil, paseos.
 
-## Ericeira
+## Ericeira (1 día)
 
 - **Camping**: **Camping Ericeira** ([https://campingericeira.com/](https://campingericeira.com/)):  
   - **Ubicación**: Ericeira, Portugal (38.9500, -9.4167)  
@@ -247,7 +248,7 @@ flowchart TD
 - **Supermercado**: **Pingo Doce** (Rua Dr. Eduardo Burnay) - Horario: 8:00-21:00, productos de surf, snacks saludables.
 - **Actividades**: Praia de Ribeira d'Ilhas (apta para perros), Azenhas do Mar (foto, 20 km), paseo marítimo, paseos con el perro.
 
-## Tróia
+## Tróia (1 día)
 
 - **Camping**: **Camping Tróia** ([https://www.troiacamping.pt/](https://www.troiacamping.pt/)):  
   - **Ubicación**: Tróia, Portugal (38.4933, -8.8867)  
@@ -258,7 +259,7 @@ flowchart TD
 - **Supermercado**: **Spar** (Marina de Tróia) - Horario: 8:00-20:00, productos premium, vista al mar.
 - **Actividades**: Praia da Costa da Galé (apta para perros, vía ferry), dunas, paseos con el perro.
 
-## Sagres
+## Sagres (2 días)
 
 - **Camping**: **Camping Orbitur Sagres** ([https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)):  
   - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)  
@@ -310,8 +311,9 @@ mindmap
         Trekking familiar
         2 km circular
     🏛️ Cultura
-      Mérida
-        Acueducto romano
+      Cáceres
+        UNESCO Medieval
+        Casco histórico
         Camping base
       Braga
         Santuário do Bom Jesus
@@ -365,6 +367,31 @@ pie title Tipos de Jornadas
 - **Consejos para familias y mascotas**:
   - **Bebé**: Carrito ligero, protector solar, juguetes para la playa, pañales, manta para sombra.
   - **Perro**: Comida, correa resistente, bolsas para desechos, cuenco portátil. Verificar normas de playas y senderos (generalmente con correa).
-  - **Trayectos**: Paradas cada 1-2 horas para estirarse (por ejemplo, Zamora en ruta a Peneda-Gerês, área de servicio en A-2 en ruta a Sagres). Llevar snacks y agua.
+  - **Trayectos**: Paradas cada 1-2 horas para estirarse (por ejemplo, Salamanca en ruta a Peneda-Gerês, área de servicio en A-2 en ruta a Sagres). Llevar snacks y agua.
 - **Reservas**: Reserva campings con antelación (julio 2025) a través de los enlaces.
+
+## Tabla del Itinerario
+
+| Día | Ubicación | Alojamiento | Restaurante | Distancia/Tiempo | Actividades | Notas |
+|-----|-----------|-------------|-------------|------------------|-------------|-------|
+| 1 | Sevilla a Cáceres | [Camping Ciudad de Cáceres](https://www.campingcaceres.com/) | Atrio | ~220 km, ~2.5 h | Casco histórico UNESCO, Plaza Mayor | Patrimonio Medieval |
+| 2 | Cáceres a Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | - | ~430 km, ~3 h (descanso) | Paseos ligeros, piscina | Descanso en Zamora |
+| 3 | Peneda-Gerês | [Parque de Campismo de Cerdeira](https://www.parquecerdeira.com/) | Restaurante Abocanhado | 0 km | Miradouro da Pedra Bela, piscinas naturales | - |
+| 4 | Peneda-Gerês a Braga | [Camping Braga](https://www.campingbraga.com/) | Taberna Real | ~70 km, ~1 h | Santuário do Bom Jesus, centro histórico | - |
+| 5 | Braga a Oporto | [Apartamento Porto Centro](https://www.booking.com/porto-family-pet.html) | Cantinho do Avillez | ~60 km, ~1 h | Librería Lello, Torre dos Clérigos | Apartamento pet-friendly |
+| 6 | Oporto | [Apartamento Porto Centro](https://www.booking.com/porto-family-pet.html) | DOP Restaurant | 0 km | Ribeira UNESCO, Palácio da Bolsa | - |
+| 7 | Oporto a Viana do Castelo | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Tasquinha da Linda | ~80 km, ~1 h | Praia do Cabedelo (apta para perros) | - |
+| 8 | Viana do Castelo a Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | O Cantinho da Ribeira | ~20 km, ~30 min | Exploración de Fonte das Tres Bicas | Base en Viana do Castelo |
+| 9 | Labruja | [Parque de Campismo Orbitur Viana do Castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo) | Casa da Eira | 0 km | Trekking Passadiços da Ribeira de São João | Base en Viana do Castelo |
+| 10 | Labruja a Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | Zé Manel dos Ossos | ~170 km, ~2 h | Portugal dos Pequenitos, Jardín Botánico | - |
+| 11 | Coimbra | [Ar Puro - Camping Coimbra](https://arpurocampings.com/) | A Cozinha da Maria | 0 km | Parque Verde do Mondego, barco Basófias | - |
+| 12 | Coimbra a Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | - | ~160 km, ~1.5 h | Praia do Sul (apta para perros) | - |
+| 13 | Nazaré | [Camping Orbitur Valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado) | A Tasquinha | 0 km | Praia do Norte, paseo en funicular | - |
+| 14 | Nazaré a Óbidos | [Campervan parking: Estrada do Capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira) | Petrarum Domus | ~40 km, ~40 min | Villa medieval, áreas verdes | - |
+| 15 | Óbidos a Peniche | [Camping Peniche Praia](https://penichepraia.pt/) | Restaurante Nau dos Corvos | ~25 km, ~30 min | Praia do Portinho (apta para perros), fortaleza | - |
+| 16 | Peniche a Ericeira | [Camping Ericeira](https://campingericeira.com/) | Mar d'Areia | ~50 km, ~45 min | Praia de Ribeira d'Ilhas, Azenhas do Mar | - |
+| 17 | Ericeira a Setúbal → Tróia | [Camping Tróia](https://www.troiacamping.pt/) | A Cevicheria | ~90 km + 5 km, ~1 h + 10 min | Praia da Costa da Galé (apta para perros) | **Ferry requerido** |
+| 18 | Tróia a Sagres (vía Praia da Galé) | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | A Tasca | ~200 km, ~2.5 h | Praia do Martinhal, Praia da Galé, Cabo São Vicente | Por carretera (N125) |
+| 19 | Sagres | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | Restaurante O Telheiro | 0 km | Praia do Martinhal, parque infantil, paseos | - |
+| 20 | Sagres a Sevilla | - | - | ~300 km, ~3 h | Plaza de España (opcional) | - |
 
