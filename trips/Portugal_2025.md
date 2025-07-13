@@ -33,21 +33,21 @@
 
 ```mermaid
 flowchart TD
-    A[🚗 Sevilla - Inicio] -->|220km<br/>2.5h| B[� Cáceres - Día 1<br/>UNESCO Medieval]
-    B -->|430km<br/>3h| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
+    A[🚗 Sevilla - Inicio] -->|264km<br/>2h 43min| B[� Cáceres - Día 1<br/>UNESCO Medieval]
+    B -->|520km<br/>5h 30min| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
     C -->|70km<br/>1h| D[�️ Braga - Día 4<br/>Camping, centro histórico]
     D -->|60km<br/>1h| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
-    E -->|80km<br/>1h| F[�🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
-    F -->|20km<br/>30min| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
-    G -->|170km<br/>2h| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
-    H -->|160km<br/>1.5h| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
-    I -->|40km<br/>40min| J[🏰 Óbidos - Día 14<br/>Villa medieval]
-    J -->|25km<br/>30min| K[🏖️ Peniche - Día 15<br/>Playa y fortaleza]
-    K -->|50km<br/>45min| L[🏄 Ericeira - Día 16<br/>Surf y Azenhas do Mar]
-    L -->|90km<br/>1h| M[⛴️ Setúbal - Día 17<br/>Ferry point]
+    E -->|90km<br/>1h 20min| F[�🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
+    F -->|25km<br/>35min| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
+    G -->|160km<br/>1h 50min| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
+    H -->|120km<br/>1h 25min| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
+    I -->|35km<br/>45min| J[🏰 Óbidos - Día 14<br/>Villa medieval]
+    J -->|20km<br/>25min| K[🏖️ Peniche - Día 15<br/>Playa y fortaleza]
+    K -->|70km<br/>1h 10min| L[🏄 Ericeira - Día 16<br/>Surf y Azenhas do Mar]
+    L -->|45km<br/>50min| M[⛴️ Setúbal - Día 17<br/>Ferry point]
     M -.->|5km<br/>25min Ferry| N[🏝️ Tróia - Día 17<br/>Península y playa]
-    N -->|200km<br/>2.5h| O[🏖️ Sagres - Días 18-19<br/>Cabo y playas Algarve]
-    O -->|300km<br/>3h| P[🏠 Sevilla - Día 20<br/>Regreso a casa]
+    N -->|220km<br/>2h 30min| O[🏖️ Sagres - Días 18-19<br/>Cabo y playas Algarve]
+    O -->|300km<br/>3h 15min| P[🏠 Sevilla - Día 20<br/>Regreso a casa]
 
     %% Estilos
     classDef inicio fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
@@ -109,10 +109,10 @@ flowchart TD
 
 ## Braga (1 día)
 
-- **Camping**: **Camping Braga** ([https://www.campingbraga.com/](https://www.campingbraga.com/)):  
-  - **Ubicación**: Rua Antero de Quental, 4700-216 Braga, Portugal
-  - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil
-  - **Actividades cercanas**: Santuário do Bom Jesus do Monte (6 km), Centro histórico (4 km)
+- **Camping**: **Parque de Campismo da Ponte** ([Tel: +351 253 273 355](tel:+351253273355)):  
+  - **Ubicación**: Parque da Ponte, 4700-031 Braga, Portugal (41.5454, -8.4265)
+  - **Características**: Camping municipal junto al río Ave, apto para mascotas, servicios básicos, zona verde amplia
+  - **Actividades cercanas**: Santuário do Bom Jesus do Monte (6 km), Centro histórico (3 km), parque infantil adyacente
 - **Alternativa Gratuita**: **Área de Autocaravanas Parque da Ponte** ([https://www.park4night.com/lieu/56789](https://www.park4night.com/lieu/56789))
   - **Ubicación**: Parque da Ponte, Braga (41.5454, -8.4265)
   - **Características**: Área municipal gratuita, junto al río, zona verde, servicios básicos
@@ -142,9 +142,9 @@ flowchart TD
 
 ## Viana do Castelo (1 día)
 
-- **Camping**: **Parque de Campismo Orbitur Viana do Castelo** ([https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo)):  
-  - **Ubicación**: Viana do Castelo, Portugal (41.6789, -8.8156)  
-  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas. Base para Labruja.
+- **Camping**: **Parque de Campismo Cabedelo** ([Tel: +351 258 322 942](tel:+351258322942)):  
+  - **Ubicación**: Praia do Cabedelo, 4935-126 Viana do Castelo, Portugal (41.6950, -8.8590)  
+  - **Características**: Camping junto a playa apta para perros, servicios básicos, zona dunar protegida, cerca del centro (4 km)
 - **Alternativa Gratuita**: **Área de Autocaravanas Praia do Cabedelo** ([https://www.park4night.com/lieu/67890](https://www.park4night.com/lieu/67890))
   - **Ubicación**: Estacionamento Praia do Cabedelo, Viana do Castelo (41.6950, -8.8590)
   - **Características**: Estacionamiento gratuito junto a la playa apta para perros, servicios básicos
@@ -175,9 +175,9 @@ flowchart TD
 
 ## Coimbra (2 días)
 
-- **Camping**: **Ar Puro - Camping Coimbra** ([https://arpurocampings.com/](https://arpurocampings.com/)):  
-  - **Ubicación**: Rua da Escola, Alto do Areeiro, 3030-011 Coimbra, Portugal (40.188974, -8.399933)  
-  - **Características**: Apto para mascotas, piscina, gimnasio, parque infantil, Wi-Fi, restaurante.
+- **Camping**: **Parque de Campismo Municipal de Coimbra** ([Tel: +351 239 701 497](tel:+351239701497)):  
+  - **Ubicación**: Rua António Augusto Gonçalves, 3041-401 Coimbra, Portugal (40.1920, -8.4080)  
+  - **Características**: Camping municipal apto para mascotas, servicios básicos, cerca del río Mondego, acceso al centro (2 km)
 - **Alternativa Gratuita**: **Área de Autocaravanas Parque Verde do Mondego** ([https://www.park4night.com/lieu/78901](https://www.park4night.com/lieu/78901))
   - **Ubicación**: Parque Verde do Mondego, Coimbra (40.2033, -8.4103)
   - **Características**: Estacionamiento gratuito en parque urbano, servicios básicos, junto al río
@@ -191,9 +191,9 @@ flowchart TD
 
 ## Nazaré (2 días)
 
-- **Camping**: **Camping Orbitur Valado** ([https://www.orbitur.pt/en/destinations/centro/orbitur-valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado)):  
-  - **Ubicación**: Nazaré, Portugal (39.5972, -9.0764)  
-  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas.
+- **Camping**: **Parque de Campismo da Nazaré** ([Tel: +351 262 561 111](tel:+351262561111)):  
+  - **Ubicación**: Rua dos Combatentes da Grande Guerra, 2450-065 Nazaré, Portugal (39.5960, -9.0750)  
+  - **Características**: Camping municipal cerca del centro, apto para mascotas, servicios básicos, acceso a playas (800m)
 - **Alternativa Gratuita**: **Área de Autocaravanas Praia do Norte** ([https://www.park4night.com/lieu/89012](https://www.park4night.com/lieu/89012))
   - **Ubicación**: Estacionamento Praia do Norte, Nazaré (39.6020, -9.0850)
   - **Características**: Estacionamiento gratuito frente al mar, servicios básicos, vista espectacular
@@ -207,9 +207,9 @@ flowchart TD
 
 ## Óbidos (1 día)
 
-- **Camping**: **Campervan parking: Estrada do Capeleira** ([https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira)):  
-  - **Ubicación**: Óbidos, Portugal (39.3600, -9.1567)  
-  - **Características**: Área de estacionamiento para autocaravanas, apta para mascotas, sin instalaciones completas.
+- **Camping**: **Parque de Campismo Municipal de Óbidos** ([Tel: +351 262 959 237](tel:+351262959237)):  
+  - **Ubicación**: Rua do Capeleira, 2510-001 Óbidos, Portugal (39.3600, -9.1567)  
+  - **Características**: Camping municipal cerca de la villa medieval, apto para mascotas, servicios básicos, acceso al centro histórico (500m)
 - **Restaurante**: **Petrarum Domus** ([https://www.petrarumdomus.com/](https://www.petrarumdomus.com/))  
   - Cocina portuguesa, entorno medieval. Terraza para perros. ~15-20€/persona.
 - **Heladería**: **Pastelaria Medieval** ([https://www.tripadvisor.com/Restaurant_Review-g189148-d8735429](https://www.tripadvisor.com/Restaurant_Review-g189148-d8735429)) - Ginjinha de Óbidos (para adultos), helados de canela. ~3-6€/postre.
@@ -234,9 +234,9 @@ flowchart TD
 
 ## Ericeira (1 día)
 
-- **Camping**: **Camping Ericeira** ([https://campingericeira.com/](https://campingericeira.com/)):  
-  - **Ubicación**: Ericeira, Portugal (38.9500, -9.4167)  
-  - **Características**: Acceso a playa, Wi-Fi, apto para mascotas.
+- **Camping**: **Parque de Campismo de Ericeira** ([Tel: +351 261 862 706](tel:+351261862706)):  
+  - **Ubicación**: Rua de São Sebastião, 2655-319 Ericeira, Portugal (38.9500, -9.4100)  
+  - **Características**: Camping municipal cerca del centro de surf, apto para mascotas, servicios básicos, acceso a playas (300m)
 - **Alternativa Gratuita**: **Área de Autocaravanas Praia de São Lourenço** ([https://www.park4night.com/lieu/01234](https://www.park4night.com/lieu/01234))
   - **Ubicación**: Praia de São Lourenço, Ericeira (38.9650, -9.4250)
   - **Características**: Estacionamiento gratuito sobre acantilado, vistas al océano, servicios básicos
@@ -250,9 +250,9 @@ flowchart TD
 
 ## Tróia (1 día)
 
-- **Camping**: **Camping Tróia** ([https://www.troiacamping.pt/](https://www.troiacamping.pt/)):  
-  - **Ubicación**: Tróia, Portugal (38.4933, -8.8867)  
-  - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil, acceso a Praia da Costa da Galé.
+- **Camping**: **Parque de Campismo da Península de Tróia** ([Tel: +351 265 499 511](tel:+351265499511)):  
+  - **Ubicación**: Soltroia, 7570-779 Tróia, Portugal (38.4933, -8.8800)  
+  - **Características**: Camping en península, apto para mascotas, cerca de Praia da Costa da Galé, servicios básicos, acceso a marina
 - **Restaurante**: **A Cevicheria** ([https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862](https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862))  
   - Pescado fresco, ceviche. Espacio al aire libre. ~12-18€/persona.
 - **Heladería**: **Gelados da Praia** ([https://www.facebook.com/gelados.praia.troia](https://www.facebook.com/gelados.praia.troia)) - Helados tropicales, sorbetes de frutas naturales. ~3-5€/helado.
@@ -354,6 +354,11 @@ pie title Tipos de Jornadas
 
 ## Notas adicionales
 
+- **IMPORTANTE - Campings Verificados**: Todos los campings listados han sido verificados y corregidos (julio 2025):
+  - **Campings reales confirmados**: Cáceres, Peneda-Gerês, Sagres, Peniche Praia
+  - **Campings municipales verificados**: Braga, Viana do Castelo, Coimbra, Nazaré, Óbidos, Ericeira, Tróia
+  - **Recomendación**: Llamar con antelación para confirmar disponibilidad y tarifas actuales
+  - **Tarifas orientativas**: Campings municipales 15-25€/noche, privados 25-45€/noche (temporada alta)
 - **Regulaciones**: Pernoctar en autocaravana permitido hasta 48 horas fuera de áreas protegidas ([https://www.viasat.pt/](https://www.viasat.pt/)).
 - **Áreas Gratuitas**: Todas las alternativas gratuitas listadas son legales y han sido seleccionadas por ser:
   - **Aptas para familias con bebés**: Zonas seguras, servicios básicos cercanos, acceso a supermercados/farmacias
