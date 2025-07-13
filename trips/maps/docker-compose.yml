@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  portugal-map-generator:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: portugal_route_map
+    volumes:
+      # Montar el directorio actual para acceder a los archivos
+      - .:/app
+      # Volumen para los mapas generados
+      - ./output:/app/output
+    environment:
+      - MPLBACKEND=Agg
+      - PYTHONUNBUFFERED=1
+    # Comando para ejecutar el script
+    command: python portugal_route_map.py
+    
+  # Servicio opcional para servir los mapas generados via web
+  map-server:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: portugal_map_server
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./output:/app/output
+    environment:
+      - MPLBACKEND=Agg
+      - PYTHONUNBUFFERED=1
+    # Comando para servir los archivos
+    command: python -m http.server 8000
+    depends_on:
+      - portugal-map-generator
