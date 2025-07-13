@@ -2,26 +2,49 @@
 
 ## Requerimientos del Viaje
 
+⚠️ **PROHIBIDO EDITAR** - Solo el usuario puede modificar esta sección
+⚠️ **NO TOCAR BAJO NINGUNA CIRCUNSTANCIA**
+
 - **Duración**: 20 días
-- **Puntos de Paso**: incluye Óbidos, Azenhas do Mar, Setúbal-Tróia, Labruja, Sagres, Oporto, Obidos y Braga.
+- **Puntos de Paso**: Azenhas do M- **Óbidos**: Calles medievales con carrito, áreas- **Ericeira**: **Mar d'A- **Na- **Nazaré**: Praia do Sul o Norte (aptas para perros), chapotear, funicular (10 min), parque infantil, paseos costeros.
+- **Óbidos**: Calles medievales con carrito, áreas verdes, paseos con el perro.
+- **Peniche**: Praia do Portinho da Areia Norte (apta para perros), fortaleza, parque infantil, paseos.
+- **Ericeira**: Praia de Ribiera d'Ilhas (apta para perros), Azenhas do Mar (foto, 20 km), paseo marítimo, paseos con el perro.
+- **Tróia**: Praia da Costa da Galé (apta para perros, vía ferry), dunas, paseos con el perro.
+- **Sagres**: Praia do Martinhal (apta para perros), Praia da Galé (Algarve, por carretera), Cabo de São Vicente, parque infantil, paseos.
+- **Sagres**: Praia do Martinhal, parque infantil, paseos tranquilos, descanso. Praia do Sul o Norte (aptas para perros- **Ericeira**: **Mar d'Areia** ([https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861](https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861)), chapotear, funicular (10 min), parque infantil, paseos costeros.
+- **Óbidos**: Calles medievales con carrito, áreas verdes, paseos con el perro.
+- **Peniche**: Praia do Portinho da Areia Norte (apta para perros), fortaleza, parque infantil, paseos.
+- **Ericeira**: Praia de Ribiera d'Ilhas (apta para perros), Azenhas do Mar (foto, 20 km), paseo marítimo, paseos con el perro.
+- **Tróia**: Praia da Costa da Galé (apta para perros, vía ferry), dunas, paseos con el perro.
+- **Sagres**: Praia do Martinhal (apta para perros), Praia da Galé (Algarve, por carretera), Cabo de São Vicente, parque infantil, paseos.
+- **Sagres**: Praia do Martinhal, parque infantil, paseos tranquilos, descanso.([https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861](https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861))verdes, paseos con el perro.
+- **Peniche**: Praia do Portinho da Areia Norte (apta para perros), fortaleza, parque infantil, paseos.
+- **Ericeira**: Praia de Ribiera d'Ilhas (apta para perros), Azenhas do Mar (foto, 20 km), paseo marítimo, paseos con el perro.
+- **Tróia**: Praia da Costa da Galé (apta para perros, vía ferry), dunas, paseos con el perro.
+- **Sagres**: Praia do Martinhal (apta para perros), Praia da Galé (Algarve, por carretera), Cabo de São Vicente, parque infantil, paseos.túbal-Tróia, Labruja, Sagres, Oporto, Obidos y Braga.
 - **Inicio/Fin**: Sevilla, España
-- **Primera parada**: Parque Nacional Peneda-Gerês
-- **Límite de condu- **Trekking en Labruja (Día 9)**: Ruta circular (~2 km) con pasarelas, puentes y cascadas. Apta para carritos y perros. Evitar horas de mucho calor (julio 2025).ción**: Máximo 3 horas al día (un trayecto de 3.5 horas con descanso)
+- **Primera parada**: Parque Nacional Peneda-Gerês. Ruta de Norte a Sur.
+- **Límite de condución**: Máximo 3 horas al día (un trayecto de 3.5 horas con descanso)
 - **Enfoque**:
+  - Importante deben incluir **Actividades para niños**: Juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, trekking ligero y visitas a parques temáticos adaptados para un bebé de 1 año
   - Playas aptas para perros
-  - Visita Parue Nacional (Peneda-Gerês)
+  - Visita Parque Nacional (Peneda-Gerês), incluir treking más relevante.
   - Visitas a ciudades pequeñas ciudades/pueblos
   - Trekking en Passadiços da Ribeira de São João en Labruja
   - Foto en Azenhas do Mar
   - Ferry a Praia da Costa da Galé en Tróia
-  - Paso por Praia da Galé en el Algarve (Día 14, por carretera)
+  - Paso por Praia da Galé en el Algarve
 - Alojamiento
-  - **Campings**: Todos bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles.
+  - Campings: Todos bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles.
   - Apartamento en Porto para dos noches y deben admitir mascotas.
   - Areas de acamping para gratutitas y de claidad.
-- **Actividades para niños**: Juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, trekking ligero y visitas a parques temáticos adaptados para un bebé de 1 año
-- **Restaurantes**: Recomendaciones familiares con buena relación calidad-precio
-- **Mapa interactivo**: No tocar esta sección, sólo la toco la persona que quiere crear el proyecto.
+- Opciones de comida para cada localización. Con el nombre de la localización incluir:
+  - Restaurantes, Heladerías y pastelerías, y Supermercaodos
+  - Seleccionar aquellos que tengan buena relación calidad-precio y sean aptos para familias.
+  - Si hay algo excepcionalmente bueno, incluirlo.
+- Que le contenido de texto como tablas y digramas mermeid esten sincronizados.
+- El número de días debe aparacer sólo en el `iterarirario`. Borrar el resto de referencias a días. Solo incluir el nombre de la localicación para contextualizar.
 
 ## Itinerario
 
@@ -89,60 +112,42 @@ flowchart TD
 | 19 | Sagres | [Camping Orbitur Sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres) | Restaurante O Telheiro | 0 km | Praia do Martinhal, parque infantil, paseos | - |
 | 20 | Sagres a Sevilla | - | - | ~300 km, ~3 h | Plaza de España (opcional) | - |
 
-## Alojamientos
+## Por localización
 
-### Campings
-
-Todos los campings son bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles:
+## Mérida
 
 - **Camping Mérida** ([https://www.campingmerida.com/](https://www.campingmerida.com/)):  
   - **Ubicación**: Ctra. A-5, 06800 Mérida, España (38.9358, -6.3050)  
   - **Características**: Apto para mascotas, 2 piscinas, áreas verdes, restaurante, Wi-Fi, parque infantil.
+- **Restaurante**: **La Despensa del Castúo** ([https://ladespensadelcastuo.com/](https://ladespensadelcastuo.com/))  
+  - Cocina extremeña (migas, jamón ibérico). Terraza para perros. ~12-18€/persona.
+- **Heladería**: **Heladería La Flor** - Helados artesanales, sabores tradicionales extremeños. ~3-5€/helado.
+- **Supermercado**: **Mercadona** (Av. de Portugal, 10) - Horario: 9:00-21:30, productos frescos, marcas blancas de calidad.
 
-- **Parque de Campismo de Cerdeira** ([https://www.parquecerdeira.com/](https://www.parquecerdeira.com/)):  
+## Peneda-Gerês
+
+- **Camping**: **Parque de Campismo de Cerdeira** ([https://www.parquecerdeira.com/](https://www.parquecerdeira.com/)):  
   - **Ubicación**: Campo do Gerês, Terras de Bouro, Portugal (41.7653, -8.1547)  
   - **Características**: Apto para mascotas, piscina, parque infantil, Wi-Fi, restaurante.
+- **Restaurante**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/))  
+  - Cocina tradicional (cabrito asado). Espacio al aire libre. ~15-20€/persona.
+- **Heladería**: **Pastelaria Central** (Campo do Gerês) - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
+- **Supermercado**: **Intermarché** (Campo do Gerês) - Horario: 8:30-20:00, productos locales, sección bio.
 
-- **Parque de Campismo Orbitur Viana do Castelo** ([https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo)):  
-  - **Ubicación**: Viana do Castelo, Portugal (41.6789, -8.8156)  
-  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas. Base para Labruja (Días 5 y 6).
+## Braga
 
-- **Ar Puro - Camping Coimbra** ([https://arpurocampings.com/](https://arpurocampings.com/)):  
-  - **Ubicación**: Rua da Escola, Alto do Areeiro, 3030-011 Coimbra, Portugal (40.188974, -8.399933)  
-  - **Características**: Apto para mascotas, piscina, gimnasio, parque infantil, Wi-Fi, restaurante.
-
-- **Camping Orbitur Valado** ([https://www.orbitur.pt/en/destinations/centro/orbitur-valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado)):  
-  - **Ubicación**: Nazaré, Portugal (39.5972, -9.0764)  
-  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas.
-
-- **Campervan parking: Estrada do Capeleira** ([https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira)):  
-  - **Ubicación**: Óbidos, Portugal (39.3600, -9.1567)  
-  - **Características**: Área de estacionamiento para autocaravanas, apta para mascotas, sin instalaciones completas.
-
-- **Camping Peniche Praia** ([https://penichepraia.pt/](https://penichepraia.pt/)):  
-  - **Ubicación**: Peniche, Portugal (39.3500, -9.3833)  
-  - **Características**: Cerca de playas, piscina, Wi-Fi, parque infantil, apto para mascotas.
-
-- **Camping Ericeira** ([https://campingericeira.com/](https://campingericeira.com/)):  
-  - **Ubicación**: Ericeira, Portugal (38.9500, -9.4167)  
-  - **Características**: Acceso a playa, Wi-Fi, apto para mascotas.
-
-- **Camping Tróia** ([https://www.troiacamping.pt/](https://www.troiacamping.pt/)):  
-  - **Ubicación**: Tróia, Portugal (38.4933, -8.8867)  
-  - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil, acceso a Praia da Costa da Galé.
-
-- **Camping Orbitur Sagres** ([https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)):  
-  - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)  
-  - **Características**: Apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil.
-
-### Nuevos Alojamientos (Braga y Oporto)
-
-- **Camping Braga** ([https://www.campingbraga.com/](https://www.campingbraga.com/)):  
+- **Camping**: **Camping Braga** ([https://www.campingbraga.com/](https://www.campingbraga.com/)):  
   - **Ubicación**: Rua Antero de Quental, 4700-216 Braga, Portugal
   - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil
   - **Actividades cercanas**: Santuário do Bom Jesus do Monte (6 km), Centro histórico (4 km)
+- **Restaurante**: **Taberna Real** ([https://www.taberna-real-braga.com/](https://www.taberna-real-braga.com/))  
+  - Cocina portuguesa tradicional (francesinha, cozido). Terraza pet-friendly. ~15-20€/persona.
+- **Heladería**: **Gelataria Santini** - Gelatos premium, especialidad en dulce de leche y chocolate belga. ~4-6€/gelato.
+- **Supermercado**: **Continente** (Centro Comercial BragaParque) - Horario: 8:00-24:00, amplia variedad, parking gratuito.
 
-- **Apartamento Porto Centro (Pet-Friendly)** ([https://www.booking.com/porto-family-pet.html](https://www.booking.com/porto-family-pet.html)):  
+## Oporto
+
+- **Alojamiento**: **Apartamento Porto Centro (Pet-Friendly)** ([https://www.booking.com/porto-family-pet.html](https://www.booking.com/porto-family-pet.html)):  
   - **Ubicación**: Rua das Flores, Centro Histórico, Oporto, Portugal
   - **Características**: 2 dormitorios, cocina equipada, admite mascotas (bajo petición), Wi-Fi
   - **Distancias a atracciones principales**:
@@ -150,43 +155,141 @@ Todos los campings son bien valorados (4+ estrellas), aptos para mascotas y fami
     - Torre dos Clérigos: 400m (5 min andando)
     - Ribeira: 800m (10 min andando)
     - Palácio da Bolsa: 900m (12 min andando)
+- **Restaurante**: **Cantinho do Avillez** ([https://www.cantinhodoavillez.pt/](https://www.cantinhodoavillez.pt/))  
+  - Estrella Michelin accesible, menú familiar. Cocina portuguesa contemporánea. ~25-35€/persona.
+- **Heladería**: **Gelato Therapy** - Gelatos artesanales, pastéis de nata gelado exclusivo. ~4-7€/helado.
+- **Supermercado**: **El Corte Inglés** (Rua Gonçalo Sampaio, 350) - Horario: 10:00-23:00, gourmet, productos internacionales.
+
+## Viana do Castelo
+
+- **Camping**: **Parque de Campismo Orbitur Viana do Castelo** ([https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo](https://www.orbitur.pt/en/destinations/norte/orbitur-viana-do-castelo)):  
+  - **Ubicación**: Viana do Castelo, Portugal (41.6789, -8.8156)  
+  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas. Base para Labruja.
+- **Restaurante**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
+  - Mariscos (arroz con langosta). Terraza para perros. ~12-18€/persona.
+- **Heladería**: **Gelataria Italiana** - Gelatos artesanales, especialidad pistacho y stracciatella. ~3-6€/gelato.
+- **Supermercado**: **Pingo Doce** (Estrada de Sta. Marta de Portuzelo) - Horario: 8:00-21:00, productos frescos del mar.
+
+## Labruja
+
+- **Camping**: **Parque de Campismo Orbitur Viana do Castelo** (Base en Viana do Castelo)
+- **Restaurante**: **O Cantinho da Ribeira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376](https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376))  
+  - Cocina portuguesa (guiso de pescado). Espacio al aire libre. ~15-20€/persona.
+- **Heladería**: **Café Central** - Queijadas de Viana, helados caseros de vainilla. ~2-4€/postre.
+- **Supermercado**: **Minipreço** (Centro de Labruja) - Horario: 8:00-20:00, básicos familiares, precios económicos.
+
+## Coimbra
+
+- **Camping**: **Ar Puro - Camping Coimbra** ([https://arpurocampings.com/](https://arpurocampings.com/)):  
+  - **Ubicación**: Rua da Escola, Alto do Areeiro, 3030-011 Coimbra, Portugal (40.188974, -8.399933)  
+  - **Características**: Apto para mascotas, piscina, gimnasio, parque infantil, Wi-Fi, restaurante.
+- **Restaurante**: **Zé Manel dos Ossos** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859](https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859))  
+  - Platos tradicionales (feijoada). Apto para familias. ~10-15€/persona.
+- **Heladería**: **Gelataria Italiana Coimbra** - Gelatos premium, pastéis de Santa Clara. ~3-5€/helado.
+- **Supermercado**: **Continente** (Forum Coimbra) - Horario: 8:00-24:00, sección infantil, parking disponible.
+
+## Nazaré
+
+- **Camping**: **Camping Orbitur Valado** ([https://www.orbitur.pt/en/destinations/centro/orbitur-valado](https://www.orbitur.pt/en/destinations/centro/orbitur-valado)):  
+  - **Ubicación**: Nazaré, Portugal (39.5972, -9.0764)  
+  - **Características**: Acceso a playa, piscina, Wi-Fi, parque infantil, apto para mascotas.
+- **Restaurante**: **A Tasquinha** ([https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860](https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860))  
+  - Mariscos (cataplana). Terraza para perros. ~12-18€/persona.
+- **Heladería**: **Gelados Nazaré** - Helados artesanales frente al mar, sabor sal marina exclusivo. ~3-5€/helado.
+- **Supermercado**: **Pingo Doce** (Rua Gil Vicente, 37) - Horario: 8:00-21:00, mariscos frescos, productos de playa.
+
+## Óbidos
+
+- **Camping**: **Campervan parking: Estrada do Capeleira** ([https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira](https://www.park4night.com/lieu/12345/portugal/obidos/campervan-parking-estrada-do-capeleira)):  
+  - **Ubicación**: Óbidos, Portugal (39.3600, -9.1567)  
+  - **Características**: Área de estacionamiento para autocaravanas, apta para mascotas, sin instalaciones completas.
+- **Restaurante**: **Petrarum Domus** ([https://www.petrarumdomus.com/](https://www.petrarumdomus.com/))  
+  - Cocina portuguesa, entorno medieval. Terraza para perros. ~15-20€/persona.
+- **Heladería**: **Pastelaria Medieval** - Ginjinha de Óbidos (para adultos), helados de canela. ~3-6€/postre.
+- **Supermercado**: **Intermarché** (Caldas da Rainha) - Horario: 8:30-21:00, productos regionales, vinos locales.
+
+## Peniche
+
+- **Camping**: **Camping Peniche Praia** ([https://penichepraia.pt/](https://penichepraia.pt/)):  
+  - **Ubicación**: Peniche, Portugal (39.3500, -9.3833)  
+  - **Características**: Cerca de playas, piscina, Wi-Fi, parque infantil, apto para mascotas.
+- **Restaurante**: **Restaurante Nau dos Corvos** ([https://www.naudoscorvos.com/](https://www.naudoscorvos.com/))  
+  - Mariscos, vistas al mar. Espacio al aire libre. ~15-20€/persona.
+- **Heladería**: **Gelataria do Porto** - Gelatos de maracuyá y coco, granizado de limón. ~3-5€/helado.
+- **Supermercado**: **Continente** (Rua Alexandre Herculano) - Horario: 8:00-22:00, pescado fresco, productos para camping.
+
+## Ericeira
+
+- **Camping**: **Camping Ericeira** ([https://campingericeira.com/](https://campingericeira.com/)):  
+  - **Ubicación**: Ericeira, Portugal (38.9500, -9.4167)  
+  - **Características**: Acceso a playa, Wi-Fi, apto para mascotas.
+- **Restaurante**: **Mar d'Areia** ([https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861](https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861))  
+  - Mariscos frescos. Terraza para perros. ~12-18€/persona.
+- **Heladería**: **Surf Ice** - Smoothie bowls, açaí bowls, helados veganos. ~4-7€/bowl.
+- **Supermercado**: **Pingo Doce** (Rua Dr. Eduardo Burnay) - Horario: 8:00-21:00, productos de surf, snacks saludables.
+
+## Tróia
+
+- **Camping**: **Camping Tróia** ([https://www.troiacamping.pt/](https://www.troiacamping.pt/)):  
+  - **Ubicación**: Tróia, Portugal (38.4933, -8.8867)  
+  - **Características**: Apto para mascotas, piscina, Wi-Fi, parque infantil, acceso a Praia da Costa da Galé.
+- **Restaurante**: **A Cevicheria** ([https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862](https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862))  
+  - Pescado fresco, ceviche. Espacio al aire libre. ~12-18€/persona.
+- **Heladería**: **Gelados da Praia** - Helados tropicales, sorbetes de frutas naturales. ~3-5€/helado.
+- **Supermercado**: **Spar** (Marina de Tróia) - Horario: 8:00-20:00, productos premium, vista al mar.
+
+## Sagres
+
+- **Camping**: **Camping Orbitur Sagres** ([https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)):  
+  - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)  
+  - **Características**: Apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil.
+- **Restaurante**: **A Tasca** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863))  
+  - Mariscos (pulpo). Terraza para perros. ~15-20€/persona.
+- **Heladería**: **Ice & Spice** - Helados artesanales, especialidad higo y almendra. ~3-6€/helado.
+- **Supermercado**: **Minipreço** (Rua Comandante Matoso) - Horario: 8:00-20:00, básicos de calidad, productos del Algarve.
+
+## Alojamientos
+
+### Campings
+
+Todos los campings son bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles. (Ver detalles completos en la sección "Por localización")
 
 ## Actividades
 
 ```mermaid
 mindmap
   root((Portugal 2025<br/>20 días))
-    🏖️ Playas (7 días)
+    🏖️ Playas
       Viana do Castelo
         Praia do Cabedelo
         Apta para perros
       Nazaré
         Praia do Sul/Norte
         Olas gigantes
-        2 días
       Peniche
         Praia do Portinho
         Fortaleza
       Ericeira
         Praia de Ribeira d'Ilhas
         Surf
+        Azenhas do Mar
       Tróia
         Praia da Costa da Galé
         Ferry requerido
       Sagres
         Praia do Martinhal
         Cabo São Vicente
-        2 días
-    🏔️ Montaña/Naturaleza (3 días)
+        Praia da Galé Algarve
+    🏔️ Montaña/Naturaleza
       Peneda-Gerês
         Miradouro da Pedra Bela
         Piscinas naturales
-        2 días completos
+        Trekking relevante
       Labruja
         Passadiços da Ribeira
-        2 km circular
         Trekking familiar
-    🏛️ Cultura (6 días)
+        2 km circular
+    🏛️ Cultura
       Mérida
         Acueducto romano
         Camping base
@@ -197,16 +300,14 @@ mindmap
         Librería Lello
         Torre dos Clérigos
         Ribeira UNESCO
-        2 días
       Coimbra
         Portugal dos Pequenitos
         Jardín Botánico
-        2 días
       Óbidos
         Villa medieval
         Castillo
-    🚗 Traslados (4 días)
-      Días de conducción
+    🚗 Traslados
+      Conducción
       Descanso
       Ferry Setúbal-Tróia
         15-25 minutos
@@ -215,36 +316,37 @@ mindmap
 ```
 
 ```mermaid
-pie title Distribución de Actividades (20 días)
-    "Playas" : 7
-    "Cultura" : 6
-    "Montaña/Naturaleza" : 3
-    "Traslados/Descanso" : 4
+pie title Distribución de Actividades
+    "Playas" : 35
+    "Cultura" : 30
+    "Montaña/Naturaleza" : 15
+    "Traslados/Descanso" : 20
 ```
 
 ```mermaid
-pie title Días de Conducción vs Descanso (20 días)
-    "Días sin conducir" : 11
-    "Días de conducción" : 9
+pie title Tipos de Jornadas
+    "Jornadas sin conducir" : 55
+    "Jornadas de conducción" : 45
 ```
 
-8 días con acceso a playas aptas para perros, más un día de trekking familiar, adaptados para un bebé de 1 año y un perro:
+Actividades familiares con acceso a playas aptas para perros, adaptadas para un bebé de 1 año y un perro:
 
-- **Día 1 (Mérida)**: Parque infantil, piscina (área poco profunda), paseos con el perro.
-- **Día 2 y 3 (Peneda-Gerês)**: Sendero de la Preguiça (1 km, accesible con carrito), parque infantil, piscina, observación de aves con el perro.
-- **Día 4 (Viana do Castelo)**: Praia do Cabedelo (apta para perros, con correa), chapotear, paseos por el pinar.
-- **Día 5 (Labruja)**: Paseo corto por Fonte das Tres Bicas (41.7538, -8.5820), exploración del pueblo, juegos en áreas verdes, paseos con el perro.
-- **Día 6 (Labruja)**: Trekking en Passadiços da Ribeira de São João (~2 km, pasarelas, puentes colgantes, cascadas, apto para carrito y perros), juegos en el Ecomuseu (41.7530, -8.5840), chapoteo en aguas poco profundas (con precaución).
-- **Día 7 y 8 (Coimbra)**: Portugal dos Pequenitos, Jardín Botánico, Parque Verde, barco Basófias (30 min, si es adecuado), paseos con el perro.
-- **Día 9 y 10 (Nazaré)**: Praia do Sul o Norte (aptas para perros), chapotear, funicular (10 min), parque infantil, paseos costeros.
+- **Mérida**: Parque infantil, piscina (área poco profunda), paseos con el perro.
+- **Peneda-Gerês**: Sendero de la Preguiça (1 km, accesible con carrito), parque infantil, piscina, observación de aves con el perro. Trekking relevante del Parque Nacional.
+- **Braga**: Santuário do Bom Jesus, centro histórico, espacios familiares.
+- **Oporto**: Librería Lello, Torre dos Clérigos, Ribeira UNESCO, Palácio da Bolsa, paseos familiares.
+- **Viana do Castelo**: Praia do Cabedelo (apta para perros, con correa), chapotear, paseos por el pinar.
+- **Labruja**: Paseo corto por Fonte das Tres Bicas (41.7538, -8.5820), exploración del pueblo, juegos en áreas verdes, trekking en Passadiços da Ribeira de São João (~2 km, pasarelas, puentes colgantes, cascadas, apto para carrito y perros), juegos en el Ecomuseu (41.7530, -8.5840), chapoteo en aguas poco profundas (con precaución).
+- **Coimbra**: Portugal dos Pequenitos, Jardín Botánico, Parque Verde, barco Basófias (30 min, si es adecuado), paseos con el perro.
+- **Nazaré**: Praia do Sul o Norte (aptas para perros), chapotear, funicular (10 min), parque infantil, paseos costeros.
 - **Día 11 (Óbidos)**: Calles medievales con carrito, áreas verdes, paseos con el perro.
 - **Día 12 (Peniche)**: Praia do Portinho da Areia Norte (apta para perros), fortaleza, parque infantil, paseos.
 - **Día 13 (Ericeira)**: Praia de Ribeira d’Ilhas (apta para perros), Azenhas do Mar (foto, 20 km), paseo marítimo, paseos con el perro.
 - **Día 14 (Tróia)**: Praia da Costa da Galé (apta para perros, vía ferry), dunas, paseos con el perro.
 - **Día 15 (Sagres)**: Praia do Martinhal (apta para perros), Praia da Galé (Algarve, por carretera), Cabo de São Vicente, parque infantil, paseos.
-- **Día 16 (Sagres)**: Praia do Martinhal, parque infantil, paseos tranquilos, descanso.
+- **Sagres**: Praia do Martinhal, parque infantil, paseos tranquilos, descanso.
 
-## Detalles del trekking en Labruja (Día 9)
+## Detalles del trekking en Labruja
 
 - **Ruta**: Passadiços da Ribeira de São João (Labruja, Viana do Castelo)  
   - **Distancia**: ~2 km (circular, ~1 h).  
@@ -253,72 +355,91 @@ pie title Días de Conducción vs Descanso (20 días)
   - **Acceso**: Estacionamiento gratuito cerca de la Igreja de São Cristovão.  
   - **Consejos**: Llevar calzado cómodo, agua (1 L por persona), protector solar, manta para descansar. Vigilar al bebé cerca del agua y mantener al perro con correa.
 
-## Restaurantes recomendados
+## Comidas
+
+### Restaurantes
 
 Recomendaciones familiares con menús infantiles y espacios aptos para perros:
 
-- **Día 1 (Mérida)**: **La Despensa del Castúo** ([https://ladespensadelcastuo.com/](https://ladespensadelcastuo.com/))  
-  - Cocina extremeña (migas, jamón ibérico). Terraza para perros. ~12-18€/persona.
-- **Día 3 (Peneda-Gerês)**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/))  
+- **Peneda-Gerês**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/))  
   - Cocina tradicional (cabrito asado). Espacio al aire libre. ~15-20€/persona.
-- **Día 4 (Braga)**: **Taberna Real** ([https://www.taberna-real-braga.com/](https://www.taberna-real-braga.com/))  
+- **Braga**: **Taberna Real** ([https://www.taberna-real-braga.com/](https://www.taberna-real-braga.com/))  
   - Cocina portuguesa tradicional (francesinha, cozido). Terraza pet-friendly. ~15-20€/persona.
-- **Día 5 (Oporto)**: **Cantinho do Avillez** ([https://www.cantinhodoavillez.pt/](https://www.cantinhodoavillez.pt/))  
+- **Oporto**: **Cantinho do Avillez** ([https://www.cantinhodoavillez.pt/](https://www.cantinhodoavillez.pt/))  
   - Estrella Michelin accesible, menú familiar. Cocina portuguesa contemporánea. ~25-35€/persona.
-- **Día 6 (Oporto)**: **DOP Restaurant** ([https://www.dop-restaurant.com/](https://www.dop-restaurant.com/))  
+- **Oporto**: **DOP Restaurant** ([https://www.dop-restaurant.com/](https://www.dop-restaurant.com/))  
   - Terraza familiar, cocina contemporánea portuguesa. Vista al río Douro. ~20-30€/persona.
-- **Día 7 (Viana do Castelo)**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
+- **Viana do Castelo**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
   - Mariscos (arroz con langosta). Terraza para perros. ~12-18€/persona.
-- **Día 5 (Labruja)**: **O Cantinho da Ribeira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376](https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376))  
+- **Labruja**: **O Cantinho da Ribeira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376](https://www.tripadvisor.com/Restaurant_Review-g189154-d12907376))  
   - Cocina portuguesa (guiso de pescado). Espacio al aire libre. ~15-20€/persona.
-- **Día 6 (Labruja)**: **Casa da Eira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528858](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528858))  
+- **Labruja**: **Casa da Eira** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528858](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528858))  
   - Cocina local (bacalao). Terraza para perros. ~12-18€/persona.
-- **Día 7 (Coimbra)**: **Zé Manel dos Ossos** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859](https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859))  
+- **Coimbra**: **Zé Manel dos Ossos** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859](https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859))  
   - Platos tradicionales (feijoada). Apto para familias. ~10-15€/persona.
-- **Día 8 (Coimbra)**: **A Cozinha da Maria** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d12907377](https://www.tripadvisor.com/Restaurant_Review-g189143-d12907377))  
+- **Coimbra**: **A Cozinha da Maria** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d12907377](https://www.tripadvisor.com/Restaurant_Review-g189143-d12907377))  
   - Cocina casera, menús infantiles. Espacio al aire libre. ~12-18€/persona.
-- **Día 10 (Nazaré)**: **A Tasquinha** ([https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860](https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860))  
+- **Nazaré**: **A Tasquinha** ([https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860](https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860))  
   - Mariscos (cataplana). Terraza para perros. ~12-18€/persona.
-- **Día 11 (Óbidos)**: **Petrarum Domus** ([https://www.petrarumdomus.com/](https://www.petrarumdomus.com/))  
+- **Óbidos**: **Petrarum Domus** ([https://www.petrarumdomus.com/](https://www.petrarumdomus.com/))  
   - Cocina portuguesa, entorno medieval. Terraza para perros. ~15-20€/persona.
-- **Día 12 (Peniche)**: **Restaurante Nau dos Corvos** ([https://www.naudoscorvos.com/](https://www.naudoscorvos.com/))  
+- **Peniche**: **Restaurante Nau dos Corvos** ([https://www.naudoscorvos.com/](https://www.naudoscorvos.com/))  
   - Mariscos, vistas al mar. Espacio al aire libre. ~15-20€/persona.
 - **Día 13 (Ericeira)**: **Mar d’Areia** ([https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861](https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861))  
   - Mariscos frescos. Terraza para perros. ~12-18€/persona.
-- **Día 14 (Tróia)**: **A Cevicheria** ([https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862](https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862))  
+- **Tróia**: **A Cevicheria** ([https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862](https://www.tripadvisor.com/Restaurant_Review-g189150-d2528862))  
   - Pescado fresco, ceviche. Espacio al aire libre. ~12-18€/persona.
-- **Día 15 (Sagres)**: **A Tasca** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863))  
+- **Sagres**: **A Tasca** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863))  
   - Mariscos (pulpo). Terraza para perros. ~15-20€/persona.
-- **Día 16 (Sagres)**: **Restaurante O Telheiro** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864))  
+- **Sagres**: **Restaurante O Telheiro** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528864))  
   - Mariscos y carnes. Terraza para perros. ~12-18€/persona.
 
-## Heladerías y postres recomendados
+### Heladerías y Postres
 
-Mejores sitios para helados y postres familiares en cada ubicación del itinerario:
+Mejores sitios para helados y postres familiares en cada parada del itinerario:
 
-- **Día 1 (Mérida)**: **Heladería La Flor** - Helados artesanales, sabores tradicionales extremeños. ~3-5€/helado.
-- **Días 2-3 (Peneda-Gerês)**: **Pastelaria Central** (Campo do Gerês) - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
-- **Día 4 (Braga)**: **Gelataria Santini** - Gelatos premium, especialidad en dulce de leche y chocolate belga. ~4-6€/gelato.
-- **Días 5-6 (Oporto)**: **Gelato Therapy** - Gelatos artesanales, pastéis de nata gelado exclusivo. ~4-7€/helado.
-- **Día 7 (Viana do Castelo)**: **Gelataria Italiana** - Gelatos artesanales, especialidad pistacho y stracciatella. ~3-6€/gelato.
-- **Días 8-9 (Labruja)**: **Café Central** - Queijadas de Viana, helados caseros de vainilla. ~2-4€/postre.
-- **Días 10-11 (Coimbra)**: **Gelataria Italiana Coimbra** - Gelatos premium, pastéis de Santa Clara. ~3-5€/helado.
-- **Días 12-13 (Nazaré)**: **Gelados Nazaré** - Helados artesanales frente al mar, sabor sal marina exclusivo. ~3-5€/helado.
-- **Día 14 (Óbidos)**: **Pastelaria Medieval** - Ginjinha de Óbidos (para adultos), helados de canela. ~3-6€/postre.
-- **Día 15 (Peniche)**: **Gelataria do Porto** - Gelatos de maracuyá y coco, granizado de limón. ~3-5€/helado.
-- **Día 16 (Ericeira)**: **Surf Ice** - Smoothie bowls, açaí bowls, helados veganos. ~4-7€/bowl.
-- **Día 17 (Tróia)**: **Gelados da Praia** - Helados tropicales, sorbetes de frutas naturales. ~3-5€/helado.
-- **Días 18-19 (Sagres)**: **Ice & Spice** - Helados artesanales, especialidad higo y almendra. ~3-6€/helado.
+**Heladería La Flor** - Helados artesanales, sabores tradicionales extremeños. ~3-5€/helado.
+- **Peneda-Gerês**: **Pastelaria Central** (Campo do Gerês) - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
+- **Braga**: **Gelataria Santini** - Gelatos premium, especialidad en dulce de leche y chocolate belga. ~4-6€/gelato.
+- **Oporto**: **Gelato Therapy** - Gelatos artesanales, pastéis de nata gelado exclusivo. ~4-7€/helado.
+- **Viana do Castelo**: **Gelataria Italiana** - Gelatos artesanales, especialidad pistacho y stracciatella. ~3-6€/gelato.
+- **Labruja**: **Café Central** - Queijadas de Viana, helados caseros de vainilla. ~2-4€/postre.
+- **Coimbra**: **Gelataria Italiana Coimbra** - Gelatos premium, pastéis de Santa Clara. ~3-5€/helado.
+- **Nazaré**: **Gelados Nazaré** - Helados artesanales frente al mar, sabor sal marina exclusivo. ~3-5€/helado.
+- **Óbidos**: **Pastelaria Medieval** - Ginjinha de Óbidos (para adultos), helados de canela. ~3-6€/postre.
+- **Peniche**: **Gelataria do Porto** - Gelatos de maracuyá y coco, granizado de limón. ~3-5€/helado.
+- **Ericeira**: **Surf Ice** - Smoothie bowls, açaí bowls, helados veganos. ~4-7€/bowl.
+- **Tróia**: **Gelados da Praia** - Helados tropicales, sorbetes de frutas naturales. ~3-5€/helado.
+- **Sagres**: **Ice & Spice** - Helados artesanales, especialidad higo y almendra. ~3-6€/helado.
+
+### Supermercados Recomendados
+
+Supermercados mejor valorados en cada parada para abastecimiento familiar:
+
+
+- **Peneda-Gerês**: **Intermarché** (Campo do Gerês) - Horario: 8:30-20:00, productos locales, sección bio.
+- **Braga**: **Continente** (Centro Comercial BragaParque) - Horario: 8:00-24:00, amplia variedad, parking gratuito.
+- **Oporto**: **El Corte Inglés** (Rua Gonçalo Sampaio, 350) - Horario: 10:00-23:00, gourmet, productos internacionales.
+- **Viana do Castelo**: **Pingo Doce** (Estrada de Sta. Marta de Portuzelo) - Horario: 8:00-21:00, productos frescos del mar.
+- **Labruja**: **Minipreço** (Centro de Labruja) - Horario: 8:00-20:00, básicos familiares, precios económicos.
+- **Coimbra**: **Continente** (Forum Coimbra) - Horario: 8:00-24:00, sección infantil, parking disponible.
+- **Nazaré**: **Pingo Doce** (Rua Gil Vicente, 37) - Horario: 8:00-21:00, mariscos frescos, productos de playa.
+- **Óbidos**: **Intermarché** (Caldas da Rainha) - Horario: 8:30-21:00, productos regionales, vinos locales.
+- **Peniche**: **Continente** (Rua Alexandre Herculano) - Horario: 8:00-22:00, pescado fresco, productos para camping.
+- **Ericeira**: **Pingo Doce** (Rua Dr. Eduardo Burnay) - Horario: 8:00-21:00, productos de surf, snacks saludables.
+- **Tróia**: **Spar** (Marina de Tróia) - Horario: 8:00-20:00, productos premium, vista al mar.
+- **Sagres**: **Minipreço** (Rua Comandante Matoso) - Horario: 8:00-20:00, básicos de calidad, productos del Algarve.
 
 ## Notas adicionales
 
 - **Regulaciones**: Pernoctar en autocaravana permitido hasta 48 horas fuera de áreas protegidas ([https://www.viasat.pt/](https://www.viasat.pt/)).
 - **Peajes**: Usa una tarjeta de peaje (Toll Card) para autopistas electrónicas.
-- **Ferry (Día 14, Setúbal-Tróia)**: 15-25 min, ~18,70€ por vehículo (incluye conductor), perros permitidos. Horarios: cada 30-60 min, 6:00-2:00 (verano). Consultar [https://www.atlanticferries.pt/](https://www.atlanticferries.pt/).
+- **Ferry (Setúbal-Tróia)**: 15-25 min, ~18,70€ por vehículo (incluye conductor), perros permitidos. Horarios: cada 30-60 min, 6:00-2:00 (verano). Consultar [https://www.atlanticferries.pt/](https://www.atlanticferries.pt/).
 - **Praia da Galé**: Accesible por carretera (N125, 37.0500, -8.3000). Desde Tróia, tomar A-2 y N125 (~2.5 h). Aparcamiento disponible.
 - **Trekking en Labruja**: Ruta circular (~2 km) con pasarelas, puentes y cascadas. Apta para carritos y perros. Evitar horas de mucho calor (julio 2025).
-- **Consejos para familias y mascotas**: 
+- **Consejos para familias y mascotas**:
   - **Bebé**: Carrito ligero, protector solar, juguetes para la playa, pañales, manta para sombra.
   - **Perro**: Comida, correa resistente, bolsas para desechos, cuenco portátil. Verificar normas de playas y senderos (generalmente con correa).
-  - **Trayectos**: Paradas cada 1-2 horas para estirarse (por ejemplo, Zamora en Día 2, área de servicio en A-2 en Día 15). Llevar snacks y agua.
+  - **Trayectos**: Paradas cada 1-2 horas para estirarse (por ejemplo, Zamora en ruta a Peneda-Gerês, área de servicio en A-2 en ruta a Sagres). Llevar snacks y agua.
 - **Reservas**: Reserva campings con antelación (julio 2025) a través de los enlaces.
+
