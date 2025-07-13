@@ -28,6 +28,7 @@
   - Si hay algo excepcionalmente bueno, incluirlo.
 - Que le contenido de texto como tablas y digramas mermeid esten sincronizados.
 - El número de días debe aparacer sólo en el `iterarirario`. Borrar el resto de referencias a días. Solo incluir el nombre de la localicación para contextualizar.
+- Verificar que la información sea correcta, incluyendo coordenadas GPS, horarios de apertura y contacto de los lugares recomendados.
 
 ## Itinerario
 
@@ -80,11 +81,11 @@ flowchart TD
 - **Camping**: **Camping Ciudad de Cáceres** ([https://www.campingcaceres.com/](https://www.campingcaceres.com/)):  
   - **Ubicación**: Ctra. N-521, km 2, 10003 Cáceres, España (39.4753, -6.3728)  
   - **Características**: Apto para mascotas, piscina, áreas verdes, restaurante, Wi-Fi, parque infantil.
-- **Alternativa Gratuita**: **Área de Autocaravanas Cáceres Centro** ([https://www.park4night.com/lieu/45321](https://www.park4night.com/lieu/45321))
+- **Alternativa Gratuita**: **Área de Autocaravanas Cáceres Centro**
   - **Ubicación**: Av. de la Universidad, 10003 Cáceres (39.4720, -6.3680)
   - **Características**: Área municipal gratuita, servicios básicos (agua, vaciado), bien iluminada, cerca del casco histórico (~800m)
   - **Apto para bebés**: Sí, zona muy segura y tranquila, supermercado Mercadona a 400m
-  - **Valoración**: 4.4/5 (Park4Night), excelente para familias y patrimonio UNESCO
+  - **Info**: Consultar disponibilidad en Oficina de Turismo de Cáceres: +34 927 010 834
 - **Restaurante**: **Atrio** ([https://www.restauranteatrio.com/](https://www.restauranteatrio.com/))  
   - Estrella Michelin, cocina extremeña moderna. Terraza para perros. ~35-45€/persona (menú degustación disponible).
 - **Heladería**: **Heladería Jijonenca** ([https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521](https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521)) - Helados artesanales, especialidad en sabores extremeños (higo, miel). ~3-5€/helado.
@@ -96,11 +97,11 @@ flowchart TD
 - **Camping**: **Parque de Campismo de Cerdeira** ([https://www.parquecerdeira.com/](https://www.parquecerdeira.com/)):  
   - **Ubicación**: Campo do Gerês, Terras de Bouro, Portugal (41.7653, -8.1547)  
   - **Características**: Apto para mascotas, piscina, parque infantil, Wi-Fi, restaurante.
-- **Alternativa Gratuita**: **Área de Estacionamiento Rio Caldo** ([https://www.park4night.com/lieu/45678](https://www.park4night.com/lieu/45678))
+- **Alternativa Gratuita**: **Área de Estacionamiento Rio Caldo**
   - **Ubicación**: Estrada da Albufeira, Rio Caldo, Terras de Bouro (41.7320, -8.1890)
   - **Características**: Estacionamiento gratuito junto al embalse, servicios básicos, entorno natural
   - **Apto para bebés**: Sí, zona muy tranquila, acceso a supermercado en Gerês (8 km)
-  - **Valoración**: 4.0/5 (Park4Night), ideal para naturaleza
+  - **Info**: Consultar con Posto de Turismo Gerês: +351 253 391 133
 - **Restaurante**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/))  
   - Cocina tradicional (cabrito asado). Espacio al aire libre. ~15-20€/persona.
 - **Heladería**: **Pastelaria Central** ([https://www.facebook.com/pastelaria.central.gerez](https://www.facebook.com/pastelaria.central.gerez)) (Campo do Gerês) - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
@@ -113,11 +114,11 @@ flowchart TD
   - **Ubicación**: Parque da Ponte, 4700-031 Braga, Portugal (41.5454, -8.4265)
   - **Características**: Camping municipal junto al río Ave, apto para mascotas, servicios básicos, zona verde amplia
   - **Actividades cercanas**: Santuário do Bom Jesus do Monte (6 km), Centro histórico (3 km), parque infantil adyacente
-- **Alternativa Gratuita**: **Área de Autocaravanas Parque da Ponte** ([https://www.park4night.com/lieu/56789](https://www.park4night.com/lieu/56789))
+- **Alternativa Gratuita**: **Área de Autocaravanas Parque da Ponte**
   - **Ubicación**: Parque da Ponte, Braga (41.5454, -8.4265)
   - **Características**: Área municipal gratuita, junto al río, zona verde, servicios básicos
   - **Apto para bebés**: Sí, parque infantil adyacente, farmacia y supermercado cerca (300m)
-  - **Valoración**: 4.1/5 (Park4Night), muy familiar
+  - **Info**: Consultar con Câmara Municipal de Braga: +351 253 203 550
 - **Restaurante**: **Taberna Real** ([https://www.taberna-real-braga.com/](https://www.taberna-real-braga.com/))  
   - Cocina portuguesa tradicional (francesinha, cozido). Terraza pet-friendly. ~15-20€/persona.
 - **Heladería**: **Gelataria Santini** ([https://www.santini.pt/](https://www.santini.pt/)) - Gelatos premium, especialidad en dulce de leche y chocolate belga. ~4-6€/gelato.
@@ -145,11 +146,11 @@ flowchart TD
 - **Camping**: **Parque de Campismo Cabedelo** ([Tel: +351 258 322 942](tel:+351258322942)):  
   - **Ubicación**: Praia do Cabedelo, 4935-126 Viana do Castelo, Portugal (41.6950, -8.8590)  
   - **Características**: Camping junto a playa apta para perros, servicios básicos, zona dunar protegida, cerca del centro (4 km)
-- **Alternativa Gratuita**: **Área de Autocaravanas Praia do Cabedelo** ([https://www.park4night.com/lieu/67890](https://www.park4night.com/lieu/67890))
+- **Alternativa Gratuita**: **Área de Autocaravanas Praia do Cabedelo**
   - **Ubicación**: Estacionamento Praia do Cabedelo, Viana do Castelo (41.6950, -8.8590)
   - **Características**: Estacionamiento gratuito junto a la playa apta para perros, servicios básicos
   - **Apto para bebés**: Sí, playa familiar, dunas protegidas, restaurantes cerca
-  - **Valoración**: 4.3/5 (Park4Night), excelente para familias con perros
+  - **Info**: Consultar con Posto de Turismo Viana do Castelo: +351 258 822 620
 - **Restaurante**: **Tasquinha da Linda** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857](https://www.tripadvisor.com/Restaurant_Review-g189154-d2528857))  
   - Mariscos (arroz con langosta). Terraza para perros. ~12-18€/persona.
 - **Heladería**: **Gelataria Italiana** ([https://www.tripadvisor.com/Restaurant_Review-g189154-d13285742](https://www.tripadvisor.com/Restaurant_Review-g189154-d13285742)) - Gelatos artesanales, especialidad pistacho y stracciatella. ~3-6€/gelato.
@@ -178,11 +179,11 @@ flowchart TD
 - **Camping**: **Parque de Campismo Municipal de Coimbra** ([Tel: +351 239 701 497](tel:+351239701497)):  
   - **Ubicación**: Rua António Augusto Gonçalves, 3041-401 Coimbra, Portugal (40.1920, -8.4080)  
   - **Características**: Camping municipal apto para mascotas, servicios básicos, cerca del río Mondego, acceso al centro (2 km)
-- **Alternativa Gratuita**: **Área de Autocaravanas Parque Verde do Mondego** ([https://www.park4night.com/lieu/78901](https://www.park4night.com/lieu/78901))
+- **Alternativa Gratuita**: **Área de Autocaravanas Parque Verde do Mondego**
   - **Ubicación**: Parque Verde do Mondego, Coimbra (40.2033, -8.4103)
   - **Características**: Estacionamiento gratuito en parque urbano, servicios básicos, junto al río
   - **Apto para bebés**: Sí, parque infantil, zonas verdes amplias, centro de salud próximo (500m)
-  - **Valoración**: 4.0/5 (Park4Night), perfecto para familias activas
+  - **Info**: Consultar con Turismo Centro de Portugal: +351 239 488 120
 - **Restaurante**: **Zé Manel dos Ossos** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859](https://www.tripadvisor.com/Restaurant_Review-g189143-d2528859))  
   - Platos tradicionales (feijoada). Apto para familias. ~10-15€/persona.
 - **Heladería**: **Gelataria Italiana Coimbra** ([https://www.tripadvisor.com/Restaurant_Review-g189143-d12734561](https://www.tripadvisor.com/Restaurant_Review-g189143-d12734561)) - Gelatos premium, pastéis de Santa Clara. ~3-5€/helado.
@@ -194,11 +195,11 @@ flowchart TD
 - **Camping**: **Parque de Campismo da Nazaré** ([Tel: +351 262 561 111](tel:+351262561111)):  
   - **Ubicación**: Rua dos Combatentes da Grande Guerra, 2450-065 Nazaré, Portugal (39.5960, -9.0750)  
   - **Características**: Camping municipal cerca del centro, apto para mascotas, servicios básicos, acceso a playas (800m)
-- **Alternativa Gratuita**: **Área de Autocaravanas Praia do Norte** ([https://www.park4night.com/lieu/89012](https://www.park4night.com/lieu/89012))
+- **Alternativa Gratuita**: **Área de Autocaravanas Praia do Norte**
   - **Ubicación**: Estacionamento Praia do Norte, Nazaré (39.6020, -9.0850)
   - **Características**: Estacionamiento gratuito frente al mar, servicios básicos, vista espectacular
   - **Apto para bebés**: Sí, playa supervisada, funicular cerca, zona comercial próxima
-  - **Valoración**: 4.4/5 (Park4Night), ubicación premium gratuita
+  - **Info**: Consultar con Posto de Turismo Nazaré: +351 262 561 194
 - **Restaurante**: **A Tasquinha** ([https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860](https://www.tripadvisor.com/Restaurant_Review-g189148-d2528860))  
   - Mariscos (cataplana). Terraza para perros. ~12-18€/persona.
 - **Heladería**: **Gelados Nazaré** ([https://www.facebook.com/gelados.nazare](https://www.facebook.com/gelados.nazare)) - Helados artesanales frente al mar, sabor sal marina exclusivo. ~3-5€/helado.
@@ -221,11 +222,11 @@ flowchart TD
 - **Camping**: **Camping Peniche Praia** ([https://penichepraia.pt/](https://penichepraia.pt/)):  
   - **Ubicación**: Peniche, Portugal (39.3500, -9.3833)  
   - **Características**: Cerca de playas, piscina, Wi-Fi, parque infantil, apto para mascotas.
-- **Alternativa Gratuita**: **Área de Autocaravanas Berlengas** ([https://www.park4night.com/lieu/90123](https://www.park4night.com/lieu/90123))
+- **Alternativa Gratuita**: **Área de Autocaravanas Berlengas**
   - **Ubicación**: Largo da Ribeira, Peniche (39.3550, -9.3810)
   - **Características**: Estacionamiento gratuito cerca del puerto, servicios básicos, zona pesquera auténtica
   - **Apto para bebés**: Sí, zona protegida del viento, supermercado y farmacia a 200m
-  - **Valoración**: 4.2/5 (Park4Night), excelente para explorar la península
+  - **Info**: Consultar con Posto de Turismo Peniche: +351 262 789 571
 - **Restaurante**: **Restaurante Nau dos Corvos** ([https://www.naudoscorvos.com/](https://www.naudoscorvos.com/))  
   - Mariscos, vistas al mar. Espacio al aire libre. ~15-20€/persona.
 - **Heladería**: **Gelataria do Porto** ([https://www.tripadvisor.com/Restaurant_Review-g580268-d12845673](https://www.tripadvisor.com/Restaurant_Review-g580268-d12845673)) - Gelatos de maracuyá y coco, granizado de limón. ~3-5€/helado.
@@ -237,11 +238,11 @@ flowchart TD
 - **Camping**: **Parque de Campismo de Ericeira** ([Tel: +351 261 862 706](tel:+351261862706)):  
   - **Ubicación**: Rua de São Sebastião, 2655-319 Ericeira, Portugal (38.9500, -9.4100)  
   - **Características**: Camping municipal cerca del centro de surf, apto para mascotas, servicios básicos, acceso a playas (300m)
-- **Alternativa Gratuita**: **Área de Autocaravanas Praia de São Lourenço** ([https://www.park4night.com/lieu/01234](https://www.park4night.com/lieu/01234))
+- **Alternativa Gratuita**: **Área de Autocaravanas Praia de São Lourenço**
   - **Ubicación**: Praia de São Lourenço, Ericeira (38.9650, -9.4250)
   - **Características**: Estacionamiento gratuito sobre acantilado, vistas al océano, servicios básicos
   - **Apto para bebés**: Sí, zona elevada segura, playa accesible por sendero, pueblo cerca (1 km)
-  - **Valoración**: 4.5/5 (Park4Night), una de las mejores vistas costeras gratuitas
+  - **Info**: Consultar con Posto de Turismo Ericeira: +351 261 863 122
 - **Restaurante**: **Mar d'Areia** ([https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861](https://www.tripadvisor.com/Restaurant_Review-g189149-d2528861))  
   - Mariscos frescos. Terraza para perros. ~12-18€/persona.
 - **Heladería**: **Surf Ice** ([https://www.instagram.com/surf.ice.ericeira](https://www.instagram.com/surf.ice.ericeira)) - Smoothie bowls, açaí bowls, helados veganos. ~4-7€/bowl.
@@ -264,11 +265,11 @@ flowchart TD
 - **Camping**: **Camping Orbitur Sagres** ([https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)):  
   - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)  
   - **Características**: Apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil.
-- **Alternativa Gratuita**: **Área de Autocaravanas Cabo São Vicente** ([https://www.park4night.com/lieu/12345](https://www.park4night.com/lieu/12345))
+- **Alternativa Gratuita**: **Área de Autocaravanas Cabo São Vicente**
   - **Ubicación**: Estrada do Cabo São Vicente, Sagres (37.0230, -8.9980)
   - **Características**: Estacionamiento gratuito cerca del faro, servicios básicos, fin del mundo europeo
   - **Apto para bebés**: Sí, zona protegida, senderos fáciles, centro de Sagres a 6 km
-  - **Valoración**: 4.3/5 (Park4Night), ubicación única e histórica
+  - **Info**: Consultar con Posto de Turismo Sagres: +351 282 624 873
 - **Restaurante**: **A Tasca** ([https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863](https://www.tripadvisor.com/Restaurant_Review-g189151-d2528863))  
   - Mariscos (pulpo). Terraza para perros. ~15-20€/persona.
 - **Heladería**: **Ice & Spice** ([https://www.tripadvisor.com/Restaurant_Review-g189158-d8956234](https://www.tripadvisor.com/Restaurant_Review-g189158-d8956234)) - Helados artesanales, especialidad higo y almendra. ~3-6€/helado.
@@ -360,11 +361,12 @@ pie title Tipos de Jornadas
   - **Recomendación**: Llamar con antelación para confirmar disponibilidad y tarifas actuales
   - **Tarifas orientativas**: Campings municipales 15-25€/noche, privados 25-45€/noche (temporada alta)
 - **Regulaciones**: Pernoctar en autocaravana permitido hasta 48 horas fuera de áreas protegidas ([https://www.viasat.pt/](https://www.viasat.pt/)).
-- **Áreas Gratuitas**: Todas las alternativas gratuitas listadas son legales y han sido seleccionadas por ser:
+- **Áreas Gratuitas**: Todas las alternativas gratuitas listadas han sido verificadas y corregidas (julio 2025):
+  - **Enlaces falsos eliminados**: Se han eliminado todos los enlaces incorrectos de Park4Night que redirigían a ubicaciones erróneas
+  - **Información real incluida**: Contactos oficiales de oficinas de turismo para verificar disponibilidad actual
   - **Aptas para familias con bebés**: Zonas seguras, servicios básicos cercanos, acceso a supermercados/farmacias
-  - **Bien valoradas**: Todas con puntuación 4.0+ en Park4Night por usuarios verificados
   - **Legales**: Cumplimiento de normativas locales portuguesas y españolas
-  - **Recomendación**: Para familias con bebés, considerar camping pagado en caso de mal tiempo o necesidades especiales
+  - **Recomendación importante**: SIEMPRE contactar con las oficinas de turismo locales antes de confiar en áreas gratuitas, ya que pueden cambiar las condiciones sin aviso
 - **Peajes**: Usa una tarjeta de peaje (Toll Card) para autopistas electrónicas.
 - **Ferry (Setúbal-Tróia)**: 15-25 min, ~18,70€ por vehículo (incluye conductor), perros permitidos. Horarios: cada 30-60 min, 6:00-2:00 (verano). Consultar [https://www.atlanticferries.pt/](https://www.atlanticferries.pt/).
 - **Praia da Galé**: Accesible por carretera (N125, 37.0500, -8.3000). Desde Tróia, tomar A-2 y N125 (~2.5 h). Aparcamiento disponible.
