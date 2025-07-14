@@ -68,6 +68,10 @@ Para cada localización incluir:
 - En `iterarirario` incluir por cada parada la ruta de conducción (enlace Google Maps), distancia y tiempo estimado. Así como link en Google Maps ruta completa del viaje.
 - El número de días debe aparacer sólo en el `iterarirario`. Borrar el resto de referencias a días. Solo incluir el nombre de la localicación para contextualizar.
 - Verificar que la información sea correcta, incluyendo coordenadas GPS, horarios de apertura y contacto de los lugares recomendados.
+- Enlaces Google Maps estilo:
+  - Puntos de interés: [📍 Google Maps](https://maps.google.com/?q=Nombre+del+Lugar,Localización,País)
+  - Rutas: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Punto+de+Inicio&daddr=Punto+de+Destino)
+  - Incluir ruta completa.
 
 <!-- ====================================================================== -->
 <!-- FIN SECCIÓN PROTEGIDA - COPILOT PUEDE EDITAR DESDE AQUÍ -->
