@@ -249,6 +249,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Ericeira (1 día)
 
+[**Ericeira**](https://es.wikipedia.org/wiki/Ericeira) es una freguesia situada en el municipio de Mafra, en Portugal. Es conocida mundialmente por las altísimas olas de esta parte de la costa que atraen a surfistas de todo el mundo. Con sus 11 kilómetros de costa, ha sido elegida la 1ª Reserva Mundial de Surf en Europa y la 2ª del mundo. Además de ser un destino privilegiado para la práctica de numerosos deportes acuáticos, desde el bodyboard hasta el skimming, conserva el encanto de una villa pesquera tradicional portuguesa.
+
 - **Camping**: **Parque de Campismo de Ericeira** ([Tel: +351 261 862 706](tel:+351261862706)):  
   - **Ubicación**: Rua de São Sebastião, 2655-319 Ericeira, Portugal (38.9500, -9.4100)  
   - **Características**: Camping municipal cerca del centro de surf, apto para mascotas, servicios básicos, acceso a playas (300m)
