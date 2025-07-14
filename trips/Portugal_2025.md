@@ -110,6 +110,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Braga (1 día)
 
+**[Braga](https://es.wikipedia.org/wiki/Braga)** es una ciudad portuguesa situada en el norte del país, capital del distrito homónimo. Es una de las ciudades económicamente más dinámicas y pobladas de Portugal, conocida como la "Ciudad de los Arzobispos" y destacada por su patrimonio religioso, especialmente el Santuario de Bom Jesus do Monte. Con más de 180.000 habitantes, conserva un importante centro histórico que incluye la catedral más antigua de Portugal y numerosos monumentos barrocos.
+
 - **Camping**: **Parque de Campismo da Ponte** ([Tel: +351 253 273 355](tel:+351253273355)):  
   - **Ubicación**: Parque da Ponte, 4700-031 Braga, Portugal (41.5454, -8.4265)
   - **Características**: Camping municipal junto al río Ave, apto para mascotas, servicios básicos, zona verde amplia
@@ -127,6 +129,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Oporto (2 días)
 
+**[Oporto](https://es.wikipedia.org/wiki/Oporto)** (en portugués Porto) es el tercer municipio más poblado de Portugal, después de Lisboa y Vila Nova de Gaia. Con 231.828 habitantes, es considerada la "Capital del Norte" de Portugal. Su centro histórico fue declarado Patrimonio de la Humanidad por la UNESCO en 1996. La ciudad es famosa por el vino de Oporto, que lleva su nombre, y por sus monumentos como la Torre de los Clérigos y el Palacio de la Bolsa. Cuenta con una rica arquitectura que va desde estructuras medievales hasta construcciones contemporáneas como la Casa de la Música.
+
 - **Alojamiento**: **Apartamento Porto Centro (Pet-Friendly)** ([https://www.booking.com/porto-family-pet.html](https://www.booking.com/porto-family-pet.html)):  
   - **Ubicación**: Rua das Flores, Centro Histórico, Oporto, Portugal
   - **Características**: 2 dormitorios, cocina equipada, admite mascotas (bajo petición), Wi-Fi
@@ -142,6 +146,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 - **Actividades**: Librería Lello, Torre dos Clérigos, Ribeira UNESCO, Palácio da Bolsa, paseos familiares.
 
 ## Viana do Castelo (1 día)
+
+[**Viana do Castelo**](https://es.wikipedia.org/wiki/Viana_do_Castelo) es una ciudad portuguesa situada en la margen derecha del estuario del río Limia, capital del municipio y del distrito homónimo. Es una ciudad de gran tradición marinera que fue un importante centro comercial durante la época de los descubrimientos portugueses. Su próspero comercio marítimo con el norte de Europa la convirtió en un destacado puerto pesquero de bacalao, y conserva importantes monumentos como la Catedral de Santa María de la Concepción, el Templo de Santa Luzia y el Puente Eiffel.
 
 - **Camping**: **Parque de Campismo Cabedelo** ([Tel: +351 258 322 942](tel:+351258322942)):  
   - **Ubicación**: Praia do Cabedelo, 4935-126 Viana do Castelo, Portugal (41.6950, -8.8590)  
@@ -176,6 +182,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Coimbra (2 días)
 
+[**Coimbra**](https://es.wikipedia.org/wiki/Co%C3%ADmbra) es una ciudad portuguesa capital del distrito homónimo, famosa por albergar una de las universidades más antiguas de Europa. Atravesada por el río Mondego, la ciudad fue cuna de seis reyes portugueses y capital del reino hasta 1255. Conserva importantes vestigios de la época romana, como su acueducto y criptopórtico, y fue declarada Patrimonio de la Humanidad por la UNESCO en 2013. Sus calles estrechas, patios y escaleras medievales, junto con monumentos como la Universidad de Coimbra, la Biblioteca Joanina y las catedrales Vieja y Nueva, la convierten en la "Atenas Lusitana".
+
 - **Camping**: **Parque de Campismo Municipal de Coimbra** ([Tel: +351 239 701 497](tel:+351239701497)):  
   - **Ubicación**: Rua António Augusto Gonçalves, 3041-401 Coimbra, Portugal (40.1920, -8.4080)  
   - **Características**: Camping municipal apto para mascotas, servicios básicos, cerca del río Mondego, acceso al centro (2 km)
@@ -191,6 +199,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 - **Actividades**: Portugal dos Pequenitos, Jardín Botánico, Parque Verde, barco Basófias (30 min, si es adecuado), paseos con el perro.
 
 ## Nazaré (2 días)
+
+[**Nazaré**](https://es.wikipedia.org/wiki/Nazar%C3%A9_(Portugal)) es una villa y municipio portugués famoso por sus tradiciones pesqueras y por albergar las olas más grandes del mundo para la práctica del surf. Ubicada en la costa atlántica, conserva su estética tradicional con mujeres vestidas con trajes típicos de siete faldas de franela de colores. El pueblo se divide en tres barrios: Pederneira (el antiguo barrio pesquero), la Praia da Nazaré y el Sitio da Nazaré, donde se encuentra el Santuario de Nuestra Señora de Nazaré. Es mundialmente conocida por el cañón submarino de Nazaré, que crea olas de récord mundial en la Playa del Norte.
 
 - **Camping**: **Parque de Campismo da Nazaré** ([Tel: +351 262 561 111](tel:+351262561111)):  
   - **Ubicación**: Rua dos Combatentes da Grande Guerra, 2450-065 Nazaré, Portugal (39.5960, -9.0750)  
@@ -208,6 +218,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Óbidos (1 día)
 
+[**Óbidos**](https://es.wikipedia.org/wiki/%C3%93bidos_(Portugal)) es una villa portuguesa fortificada que conserva su aspecto medieval prácticamente intacto. Su nombre deriva del latín "oppidum" que significa "ciudadela" o "ciudad fortificada". Rodeada por murallas del siglo XII, es famosa por sus calles empedradas, casas blancas con detalles azules y amarillos, y por ser el lugar donde se produce la famosa ginjinha (licor de cereza ácida). Entre sus monumentos destacan el Castillo de Óbidos, la Porta da Vila, la Plaza de Santa María y diversas iglesias históricas.
+
 - **Camping**: **Parque de Campismo Municipal de Óbidos** ([Tel: +351 262 959 237](tel:+351262959237)):  
   - **Ubicación**: Rua do Capeleira, 2510-001 Óbidos, Portugal (39.3600, -9.1567)  
   - **Características**: Camping municipal cerca de la villa medieval, apto para mascotas, servicios básicos, acceso al centro histórico (500m)
@@ -218,6 +230,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 - **Actividades**: Calles medievales con carrito, áreas verdes, paseos con el perro.
 
 ## Peniche (1 día)
+
+[**Peniche**](https://es.wikipedia.org/wiki/Peniche) es un municipio portugués situado en una península rodeada por el océano Atlántico, siendo la población más occidental de Europa Continental. Es famoso mundialmente por ser uno de los mejores destinos para la práctica del surf, bodyboard y otros deportes acuáticos, especialmente en la playa de Supertubos. La ciudad conserva su histórica fortaleza del siglo XVII, que fue utilizada como prisión durante el régimen de Salazar y se hizo famosa por la fuga del líder comunista Álvaro Cunhal. Peniche tiene un microclima especial que escapa a los calurosos veranos portugueses.
 
 - **Camping**: **Camping Peniche Praia** ([https://penichepraia.pt/](https://penichepraia.pt/)):  
   - **Ubicación**: Peniche, Portugal (39.3500, -9.3833)  
