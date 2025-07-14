@@ -1,34 +1,59 @@
 # Planificación de viaje a Portugal (Agosto 2025)
 
-## Requerimientos del Viaje
+<!-- ====================================================================== -->
+<!-- INSTRUCCIONES PARA GITHUB COPILOT: NO MODIFICAR LA SIGUIENTE SECCIÓN -->
+<!-- ====================================================================== -->
 
-⚠️ **PROHIBIDO EDITAR** - Solo el usuario puede modificar esta sección
-⚠️ **NO TOCAR BAJO NINGUNA CIRCUNSTANCIA**
+## ⛔ REQUERIMIENTOS DEL VIAJE - SOLO LECTURA ⛔
+
+> **🤖 INSTRUCCIONES PARA GITHUB COPILOT:**
+> 
+> - Esta sección es **INMUTABLE**
+> - **NO** sugerir cambios, modificaciones o mejoras
+> - **USAR SOLO** como referencia para generar contenido en otras secciones
+> - Cualquier edición requiere autorización **EXPLÍCITA** del usuario
+> - **RESPETAR** absolutamente todo el contenido entre estas marcas
+
+### Especificaciones del viaje
 
 - **Duración**: 20 días
 - **Inicio/Fin**: Sevilla, España
 - **Primera parada**: Parque Nacional Peneda-Gerês. Ruta de Norte a Sur.
 - **Límite de condución**: Máximo 3 horas al día (un trayecto de 3.5 horas con descanso)
-- **Enfoque**:
-  - Importante deben incluir **Actividades para niños**: Juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, trekking ligero y visitas a parques temáticos adaptados para un bebé de 1 año
-  - Playas aptas para perros
-  - Visita Parque Nacional (Peneda-Gerês), incluir treking más relevante.
-  - Visitas a ciudades pequeñas ciudades/pueblos
-  - Trekking en Passadiços da Ribeira de São João en Labruja
-  - Foto en Azenhas do Mar
-  - Ferry a Praia da Costa da Galé en Tróia
-  - Paso por Praia da Galé en el Algarve
-- Alojamiento
-  - Campings: Todos bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles.
-  - Apartamento en Porto para dos noches y deben admitir mascotas.
-  - Areas de acamping para gratutitas y de claidad.
-- Opciones de comida para cada localización. Con el nombre de la localización incluir:
-  - Restaurantes, Heladerías y pastelerías, y Supermercaodos
-  - Seleccionar aquellos que tengan buena relación calidad-precio y sean aptos para familias.
-  - Si hay algo excepcionalmente bueno, incluirlo.
+
+### Particularidades obligatorias
+
+- Importante deben incluir **Actividades para niños**: Juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, trekking ligero y visitas a parques temáticos adaptados para un bebé de 1 año
+- Playas aptas para perros
+- Visita Parque Nacional (Peneda-Gerês), incluir treking más relevante.
+- Visitas a ciudades pequeñas ciudades/pueblos
+- Trekking en Passadiços da Ribeira de São João en Labruja
+- Foto en Azenhas do Mar
+- Ferry a Praia da Costa da Galé en Tróia
+- Paso por Praia da Galé en el Algarve
+
+### Especificaciones de alojamiento
+
+- Campings: Todos bien valorados (4+ estrellas), aptos para mascotas y familias, con piscinas, Wi-Fi y áreas de juegos infantiles.
+- Apartamento en Porto para dos noches y deben admitir mascotas.
+- Areas de acamping para gratutitas y de claidad.
+
+### Opciones de comida requeridas
+
+Para cada localización incluir:
+- Restaurantes, Heladerías y pastelerías, y Supermercaodos
+- Seleccionar aquellos que tengan buena relación calidad-precio y sean aptos para familias.
+- Si hay algo excepcionalmente bueno, incluirlo.
+
+### Reglas de formato y contenido
+
 - Que le contenido de texto como tablas y digramas mermeid esten sincronizados.
 - El número de días debe aparacer sólo en el `iterarirario`. Borrar el resto de referencias a días. Solo incluir el nombre de la localicación para contextualizar.
 - Verificar que la información sea correcta, incluyendo coordenadas GPS, horarios de apertura y contacto de los lugares recomendados.
+
+<!-- ====================================================================== -->
+<!-- FIN SECCIÓN PROTEGIDA - COPILOT PUEDE EDITAR DESDE AQUÍ -->
+<!-- ====================================================================== -->
 
 ## Itinerario
 
@@ -367,7 +392,6 @@ pie title Tipos de Jornadas
     "Jornadas sin conducir" : 55
     "Jornadas de conducción" : 45
 ```
-
 
 ## Notas adicionales
 
