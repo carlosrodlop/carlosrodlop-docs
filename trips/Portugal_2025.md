@@ -34,21 +34,21 @@
 
 ```mermaid
 flowchart TD
-    A[🚗 Sevilla - Inicio] -->|385km<br/>3h 30min| B[🏕️ Ortiga - Día 1<br/>Camping municipal, embalse]
-    B -->|200km<br/>2h 15min| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
-    C -->|70km<br/>1h| D[🏕️ Braga - Día 4<br/>Camping, centro histórico]
-    D -->|60km<br/>1h| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
-    E -->|90km<br/>1h 20min| F[🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
-    F -->|25km<br/>35min| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
-    G -->|160km<br/>1h 50min| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
-    H -->|120km<br/>1h 25min| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
-    I -->|35km<br/>45min| J[🏰 Óbidos - Día 14<br/>Villa medieval]
-    J -->|20km<br/>25min| K[🏖️ Peniche - Día 15<br/>Playa y fortaleza]
-    K -->|70km<br/>1h 10min| L[🏄 Ericeira - Día 16<br/>Surf y Azenhas do Mar]
-    L -->|45km<br/>50min| M[⛴️ Setúbal - Día 17<br/>Ferry point]
-    M -.->|5km<br/>25min Ferry| N[🏝️ Tróia - Día 17<br/>Península y playa]
-    N -->|220km<br/>2h 30min| O[🏖️ Sagres - Días 18-19<br/>Cabo y playas Algarve]
-    O -->|300km<br/>3h 15min| P[🏠 Sevilla - Día 20<br/>Regreso a casa]
+    A[🚗 Sevilla - Inicio] -->|385km<br/>3h 30min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Sevilla,Spain&daddr=Ortiga,Portugal'>🗺️</a>| B[🏕️ Ortiga - Día 1<br/>Camping municipal, embalse]
+    B -->|200km<br/>2h 15min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Ortiga,Portugal&daddr=Peneda-Gerês,Portugal'>🗺️</a>| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
+    C -->|70km<br/>1h<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Peneda-Gerês,Portugal&daddr=Braga,Portugal'>🗺️</a>| D[🏕️ Braga - Día 4<br/>Camping, centro histórico]
+    D -->|60km<br/>1h<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Braga,Portugal&daddr=Porto,Portugal'>🗺️</a>| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
+    E -->|90km<br/>1h 20min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Porto,Portugal&daddr=Viana+do+Castelo,Portugal'>🗺️</a>| F[🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
+    F -->|25km<br/>35min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Viana+do+Castelo,Portugal&daddr=Labruja,Portugal'>🗺️</a>| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
+    G -->|160km<br/>1h 50min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Labruja,Portugal&daddr=Coimbra,Portugal'>🗺️</a>| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
+    H -->|120km<br/>1h 25min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Coimbra,Portugal&daddr=Nazaré,Portugal'>🗺️</a>| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
+    I -->|35km<br/>45min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Nazaré,Portugal&daddr=Óbidos,Portugal'>🗺️</a>| J[🏰 Óbidos - Día 14<br/>Villa medieval]
+    J -->|20km<br/>25min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Óbidos,Portugal&daddr=Peniche,Portugal'>🗺️</a>| K[🏖️ Peniche - Día 15<br/>Playa y fortaleza]
+    K -->|70km<br/>1h 10min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Peniche,Portugal&daddr=Ericeira,Portugal'>🗺️</a>| L[🏄 Ericeira - Día 16<br/>Surf y Azenhas do Mar]
+    L -->|45km<br/>50min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Ericeira,Portugal&daddr=Setúbal,Portugal'>🗺️</a>| M[⛴️ Setúbal - Día 17<br/>Ferry point]
+    M -.->|5km<br/>25min Ferry<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Setúbal,Portugal&daddr=Tróia,Portugal'>🗺️</a>| N[🏝️ Tróia - Día 17<br/>Península y playa]
+    N -->|220km<br/>2h 30min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Tróia,Portugal&daddr=Sagres,Portugal'>🗺️</a>| O[🏖️ Sagres - Días 18-19<br/>Cabo y playas Algarve]
+    O -->|300km<br/>3h 15min<br/><a href='https://maps.google.com/maps?f=d&source=s_d&saddr=Sagres,Portugal&daddr=Sevilla,Spain'>🗺️</a>| P[🏠 Sevilla - Día 20<br/>Regreso a casa]
 
     %% Estilos
     classDef inicio fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
