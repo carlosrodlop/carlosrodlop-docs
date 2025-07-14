@@ -10,7 +10,7 @@
 > 
 > - Esta sección es **INMUTABLE**
 > - **NO** sugerir cambios, modificaciones o mejoras
-> - **USAR SOLO** como referencia para generar contenido en otras secciones
+> - **USAR SOLO** como contexto para generar contenido en otras secciones
 > - Cualquier edición requiere autorización **EXPLÍCITA** del usuario
 > - **RESPETAR** absolutamente todo el contenido entre estas marcas
 
