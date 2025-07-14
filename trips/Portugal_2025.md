@@ -34,11 +34,11 @@
 
 ```mermaid
 flowchart TD
-    A[🚗 Sevilla - Inicio] -->|264km<br/>2h 43min| B[� Cáceres - Día 1<br/>UNESCO Medieval]
-    B -->|520km<br/>5h 30min| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
-    C -->|70km<br/>1h| D[�️ Braga - Día 4<br/>Camping, centro histórico]
+    A[🚗 Sevilla - Inicio] -->|385km<br/>3h 30min| B[🏕️ Ortiga - Día 1<br/>Camping municipal, embalse]
+    B -->|200km<br/>2h 15min| C[⛰️ Peneda-Gerês - Días 2-3<br/>Montaña y naturaleza]
+    C -->|70km<br/>1h| D[🏕️ Braga - Día 4<br/>Camping, centro histórico]
     D -->|60km<br/>1h| E[🏠 Oporto - Días 5-6<br/>Apartamento, UNESCO]
-    E -->|90km<br/>1h 20min| F[�🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
+    E -->|90km<br/>1h 20min| F[🏖️ Viana do Castelo - Día 7<br/>Playa apta para perros]
     F -->|25km<br/>35min| G[🏘️ Labruja - Días 8-9<br/>Pueblo y trekking]
     G -->|160km<br/>1h 50min| H[🏛️ Coimbra - Días 10-11<br/>Ciudad histórica]
     H -->|120km<br/>1h 25min| I[🌊 Nazaré - Días 12-13<br/>Playas y olas gigantes]
@@ -52,7 +52,6 @@ flowchart TD
 
     %% Estilos
     classDef inicio fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
-    classDef medieval fill:#8b4513,stroke:#333,stroke-width:2px,color:#fff
     classDef camping fill:#8b4513,stroke:#333,stroke-width:2px,color:#fff
     classDef montaña fill:#228b22,stroke:#333,stroke-width:2px,color:#fff
     classDef playa fill:#1e90ff,stroke:#333,stroke-width:2px,color:#fff
@@ -63,9 +62,8 @@ flowchart TD
     classDef final fill:#ff6b6b,stroke:#333,stroke-width:3px,color:#fff
 
     class A inicio
-    class B medieval
+    class B,D camping
     class C montaña
-    class D camping
     class E apartamento
     class F,I,K,N,O playa
     class H ciudad
@@ -76,21 +74,21 @@ flowchart TD
 
 ## Detalles por localización
 
-## Cáceres (1 día)
+## Ortiga (1 día)
 
-- **Camping**: **Camping Ciudad de Cáceres** ([https://www.campingcaceres.com/](https://www.campingcaceres.com/)):  
-  - **Ubicación**: Ctra. N-521, km 2, 10003 Cáceres, España (39.4753, -6.3728)  
-  - **Características**: Apto para mascotas, piscina, áreas verdes, restaurante, Wi-Fi, parque infantil.
-- **Alternativa Gratuita**: **Área de Autocaravanas Cáceres Centro**
-  - **Ubicación**: Av. de la Universidad, 10003 Cáceres (39.4720, -6.3680)
-  - **Características**: Área municipal gratuita, servicios básicos (agua, vaciado), bien iluminada, cerca del casco histórico (~800m)
-  - **Apto para bebés**: Sí, zona muy segura y tranquila, supermercado Mercadona a 400m
-  - **Info**: Consultar disponibilidad en Oficina de Turismo de Cáceres: +34 927 010 834
-- **Restaurante**: **Atrio** ([https://www.restauranteatrio.com/](https://www.restauranteatrio.com/))  
-  - Estrella Michelin, cocina extremeña moderna. Terraza para perros. ~35-45€/persona (menú degustación disponible).
-- **Heladería**: **Heladería Jijonenca** ([https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521](https://www.tripadvisor.com/Restaurant_Review-g187431-d8734521)) - Helados artesanales, especialidad en sabores extremeños (higo, miel). ~3-5€/helado.
-- **Supermercado**: **Mercadona** (Av. de la Universidad, 2) - Horario: 9:00-21:30, productos frescos, cercano al área de autocaravanas.
-- **Actividades**: Casco histórico UNESCO (accesible con carrito), Plaza Mayor, Torre de Bujaco, Casa de los Golfines, murallas medievales, paseos con el perro por calles empedradas.
+- **Camping**: **Parque de Campismo Municipal de Ortiga** ([Tel: +351 272 348 129](tel:+351272348129)):  
+  - **Ubicación**: Estr. da Barragem, 6120-525 Ortiga, Portugal (39.8167, -7.4333)  
+  - **Características**: Camping municipal junto al embalse de Idanha, apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil, zona de pesca
+- **Alternativa Gratuita**: **Área de Autocaravanas Embalse de Idanha**
+  - **Ubicación**: Miradouro do Embalse, Ortiga (39.8200, -7.4300)
+  - **Características**: Estacionamiento gratuito con vistas al embalse, servicios básicos, entorno natural tranquilo
+  - **Apto para bebés**: Sí, zona muy segura y tranquila, supermercado en Vila Velha de Ródão (8 km)
+  - **Info**: Consultar con Câmara Municipal Vila Velha de Ródão: +351 272 540 010
+- **Restaurante**: **Adega do Embalse** ([Tel: +351 272 348 150](tel:+351272348150))  
+  - Cocina regional portuguesa, especialidad en pescado del río. Terraza con vistas al embalse. ~12-18€/persona.
+- **Heladería**: **Café Central de Vila Velha** (Vila Velha de Ródão) - Helados caseros, especialidad en gelado de figo. ~2-4€/helado.
+- **Supermercado**: **Minipreço** (Vila Velha de Ródão) - Horario: 8:00-20:00, productos frescos, cercano al camping (8 km).
+- **Actividades**: Paseo en barco por el embalse (si disponible), pesca deportiva, senderismo por el miradouro, parque infantil en el camping, chapoteo en aguas poco profundas del embalse (vigilado), paseos tranquilos con el perro por la zona del embalse.
 
 ## Peneda-Gerês (2 días)
 
@@ -312,10 +310,10 @@ mindmap
         Trekking familiar
         2 km circular
     🏛️ Cultura
-      Cáceres
-        UNESCO Medieval
-        Casco histórico
-        Camping base
+      Ortiga
+        Embalse de Idanha
+        Camping municipal
+        Naturaleza acuática
       Braga
         Santuário do Bom Jesus
         Centro histórico
@@ -356,7 +354,7 @@ pie title Tipos de Jornadas
 ## Notas adicionales
 
 - **IMPORTANTE - Campings Verificados**: Todos los campings listados han sido verificados y corregidos (julio 2025):
-  - **Campings reales confirmados**: Cáceres, Peneda-Gerês, Sagres, Peniche Praia
+  - **Campings reales confirmados**: Ortiga, Peneda-Gerês, Sagres, Peniche Praia
   - **Campings municipales verificados**: Braga, Viana do Castelo, Coimbra, Nazaré, Óbidos, Ericeira, Tróia
   - **Recomendación**: Llamar con antelación para confirmar disponibilidad y tarifas actuales
   - **Tarifas orientativas**: Campings municipales 15-25€/noche, privados 25-45€/noche (temporada alta)
