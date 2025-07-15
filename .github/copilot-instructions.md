@@ -2,13 +2,12 @@
 
 ## Reglas de edición estrictas
 
-⛔ **NUNCA modificar secciones marcadas con "PROHIBIDO EDITAR"**  
-⛔ **RESPETAR secciones entre advertencias de ⚠️**  
+⛔ **NUNCA modificar secciones marcadas con "PROHIBIDO EDITAR"**   
 ⛔ **NO TOCAR contenido entre comentarios de "SECCIÓN PROTEGIDA"**
 
-### Específico para archivos de viaje (docs/trips/):
+### Específico para todos los archivos .md
 
-- **NO** editar la sección "Requerimientos del Viaje" bajo ninguna circunstancia
+- **NO** editar la sección "Requerimientos" or "Requirements" bajo ninguna circunstancia
 - **USAR** esa sección solo como REFERENCIA para generar contenido coherente
 - **MANTENER** sincronización entre diagramas mermaid y contenido textual
 - **VERIFICAR** que enlaces y coordenadas sean reales y funcionales
