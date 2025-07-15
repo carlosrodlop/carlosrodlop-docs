@@ -11,6 +11,7 @@
 - **USAR** esa sección solo como REFERENCIA para generar contenido coherente
 - **MANTENER** sincronización entre diagramas mermaid y contenido textual
 - **VERIFICAR** que enlaces y coordenadas sean reales y funcionales
+- **Disminuir el grado de alucinación al mínimo posible**, utilizar fuentes verificables y contrastadas.
 
 ### Comportamiento esperado:
 

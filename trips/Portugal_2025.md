@@ -53,6 +53,7 @@
 
 - Campings: Aptos para mascotas y familias, con piscinas y Wi-Fi. con buenos comentarios y scoring. Incluye enlaces de https://www.pitchup.com/, https://www.camping.info/ and https://www.holidu.es/
 - Incluye areas para camper gratutitas y de calidad, con buenos comentarios y scoring. Incluye enlaces de Park 4 Night y/o Park4Camper.
+- Numero de Entradas: Incluir TODOS los camping y areas para camper gratutitas a menos de 10km de la localización, y ordenarlos según scoring mejor valorado y con mejores servicios.
 
 ### Opciones de comida requeridas
 
@@ -61,6 +62,7 @@ Para cada localización incluir:
 - Para todoas localizacion incluir enlace con punto en google maps.
 - Seleccionar aquellos que tengan buena relación calidad-precio y sean aptos para familias.
 - Si hay algo excepcionalmente bueno, incluirlo.
+- Numero de Entradas: Incluir hasta una maximo de 3 restaurantes, 2 heladerías y 2 supermercado por localización. ordenarlos según scoring calidad-precio mejor valorado.
 
 ### Reglas de formato y contenido
 
@@ -143,7 +145,7 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Peneda-Gerês
 
-- **Camping**: **Parque de Campismo de Cerdeira** ([https://www.parquecerdeira.com/](https://www.parquecerdeira.com/)) - [📍 Google Maps](https://maps.google.com/?q=Parque+de+Campismo+de+Cerdeira,Campo+do+Gerês,Portugal)
+- **Camping**: **Parque de Campismo de Cerdeira** ([Sitio Web](https://www.parquecerdeira.com/)) - [📍 Google Maps](https://maps.google.com/?q=Parque+de+Campismo+de+Cerdeira,Campo+do+Gerês,Portugal) - [Pitchup](https://www.pitchup.com/campsites/Portugal/Norte/Braga/Geres/parque-de-cerdeira/)
   - **Ubicación**: Lugar de Cerdeira, 4840-030 Campo do Gerês, Portugal (41.7586, -8.1938)
   - **Características**: Apto para mascotas, piscina, parque infantil, Wi-Fi, restaurante.
 - **Alternativa Gratuita**: **Área de Estacionamiento Rio Caldo** ([Park4Night](https://park4night.com/place/89234))
@@ -153,6 +155,8 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
   - **Info**: Consultar con Posto de Turismo Gerês: [+351 253 391 133](tel:+351253391133).
 - **Restaurante**: **Restaurante Abocanhado** ([https://www.abocanhado.com/](https://www.abocanhado.com/)) - [📍 Google Maps](https://maps.google.com/?q=Restaurante+Abocanhado,Peneda-Gerês,Portugal)
   - Cocina tradicional (cabrito asado). Espacio al aire libre. ~15-20€/persona.
+- **Restaurante (Opción 2)**: **Restaurante Lurdes Capela** ([Facebook](https://www.facebook.com/p/Restaurante-Lurdes-Capela-100063721296303/)) - [📍 Google Maps](https://maps.google.com/?q=Restaurante+Lurdes+Capela,Gerês,Portugal)
+  - Vistas al río, cocina casera (posta à mirandesa). Ideal para familias. ~15-25€/persona.
 - **Heladería**: **Pastelaria Central** ([https://www.facebook.com/pastelaria.central.gerez](https://www.facebook.com/pastelaria.central.gerez)) - [📍 Google Maps](https://maps.google.com/?q=Pastelaria+Central,Vila+do+Gerês,Portugal)
   - Pastéis de nata caseros, gelados de frutas del bosque. ~2-4€/postre.
 - **Supermercado**: **Intermarché** - [📍 Google Maps](https://maps.google.com/?q=Intermarché,Vila+do+Gerês,Portugal)
@@ -166,7 +170,7 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 - **Camping**: **Parque de Campismo da Ponte** ([Tel: +351 253 273 355](tel:+351253273355)) - [📍 Google Maps](https://maps.google.com/?q=Parque+de+Campismo+da+Ponte,Braga,Portugal)
   - **Ubicación**: Parque da Ponte, 4700-031 Braga, Portugal (41.5454, -8.4265)
   - **Características**: Camping municipal junto al río Ave, apto para mascotas, con servicios básicos y una zona verde amplia.
-- **Alternativa Gratuita**: **Área de Autocaravanas Parque da Ponte** ([Park4Night](https://park4night.com/place/156789))
+- **Alternativa Gratuita**: **Área de Autocaravanas Parque da Ponte** ([Park4Night](https://www.park4night.com/en/place/23760))
   - **Ubicación**: Parque da Ponte, Braga, Portugal (41.5454, -8.4265)
   - **Características**: Área municipal gratuita, junto al río, con zona verde y servicios básicos.
   - **Apto para bebés**: Sí, con parque infantil adyacente, farmacia y supermercado cerca (300m).
@@ -193,17 +197,23 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
     - Palácio da Bolsa: 900m (12 min andando)
 - **Restaurante**: **Cantinho do Avillez** ([https://www.cantinhodoavillez.pt/](https://www.cantinhodoavillez.pt/)) - [📍 Google Maps](https://maps.google.com/?q=Cantinho+do+Avillez,Porto,Portugal)
   - Estrella Michelin accesible, menú familiar. Cocina portuguesa contemporánea. ~25-35€/persona.
+- **Restaurante (Opción 2)**: **Tasca do Cais** ([Facebook](https://www.facebook.com/tascadocaisdaribeira/)) - [📍 Google Maps](https://maps.google.com/?q=Tasca+do+Cais,Porto,Portugal)
+  - Ubicado en la Ribeira, ideal para tapas (petiscos) y vino. Terraza pet-friendly. ~20-30€/persona.
 - **Heladería**: **Gelato Therapy** ([https://www.gelatotherapy.com/](https://www.gelatotherapy.com/)) - [📍 Google Maps](https://maps.google.com/?q=Gelato+Therapy,Porto,Portugal)
   - Gelatos artesanales, pastéis de nata gelado exclusivo. ~4-7€/helado.
+- **Heladería (Opción 2)**: **Santini** ([https://www.santini.pt/](https://www.santini.pt/)) - [📍 Google Maps](https://maps.google.com/?q=Santini,Porto,Portugal)
+  - Una de las heladerías más famosas de Portugal. Sabores de fruta de temporada. ~4-6€/helado.
 - **Supermercado**: **El Corte Inglés** - [📍 Google Maps](https://maps.google.com/?q=El+Corte+Inglés,Vila+Nova+de+Gaia,Portugal)
   - Av. da República, Vila Nova de Gaia, Portugal - Horario: 10:00-23:00, gourmet, productos internacionales.
+- **Supermercado (Opción 2)**: **Mercado do Bolhão** ([Sitio Web](https://mercadobolhao.pt/)) - [📍 Google Maps](https://maps.google.com/?q=Mercado+do+Bolhão,Porto,Portugal)
+  - Mercado histórico renovado. Ideal para productos frescos, locales y ambiente tradicional. Horario: 8:00-20:00.
 - **Actividades**: Librería Lello, Torre dos Clérigos, Ribeira UNESCO, Palácio da Bolsa, paseos familiares.
 
 ## Viana do Castelo
 
 [**Viana do Castelo**](https://es.wikipedia.org/wiki/Viana_do_Castelo) es una ciudad portuguesa situada en la margen derecha del estuario del río Limia, capital del municipio y del distrito homónimo. Es una ciudad de gran tradición marinera que fue un importante centro comercial durante la época de los descubrimientos portugueses. Su próspero comercio marítimo con el norte de Europa la convirtió en un destacado puerto pesquero de bacalao, y conserva importantes monumentos como la Catedral de Santa María de la Concepción, el Templo de Santa Luzia y el Puente Eiffel.
 
-- **Camping**: **Parque de Campismo Cabedelo** ([Tel: +351 258 322 942](tel:+351258322942)) - [📍 Google Maps](https://maps.google.com/?q=Parque+de+Campismo+Cabedelo,Viana+do+Castelo,Portugal)
+- **Camping**: **Parque de Campismo Cabedelo** ([Tel: +351 258 322 942](tel:+351258322942)) - [📍 Google Maps](https://maps.google.com/?q=Parque+de+Campismo+Cabedelo,Viana+do+Castelo,Portugal) - [Camping.info](https://www.camping.info/en/campsite/camping-viana-do-castelo-orbitur)
   - **Ubicación**: Praia do Cabedelo, 4935-126 Viana do Castelo, Portugal (41.6845, -8.8452)
   - **Características**: Camping junto a playa apta para perros, con servicios básicos, zona dunar protegida y cerca del centro (4 km).
 - **Alternativa Gratuita**: **Área de Autocaravanas Praia do Cabedelo** ([Park4Night](https://www.park4night.com/en/place/24658))
@@ -385,7 +395,7 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Seville/Ortig
 
 ## Sagres
 
-- **Camping**: **Camping Orbitur Sagres** ([https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)) - [📍 Google Maps](https://maps.google.com/?q=Camping+Orbitur+Sagres,Portugal)
+- **Camping**: **Camping Orbitur Sagres** ([Sitio Web](https://www.orbitur.pt/en/destinations/algarve/orbitur-sagres)) - [📍 Google Maps](https://maps.google.com/?q=Camping+Orbitur+Sagres,Portugal) - [Pitchup](https://www.pitchup.com/campsites/Portugal/Algarve/Sagres/orbitur-sagres/)
   - **Ubicación**: Sagres, Portugal (37.0294, -8.9378)
   - **Características**: Apto para mascotas, piscina, restaurante, Wi-Fi, parque infantil.
 - **Alternativa Gratuita**: **Área de Autocaravanas Cabo São Vicente** ([Park4Night](https://www.park4night.com/en/place/13358))
