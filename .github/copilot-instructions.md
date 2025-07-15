@@ -33,6 +33,7 @@
 - Preservar enlaces de Wikipedia verificados
 - Respetar formato de coordenadas GPS
 - Conservar estructura de diagramas mermaid
+- Utilizar fuentes confiables y verificables para información
 
 ### Para contenido de viajes:
 
