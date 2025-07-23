@@ -1,18 +1,10 @@
 # Planificación de viaje a Portugal (Agosto 2025)
 
 <!-- ====================================================================== -->
-<!-- INSTRUCCIONES PARA GITHUB COPILOT: NO MODIFICAR LA SIGUIENTE SECCIÓN -->
+<!-- SECCIÓN PROTEGIDA: INSTRUCCIONES PARA GITHUB COPILOT: NO MODIFICAR     -->
 <!-- ====================================================================== -->
 
-## ⛔ REQUERIMIENTOS ⛔
-
-> **🤖 INSTRUCCIONES PARA GITHUB COPILOT:**
-> 
-> - Esta sección es **INMUTABLE**
-> - **NO** sugerir cambios, modificaciones o mejoras
-> - **USAR SOLO** como contexto para generar contenido en otras secciones
-> - Cualquier edición requiere autorización **EXPLÍCITA** del usuario
-> - **RESPETAR** absolutamente todo el contenido entre estas marcas
+## REQUERIMIENTOS
 
 ### Especificaciones del viaje
 
@@ -58,6 +50,7 @@
 ### Opciones de comida requeridas
 
 Para cada localización incluir:
+
 - Restaurantes, Heladerías y pastelerías, y Supermercados.
 - Para todoas localizacion incluir enlace con punto en google maps.
 - Seleccionar aquellos que tengan buena relación calidad-precio y sean aptos para familias.

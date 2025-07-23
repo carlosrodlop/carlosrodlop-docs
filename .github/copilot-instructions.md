@@ -2,8 +2,19 @@
 
 ## Reglas de edición estrictas
 
-⛔ **NUNCA modificar secciones marcadas con "PROHIBIDO EDITAR"**   
-⛔ **NO TOCAR contenido entre comentarios de "SECCIÓN PROTEGIDA"**
+**NUNCA modificar secciones marcadas entre comentarios de "SECCIÓN PROTEGIDA"**
+
+```md
+<!-- ====================================================================== -->
+<!-- INSTRUCCIONES PARA GITHUB COPILOT: NO MODIFICAR LA SIGUIENTE SECCIÓN -->
+<!-- ====================================================================== -->
+
+...
+
+<!-- ====================================================================== -->
+<!-- FIN SECCIÓN PROTEGIDA - COPILOT PUEDE EDITAR DESDE AQUÍ -->
+<!-- ====================================================================== -->
+```
 
 ### Específico para todos los archivos .md
 
