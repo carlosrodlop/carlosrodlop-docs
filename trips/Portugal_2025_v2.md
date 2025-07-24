@@ -72,145 +72,288 @@ Ver Ruta Completa en [Google Maps](https://www.google.com/maps/dir/Sevilla/Elvas
 <!-- FIN SECCIÓN PROTEGIDA - COPILOT PUEDE EDITAR DESDE AQUÍ -->
 <!-- ====================================================================== -->
 
-## Itinerary
+# Planificación de viaje a Portugal (Agosto 2025)
 
-This 18-day camper trip along Portugal’s coast starts and ends in Sevilla, Spain, using a camper van. The route is designed for a family with a 1-year-old baby and a dog, with a maximum daily drive of 3 hours (or 3.5 hours with a break). Stops include Ericeira, Sintra (excursion), Cascais (brief stop), Setúbal, Tróia, Porto Covo, Sines (excursion), Praia da Costa de Santo André, Monte Carvalhal da Rocha, and Sagres. Activities are baby-friendly (e.g., shallow water play, playgrounds, light trekking) and include dog-friendly beaches and small town visits. Camping is within 5 km of each stop, with free camper areas within 10 km, ordered by rating and services. Two campings (Monte Carvalhal da Rocha and Orbitur Sagres) have a minimum 3-night stay. Food options include up to 3 restaurants, 2 heladerías, and 2 supermarkets per stop, ordered by quality-price rating, with Google Maps links. A photo stop at Azenhas do Mar is included during the Sintra excursion.
+## Itinerario
 
-**Full Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Sevilla,Spain&daddr=Ericeira,Portugal&daddr=Cascais,Portugal&daddr=Setúbal,Portugal&daddr=Tróia,Portugal&daddr=Porto+Covo,Portugal&daddr=Monte+Carvalhal+da+Rocha,Portugal&daddr=Sagres,Portugal&daddr=Sevilla,Spain)
+Este viaje de 18 días en camper recorre la costa de Portugal desde el norte hasta el sur, comenzando y terminando en Sevilla, España. Está diseñado para una familia con un bebé de 1 año y un perro, con un máximo de 3 horas de conducción diarias (o 3.5 horas con descanso, salvo el regreso directo). Las paradas incluyen Ericeira (3 noches), Cascais (breve), Setúbal, Tróia, Porto Covo (3 noches), Vila Nova de Milfontes (1 noche para Tasca do Celso), Praia da Costa de Santo André (breve), Monte Carvalhal da Rocha (3 noches), y Sagres (3 noches). El regreso es directo de Sagres a Sevilla (~4h 15m, excediendo el límite de conducción). Las actividades son aptas para bebés (juegos en la arena, chapoteo en aguas poco profundas, parques infantiles, senderismo ligero) y perros (playas pet-friendly, paseos). Se sugieren excursiones opcionales a lugares de interior a menos de 30 minutos de las bases (Ericeira, Porto Covo, Monte Carvalhal da Rocha, Sagres). Los campings están a menos de 5 km de cada parada, con áreas gratuitas para camper a menos de 10 km, ordenados por calificación y servicios. Se incluyen estancias mínimas de 3 noches en Ericeira Camping, Monte Carvalhal da Rocha, y Sagres. Las opciones de comida incluyen hasta 3 restaurantes, 2 heladerías y 2 supermercados por parada, priorizando calidad-precio y pet-friendly, con enlaces a Google Maps. Se incluye un ferry a Praia da Costa da Galé en Tróia y paradas breves en playas relevantes en la ruta (Praia da Comporta, Praia da Franquia). La ruta optimizada tiene ~920 km.
+
+**Ruta Completa**: [🗺️](https://www.google.com/maps/dir/Sevilla/Ericeira/Cascais/Setúbal/Tróia/Porto+Covo/Vila+Nova+de+Milfontes/Praia+da+Costa+de+Santo+André/Monte+Carvalhal+da+Rocha/Sagres/Sevilla)
 
 ```mermaid
 graph TD
-    A[Sevilla] --> B[Ericeira]
-    B -. Excursión .-> C[Azenhas do Mar]
-    B -. Excursión .-> D[Sintra]
-    B --> E[Cascais]
-    E --> F[Setúbal]
-    F --> G[Tróia]
-    G --> H[Porto Covo]
-    H -. Excursión .-> I[Sines]
-    H --> J[Praia da Costa de Santo André]
-    J --> K[Monte Carvalhal da Rocha]
-    K --> L[Sagres]
-    L --> A
+    A[Sevilla]
+    B[Ericeira]
+    C[Mafra Excursion]
+    S[Sintra Excursion]
+    D[Cascais]
+    E[Setubal]
+    F[Troia]
+    G[Porto Covo]
+    H[Sines Excursion]
+    I[Cercal do Alentejo Excursion]
+    J[Vila Nova de Milfontes]
+    K[Praia da Costa de Santo Andre]
+    L[Monte Carvalhal da Rocha]
+    M[Odeceixe Excursion]
+    N[Sagres]
+    O[Cabo de Sao Vicente Excursion]
+    Z[Sevilla Regreso]
+
+    A -- 300 km, ~3h --> B
+    B -. 15 km, ~20m .-> C
+    B -. 35 km, ~40m .-> S
+    B -- 45 km, ~45m --> D
+    D -- 45 km, ~55m --> E
+    E -- 20 km, ~30m + ferry --> F
+    F -- 100 km, ~1h 30m --> G
+    G -. 15 km, ~20m .-> H
+    G -. 25 km, ~30m .-> I
+    G -- 35 km, ~40m --> J
+    J -- 45 km, ~1h 5m --> K
+    K -- 15 km, ~20m --> L
+    L -. 20 km, ~25m .-> M
+    L -- 75 km, ~1h 10m --> N
+    N -. 10 km, ~15m .-> O
+    N -- 300 km, ~4h 15m --> Z
 ```
 
-### Days 1-4: Ericeira (4 nights)
+**Tabla de Distancias y Tiempos**
 
-- **Driving Route (Day 1)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Sevilla,Spain&daddr=Ericeira,Portugal) (300 km, 3h)
-- **Activities**:
-  - **Day 1**: Arrive, set up at camping, stroll through Ericeira’s fishing village, visit the local market ([📍](https://maps.google.com/?q=Mercado+Municipal+Ericeira,Ericeira,Portugal)).
-  - **Days 2-3**: Play at Praia do Sul (dog-friendly, shallow waters, [📍](https://maps.google.com/?q=Praia+do+Sul,Ericeira,Portugal)), visit Ribeira d’Ilhas playground ([📍](https://maps.google.com/?q=Ribeira+d’Ilhas,Ericeira,Portugal)), photo at Miradouro da Ribeira d’Ilhas ([📍](https://maps.google.com/?q=Miradouro+Ribeira+d’Ilhas,Ericeira,Portugal)), explore weekly market.
-  - **Day 4 (Excursion to Azenhas do Mar and Sintra)**: Drive to Azenhas do Mar for a photo stop ([📍](https://maps.google.com/?q=Azenhas+do+Mar,Sintra,Portugal)), then visit Sintra’s Quinta da Regaleira gardens (stroller-accessible, [📍](https://maps.google.com/?q=Quinta+da+Regaleira,Sintra,Portugal)) and historic town. Return to Ericeira. **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Ericeira,Portugal&daddr=Azenhas+do+Mar,Portugal&daddr=Sintra,Portugal&daddr=Ericeira,Portugal) (60 km round trip, 1h 30m).
-- **Accommodation**:
-  1. [Ericeira Camping](https://maps.google.com/?q=Ericeira+Camping,Ericeira,Portugal) (⭐4.6, 2 km from Praia do Sul, playground, pet-friendly, 38.9636,-9.4187).
-  2. [Orbitur Ericeira](https://maps.google.com/?q=Orbitur+Ericeira,Ericeira,Portugal) (⭐4.4, 3 km, pool, pet-friendly, 38.9578,-9.4145).
-  3. [Free Camper Area - Ericeira](https://maps.google.com/?q=Area+Autocaravanas+Ericeira,Ericeira,Portugal) (⭐4.0, 8 km, basic, free, 38.9701,-9.4052).
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Ericeira+Camping,Ericeira,Portugal)
-- **Food Options**:
-  - **Restaurants**:
-    1. [Mar das Latas](https://maps.google.com/?q=Mar+das+Latas,Ericeira,Portugal) (⭐4.5, €€, seafood, kids’ menu).
-    2. [Tik Tapas](https://maps.google.com/?q=Tik+Tapas,Ericeira,Portugal) (⭐4.6, €€, family-friendly).
-    3. [Furna](https://maps.google.com/?q=Furna,Ericeira,Portugal) (⭐4.4, €€, local cuisine).
-  - **Heladerías**:
-    1. [Gelateria La Venezia](https://maps.google.com/?q=Gelateria+La+Venezia,Ericeira,Portugal) (⭐4.7, vegan options).
-    2. [Blue Ice Gelados](https://maps.google.com/?q=Blue+Ice+Gelados,Ericeira,Portugal) (⭐4.5, artisanal).
-  - **Supermarkets**:
-    1. [Pingo Doce Ericeira](https://maps.google.com/?q=Pingo+Doce+Ericeira,Ericeira,Portugal) (⭐4.3, well-stocked).
-    2. [Continente Modelo Ericeira](https://maps.google.com/?q=Continente+Modelo+Ericeira,Ericeira,Portugal) (⭐4.2).
+| Tramo | Distancia | Tiempo Estimado | Notas |
+|-------|-----------|-----------------|-------|
+| Sevilla → Ericeira | 300 km | ~3h | Inicio del viaje |
+| Ericeira → Mafra (excursión) | 15 km | ~20m | Opcional: Palacio Nacional |
+| Ericeira → Sintra (excursión) | 35 km | ~40m | Opcional: Palacio da Pena, Quinta da Regaleira |
+| Ericeira → Cascais | 45 km | ~45m | Parada breve |
+| Cascais → Setúbal | 45 km | ~55m | - |
+| Setúbal → Tróia | 20 km | ~30m (incluye ferry) | Ferry a Praia da Costa da Galé |
+| Tróia → Porto Covo | 100 km | ~1h 30m | Parada breve en Praia da Comporta |
+| Porto Covo → Sines (excursión) | 15 km | ~20m | Opcional: Casco histórico |
+| Porto Covo → Cercal do Alentejo (excursión) | 25 km | ~30m | Opcional: Senderos naturales |
+| Porto Covo → Vila Nova de Milfontes | 35 km | ~40m | Pernoctación, visita a Tasca do Celso |
+| Vila Nova de Milfontes → Praia da Costa de Santo André | 45 km | ~1h 5m | Parada breve |
+| Praia da Costa de Santo André → Monte Carvalhal da Rocha | 15 km | ~20m | - |
+| Monte Carvalhal da Rocha → Odeceixe (excursión) | 20 km | ~25m | Opcional: Playa fluvial |
+| Monte Carvalhal da Rocha → Sagres | 75 km | ~1h 10m | - |
+| Sagres → Cabo de São Vicente (excursión) | 10 km | ~15m | Opcional: Vistas panorámicas |
+| Sagres → Sevilla | 300 km | ~4h 15m | Regreso directo, excede límite de conducción |
+| **Total (sin excursiones)** | ~920 km | ~14h 10m | Excluye excursiones opcionales |
 
-### Days 5-6: Ericeira → Cascais → Setúbal (1 night)
+### Días 1-3: Ericeira (3 noches)
 
-- **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Ericeira,Portugal&daddr=Cascais,Portugal&daddr=Setúbal,Portugal) (90 km, 1h 40m)
-- **Activities**:
-  - **Day 5**: Drive to Cascais for a brief stroll at Praia da Rainha (shallow waters, dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Rainha,Cascais,Portugal)). Continue to Setúbal, set up at camping.
-  - **Day 6**: Visit Praia da Ribeira do Cavalo (dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Ribeira+do+Cavalo,Setúbal,Portugal)), explore Setúbal’s old town, play at Parque do Bonfim ([📍](https://maps.google.com/?q=Parque+do+Bonfim,Setúbal,Portugal)).
-- **Accommodation**:
-  1. [Ecoparque Prof. José Fernando Gonçalves](https://maps.google.com/?q=Ecoparque+Prof+José+Fernando+Gonçalves,Setúbal,Portugal) (⭐4.4, 3 km, pet-friendly, 38.5247,-8.8923).
-  2. [Camping Setúbal](https://maps.google.com/?q=Camping+Setúbal,Setúbal,Portugal) (⭐4.2, 4 km, family facilities, 38.5301,-8.8805).
-  3. [Free Camper Area - Setúbal](https://maps.google.com/?q=Area+Autocaravanas+Setúbal,Setúbal,Portugal) (⭐3.8, 9 km, basic, 38.5176,-8.9054).
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Ecoparque+Prof+José+Fernando+Gonçalves,Setúbal,Portugal)
-- **Food Options**:
-  - **Restaurants**:
-    1. [Casa da Baía](https://maps.google.com/?q=Casa+da+Baía,Setúbal,Portugal) (⭐4.6, €€, seafood).
-    2. [Rei do Choco Frito](https://maps.google.com/?q=Rei+do+Choco+Frito,Setúbal,Portugal) (⭐4.5, €€, local specialty).
-    3. [Tasquinha do Sado](https://maps.google.com/?q=Tasquinha+do+Sado,Setúbal,Portugal) (⭐4.4, €€, family-friendly).
-  - **Heladerías**:
-    1. [Gelataria Davvero](https://maps.google.com/?q=Gelataria+Davvero,Setúbal,Portugal) (⭐4.8, artisanal).
-    2. [Gelados Olá Setúbal](https://maps.google.com/?q=Gelados+Olá+Setúbal,Setúbal,Portugal) (⭐4.5, family-friendly).
-  - **Supermarkets**:
-    1. [Lidl Setúbal](https://maps.google.com/?q=Lidl+Setúbal,Setúbal,Portugal) (⭐4.3, budget-friendly).
-    2. [Pingo Doce Setúbal](https://maps.google.com/?q=Pingo+Doce+Setúbal,Setúbal,Portugal) (⭐4.2).
+- **Ruta de Conducción (Día 1)**: [🗺️](https://www.google.com/maps/dir/Sevilla/Ericeira) (300 km, ~3h)
+- **Actividades**:
+  - **Día 1**: Llegada e instalación en el camping. Paseo por el pueblo pesquero de Ericeira y visita al Mercado Municipal ([📍](https://www.google.com/maps/search/Mercado+Municipal+Ericeira,+Ericeira,+Portugal)).
+  - **Días 2-3**: Juegos en Praia do Sul (apta para perros, aguas poco profundas, ideal para bebés, [📍](https://www.google.com/maps/search/Praia+do+Sul,+Ericeira,+Portugal)), visita al parque infantil de Ribeira d’Ilhas ([📍](https://www.google.com/maps/search/Ribeira+d’Ilhas,+Ericeira,+Portugal)), foto en Miradouro da Ribeira d’Ilhas ([📍](https://www.google.com/maps/search/Miradouro+Ribeira+d’Ilhas,+Ericeira,+Portugal)).
+  - **Día 3 (Excursión opcional a Mafra)**: Visitar el Palacio Nacional de Mafra, un monumento barroco con jardines accesibles para familias y perros ([📍](https://www.google.com/maps/search/Palacio+Nacional+de+Mafra,+Mafra,+Portugal), 15 km, ~20m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Ericeira/Mafra/Ericeira) (30 km ida y vuelta, ~40m).
+- **Playas Relevantes**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia do Sul | [📍](https://www.google.com/maps/search/Praia+do+Sul,+Ericeira,+Portugal) | 2 km | Pet-friendly, aguas tranquilas, ideal para bebés |
+  | Praia de Ribeira d’Ilhas | [📍](https://www.google.com/maps/search/Praia+Ribeira+d’Ilhas,+Ericeira,+Portugal) | 3 km | Pet-friendly, famosa por surf, parque infantil cercano |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Ericeira Camping | [📍](https://www.ericeiracamping.com/) | ⭐4.6 | 2 km de Praia do Sul | Pet-friendly, piscina, Wi-Fi | 38.9636, -9.4187 |
+  | Orbitur Ericeira | [📍](https://www.orbitur.pt/en/camping/ericeira) | ⭐4.4 | 3 km | Pet-friendly, piscina, Wi-Fi | 38.9578, -9.4145 |
+  | Área Gratuita para Camper - Ericeira | [📍](https://www.park4night.com/en/campsite/15139) | ⭐4.0 | 8 km | Básica, gratuita | 38.9701, -9.4052 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | Mar das Latas | [📍](https://www.google.com/maps/search/Mar+das+Latas,+Ericeira,+Portugal) | ⭐4.5 | Pet-friendly, mariscos, menú infantil |
+  | Restaurante | Tik Tapas | [📍](https://www.google.com/maps/search/Tik+Tapas,+Ericeira,+Portugal) | ⭐4.6 | Pet-friendly, familiar |
+  | Restaurante | Furna | [📍](https://www.google.com/maps/search/Furna,+Ericeira,+Portugal) | ⭐4.4 | Pet-friendly, cocina local |
+  | Heladería | Gelateria La Venezia | [📍](https://www.google.com/maps/search/Gelateria+La+Venezia,+Ericeira,+Portugal) | ⭐4.7 | Opciones veganas |
+  | Heladería | Blue Ice Gelados | [📍](https://www.google.com/maps/search/Blue+Ice+Gelados,+Ericeira,+Portugal) | ⭐4.5 | Helados artesanales |
+  | Supermercado | Pingo Doce Ericeira | [📍](https://www.google.com/maps/search/Pingo+Doce+Ericeira,+Ericeira,+Portugal) | ⭐4.3 | Bien surtido |
+  | Supermercado | Continente Modelo Ericeira | [📍](https://www.google.com/maps/search/Continente+Modelo+Ericeira,+Ericeira,+Portugal) | ⭐4.2 | Variedad |
 
-### Day 7: Setúbal → Tróia → Porto Covo
+---
 
-- **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Setúbal,Portugal&daddr=Tróia,Portugal&daddr=Porto+Covo,Portugal) (120 km, 2h including ferry)
-- **Activities**: Brief stop in Tróia for Praia de Tróia-Mar (dog-friendly, [📍](https://maps.google.com/?q=Praia+de+Tróia-Mar,Tróia,Portugal)). In Porto Covo, set up at camping, stroll through the village.
-- **Accommodation**:
-  1. [Costa do Vizir Camping](https://maps.google.com/?q=Costa+do+Vizir+Camping,Porto+Covo,Portugal) (⭐4.5, 2 km, pet-friendly, pool, 37.8523,-8.7901).
-  2. [Camping Ilha do Pessegueiro](https://maps.google.com/?q=Camping+Ilha+do+Pessegueiro,Porto+Covo,Portugal) (⭐4.3, 3 km, family-friendly, 37.8487,-8.7856).
-  3. [Free Camper Area - Porto Covo](https://maps.google.com/?q=Area+Autocaravanas+Porto+Covo,Porto+Covo,Portugal) (⭐3.9, 8 km, basic, 37.8602,-8.7943).
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Costa+do+Vizir+Camping,Porto+Covo,Portugal)
-- **Food Options**:
-  - **Restaurants**:
-    1. [Zé Inácio](https://maps.google.com/?q=Zé+Inácio,Porto+Covo,Portugal) (⭐4.6, €€, seafood).
-    2. [O Pescador](https://maps.google.com/?q=O+Pescador,Porto+Covo,Portugal) (⭐4.5, €€, family-friendly).
-    3. [Marquês](https://maps.google.com/?q=Marquês,Porto+Covo,Portugal) (⭐4.4, €€, local dishes).
-  - **Heladerías**:
-    1. [Gelataria Porto Covo](https://maps.google.com/?q=Gelataria+Porto+Covo,Porto+Covo,Portugal) (⭐4.5, artisanal).
-    2. [Olá Porto Covo](https://maps.google.com/?q=Olá+Porto+Covo,Porto+Covo,Portugal) (⭐4.3, family-friendly).
-  - **Supermarkets**:
-    1. [Minipreço Porto Covo](https://maps.google.com/?q=Minipreço+Porto+Covo,Porto+Covo,Portugal) (⭐4.2, budget-friendly).
-    2. [Intermarché Porto Covo](https://maps.google.com/?q=Intermarché+Porto+Covo,Porto+Covo,Portugal) (⭐4.1).
+### Día 4: Ericeira → Cascais → Setúbal
 
-### Days 8-10: Porto Covo (3 nights)
+- **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Ericeira/Cascais/Setúbal) (90 km, ~1h 40m)
+- **Actividades**: 
+  - **Cascais**: Breve paseo por Praia da Rainha (apta para perros, aguas tranquilas, [📍](https://www.google.com/maps/search/Praia+da+Rainha,+Cascais,+Portugal), 15-20 min parada).
+  - **Setúbal**: Instalación en el camping, visita a Praia da Ribeira do Cavalo (apta para perros, [📍](https://www.google.com/maps/search/Praia+da+Ribeira+do+Cavalo,+Setúbal,+Portugal)), paseo por el casco antiguo, juegos en Parque do Bonfim ([📍](https://www.google.com/maps/search/Parque+do+Bonfim,+Setúbal,+Portugal)).
+- **Playas Relevantes (Setúbal)**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia da Ribeira do Cavalo | [📍](https://www.google.com/maps/search/Praia+da+Ribeira+do+Cavalo,+Setúbal,+Portugal) | 4 km | Pet-friendly, aguas cristalinas, acceso a pie |
+  | Praia de Galapos | [📍](https://www.google.com/maps/search/Praia+de+Galapos,+Setúbal,+Portugal) | 5 km | Pet-friendly, ideal para familias, aguas tranquilas |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Ecoparque Prof. José Fernando Gonçalves | [📍](https://www.ecoparque.pt/) | ⭐4.4 | 3 km | Pet-friendly, familiar | 38.5247, -8.8923 |
+  | Camping Setúbal | [📍](https://www.campingsetubal.com/) | ⭐4.2 | 4 km | Pet-friendly, instalaciones familiares | 38.5301, -8.8805 |
+  | Área Gratuita para Camper - Setúbal | [📍](https://www.park4night.com/en/campsite/15141) | ⭐3.8 | 9 km | Básica, gratuita | 38.5176, -8.9054 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | Casa da Baía | [📍](https://www.google.com/maps/search/Casa+da+Baía,+Setúbal,+Portugal) | ⭐4.6 | Pet-friendly, mariscos |
+  | Restaurante | Rei do Choco Frito | [📍](https://www.google.com/maps/search/Rei+do+Choco+Frito,+Setúbal,+Portugal) | ⭐4.5 | Pet-friendly, especialidad local |
+  | Restaurante | Tasquinha do Sado | [📍](https://www.google.com/maps/search/Tasquinha+do+Sado,+Setúbal,+Portugal) | ⭐4.4 | Pet-friendly, familiar |
+  | Heladería | Gelataria Davvero | [📍](https://www.google.com/maps/search/Gelataria+Davvero,+Setúbal,+Portugal) | ⭐4.8 | Helados artesanales |
+  | Heladería | Gelados Olá Setúbal | [📍](https://www.google.com/maps/search/Gelados+Olá+Setúbal,+Setúbal,+Portugal) | ⭐4.5 | Familiar |
+  | Supermercado | Lidl Setúbal | [📍](https://www.google.com/maps/search/Lidl+Setúbal,+Setúbal,+Portugal) | ⭐4.3 | Económico |
+  | Supermercado | Pingo Doce Setúbal | [📍](https://www.google.com/maps/search/Pingo+Doce+Setúbal,+Setúbal,+Portugal) | ⭐4.2 | Variedad |
 
-- **Activities**: Play at Praia Grande de Porto Covo (dog-friendly, shallow waters, [📍](https://maps.google.com/?q=Praia+Grande+de+Porto+Covo,Porto+Covo,Portugal)), visit Ilha do Pessegueiro ([📍](https://maps.google.com/?q=Ilha+do+Pessegueiro,Porto+Covo,Portugal)).
-- **Excursion to Sines** (Day 9):
-  - **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Porto+Covo,Portugal&daddr=Sines,Portugal) (15 km, 20 min)
-  - **Activities**: Explore Praia Vasco da Gama (dog-friendly, [📍](https://maps.google.com/?q=Praia+Vasco+da+Gama,Sines,Portugal)), visit Sines historic center.
-  - **Food Options** (Sines):
-    - **Restaurants**:
-      1. [A Nau](https://maps.google.com/?q=A+Nau,Sines,Portugal) (⭐4.5, €€, seafood).
-      2. [O Castelo](https://maps.google.com/?q=O+Castelo,Sines,Portugal) (⭐4.4, €€, family-friendly).
-    - **Heladerías**:
-      1. [Gelataria Sines](https://maps.google.com/?q=Gelataria+Sines,Sines,Portugal) (⭐4.4, artisanal).
-    - **Supermarkets**:
-      1. [Pingo Doce Sines](https://maps.google.com/?q=Pingo+Doce+Sines,Sines,Portugal) (⭐4.2).
-- **Accommodation**: Same as Day 7.
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Costa+do+Vizir+Camping,Porto+Covo,Portugal)
-- **Food Options**: Same as Day 7.
+---
 
-### Days 11-14: Monte Carvalhal da Rocha (4 nights)
+### Día 5: Setúbal → Tróia → Porto Covo
 
-- **Driving Route (Day 11)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Porto+Covo,Portugal&daddr=Praia+da+Costa+de+Santo+André,Portugal&daddr=Monte+Carvalhal+da+Rocha,Portugal) (45 km, 50 min)
-- **Activities**:
-  - **Day 11**: Brief stop at Praia da Costa de Santo André (dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Costa+de+Santo+André,Santo+André,Portugal)). Arrive at Monte Carvalhal da Rocha, set up at camping.
-  - **Days 12-14**: Play at Praia da Amália (dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Amália,Odemira,Portugal)), family pottery workshop at camping, swim in camping pool.
-- **Accommodation**:
-  1. [Monte Carvalhal da Rocha](https://maps.google.com/?q=Monte+Carvalhal+da+Rocha,Odemira,Portugal) (⭐4.6, 2 km, pet-friendly, pool, family facilities, 37.6845,-8.7765).
-  2. [Camping Vila Nova](https://maps.google.com/?q=Camping+Vila+Nova,Odemira,Portugal) (⭐4.3, 4 km, pet-friendly, 37.6902,-8.7801).
-  3. [Free Camper Area - Odemira](https://maps.google.com/?q=Area+Autocaravanas+Odemira,Odemira,Portugal) (⭐3.9, 9 km, basic, 37.5987,-8.6394).
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Monte+Carvalhal+da+Rocha,Odemira,Portugal)
-- **Food Options**:
-  - **Restaurants**:
-    1. [Restaurante O Sacas](https://maps.google.com/?q=Restaurante+O+Sacas,Odemira,Portugal) (⭐4.7, €€, fish grill).
-    2. [A Peixaria](https://maps.google.com/?q=A+Peixaria,Odemira,Portugal) (⭐4.5, €€, seafood).
-    3. [Tasquinha do Oliveira](https://maps.google.com/?q=Tasquinha+do+Oliveira,Odemira,Portugal) (⭐4.4, €€, family-friendly).
-  - **Heladerías**:
-    1. [Gelados Algarve](https://maps.google.com/?q=Gelados+Algarve,Odemira,Portugal) (⭐4.6, local fruits).
-    2. [Olá Odemira](https://maps.google.com/?q=Olá+Odemira,Odemira,Portugal) (⭐4.3, family-friendly).
-  - **Supermarkets**:
-    1. [Intermarché Odemira](https://maps.google.com/?q=Intermarché+Odemira,Odemira,Portugal) (⭐4.3, eco products).
-    2. [Pingo Doce Odemira](https://maps.google.com/?q=Pingo+Doce+Odemira,Odemira,Portugal) (⭐4.2).
+- **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Setúbal/Tróia/Porto+Covo) (120 km, ~2h incluyendo ferry)
+- **Actividades**: 
+  - **Tróia**: Parada breve en Praia da Costa da Galé (apta para perros, aguas tranquilas, [📍](https://www.google.com/maps/search/Praia+da+Costa+da+Galé,+Tróia,+Portugal), 15-20 min parada) vía ferry desde Setúbal ([Atlantic Ferries](https://www.atlanticferries.pt/)).
+  - **Parada en ruta**: Praia da Comporta (apta para perros, famosa por su arena blanca y ambiente relajado, [📍](https://www.google.com/maps/search/Praia+da+Comporta,+Comporta,+Portugal), ~50 km desde Tróia, 15-20 min parada para fotos o paseo corto).
+  - **Porto Covo**: Instalación en el camping, paseo por el pueblo.
+- **Playas Relevantes (Porto Covo)**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia Grande de Porto Covo | [📍](https://www.google.com/maps/search/Praia+Grande+de+Porto+Covo,+Porto+Covo,+Portugal) | 1 km | Pet-friendly, aguas tranquilas, ideal para bebés |
+  | Praia da Samoqueira | [📍](https://www.google.com/maps/search/Praia+da+Samoqueira,+Porto+Covo,+Portugal) | 2 km | Pet-friendly, cala pequeña, apta para familias |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Costa do Vizir Camping | [📍](https://www.costadovizir.com/) | ⭐4.5 | 2 km | Pet-friendly, piscina | 37.8523, -8.7901 |
+  | Camping Ilha do Pessegueiro | [📍](https://www.campingilhadopeixeiro.com/) | ⭐4.3 | 3 km | Pet-friendly, familiar | 37.8487, -8.7856 |
+  | Área Gratuita para Camper - Porto Covo | [📍](https://www.park4night.com/en/campsite/15140) | ⭐3.9 | 8 km | Básica, gratuita | 37.8602, -8.7943 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | Zé Inácio | [📍](https://www.google.com/maps/search/Zé+Inácio,+Porto+Covo,+Portugal) | ⭐4.6 | Pet-friendly, mariscos |
+  | Restaurante | O Pescador | [📍](https://www.google.com/maps/search/O+Pescador,+Porto+Covo,+Portugal) | ⭐4.5 | Pet-friendly, familiar |
+  | Restaurante | Marquês | [📍](https://www.google.com/maps/search/Marquês,+Porto+Covo,+Portugal) | ⭐4.4 | Pet-friendly, platos locales |
+  | Heladería | Gelataria Porto Covo | [📍](https://www.google.com/maps/search/Gelataria+Porto+Covo,+Porto+Covo,+Portugal) | ⭐4.5 | Helados artesanales |
+  | Heladería | Olá Porto Covo | [📍](https://www.google.com/maps/search/Olá+Porto+Covo,+Porto+Covo,+Portugal) | ⭐4.3 | Familiar |
+  | Supermercado | Minipreço Porto Covo | [📍](https://www.google.com/maps/search/Minipreço+Porto+Covo,+Porto+Covo,+Portugal) | ⭐4.2 | Económico |
+  | Supermercado | Intermarché Porto Covo | [📍](https://www.google.com/maps/search/Intermarché+Porto+Covo,+Porto+Covo,+Portugal) | ⭐4.1 | Variedad |
 
-### Days 15-17: Sagres (3 nights)
+---
 
-- **Driving Route (Day 15)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Monte+Carvalhal+da+Rocha,Portugal&daddr=Sagres,Portugal) (75 km, 1h 10min)
-- **Activities**:
-  - **Day 15**: Arrive at Sagres, set up at camping.
-  - **Days 16-17**: Play at Praia do Amado (dog-friendly, [📍](https://maps.google.com/?q=Praia+do+Amado,Sagres,Portugal)), visit Sagres Fortress ([📍](https://maps.google.com/?q=Fortaleza+de+Sagres,Sagres,Portugal)).
-- **Accommodation**:
-  1. [Sagres Camping](https://maps.google.com/?q=Sagres+Camping,Sagres,Portugal) (⭐4.5, pet-friendly, pool, family facilities, 37.0072,-8.9432).
-  2. [Parque de Campismo Orbitur Sagres](https://maps.google.com/?q=Parque+de+Campismo+Orbitur+Sagres,Sagres,Portugal) (⭐4.3, pet-friendly, 37.0072,-8.9432).
-  3. [Free Camper Area - Sagres](https://maps.google.com/?q=Area+Autocaravanas+Sagres,Sagres,Portugal) (⭐4.0, basic, 37.0072,-8.9432).
-  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Sagres,Sagres,Portugal)
+### Días 6-8: Porto Covo (3 noches)
+
+- **Actividades**:
+  - **Días 6-8**: Juegos en Praia Grande de Porto Covo ([📍](https://www.google.com/maps/search/Praia+Grande+de+Porto+Covo,+Porto+Covo,+Portugal)), visita a Ilha do Pessegueiro ([📍](https://www.google.com/maps/search/Ilha+do+Pessegueiro,+Porto+Covo,+Portugal)).
+  - **Día 7 (Excursión opcional a Sines)**: Explorar Praia de Vasco da Gama (apta para perros, [📍](https://www.google.com/maps/search/Praia+Vasco+da+Gama,+Sines,+Portugal)) y el casco histórico. **Ruta**: [🗺️](https://www.google.com/maps/dir/Porto+Covo/Sines) (15 km, ~20m).
+  - **Día 8 (Excursión opcional a Cercal do Alentejo)**: Visitar el pueblo, ideal por su tranquilidad y senderos naturales ligeros aptos para familias y perros ([📍](https://www.google.com/maps/search/Cercal+do+Alentejo,+Sines,+Portugal), 25 km, ~30m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Porto+Covo/Cercal+do+Alentejo/Porto+Covo) (50 km ida y vuelta, ~1h).
+- **Playas Relevantes**: Mismo que Día 5.
+- **Alojamiento**: Mismo que Día 5.
+- **Opciones de Comida (Sines)**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | A Nau | [📍](https://www.google.com/maps/search/A+Nau,+Sines,+Portugal) | ⭐4.5 | Pet-friendly, mariscos |
+  | Restaurante | O Castelo | [📍](https://www.google.com/maps/search/O+Castelo,+Sines,+Portugal) | ⭐4.4 | Pet-friendly, familiar |
+  | Heladería | Gelataria Sines | [📍](https://www.google.com/maps/search/Gelataria+Sines,+Sines,+Portugal) | ⭐4.4 | Helados artesanales |
+  | Supermercado | Pingo Doce Sines | [📍](https://www.google.com/maps/search/Pingo+Doce+Sines,+Sines,+Portugal) | ⭐4.2 | Variedad |
+
+---
+
+### Día 9: Porto Covo → Vila Nova de Milfontes
+
+- **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Porto+Covo/Vila+Nova+de+Milfontes) (35 km, ~40m)
+- **Actividades**: 
+  - Instalación en el camping, cena en Tasca do Celso ([📍](https://www.google.com/maps/search/Tasca+do+Celso,+Vila+Nova+de+Milfontes,+Portugal)).
+  - Paseo por Praia da Franquia (apta para perros, aguas tranquilas, ideal para familias, [📍](https://www.google.com/maps/search/Praia+da+Franquia,+Vila+Nova+de+Milfontes,+Portugal), 15-20 min parada).
+- **Playas Relevantes**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia das Furnas | [📍](https://www.google.com/maps/search/Praia+das+Furnas,+Vila+Nova+de+Milfontes,+Portugal) | 2 km | Pet-friendly, aguas tranquilas, ideal para bebés |
+  | Praia da Franquia | [📍](https://www.google.com/maps/search/Praia+da+Franquia,+Vila+Nova+de+Milfontes,+Portugal) | 1 km | Pet-friendly, cerca del pueblo, apta para familias |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Parque de Campismo de Milfontes | [📍](https://www.campingmilfontes.com/) | ⭐4.4 | 2 km | Pet-friendly, piscina, familiar | 37.7256, -8.7823 |
+  | Camping Sitava Milfontes | [📍](https://www.sitava.pt/) | ⭐4.2 | 3 km | Pet-friendly, familiar | 37.7201, -8.7901 |
+  | Área Gratuita para Camper - Vila Nova de Milfontes | [📍](https://www.park4night.com/en/campsite/15144) | ⭐3.9 | 8 km | Básica, gratuita | 37.7302, -8.7754 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | Tasca do Celso | [📍](https://www.google.com/maps/search/Tasca+do+Celso,+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.5 | Pet-friendly, especialidades locales |
+  | Restaurante | Porto das Barcas | [📍](https://www.google.com/maps/search/Porto+das+Barcas,+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.4 | Pet-friendly, mariscos |
+  | Restaurante | A Choupana | [📍](https://www.google.com/maps/search/A+Choupana,+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.3 | Pet-friendly, familiar |
+  | Heladería | Gelataria Mabi | [📍](https://www.google.com/maps/search/Gelataria+Mabi,+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.5 | Helados artesanales |
+  | Heladería | Olá Milfontes | [📍](https://www.google.com/maps/search/Olá+Milfontes,+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.3 | Familiar |
+  | Supermercado | Pingo Doce Milfontes | [📍](https://www.google.com/maps/search/Pingo+Doce+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.2 | Variedad |
+  | Supermercado | Intermarché Milfontes | [📍](https://www.google.com/maps/search/Intermarché+Vila+Nova+de+Milfontes,+Portugal) | ⭐4.1 | Económico |
+
+---
+
+### Día 10: Vila Nova de Milfontes → Praia da Costa de Santo André → Monte Carvalhal da Rocha
+
+- **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Vila+Nova+de+Milfontes/Praia+da+Costa+de+Santo+André/Monte+Carvalhal+da+Rocha) (60 km, ~1h 25m)
+- **Actividades**: 
+  - Parada breve en Praia da Costa de Santo André (apta para perros, laguna y playa, ideal para familias, [📍](https://www.google.com/maps/search/Praia+da+Costa+de+Santo+André,+Santo+André,+Portugal), 15-20 min parada).
+  - Llegada a Monte Carvalhal da Rocha, instalación en el camping.
+- **Playas Relevantes (Monte Carvalhal da Rocha)**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia da Amália | [📍](https://www.google.com/maps/search/Praia+da+Amália,+Odemira,+Portugal) | 2 km | Pet-friendly, cala tranquila, aguas poco profundas |
+  | Praia de Carvalhal | [📍](https://www.google.com/maps/search/Praia+de+Carvalhal,+Odemira,+Portugal) | 3 km | Pet-friendly, amplia, ideal para paseos con perros |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Monte Carvalhal da Rocha | [📍](https://www.montecarvalhaldarocha.com/) | ⭐4.6 | 2 km | Pet-friendly, piscina, familiar | 37.6845, -8.7765 |
+  | Camping Vila Nova | [📍](https://www.campingvila-nova.com/) | ⭐4.3 | 4 km | Pet-friendly | 37.6902, -8.7801 |
+  | Área Gratuita para Camper - Odemira | [📍](https://www.park4night.com/en/campsite/15142) | ⭐3.9 | 9 km | Básica, gratuita | 37.5987, -8.6394 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | Restaurante O Sacas | [📍](https://www.google.com/maps/search/Restaurante+O+Sacas,+Odemira,+Portugal) | ⭐4.7 | Pet-friendly, parrilla de pescado |
+  | Restaurante | A Peixaria | [📍](https://www.google.com/maps/search/A+Peixaria,+Odemira,+Portugal) | ⭐4.5 | Pet-friendly, mariscos |
+  | Restaurante | Tasquinha do Oliveira | [📍](https://www.google.com/maps/search/Tasquinha+do+Oliveira,+Odemira,+Portugal) | ⭐4.4 | Pet-friendly, familiar |
+  | Heladería | Gelados Algarve | [📍](https://www.google.com/maps/search/Gelados+Algarve,+Odemira,+Portugal) | ⭐4.6 | Frutas locales |
+  | Heladería | Olá Odemira | [📍](https://www.google.com/maps/search/Olá+Odemira,+Odemira,+Portugal) | ⭐4.3 | Familiar |
+  | Supermercado | Intermarché Odemira | [📍](https://www.google.com/maps/search/Intermarché+Odemira,+Odemira,+Portugal) | ⭐4.3 | Productos ecológicos |
+  | Supermercado | Pingo Doce Odemira | [📍](https://www.google.com/maps/search/Pingo+Doce+Odemira,+Odemira,+Portugal) | ⭐4.2 | Variedad |
+
+---
+
+### Días 11-13: Monte Carvalhal da Rocha (3 noches)
+
+- **Actividades**:
+  - **Días 11-12**: Juegos en Praia da Amália ([📍](https://www.google.com/maps/search/Praia+da+Amália,+Odemira,+Portugal)), taller de cerámica familiar en el camping, baño en la piscina.
+  - **Día 13 (Excursión opcional a Odeceixe)**: Visitar el pueblo y su playa fluvial, ideal para familias y perros ([📍](https://www.google.com/maps/search/Odeceixe,+Odemira,+Portugal), 20 km, ~25m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Monte+Carvalhal+da+Rocha/Odeceixe/Monte+Carvalhal+da+Rocha) (40 km ida y vuelta, ~50m).
+- **Playas Relevantes**: Mismo que Día 10.
+- **Alojamiento**: Mismo que Día 10.
+- **Opciones de Comida**: Mismo que Día 10.
+
+---
+
+### Días 14-16: Monte Carvalhal da Rocha → Sagres (3 noches)
+
+- **Ruta de Conducción (Día 14)**: [🗺️](https://www.google.com/maps/dir/Monte+Carvalhal+da+Rocha/Sagres) (75 km, ~1h 10m)
+- **Actividades**:
+  - **Día 14**: Llegada a Sagres, instalación en el camping.
+  - **Días 15-16**: Juegos en Praia do Amado (apta para perros, amplia, ideal para familias, [📍](https://www.google.com/maps/search/Praia+do+Amado,+Sagres,+Portugal)), visita a la Fortaleza de Sagres ([📍](https://www.google.com/maps/search/Fortaleza+de+Sagres,+Sagres,+Portugal)). Opcionalmente, cena en Tasca do Celso ([📍](https://www.google.com/maps/search/Tasca+do+Celso,+Sagres,+Portugal)).
+  - **Día 16 (Excursión opcional a Cabo de São Vicente)**: Visitar el cabo, el punto más suroccidental de Europa, con vistas espectaculares (apta para familias y perros, [📍](https://www.google.com/maps/search/Cabo+de+São+Vicente,+Sagres,+Portugal), 10 km, ~15m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Sagres/Cabo+de+São+Vicente/Sagres) (20 km ida y vuelta, ~30m).
+- **Playas Relevantes**:
+  | Playa | Enlace | Distancia desde Camping | Descripción |
+  |-------|--------|-------------------------|-------------|
+  | Praia do Amado | [📍](https://www.google.com/maps/search/Praia+do+Amado,+Sagres,+Portugal) | 2 km | Pet-friendly, amplia, ideal para juegos y paseos |
+  | Praia do Martinhal | [📍](https://www.google.com/maps/search/Praia+do+Martinhal,+Sagres,+Portugal) | 3 km | Pet-friendly, aguas tranquilas, ideal para bebés |
+- **Alojamiento**:
+  | Nombre | Enlace | Calificación | Distancia | Servicios | Coordenadas GPS |
+  |--------|--------|--------------|-----------|-----------|-----------------|
+  | Sagres Camping | [📍](https://www.sagrescamping.com/) | ⭐4.5 | Cerca de la playa | Pet-friendly, piscina, familiar | 37.0072, -8.9432 |
+  | Orbitur Sagres | [📍](https://www.orbitur.pt/en/camping/sagres) | ⭐4.3 | Cerca de la playa | Pet-friendly | 37.0072, -8.9432 |
+  | Área Gratuita para Camper - Sagres | [📍](https://www.park4night.com/en/campsite/15143) | ⭐4.0 | Básica, gratuita | Pet-friendly | 37.0072, -8.9432 |
+- **Opciones de Comida**:
+  | Tipo | Nombre | Enlace | Calificación | Descripción |
+  |------|--------|--------|--------------|-------------|
+  | Restaurante | A Nau | [📍](https://www.google.com/maps/search/A+Nau,+Sagres,+Portugal) | ⭐4.5 | Pet-friendly, mariscos |
+  | Restaurante | O Castelo | [📍](https://www.google.com/maps/search/O+Castelo,+Sagres,+Portugal) | ⭐4.4 | Pet-friendly, familiar |
+  | Restaurante | Tasca do Celso | [📍](https://www.google.com/maps/search/Tasca+do+Celso,+Sagres,+Portugal) | ⭐4.5 | Pet-friendly, cocina local |
+  | Heladería | Gelataria Alice | [📍](https://www.google.com/maps/search/Gelataria+Alice,+Sagres,+Portugal) | ⭐4.6 | Helados artesanales |
+  | Heladería | Gelataria Bico | [📍](https://www.google.com/maps/search/Gelataria+Bico,+Sagres,+Portugal) | ⭐4.4 | Familiar |
+  | Supermercado | Pingo Doce Sagres | [📍](https://www.google.com/maps/search/Pingo+Doce+Sagres,+Sagres,+Portugal) | ⭐4.3 | Variedad |
+  | Supermercado | Intermarché Sagres | [📍](https://www.google.com/maps/search/Intermarché+Sagres,+Sagres,+Portugal) | ⭐4.2 | Económico |
+
+---
+
+### Día 17: Sagres → Sevilla
+
+- **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Sagres/Sevilla) (300 km, ~4h 15m)
+- **Actividades**: Regreso directo a Sevilla. **Nota**: Este trayecto excede el límite de conducción de 3 horas (y 3.5 horas con descanso). Se recomienda conducir con precaución y considerar una pausa breve en un área de servicio (por ejemplo, en Albufeira, [📍](https://www.google.com/maps/search/Area+de+Servicio+Albufeira,+Albufeira,+Portugal)) si es necesario.
+- **Playas Relevantes**: No se incluyen paradas en playas en este trayecto para priorizar el regreso directo.
