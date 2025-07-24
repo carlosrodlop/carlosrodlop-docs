@@ -95,6 +95,7 @@ graph TD
 ```
 
 ### Days 1-4: Ericeira (4 nights)
+
 - **Driving Route (Day 1)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Sevilla,Spain&daddr=Ericeira,Portugal) (300 km, 3h)
 - **Activities**:
   - **Day 1**: Arrive, set up at camping, stroll through Ericeira’s fishing village, visit the local market ([📍](https://maps.google.com/?q=Mercado+Municipal+Ericeira,Ericeira,Portugal)).
@@ -118,6 +119,7 @@ graph TD
     2. [Continente Modelo Ericeira](https://maps.google.com/?q=Continente+Modelo+Ericeira,Ericeira,Portugal) (⭐4.2).
 
 ### Days 5-6: Ericeira → Cascais → Setúbal (1 night)
+
 - **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Ericeira,Portugal&daddr=Cascais,Portugal&daddr=Setúbal,Portugal) (90 km, 1h 40m)
 - **Activities**:
   - **Day 5**: Drive to Cascais for a brief stroll at Praia da Rainha (shallow waters, dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Rainha,Cascais,Portugal)). Continue to Setúbal, set up at camping.
@@ -140,6 +142,7 @@ graph TD
     2. [Pingo Doce Setúbal](https://maps.google.com/?q=Pingo+Doce+Setúbal,Setúbal,Portugal) (⭐4.2).
 
 ### Day 7: Setúbal → Tróia → Porto Covo
+
 - **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Setúbal,Portugal&daddr=Tróia,Portugal&daddr=Porto+Covo,Portugal) (120 km, 2h including ferry)
 - **Activities**: Brief stop in Tróia for Praia de Tróia-Mar (dog-friendly, [📍](https://maps.google.com/?q=Praia+de+Tróia-Mar,Tróia,Portugal)). In Porto Covo, set up at camping, stroll through the village.
 - **Accommodation**:
@@ -160,6 +163,7 @@ graph TD
     2. [Intermarché Porto Covo](https://maps.google.com/?q=Intermarché+Porto+Covo,Porto+Covo,Portugal) (⭐4.1).
 
 ### Days 8-10: Porto Covo (3 nights)
+
 - **Activities**: Play at Praia Grande de Porto Covo (dog-friendly, shallow waters, [📍](https://maps.google.com/?q=Praia+Grande+de+Porto+Covo,Porto+Covo,Portugal)), visit Ilha do Pessegueiro ([📍](https://maps.google.com/?q=Ilha+do+Pessegueiro,Porto+Covo,Portugal)).
 - **Excursion to Sines** (Day 9):
   - **Driving Route**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Porto+Covo,Portugal&daddr=Sines,Portugal) (15 km, 20 min)
@@ -177,6 +181,7 @@ graph TD
 - **Food Options**: Same as Day 7.
 
 ### Days 11-14: Monte Carvalhal da Rocha (4 nights)
+
 - **Driving Route (Day 11)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Porto+Covo,Portugal&daddr=Praia+da+Costa+de+Santo+André,Portugal&daddr=Monte+Carvalhal+da+Rocha,Portugal) (45 km, 50 min)
 - **Activities**:
   - **Day 11**: Brief stop at Praia da Costa de Santo André (dog-friendly, [📍](https://maps.google.com/?q=Praia+da+Costa+de+Santo+André,Santo+André,Portugal)). Arrive at Monte Carvalhal da Rocha, set up at camping.
@@ -199,6 +204,13 @@ graph TD
     2. [Pingo Doce Odemira](https://maps.google.com/?q=Pingo+Doce+Odemira,Odemira,Portugal) (⭐4.2).
 
 ### Days 15-17: Sagres (3 nights)
-- **Driving Route (Day 15)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Monte+Carvalhal+da+Rocha,Portugal&daddr=Sagres,Portugal) (75焦
 
-System: * Today's date and time is 09:10 AM CEST on Thursday, July 24, 2025.
+- **Driving Route (Day 15)**: [🗺️](https://maps.google.com/maps?f=d&source=s_d&saddr=Monte+Carvalhal+da+Rocha,Portugal&daddr=Sagres,Portugal) (75 km, 1h 10min)
+- **Activities**:
+  - **Day 15**: Arrive at Sagres, set up at camping.
+  - **Days 16-17**: Play at Praia do Amado (dog-friendly, [📍](https://maps.google.com/?q=Praia+do+Amado,Sagres,Portugal)), visit Sagres Fortress ([📍](https://maps.google.com/?q=Fortaleza+de+Sagres,Sagres,Portugal)).
+- **Accommodation**:
+  1. [Sagres Camping](https://maps.google.com/?q=Sagres+Camping,Sagres,Portugal) (⭐4.5, pet-friendly, pool, family facilities, 37.0072,-8.9432).
+  2. [Parque de Campismo Orbitur Sagres](https://maps.google.com/?q=Parque+de+Campismo+Orbitur+Sagres,Sagres,Portugal) (⭐4.3, pet-friendly, 37.0072,-8.9432).
+  3. [Free Camper Area - Sagres](https://maps.google.com/?q=Area+Autocaravanas+Sagres,Sagres,Portugal) (⭐4.0, basic, 37.0072,-8.9432).
+  - **Puntos de interés**: [📍 Google Maps](https://maps.google.com/?q=Sagres,Sagres,Portugal)
