@@ -103,6 +103,7 @@ graph TD
     A -- 300 km, ~3h --> B
     B -. 15 km, ~20m .-> C
     B -. 35 km, ~40m .-> S
+    L -. 230 km, ~2h 40m .-> Q[Lourinhã Passadiços Barranco do Demo]
     B -- 45 km, ~45m --> D
     D -- 45 km, ~55m --> E
     E -- 20 km, ~30m + ferry --> F
@@ -147,6 +148,8 @@ graph TD
   - **Día 1**: Llegada e instalación en el camping. Paseo por el pueblo pesquero de Ericeira y visita al Mercado Municipal ([📍](https://www.google.com/maps/search/Mercado+Municipal+Ericeira,+Ericeira,+Portugal)).
   - **Días 2-3**: Juegos en Praia do Sul (apta para perros, aguas poco profundas, ideal para bebés, [📍](https://www.google.com/maps/search/Praia+do+Sul,+Ericeira,+Portugal)), visita al parque infantil de Ribeira d’Ilhas ([📍](https://www.google.com/maps/search/Ribeira+d’Ilhas,+Ericeira,+Portugal)), foto en Miradouro da Ribeira d’Ilhas ([📍](https://www.google.com/maps/search/Miradouro+Ribeira+d’Ilhas,+Ericeira,+Portugal)).
   - **Día 3 (Excursión opcional a Mafra)**: Visitar el Palacio Nacional de Mafra, un monumento barroco con jardines accesibles para familias y perros ([📍](https://www.google.com/maps/search/Palacio+Nacional+de+Mafra,+Mafra,+Portugal), 15 km, ~20m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Ericeira/Mafra/Ericeira) (30 km ida y vuelta, ~40m).
+  - **Ruta imprescindible (senderismo ligero)**: Litoral de Ribeira d’Ilhas (3–5 km, fácil y panorámico por el paseo litoral y miradores; bebé en carrito en tramos urbanos o portabebés; perro con correa). Punto clave: [📍](https://www.google.com/maps/search/Praia+Ribeira+d’Ilhas,+Ericeira,+Portugal).
+  
 - **Playas Relevantes**:
   | Playa | Enlace | Distancia desde Camping | Descripción |
   |-------|--------|-------------------------|-------------|
@@ -176,6 +179,7 @@ graph TD
 - **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Ericeira/Cascais/Setúbal) (90 km, ~1h 40m)
 - **Actividades**: 
   - **Cascais**: Breve paseo por Praia da Rainha (apta para perros, aguas tranquilas, [📍](https://www.google.com/maps/search/Praia+da+Rainha,+Cascais,+Portugal), 15-20 min parada).
+    - **Ruta imprescindible**: Boca do Inferno ↔ Farol de Santa Marta (≈3 km, prácticamente llano, apto con carrito; perro con correa). Inicio en Boca do Inferno: [📍](https://www.google.com/maps/search/Boca+do+Inferno,+Cascais,+Portugal).
   - **Setúbal**: Instalación en el camping, visita a Praia da Ribeira do Cavalo (apta para perros, [📍](https://www.google.com/maps/search/Praia+da+Ribeira+do+Cavalo,+Setúbal,+Portugal)), paseo por el casco antiguo, juegos en Parque do Bonfim ([📍](https://www.google.com/maps/search/Parque+do+Bonfim,+Setúbal,+Portugal)).
 - **Playas Relevantes (Setúbal)**:
   | Playa | Enlace | Distancia desde Camping | Descripción |
@@ -238,6 +242,7 @@ graph TD
   - **Días 6-8**: Juegos en Praia Grande de Porto Covo ([📍](https://www.google.com/maps/search/Praia+Grande+de+Porto+Covo,+Porto+Covo,+Portugal)), visita a Ilha do Pessegueiro ([📍](https://www.google.com/maps/search/Ilha+do+Pessegueiro,+Porto+Covo,+Portugal)).
   - **Día 7 (Excursión opcional a Sines)**: Explorar Praia de Vasco da Gama (apta para perros, [📍](https://www.google.com/maps/search/Praia+Vasco+da+Gama,+Sines,+Portugal)) y el casco histórico. **Ruta**: [🗺️](https://www.google.com/maps/dir/Porto+Covo/Sines) (15 km, ~20m).
   - **Día 8 (Excursión opcional a Cercal do Alentejo)**: Visitar el pueblo, ideal por su tranquilidad y senderos naturales ligeros aptos para familias y perros ([📍](https://www.google.com/maps/search/Cercal+do+Alentejo,+Sines,+Portugal), 25 km, ~30m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Porto+Covo/Cercal+do+Alentejo/Porto+Covo) (50 km ida y vuelta, ~1h).
+  - **Ruta imprescindible**: Porto Covo ↔ Ilha do Pessegueiro (Trilho dos Pescadores corto, 6–8 km; opción parcial 3 km junto a la costa; vistas espectaculares. Apto con portabebés; perro con correa). Inicio en el pueblo: [📍](https://www.google.com/maps/search/Porto+Covo,+Portugal) · Isla: [📍](https://www.google.com/maps/search/Ilha+do+Pessegueiro,+Porto+Covo,+Portugal).
 - **Playas Relevantes**: Mismo que Día 5.
 - **Alojamiento**: Mismo que Día 5.
 - **Opciones de Comida (Sines)**:
@@ -256,6 +261,7 @@ graph TD
 - **Actividades**: 
   - Instalación en el camping, cena en Tasca do Celso ([📍](https://www.google.com/maps/search/Tasca+do+Celso,+Vila+Nova+de+Milfontes,+Portugal)).
   - Paseo por Praia da Franquia (apta para perros, aguas tranquilas, ideal para familias, [📍](https://www.google.com/maps/search/Praia+da+Franquia,+Vila+Nova+de+Milfontes,+Portugal), 15-20 min parada).
+  - **Ruta imprescindible**: Estuario del Mira — Franquia ↔ Mirador de Furnas (4–5 km, llano y panorámico sobre la ría; apto con carrito; perro con correa). Puntos: Franquia [📍](https://www.google.com/maps/search/Praia+da+Franquia,+Vila+Nova+de+Milfontes,+Portugal) · Furnas [📍](https://www.google.com/maps/search/Praia+das+Furnas,+Vila+Nova+de+Milfontes,+Portugal).
 - **Playas Relevantes**:
   | Playa | Enlace | Distancia desde Camping | Descripción |
   |-------|--------|-------------------------|-------------|
@@ -285,6 +291,7 @@ graph TD
 - **Ruta de Conducción**: [🗺️](https://www.google.com/maps/dir/Vila+Nova+de+Milfontes/Praia+da+Costa+de+Santo+André/Monte+Carvalhal+da+Rocha) (60 km, ~1h 25m)
 - **Actividades**: 
   - Parada breve en Praia da Costa de Santo André (apta para perros, laguna y playa, ideal para familias, [📍](https://www.google.com/maps/search/Praia+da+Costa+de+Santo+André,+Santo+André,+Portugal), 15-20 min parada).
+    - **Ruta imprescindible**: Pasarelas de la Lagoa de Santo André (3–5 km, llano; excelente con carrito; perro con correa). Inicio recomendado junto a la laguna: [📍](https://www.google.com/maps/search/Praia+da+Costa+de+Santo+Andr%C3%A9,+Santo+Andr%C3%A9,+Portugal).
   - Llegada a Monte Carvalhal da Rocha, instalación en el camping.
 - **Playas Relevantes (Monte Carvalhal da Rocha)**:
   | Playa | Enlace | Distancia desde Camping | Descripción |
@@ -315,6 +322,8 @@ graph TD
 - **Actividades**:
   - **Días 11-12**: Juegos en Praia da Amália ([📍](https://www.google.com/maps/search/Praia+da+Amália,+Odemira,+Portugal)), taller de cerámica familiar en el camping, baño en la piscina.
   - **Día 13 (Excursión opcional a Odeceixe)**: Visitar el pueblo y su playa fluvial, ideal para familias y perros ([📍](https://www.google.com/maps/search/Odeceixe,+Odemira,+Portugal), 20 km, ~25m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Monte+Carvalhal+da+Rocha/Odeceixe/Monte+Carvalhal+da+Rocha) (40 km ida y vuelta, ~50m).
+  - **Ruta imprescindible**: Sendero a Praia da Amália (≈1.5 km total, corto con algo de desnivel; mejor con portabebés; perro con correa). Playa: [📍](https://www.google.com/maps/search/Praia+da+Am%C3%A1lia,+Odemira,+Portugal).
+  - **Excursión imprescindible (pasarelas)**: Passadiços do Barranco do Demo (Lourinhã — Porto Dinheiro ↔ Valmitão, 3–5 km por pasarelas y acantilados; ~225–235 km, ~2h 40m desde Monte Carvalhal; mejor programar medio día; perro con correa). Inicio recomendado: Porto Dinheiro [📍](https://www.google.com/maps/search/Praia+de+Porto+Dinheiro,+Ribamar,+Lourinh%C3%A3,+Portugal) · Alternativa/retorno: Valmitão [📍](https://www.google.com/maps/search/Praia+do+Valmit%C3%A3o,+Lourinh%C3%A3,+Portugal). **Ruta (i/v)**: [🗺️](https://www.google.com/maps/dir/Monte+Carvalhal+da+Rocha,+Odemira/Praia+de+Porto+Dinheiro,+Lourinh%C3%A3/Monte+Carvalhal+da+Rocha,+Odemira).
 - **Playas Relevantes**: Mismo que Día 10.
 - **Alojamiento**: Mismo que Día 10.
 - **Opciones de Comida**: Mismo que Día 10.
@@ -327,6 +336,8 @@ graph TD
 - **Actividades**:
   - **Día 14**: Llegada a Sagres, instalación en el camping.
   - **Días 15-16**: Juegos en Praia do Amado (apta para perros, amplia, ideal para familias, [📍](https://www.google.com/maps/search/Praia+do+Amado,+Sagres,+Portugal)), visita a la Fortaleza de Sagres ([📍](https://www.google.com/maps/search/Fortaleza+de+Sagres,+Sagres,+Portugal)). Opcionalmente, cena en Tasca do Celso ([📍](https://www.google.com/maps/search/Tasca+do+Celso,+Sagres,+Portugal)).
+  - **Ruta imprescindible**: Caminos cortos en Cabo de São Vicente (1–2 km, llano; muy ventoso, ideal al atardecer; apto con carrito; perro con correa). Cabo: [📍](https://www.google.com/maps/search/Cabo+de+S%C3%A3o+Vicente,+Sagres,+Portugal).
+  - **Excursión opcional destacada (25–30 min en coche)**: Pasarelas del Pontal da Carrapateira y miradores de Praia do Amado (2–3 km, fácil y escénico). Pontal: [📍](https://www.google.com/maps/search/Pontal+da+Carrapateira,+Portugal) · Amado: [📍](https://www.google.com/maps/search/Praia+do+Amado,+Sagres,+Portugal).
   - **Día 16 (Excursión opcional a Cabo de São Vicente)**: Visitar el cabo, el punto más suroccidental de Europa, con vistas espectaculares (apta para familias y perros, [📍](https://www.google.com/maps/search/Cabo+de+São+Vicente,+Sagres,+Portugal), 10 km, ~15m). **Ruta**: [🗺️](https://www.google.com/maps/dir/Sagres/Cabo+de+São+Vicente/Sagres) (20 km ida y vuelta, ~30m).
 - **Playas Relevantes**:
   | Playa | Enlace | Distancia desde Camping | Descripción |
